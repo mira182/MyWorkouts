@@ -1,0 +1,34 @@
+version: "3.1"
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_for_my_apps
+    expose:
+      - 5435
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_PASSWORD=macos
+      - POSTGRES_USER=webappuser
+      - POSTGRES_DB=my_workouts
+    volumes:
+      - "/var/services/homes/mira/Drive/Apps/PostgresForMyApps/data:/var/lib/postgresql/data"
+      - "/var/services/homes/mira/Drive/Apps/PostgresForMyApps/init-scripts:/docker-entrypoint-initdb.d"
+    restart: unless-stopped
+  # APP*****************************************
+  myworkouts:
+    build: ./
+    image: myworkouts
+    network_mode: host
+    container_name: myworkouts
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/logs:/usr/app/logs"
+      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/export:/usr/app/export"
+      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/img:/usr/app/img"
+    depends_on:
+      - postgres
+    restart: unless-stopped
