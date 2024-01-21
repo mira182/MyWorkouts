@@ -1,0 +1,130 @@
+{
+  "app.home.title": "My Center",
+  "HOME": {
+    "welcome": "Welcome user",
+    "home": "Home"
+  },
+  "USER": {
+    "user-details": "User details",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "role": "Role",
+    "edit": "Ddit user"
+  },
+  "ERROR": {
+    "required": {
+      "name" : "Name is required",
+      "category" : "Category is required",
+      "quantity" : "Quantity is required",
+      "quantityType" : "Quantity type is required",
+      "firstname": "First name is required",
+      "lastname": "Last name is required",
+      "username": "Username is required",
+      "email": "Email is required",
+      "password": "Password if required",
+      "exerciseName": "Name of exercise is required",
+      "exerciseType": "Type of exercise is required",
+      "exerciseCategory": "Category of exercise is required",
+      "workoutName": "Workout name is required",
+      "weight": "Weight is required",
+      "reps": "Reps are required",
+      "time": "Minutes and seconds are required"
+    },
+    "length": {
+      "password": "Password must be at least 6 characters long"
+    },
+    "pages": {
+      "page-not-found": "Page not found.",
+      "unauthorized": "Unauthorized access.",
+      "access-denied": "Username or password is incorrect",
+      "internalError": "500 Internal error on server side",
+      "bad-request": "400 Bad request",
+      "go-home": "Go home"
+    }
+  },
+  "ALERT": {
+    "successfully-saved": "Successfuly saved.",
+    "update-weight-report-failed": "Updating of weight report failed",
+    "update-weight-report-successful": "Successfully updated.",
+    "successfully-updated": "Successfully updated.",
+    "update-failed": "Update failed.",
+    "no-weight-data": "No data in weight report!",
+    "save-exercise-failed": "Saving exercise failed.",
+    "save-failed": "Saving failed.",
+    "save-workout-failed": "Saving workout failed.",
+    "get-exercises": "Getting exercises failed!",
+    "get-workouts": "Getting workouts failed",
+    "deleted-successfully": "Successfully deleted.",
+    "delete-failed": "Deleting failed.",
+    "error": "Error",
+    "connection-error": "Connection error"
+  },
+  "BUTTON": {
+    "logout": "Logout",
+    "login": "Login",
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "register": "Register",
+    "save": "Save",
+    "save-menu": "Save menu",
+    "save-user": "Save user",
+    "yes": "Yes",
+    "no": "No",
+    "next": "Next",
+    "back": "Back",
+    "add-workout": "Add workout",
+    "add-exercise": "Add exercise",
+    "edit-exercise": "Edit exercise",
+    "delete-exercise": "Delete exercise",
+    "delete-workouts": "Delete all workouts",
+    "add-training": "Add training",
+    "create-exercise": "Create exercise",
+    "dashboard": "Dashboard",
+    "trainings": "Trainings",
+    "export": "Export",
+    "import": "Import"
+  },
+  "TITLES": {
+    "menu-key-dialog": "Menu key",
+    "edit-user-dialog": "Edit user",
+    "error-title": "Error",
+    "search-title": "Search",
+    "login-title": "Login",
+    "registration-title": "Registration",
+    "breakdown": "Breakdown",
+    "totals": "Totals",
+    "workouts": "Workouts",
+    "trainings": "Trainings",
+    "exercises": "Exercises",
+    "no-workouts": "No workouts for selected time",
+    "new-training": "New training"
+  },
+  "MESSAGES": {
+    "delete-exercise-question": "Do you really want to delete exercise?",
+    "delete-workout-question": "Do you really want to delete workout?",
+    "delete-training-question": "Do you really want to delete training?"
+  },
+  "WEIGHT": {
+    "weight" : "Weight",
+    "update" : "Update",
+    "loading" : "Loading...",
+    "report": "Show report"
+  },
+  "WORKOUTS": {
+    "workouts": "Workouts",
+    "select-category": "Select category",
+    "select-exercise": "Select exercise",
+    "weight": "Weight",
+    "reps": "Reps"
+  },
+  "EXERCISE": {
+    "name": "Name",
+    "type": "Type",
+    "category": "Category"
+  }
+}

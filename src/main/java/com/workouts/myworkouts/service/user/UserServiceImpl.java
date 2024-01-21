@@ -21,8 +21,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@Service(value = "userService")
 @RequiredArgsConstructor
+@Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);

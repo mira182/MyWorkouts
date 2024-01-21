@@ -1,0 +1,130 @@
+{
+  "app.home.title": "My Center",
+  "HOME": {
+    "welcome": "Vítej",
+    "home": "Domů"
+  },
+  "USER": {
+    "user-details": "Detaily o uživateli",
+    "firstname": "Jméno",
+    "lastname": "Přijmení",
+    "username": "Uživatelské jméno",
+    "password": "Heslo",
+    "email": "Email",
+    "role": "Role",
+    "edit": "Uprav údaje"
+  },
+  "ERROR": {
+    "required": {
+      "name" : "Jméno je povinné",
+      "category" : "Kategorie je povinná",
+      "quantity" : "Množství je povinné",
+      "quantityType" : "Jednotka je povinná",
+      "firstname": "Jméno je povinné",
+      "lastname": "Přijmení je povinné",
+      "username": "Uživatelské jméno je povinné",
+      "email": "Email je povinný",
+      "password": "Heslo je povinné",
+      "exerciseName": "Jméno cviku je povinné",
+      "exerciseType": "Typ je povinný",
+      "exerciseCategory": "Kategorie je povinná",
+      "workoutName": "Název cvičení je povinný",
+      "weight": "Váha je povinná",
+      "reps": "Opakování jsou povinná",
+      "time": "Minuty i sekundy jsou povinné"
+    },
+    "length": {
+      "password": "Heslo musí být alespoň 6 znaků dlouhé."
+    },
+    "pages": {
+      "page-not-found": "Stránka nenalezena.",
+      "unauthorized": "Nemáte práva pro přístup na tuto stránku.",
+      "access-denied": "Heslo nebo jmeno je spatne",
+      "internalError": "500 Chyba na straně serveru",
+      "bad-request": "400 Špatný request",
+      "go-home": "Domů"
+    }
+  },
+  "ALERT": {
+    "successfully-saved": "Úspěšně uloženo.",
+    "update-weight-report-failed": "Aktualizace reportu o váze selhalo",
+    "update-weight-report-successful": "Úspěšně aktualizováno.",
+    "successfully-updated": "Úspěšně aktualizováno.",
+    "update-failed": "Aktualizace selhala.",
+    "no-weight-data": "Žádná data o váze!",
+    "save-exercise-failed": "Ukládání cvičení selhalo",
+    "save-failed": "Ukládání selhalo",
+    "save-workout-failed": "Ukládání cvičení selhalo",
+    "get-exercises": "Nepodařilo se získat cvičení!",
+    "get-workouts": "Nepodařilo se získat cvičení!",
+    "deleted-successfully": "Úspěšně odstraněno.",
+    "delete-failed": "Mazání selhalo.",
+    "error": "Chyba",
+    "connection-error": "Chyba připojení"
+  },
+  "BUTTON": {
+    "logout": "Odhlásit",
+    "login": "Přihlásit",
+    "cancel": "Zruš",
+    "close": "Zavřít",
+    "edit": "Uprav",
+    "delete": "Smaž",
+    "register": "Registrace",
+    "save": "Ulož",
+    "save-menu": "Ulož klíč",
+    "save-user": "Ulož",
+    "yes": "Ano",
+    "no": "Ne",
+    "next": "Další",
+    "back": "Zpátky",
+    "add-workout": "Přidej workout",
+    "add-exercise": "Přidej cvik",
+    "edit-exercise": "Uprav cvik",
+    "delete-exercise": "Smaž cvik",
+    "delete-workouts": "Smaž workouty",
+    "add-training": "Přidej trénink",
+    "create-exercise": "Vytvoř cvik",
+    "dashboard": "Dashboard",
+    "trainings": "Tréninky",
+    "export": "Export",
+    "import": "Import"
+  },
+  "TITLES": {
+    "menu-key-dialog": "Váš klíč",
+    "edit-user-dialog": "Údaje o uživateli",
+    "error-title": "Chyba",
+    "search-title": "Hledej",
+    "login-title": "Login",
+    "registration-title": "Registrace",
+    "breakdown": "Rozbor",
+    "totals": "Součty",
+    "workouts": "Workouts",
+    "trainings": "Tréninky",
+    "exercises": "Cviky",
+    "no-workouts": "Žádné cvičení pro vybraný čas",
+    "new-training": "Nový trénink"
+  },
+  "MESSAGES": {
+    "delete-exercise-question": "Opravdu chcete smazat cvik?",
+    "delete-workout-question": "Opravdu chcete smazat workout?",
+    "delete-training-question": "Opravdu chcete smazat trénink?"
+  },
+  "WEIGHT": {
+    "weight": "Moje váha",
+    "update": "Aktualizuj",
+    "loading": "Načítá se...",
+    "report": "Ukaž report"
+  },
+  "WORKOUTS": {
+    "workouts": "Workouts",
+    "select-category": "Vyber kategorii",
+    "select-exercise": "Vyber cvik",
+    "weight": "Váha",
+    "reps": "Opakování"
+  },
+  "EXERCISE": {
+    "name": "Název",
+    "type": "Typ",
+    "category": "Kategorie"
+  }
+}

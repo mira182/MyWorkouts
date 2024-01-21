@@ -1,0 +1,4 @@
+export enum PictureType {
+  EXERCISE_IMAGE = "EXERCISE_IMAGE",
+  EXERCISE_ICON = "EXERCISE_ICON",
+}

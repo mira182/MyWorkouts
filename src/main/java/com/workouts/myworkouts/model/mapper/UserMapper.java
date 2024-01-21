@@ -3,17 +3,16 @@ package com.workouts.myworkouts.model.mapper;
 import com.workouts.myworkouts.config.JwtTokenUtil;
 import com.workouts.myworkouts.model.dto.user.UserDto;
 import com.workouts.myworkouts.model.entity.user.User;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public abstract class UserMapper {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @BeanMapping(ignoreByDefault = true)
     public abstract UserDto entityToDto(User user);
 
     public abstract User dtoToEntity(UserDto user);
