@@ -1,0 +1,8 @@
+<div>
+  <input hidden="true" #file type="file" accept='image/*' (change)="preview(file.files)"/>
+  <button mat-icon-button (click)="file.click()">
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+  <span class="text-red-700" *ngIf="message">{{message}}</span>
+  <img [src]="imgURL" height="200" *ngIf="imgURL">
+</div>

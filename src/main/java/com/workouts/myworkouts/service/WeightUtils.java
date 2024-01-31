@@ -12,4 +12,11 @@ public class WeightUtils {
     public static double calculateMass(double weight, double percentageValue) {
         return BigDecimal.valueOf((weight / 100) * percentageValue).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
+
+    public static double bmiCalculator(double weight) {
+        final double height = 1.86;
+        return BigDecimal.valueOf(weight / Math.pow(height, 2))
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
 }

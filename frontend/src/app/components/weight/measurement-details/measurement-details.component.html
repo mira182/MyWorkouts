@@ -1,0 +1,42 @@
+<div class="flex flex-row items-center">
+
+  <mat-card class="mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <app-day-select (dateChanged)="onDaySelected($event)"></app-day-select>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let measurementTransformingInput of measurementDetails; index as i">
+          <div class="flex flex-row flex-nowrap gap-8 justify-start w-96">
+            <div>
+              <strong>{{ measurementTransformingInput.name }}</strong>
+            </div>
+            <div>
+              <div class="measurementTransformingInput-value">
+                {{ measurementTransformingInput.value }}
+              </div>&nbsp;
+              <span class="measurementTransformingInput-unit">{{ measurementTransformingInput.unit }}</span>
+            </div>
+            <div>
+              <div class="measurementTransformingInput-value">
+                {{ measurementTransformingInput.secondValue }}
+              </div>&nbsp;
+              <span class="measurementTransformingInput-unit">{{ measurementTransformingInput.secondUnit }}</span>
+            </div>
+          </div>
+          <mat-divider *ngIf="i < measurementDetails.length - 1"></mat-divider>
+        </mat-list-item>
+        <div *ngIf="measurementDetails.length === 0">
+          No data for this day.
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

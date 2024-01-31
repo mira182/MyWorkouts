@@ -1,0 +1,24 @@
+.graph {
+  margin: 10px;
+  height: 300px;
+}
+
+.mat-tab-labels :last-child.mat-tab-label {
+  min-width: 0;
+  padding: 0 12px;
+  color: unset;
+  opacity: unset;
+}
+
+//mat-cell, mat-header-cell, mat-footer-cell {
+//  overflow: visible;
+//  //padding-right: 12px;
+//  justify-content: center;
+//}
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  width: 120px;
+}
+
+w-100 {
+  width: 100%;
+}

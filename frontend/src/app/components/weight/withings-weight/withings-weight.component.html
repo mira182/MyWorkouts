@@ -1,0 +1,29 @@
+<div class="flex flex-col">
+<mat-tab-group (selectedIndexChange)="selectedTab($event)" [selectedIndex]="selectedTabIndex">
+  <mat-tab label="Charts">
+
+  </mat-tab>
+
+  <mat-tab label="Tables">
+
+  </mat-tab>
+
+  <mat-tab label="Details">
+<!--    <app-measurement-details [measurementData]="measurementData"-->
+<!--                             [date]="measurementDate"-->
+<!--                             [scaleType]="selectedScaleType">-->
+<!--    </app-measurement-details>-->
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <button mat-icon-button matTooltip="{{'WEIGHT.update' | translate}}"  (click)="redirectToGetCodeUrl()">
+        <mat-icon>update</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="{{'WEIGHT.report' | translate}}">
+        <mat-icon>preview</mat-icon>
+      </button>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+</div>

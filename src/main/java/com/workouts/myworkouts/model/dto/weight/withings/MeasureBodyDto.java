@@ -15,5 +15,5 @@ public class MeasureBodyDto {
 
     private String timezone;
 
-    private List<MeasureGroupDto> measuregrps;
+    private List<WithingsMeasureGroupDto> measureGroups;
 }

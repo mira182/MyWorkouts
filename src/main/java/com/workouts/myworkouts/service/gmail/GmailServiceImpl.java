@@ -9,7 +9,6 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
@@ -18,6 +17,7 @@ import com.google.api.services.gmail.model.Message;
 import com.google.api.services.gmail.model.MessagePart;
 import com.google.api.services.gmail.model.MessagePartBody;
 import com.google.common.collect.Lists;
+import com.google.common.io.BaseEncoding;
 import com.workouts.myworkouts.model.entity.weight.TanitaLastUpdate;
 import com.workouts.myworkouts.repository.weight.TanitaLastUpdateRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,14 +44,11 @@ public class GmailServiceImpl implements GmailService {
 
     private static final String USER = "me";
 
-    private static final List<String> SCOPES = Lists.newArrayList(
-            GmailScopes.GMAIL_READONLY,
-            GmailScopes.GMAIL_MODIFY,
-            GmailScopes.MAIL_GOOGLE_COM);
+    private static final List<String> SCOPES = Lists.newArrayList(GmailScopes.GMAIL_READONLY);
 
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+    private static final String CREDENTIALS_FILE_PATH = "/tanita/credentials.json";
 
-    private static final String QUERY = "from:apps@tanita.eu";
+    private static final String QUERY = "from:tanitaeurope@uhp.digital";
 
     private final TanitaLastUpdateRepository tanitaLastUpdateRepository;
 
@@ -137,7 +134,7 @@ public class GmailServiceImpl implements GmailService {
 
                 log.debug("Saving attachment with name {}", filename);
 
-                return Base64.decodeBase64(attachPart.getData());
+                return BaseEncoding.base64Url().decode(attachPart.getData());
             }
         }
         return null;

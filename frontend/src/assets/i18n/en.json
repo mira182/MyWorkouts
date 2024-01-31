@@ -60,7 +60,8 @@
     "deleted-successfully": "Successfully deleted.",
     "delete-failed": "Deleting failed.",
     "error": "Error",
-    "connection-error": "Connection error"
+    "connection-error": "Connection error",
+    "statusCode": "Status code: "
   },
   "BUTTON": {
     "logout": "Logout",
@@ -126,5 +127,10 @@
     "name": "Name",
     "type": "Type",
     "category": "Category"
+  },
+  "LABELS": {
+    "WEIGHT": "Weight",
+    "BMI": "BMI",
+    "BODY_FAT": "Body fat"
   }
 }

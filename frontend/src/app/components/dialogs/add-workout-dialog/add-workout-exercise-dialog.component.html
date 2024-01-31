@@ -1,0 +1,63 @@
+<div class="flex flex-row justify-between items-center m-4">
+  <div>{{ 'BUTTON.add-workout' | translate }}</div>
+  <button mat-icon-button matTooltip="{{ 'BUTTON.close' | translate }}" (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <mat-stepper labelPosition="bottom" linear="true">
+
+    <!-- STEP 1 -->
+    <mat-step>
+      <ng-template matStepLabel>{{ 'WORKOUTS.select-category' | translate }}</ng-template>
+      <mat-action-list>
+        <button mat-list-item matStepperNext *ngFor="let exerciseCategory of exerciseCategories"
+                (click)="selectCategory(exerciseCategory)">
+          {{ exerciseCategory }}
+        </button>
+      </mat-action-list>
+    </mat-step>
+
+    <!-- STEP 2 -->
+    <mat-step>
+      <ng-template matStepLabel>{{ 'WORKOUTS.select-exercise' | translate }}</ng-template>
+      <mat-action-list>
+        <button mat-list-item matStepperNext (click)="selectExercise(exercise)"
+                *ngFor="let exercise of exercisesByCategory">
+          <div class="flex flex-row">
+            <div>
+              <img [src]="IMAGE_BASE_URL + imageUtilsService.getExerciseIconPath(exercise)">
+            </div>
+            <div>
+              {{exercise.name}}
+            </div>
+          </div>
+        </button>
+      </mat-action-list>
+      <div class="flex flex-row justify-center">
+        <button mat-button matStepperPrevious>{{ 'BUTTON.back' | translate }}</button>
+      </div>
+    </mat-step>
+
+    <!-- STEP 3 -->
+    <mat-step>
+      <ng-template matStepLabel>{{'BUTTON.save' | translate }}</ng-template>
+      <div [ngSwitch]="selectedExercise?.type">
+        <div *ngSwitchCase="'WEIGHTED_REPS'">
+          <app-weight-reps-exercise (update)="setsUpdated($event)"></app-weight-reps-exercise>
+        </div>
+        <div *ngSwitchCase="'REPS'">
+          <app-reps-exercise (update)="setsUpdated($event)"></app-reps-exercise>
+        </div>
+        <div *ngSwitchCase="'TIME'">
+          <app-time-exercise (update)="setsUpdated($event)"></app-time-exercise>
+        </div>
+      </div>
+      <div class="flex flex-row justify-end items-center">
+        <button mat-button matStepperPrevious>{{ 'BUTTON.back' | translate }}</button>
+        <button mat-raised-button (click)="saveWorkoutExercise()" color="primary">{{ 'BUTTON.save' | translate }}</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

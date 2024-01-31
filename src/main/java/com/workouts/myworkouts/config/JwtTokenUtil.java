@@ -20,27 +20,27 @@ import static com.workouts.myworkouts.config.JwtAuthenticationFilter.SIGNING_KEY
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    public String getUsernameFromToken(String token) {
+    public static String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    private Date getExpirationDateFromToken(String token) {
+    private static Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    private static <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
-    private Claims getAllClaimsFromToken(String token) {
+    private static Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(SIGNING_KEY)
                 .parseClaimsJws(token)
                 .getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
+    private static Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
@@ -62,7 +62,7 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
-    public boolean validateToken(String token, UserDetails userDetails) {
+    public static boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }

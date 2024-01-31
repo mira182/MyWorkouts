@@ -1,0 +1,10 @@
+<div class="flex flex-row justify-center">
+  <button mat-icon-button class="bg-red-700" (click)="decrement()"><mat-icon>remove</mat-icon></button>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <input [formControl]="formControl" matInput type="number" min="{{ minimumValue }}">
+    <span matSuffix>{{suffix}}</span>
+    <mat-error *ngIf="formControl.invalid">{{ errorMessage }}</mat-error>
+  </mat-form-field>
+  <button mat-icon-button class="bg-green-700" (click)="increment()"><mat-icon>add</mat-icon></button>
+</div>

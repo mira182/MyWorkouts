@@ -60,7 +60,8 @@
     "deleted-successfully": "Úspěšně odstraněno.",
     "delete-failed": "Mazání selhalo.",
     "error": "Chyba",
-    "connection-error": "Chyba připojení"
+    "connection-error": "Chyba připojení",
+    "statusCode": "Stavový kód: "
   },
   "BUTTON": {
     "logout": "Odhlásit",
@@ -126,5 +127,10 @@
     "name": "Název",
     "type": "Typ",
     "category": "Kategorie"
+  },
+  "LABELS": {
+    "WEIGHT": "Váha",
+    "BMI": "BMI",
+    "BODY_FAT": "Tuk"
   }
 }

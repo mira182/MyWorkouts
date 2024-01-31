@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Select training day</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="dateFormControl">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button color="primary" [mat-dialog-close]="dateFormControl.value">
+    Select date
+  </button>
+</div>

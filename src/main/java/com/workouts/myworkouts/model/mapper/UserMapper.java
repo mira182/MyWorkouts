@@ -12,7 +12,6 @@ public abstract class UserMapper {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @BeanMapping(ignoreByDefault = true)
     public abstract UserDto entityToDto(User user);
 
     public abstract User dtoToEntity(UserDto user);

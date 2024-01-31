@@ -11,14 +11,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
 public class Privilege {
-
-    public Privilege(String name) {
-        this.name = name;
-    }
 
     @Id
     @JsonIgnore

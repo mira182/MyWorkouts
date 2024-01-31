@@ -6,4 +6,7 @@ export class Urls {
   public static readonly LOCAL_URL = environment.localUrl;
   public static readonly IMAGE_BASE_URL = environment.imageBaseUrl;
 
+  // EXERCISE URL
+  public static readonly EXERCISE_URL = '/exercise';
+
 }
