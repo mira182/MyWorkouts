@@ -9,9 +9,11 @@ import java.time.LocalDate;
 
 public interface WorkoutService {
 
-    WorkoutDto findByDate(LocalDate date);
+    WorkoutDto findByDate(@NonNull LocalDate date);
 
     WorkoutDto createWorkout(@NonNull WorkoutDto workoutDto);
 
     void deleteWorkout(long id);
+
+    void addWorkoutExerciseToWorkout(long workoutId, @NonNull WorkoutExerciseDto workoutExerciseDto);
 }

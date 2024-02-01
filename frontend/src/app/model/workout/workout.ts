@@ -6,5 +6,5 @@ export class Workout {
   id?: number;
   date: Moment;
   note: string;
-  workoutExercises: WorkoutExercise[];
+  exercises: WorkoutExercise[];
 }

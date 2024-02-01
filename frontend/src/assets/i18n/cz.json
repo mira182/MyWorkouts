@@ -61,7 +61,8 @@
     "delete-failed": "Mazání selhalo.",
     "error": "Chyba",
     "connection-error": "Chyba připojení",
-    "statusCode": "Stavový kód: "
+    "statusCode": "Stavový kód: ",
+    "workout-id-missing": "Workout ID chybí"
   },
   "BUTTON": {
     "logout": "Odhlásit",
@@ -82,7 +83,7 @@
     "add-exercise": "Přidej cvik",
     "edit-exercise": "Uprav cvik",
     "delete-exercise": "Smaž cvik",
-    "delete-workouts": "Smaž workouty",
+    "delete-workouts": "Smaž workout",
     "add-training": "Přidej trénink",
     "create-exercise": "Vytvoř cvik",
     "dashboard": "Dashboard",

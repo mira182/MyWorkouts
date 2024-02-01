@@ -1,4 +1,4 @@
-import {Component, Input, signal, Signal, WritableSignal} from '@angular/core';
+import {Component, Input, OnInit, signal, Signal, WritableSignal} from '@angular/core';
 import moment, {Moment} from "moment";
 import {CommonModule} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
@@ -7,14 +7,15 @@ import {TranslateModule} from "@ngx-translate/core";
 import {MatMiniFabButton} from "@angular/material/button";
 import {DaySelectComponent} from "../day-select/day-select.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import {NgxSpinnerService} from "ngx-spinner";
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutService} from "../../services/rest/workout/workout.service";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
-import {finalize, mergeMap, take} from "rxjs";
+import {filter, finalize, mergeMap, switchMap, take, tap} from "rxjs";
 import {Workout} from "../../model/workout/workout";
 import {isNil} from "lodash";
 import {WorkoutsHandlerComponent} from "../workouts-handler/workouts-handler.component";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-workouts',
@@ -27,12 +28,13 @@ import {WorkoutsHandlerComponent} from "../workouts-handler/workouts-handler.com
     MatMiniFabButton,
     DaySelectComponent,
     MatProgressSpinner,
-    WorkoutsHandlerComponent
+    WorkoutsHandlerComponent,
+    NgxSpinnerModule
   ],
   templateUrl: './workouts.component.html',
   styleUrl: './workouts.component.scss',
 })
-export class WorkoutsComponent {
+export class WorkoutsComponent implements OnInit {
 
   @Input()
   public workout: Workout;
@@ -47,21 +49,34 @@ export class WorkoutsComponent {
               private readonly spinner: NgxSpinnerService,) {
   }
 
+  public ngOnInit(): void {
+    if (!isNil(this.workout)) {
+      return;
+    }
+
+    this.workoutService.getWorkoutForDay(this.selectedDate())
+      .pipe(take(1))
+      .subscribe({
+        next: workout => this.workout = workout,
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+  }
+
   protected openAddWorkoutDialog() {
     this.spinner.show();
 
     this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
       .pipe(
         mergeMap(workoutExercise => this.workoutService.createWorkout({
-          date: this.selectedDate().startOf('day'),
+          date: this.selectedDate(),
           note: 'test note',
-          workoutExercises: [ workoutExercise ],
+          exercises: [ workoutExercise ],
         })),
         finalize(() => this.spinner.hide()),
         take(1),
       )
       .subscribe({
-        next: workout => {
+        next: () => {
           this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
         },
         error: err => {
@@ -75,14 +90,21 @@ export class WorkoutsComponent {
     this.selectedDate.set(date);
   }
 
-  protected deleteAllWorkouts() {
-    this.dialogsHandler.openDeleteConfirmationDialog("Do you really want to delete all workouts?").afterClosed().subscribe(yes => {
-      if (yes && !isNil(this.workout.id)) {
-        this.workoutService.deleteWorkout(this.workout.id).subscribe(() => {
-          this.getWorkoutsForDay(this.selectedDate());
-        });
-      }
-    })
+  protected deleteWorkout() {
+    if (!this.workout?.id) {
+      this.snackBarService.showErrorMessageSnackBar('ALERT.workout-id-missing');
+    }
+
+    this.dialogsHandler.openDeleteConfirmationDialog("Do you really want to delete workout?").afterClosed()
+      .pipe(
+        filter(confirm => confirm),
+        switchMap(() => this.workoutService.deleteWorkout(this.workout.id!)),
+        take(1),
+      )
+      .subscribe({
+        next: () => this.snackBarService.showSuccessSnackBar('ALERT.deleted-successfully'),
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
   }
 
   public today() {

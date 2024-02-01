@@ -17,13 +17,16 @@ import {CustomErrorResponse} from "../../../model/error/error.model";
 })
 export class AlertSnackBarComponent implements OnInit {
 
-  messageTranslationKey: string;
+  messageTranslationKey: string | undefined;
 
-  error : CustomErrorResponse;
+  errorMessageTranslationKey: string | undefined;
+
+  error : CustomErrorResponse | undefined;
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: AlertSnackBarModel) {
     this.messageTranslationKey = data.message;
     this.error = data.error;
+    this.errorMessageTranslationKey = data.errorMessage;
   }
 
   ngOnInit(): void {

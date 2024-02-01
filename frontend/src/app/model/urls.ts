@@ -8,5 +8,6 @@ export class Urls {
 
   // EXERCISE URL
   public static readonly EXERCISE_URL = '/exercise';
+  public static readonly WORKOUT_URL = '/workout';
 
 }

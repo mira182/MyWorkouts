@@ -61,7 +61,8 @@
     "delete-failed": "Deleting failed.",
     "error": "Error",
     "connection-error": "Connection error",
-    "statusCode": "Status code: "
+    "statusCode": "Status code: ",
+    "workout-id-missing": "Workout ID is missing"
   },
   "BUTTON": {
     "logout": "Logout",
@@ -82,7 +83,7 @@
     "add-exercise": "Add exercise",
     "edit-exercise": "Edit exercise",
     "delete-exercise": "Delete exercise",
-    "delete-workouts": "Delete all workouts",
+    "delete-workouts": "Delete workout",
     "add-training": "Add training",
     "create-exercise": "Create exercise",
     "dashboard": "Dashboard",

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {WorkoutExercise} from "../../model/exercise/workoutExercise";
 import {WorkoutSet} from "../../model/exercise/workoutSet";
 import {WorkoutExerciseService} from "../../services/rest/workout-exercise/workout-exercise.service";
@@ -80,14 +80,20 @@ export class WorkoutsHandlerComponent implements OnInit, OnChanges {
     this.workoutForm = this.formBuilder.group({
       note: [this.workout?.note ? this.workout.note : ''],
       date: [this.workout?.date ? this.workout.date : ''],
-      workoutExercises: this.formBuilder.array([])
+      exercises: this.createWorkoutExercisesArray(this.workout.exercises),
     });
 
-    this.workoutExercises.clear();
+    console.log(this.workoutForm);
+
+    console.log(this.workoutSets(0));
   }
 
-  get workoutExercises() {
-    return this.workoutForm.get('workoutExercises') as FormArray;
+  get workoutExercises(): FormArray {
+    return this.workoutForm.get('exercises') as FormArray;
+  }
+
+  public workoutSets(index: number): FormArray {
+    return this.workoutExercises.at(index).get('workoutSets') as FormArray
   }
 
   protected saveWorkout() {
@@ -111,4 +117,28 @@ export class WorkoutsHandlerComponent implements OnInit, OnChanges {
     });
   }
 
+  private createWorkoutExercisesArray(workoutExercises: WorkoutExercise[]): FormArray {
+    return this.formBuilder.array([this.createWorkoutExerciseGroup(workoutExercises)])
+  }
+
+  private createWorkoutExerciseGroup(workoutExercises: WorkoutExercise[]): FormGroup[] {
+    return workoutExercises.map(workoutExercise =>
+      this.formBuilder.group({
+        name: new FormControl(workoutExercise.exercise.name),
+        type: new FormControl(workoutExercise.exercise.type),
+        dateTime: new FormControl(workoutExercise.dateTime),
+        workoutSets: this.formBuilder.array([this.createWorkoutSetsGroups(workoutExercise.workoutSets)]),
+      }));
+  }
+
+  private createWorkoutSetsGroups(workoutSets: WorkoutSet[]): FormGroup[] {
+    return workoutSets.map(set =>
+      this.formBuilder.group({
+        weight: new FormControl({value: set.weight, disabled: true}, Validators.required),
+        reps: new FormControl({value: set.reps, disabled: true}, Validators.required),
+        distance: new FormControl({value: set.distance, disabled: true}, Validators.required),
+        durationMin: new FormControl({ value: Math.floor(set.duration / 60), disabled: true }, Validators.required),
+        durationSec: new FormControl({ value: set.duration % 60, disabled: true }, Validators.required)
+      }));
+  }
 }

@@ -24,7 +24,7 @@ public class TrainingPlan {
 
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "workout_id", referencedColumnName = "id")
     private Workout workout;
 

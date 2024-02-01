@@ -12,8 +12,6 @@ import java.util.List;
 @ToString
 public class WorkoutExerciseDto {
 
-    private Long id;
-
     private ExerciseDto exercise;
 
     private List<WorkoutSetDto> workoutSets;

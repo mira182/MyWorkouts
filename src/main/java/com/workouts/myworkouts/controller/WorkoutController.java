@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import static com.workouts.myworkouts.config.Constants.API_BASE_URL;
 
 @RestController
-@RequestMapping(API_BASE_URL + "/workouts")
+@RequestMapping(API_BASE_URL + "/workout")
 @RequiredArgsConstructor
 public class WorkoutController {
 
@@ -26,6 +26,11 @@ public class WorkoutController {
     @PostMapping("/create")
     public WorkoutDto createWorkout(@RequestBody WorkoutDto workoutDto) {
         return workoutService.createWorkout(workoutDto);
+    }
+
+    @PostMapping("/addWorkoutExercise")
+    public void addWorkoutExerciseToWorkout(@RequestParam long workoutId, @RequestBody WorkoutExerciseDto workoutExerciseDto) {
+        workoutService.addWorkoutExerciseToWorkout(workoutId, workoutExerciseDto);
     }
 
     @DeleteMapping("/delete")

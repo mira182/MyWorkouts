@@ -2,10 +2,10 @@ package com.workouts.myworkouts.model.entity.exercise;
 
 import com.workouts.myworkouts.model.entity.audit.AuditableTime;
 import com.workouts.myworkouts.model.entity.picture.Picture;
+import com.workouts.myworkouts.model.entity.workout.WorkoutExercise;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.ExerciseType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,17 +22,19 @@ public class Exercise extends AuditableTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ExerciseType type;
 
-    @NotNull
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ExerciseCategory category;
+
+    @OneToMany(mappedBy = "exercise")
+    private List<WorkoutExercise> workoutExercises;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -46,10 +48,6 @@ public class Exercise extends AuditableTime {
 
     public void addPicture(Picture picture) {
         pictures.add(picture);
-    }
-
-    public void removePicture(Picture picture) {
-        pictures.remove(picture);
     }
 
 }

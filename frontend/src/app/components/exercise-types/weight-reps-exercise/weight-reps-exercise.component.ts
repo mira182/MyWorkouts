@@ -82,7 +82,6 @@ export class WeightRepsExerciseComponent implements OnInit {
 
   weightUpdated(weightValue: number, index: number) {
     this.sets.at(index).patchValue({weight: weightValue});
-    console.log(this.weightRepsForm);
     this.update.emit(this.weightRepsForm);
   }
 

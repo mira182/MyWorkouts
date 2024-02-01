@@ -77,12 +77,12 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
   }
 
   protected saveWorkoutExercise() {
-    let ex: WorkoutExercise = {
+    let workoutExercise: WorkoutExercise = {
       exercise: this.selectedExercise,
       workoutSets: this.setsForm.value.sets,
     };
 
-    this.dialogRef.close(ex);
+    this.dialogRef.close(workoutExercise);
   }
 
   protected selectCategory(exerciseCategory: string): void {

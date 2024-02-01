@@ -21,16 +21,19 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Exercise exercise;
 
     @OneToMany(mappedBy = "workoutExercise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutSet> workoutSets  = new ArrayList<>();
+    private List<WorkoutSet> workoutSets;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Workout workout;
 
     public void addWorkoutSet(WorkoutSet workoutSet) {
+        if (workoutSets == null) {
+            workoutSets = new ArrayList<>();
+        }
         workoutSets.add(workoutSet);
         workoutSet.setWorkoutExercise(this);
     }

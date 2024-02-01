@@ -1,12 +1,12 @@
 <div *ngIf="workout">
   <form [formGroup]="workoutForm">
-    <div class="flex flex-col gap-4" formArrayName="workouts">
+    <div class="flex flex-col gap-4" formArrayName="exercises">
       <mat-card *ngFor="let workout of workoutExercises.controls; let workoutIndex = index">
         <div [formGroupName]="workoutIndex">
           <mat-card-subtitle class="card-title">
             <div class="flex flex-row justify-start items-center">
               <div>
-                {{ workout.value.exercise.name }}
+                {{ workout.value.name }}
               </div>
               <button *ngIf="workout.enabled" mat-icon-button matTooltip="{{'BUTTON.save' | translate}}"
                       (click)="saveWorkout()" color="primary">
@@ -25,7 +25,7 @@
           <mat-divider></mat-divider>
           <mat-card-content>
             <div class="flex flex-col" formArrayName="workoutSets">
-              <div class="flex flex-row justify-center items-center" *ngIf="workout.enabled" style="margin-top: 5px">
+              <div class="flex flex-row justify-center items-center mt-2" *ngIf="workout.enabled">
                 <div *ngIf="withDate">
                   <mat-form-field>
                     <mat-label>Choose a date</mat-label>
@@ -42,9 +42,10 @@
                 </div>
               </div>
 
-              <div *ngFor="let set of workout.get('workoutSets')?.value; let setIndex = index">
+              <div *ngFor="let set of workoutSets(workoutIndex).controls let setIndex = index">
+                {{ set | json }}
                 <div [formGroupName]="setIndex">
-                  <div [ngSwitch]="workout.value.exercise.type">
+                  <div [ngSwitch]="workout.value.type">
                     <div *ngSwitchCase="'WEIGHTED_REPS'" class="flex flex-row justify-center gap-4">
                       <div>
                         <mat-form-field>

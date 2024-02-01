@@ -77,11 +77,6 @@ public class TrainingServiceImpl implements TrainingService {
 
         WorkoutDto workoutDto = workoutMapper.entityToDto(workout);
         workoutDto.setDate(dateTime);
-        workoutDto.getExercises().forEach(workoutExercise -> {
-            workoutExercise.setId(null);
-            workoutExercise.getWorkoutSets().forEach(workoutSet -> workoutSet.setId(null));
-        });
-
 
         workoutService.createWorkout(workoutDto);
 

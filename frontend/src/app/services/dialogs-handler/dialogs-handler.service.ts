@@ -16,11 +16,12 @@ export class DialogsHandlerService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  openAddWorkoutExerciseDialog(data?: any) {
+  public openAddWorkoutExerciseDialog(data?: any) {
     return this.dialog.open(AddWorkoutExerciseDialogComponent, {
       height: 'auto',
       width: '590px',
       hasBackdrop: true,
+      disableClose: true,
       data: data
     });
   }

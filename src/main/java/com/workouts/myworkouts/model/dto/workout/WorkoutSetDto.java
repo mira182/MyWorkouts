@@ -9,8 +9,6 @@ import lombok.ToString;
 @ToString
 public class WorkoutSetDto {
 
-    private Long id;
-
     private int reps;
 
     private double weight;

@@ -1,3 +1,11 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin"
+  [fullScreen]="true"
+></ngx-spinner>
+
 <div class="flex flex-col gap-2 mt-4">
 
   <div class="flex flex-row justify-center gap-2 mx-4">
@@ -14,7 +22,7 @@
       </button>
     </div>
     <div>
-      <button mat-mini-fab matTooltip="{{'BUTTON.delete-workouts' | translate}}" (click)="deleteAllWorkouts()">
+      <button mat-mini-fab matTooltip="{{'BUTTON.delete-workouts' | translate}}" (click)="deleteWorkout()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -29,14 +37,13 @@
 
     <app-day-select [inputDate]="selectedDate()" (dateChanged)="getWorkoutsForDay($event)"></app-day-select>
 
-    <div *ngIf="loading">
-      <mat-spinner [diameter]="40"></mat-spinner>
-    </div>
-    <div *ngIf="workout && !loading">
-      <h2>No workouts today.</h2>
+    <div *ngIf="workout; else noWorkouts">
+      <app-workouts-handler [workout]="workout"></app-workouts-handler>
     </div>
 
-    <app-workouts-handler [workout]="workout"></app-workouts-handler>
+    <ng-template #noWorkouts>
+      <h2>No workouts today.</h2>
+    </ng-template>
 
   </div>
 </div>

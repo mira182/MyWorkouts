@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,7 +52,6 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
         // update existing sets
         workoutSetDtos.forEach(workoutSetDto -> {
             Optional<WorkoutSet> workoutSetToEdit = workoutExercise.getWorkoutSets().stream()
-                    .filter(workoutSet -> workoutSet.getId().equals(workoutSetDto.getId()))
                     .findFirst();
             if (workoutSetToEdit.isPresent()) {
                 workoutSetToEdit.get().setReps(workoutSetDto.getReps());
@@ -73,18 +71,11 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
         final List<WorkoutSet> newWorkouts = receivedWorkoutSets.stream()
                 .filter(workoutSet -> workoutSet.getId() == null)
                 .toList();
-        newWorkouts.forEach(workoutExercise::addWorkoutSet);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void deleteWorkout(Long id) {
         workoutExerciseRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public void deleteWorkouts(List<Long> workoutIds) {
-        workoutIds.forEach(this::deleteWorkout);
     }
 }

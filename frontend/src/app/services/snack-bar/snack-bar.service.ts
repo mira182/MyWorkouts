@@ -16,10 +16,10 @@ export class SnackBarService {
   }
 
   public showErrorSnackBar(error: CustomErrorResponse) {
-    if (isNil(error)) {
-      return;
-    }
-
     this.snackBar.openFromComponent(AlertSnackBarComponent, {data: { error }, verticalPosition: "bottom", panelClass: "alert-danger", duration: 2000});
+  }
+
+  public showErrorMessageSnackBar(errorMessage: string) {
+    this.snackBar.openFromComponent(AlertSnackBarComponent, {data: { errorMessage }, verticalPosition: "bottom", panelClass: "alert-danger", duration: 2000});
   }
 }
