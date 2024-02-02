@@ -3,7 +3,6 @@ import {Urls} from '../../../model/urls';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Exercise} from '../../../model/exercise/exercise';
 import {Observable} from 'rxjs';
-import {ExerciseCategory} from '../../../model/exercise/exerciseCategory';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +58,6 @@ export class ExerciseService {
   }
 
   public deleteExercise(id: number) {
-    return this.http.delete<boolean>(Urls.API_URL + Urls.EXERCISE_URL + id);
+    return this.http.delete<boolean>(Urls.API_URL + Urls.EXERCISE_URL + "/" + id);
   }
 }

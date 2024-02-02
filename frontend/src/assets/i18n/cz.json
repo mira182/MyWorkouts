@@ -130,6 +130,7 @@
     "category": "Kategorie"
   },
   "LABELS": {
+    "date-picker": "Vyberte datum",
     "WEIGHT": "Váha",
     "BMI": "BMI",
     "BODY_FAT": "Tuk"

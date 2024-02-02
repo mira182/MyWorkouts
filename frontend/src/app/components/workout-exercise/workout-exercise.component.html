@@ -1,0 +1,110 @@
+<ng-container *ngIf="workoutExercise">
+  <form [formGroup]="form">
+    <mat-card>
+      <mat-card-subtitle>
+        <div class="flex flex-row justify-between items-center mx-4">
+          <div class="text-lg">
+            {{ form.get('exercise').value.name }}
+          </div>
+
+          <div>
+            <button *ngIf="form.enabled" mat-icon-button matTooltip="{{'BUTTON.save' | translate}}"
+                    (click)="saveWorkout()" color="primary">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="{{'BUTTON.edit' | translate}}"
+                    (click)="form.disabled ? form.enable() : form.disable()">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="{{'BUTTON.delete' | translate}}"
+                    (click)="deleteWorkoutExercise()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-subtitle>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <div class="flex flex-col" formArrayName="workoutSets">
+
+          <div class="flex flex-row justify-between items-start mt-2" *ngIf="form.enabled">
+            <div *ngIf="form.get('date')">
+              <mat-form-field>
+                <mat-label>{{ 'LABELS.date-picker' | translate }}</mat-label>
+                <input matInput [matDatepicker]="picker" [formControl]="form.get('date')">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="form.enabled">
+              <button mat-icon-button matTooltip="Add Set" (click)="addWorkoutSet()">
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div *ngFor="let set of workoutSets.controls let setIndex = index">
+            <div [formGroupName]="setIndex">
+              <div [ngSwitch]="form.get('exercise').value.type">
+                <div *ngSwitchCase="'WEIGHTED_REPS'" class="flex flex-row justify-center gap-4">
+                  <div>
+                    <mat-form-field>
+                      <input matInput type="number" formControlName="weight" min="0" step="2.5">
+                      <span matSuffix>kg</span>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field>
+                      <input matInput type="number" formControlName="reps" min="0" step="1">
+                      <span matSuffix>reps</span>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="form.enabled">
+                    <ng-container *ngTemplateOutlet="deleteSetButton; context:{ $implicit: setIndex }"></ng-container>
+                  </div>
+                </div>
+                <div *ngSwitchCase="'REPS'" class="flex flex-row justify-center gap-4">
+                  <div>
+                    <mat-form-field>
+                      <input matInput type="number" formControlName="reps" min="0" step="1">
+                      <span matSuffix>reps</span>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="form.enabled">
+                    <ng-container *ngTemplateOutlet="deleteSetButton; context:{ $implicit: setIndex }"></ng-container>
+                  </div>
+                </div>
+                <div *ngSwitchCase="'TIME'" class="flex flex-row justify-center gap-4">
+                  <div>
+                    <mat-form-field>
+                      <input matInput type="number" formControlName="durationMin" min="0" step="1">
+                      <span matSuffix>min</span>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field>
+                      <input matInput type="number" formControlName="durationSec" min="0" step="1">
+                      <span matSuffix>sec</span>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="form.enabled">
+                    <ng-container *ngTemplateOutlet="deleteSetButton; context:{ $implicit: setIndex }"></ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</ng-container>
+
+<ng-template #deleteSetButton let-setIndex>
+  <button mat-icon-button matTooltip="Remove Set" (click)="workoutSets.removeAt(setIndex)">
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+</ng-template>

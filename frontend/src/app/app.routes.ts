@@ -5,7 +5,7 @@ import {canActivatePageFunction} from "./services/rest/auth/can-activate-page-fu
 import {LoginComponent} from "./components/login/login.component";
 import {HomeLayoutComponent} from "./components/layouts/home-page-layout/home-page-layout.component";
 import {LoginLayoutComponent} from "./components/layouts/login-page-layout.component";
-import {WorkoutsComponent} from "./components/workouts/workouts.component";
+import {WorkoutsComponent} from "./components/workout/workouts.component";
 
 export const routes: Routes = [
   {

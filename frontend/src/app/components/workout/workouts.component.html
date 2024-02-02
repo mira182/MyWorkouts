@@ -37,8 +37,8 @@
 
     <app-day-select [inputDate]="selectedDate()" (dateChanged)="getWorkoutsForDay($event)"></app-day-select>
 
-    <div *ngIf="workout; else noWorkouts">
-      <app-workouts-handler [workout]="workout"></app-workouts-handler>
+    <div *ngIf="workout; else noWorkouts" class="flex flex-col justify-center items-center">
+      <app-workout-exercise *ngFor="let workoutExercise of workout.exercises" [workoutExercise]="workoutExercise"></app-workout-exercise>
     </div>
 
     <ng-template #noWorkouts>

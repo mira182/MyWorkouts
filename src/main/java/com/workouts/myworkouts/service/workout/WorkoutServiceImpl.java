@@ -31,8 +31,10 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Override
     @Transactional(readOnly = true)
     public WorkoutDto findByDate(@NonNull LocalDate date) {
-        return workoutMapper.entityToDto(workoutRepository.findByDate(date)
-                .orElseThrow(() -> new WorkoutNotFoundException(date)));
+        return workoutRepository.findByDate(date)
+                .map(workoutMapper::entityToDto)
+                .orElse(null);
+
     }
 
     @Override
@@ -58,6 +60,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
+    @Transactional
     public void deleteWorkout(long id) {
         workoutRepository.deleteById(id);
     }

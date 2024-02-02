@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,21 +20,18 @@ public class Workout extends AuditableTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private LocalDate date;
 
     private String note;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> exercises;
+    private List<WorkoutExercise> exercises = new ArrayList<>();
 
     @OneToOne(mappedBy = "workout")
     private TrainingPlan trainingPlan;
 
     public void addWorkoutExercise(WorkoutExercise workoutExercise) {
-        if (exercises == null) {
-            exercises = new ArrayList<>();
-        }
         exercises.add(workoutExercise);
         workoutExercise.setWorkout(this);
     }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, signal, Signal, WritableSignal} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import moment, {Moment} from "moment";
 import {CommonModule} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
@@ -14,8 +14,8 @@ import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-hand
 import {filter, finalize, mergeMap, switchMap, take, tap} from "rxjs";
 import {Workout} from "../../model/workout/workout";
 import {isNil} from "lodash";
-import {WorkoutsHandlerComponent} from "../workouts-handler/workouts-handler.component";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import {API_DATE_FORMAT} from "../../app.config";
+import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.component";
 
 @Component({
   selector: 'app-workouts',
@@ -28,15 +28,13 @@ import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
     MatMiniFabButton,
     DaySelectComponent,
     MatProgressSpinner,
-    WorkoutsHandlerComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    WorkoutExerciseComponent
   ],
   templateUrl: './workouts.component.html',
-  styleUrl: './workouts.component.scss',
 })
 export class WorkoutsComponent implements OnInit {
 
-  @Input()
   public workout: Workout;
 
   protected selectedDate: WritableSignal<Moment> = signal(moment());
@@ -50,33 +48,25 @@ export class WorkoutsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (!isNil(this.workout)) {
-      return;
-    }
-
-    this.workoutService.getWorkoutForDay(this.selectedDate())
-      .pipe(take(1))
-      .subscribe({
-        next: workout => this.workout = workout,
-        error: err => this.snackBarService.showErrorSnackBar(err),
-      });
+    this.getWorkoutForSelectedDay();
   }
 
   protected openAddWorkoutDialog() {
-    this.spinner.show();
-
     this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
       .pipe(
+        filter((workoutExercise) => !isNil(workoutExercise)),
         mergeMap(workoutExercise => this.workoutService.createWorkout({
-          date: this.selectedDate(),
+          date: this.selectedDate().format(API_DATE_FORMAT),
           note: 'test note',
           exercises: [ workoutExercise ],
         })),
+        tap(() => this.spinner.show()),
         finalize(() => this.spinner.hide()),
         take(1),
       )
       .subscribe({
-        next: () => {
+        next: (workout) => {
+          this.workout = workout;
           this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
         },
         error: err => {
@@ -88,6 +78,7 @@ export class WorkoutsComponent implements OnInit {
   protected getWorkoutsForDay(date: Moment) {
     this.loading = true;
     this.selectedDate.set(date);
+    this.getWorkoutForSelectedDay();
   }
 
   protected deleteWorkout() {
@@ -109,5 +100,18 @@ export class WorkoutsComponent implements OnInit {
 
   public today() {
     this.selectedDate.set(moment());
+  }
+
+  private getWorkoutForSelectedDay(): void {
+    this.spinner.show()
+
+    this.workoutService.getWorkoutForDay(this.selectedDate())
+      .pipe(
+        take(1),
+        finalize(() => this.spinner.hide()),
+      )
+      .subscribe({
+        next: workout => this.workout = workout,
+      });
   }
 }

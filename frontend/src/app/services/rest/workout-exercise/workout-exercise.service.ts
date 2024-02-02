@@ -13,42 +13,27 @@ export class WorkoutExerciseService {
   constructor(private http: HttpClient) { }
 
   public createWorkoutExercise(workout: WorkoutExercise) {
-    return this.http.post(Urls.API_URL + '/workouts', workout);
+    return this.http.post(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL, workout);
   }
 
   public getWorkoutsForWeek(from: Moment): Observable<WorkoutExercise[]> {
-    return this.http.get<WorkoutExercise[]>(Urls.API_URL + '/workouts', {
+    return this.http.get<WorkoutExercise[]>(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL, {
       params : new HttpParams()
         .set('from', from.format('yyyy-MM-dd'))
         .set('to', from.add(6, 'days').format('yyyy-MM-dd'))
     });
   }
 
-  public getWorkoutsForInterval(from: Moment, to: Date): Observable<WorkoutExercise[]> {
-    return this.http.get<WorkoutExercise[]>(Urls.API_URL + '/workouts', {
-      params : new HttpParams()
-        .set('from', from.format('yyyy-MM-dd'))
-        .set('to', from.format('yyyy-MM-dd'))
-    });
-  }
-
   public getWorkoutsForDay(day: Moment): Observable<WorkoutExercise[]> {
-    return this.http.get<WorkoutExercise[]>(Urls.API_URL + '/workouts/' +day.format('yyyy-MM-dd'));
+    return this.http.get<WorkoutExercise[]>(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL + '/' +day.format('yyyy-MM-dd'));
   }
 
-  public updateWorkout(workoutId: number, workout: WorkoutExercise): Observable<WorkoutExercise> {
-    return this.http.patch<WorkoutExercise>(Urls.API_URL + '/workouts/' + workoutId, workout);
+  public updateWorkoutExercise(workout: WorkoutExercise): Observable<WorkoutExercise> {
+    return this.http.patch<WorkoutExercise>(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL, workout);
   }
 
-  public deleteWorkout(id: number): Observable<void> {
-    return this.http.delete<void>(Urls.API_URL + '/workouts/delete/' + id);
-  }
-
-  public deleteWorkouts(workoutIds: number[]): Observable<void> {
-    return this.http.delete<void>(Urls.API_URL + '/workouts/delete', {
-      params : new HttpParams()
-        .set('workoutIds', workoutIds.join(','))
-    })
+  public deleteWorkoutExercise(id: number): Observable<void> {
+    return this.http.delete<void>(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL + '/delete/' + id);
   }
 
 }

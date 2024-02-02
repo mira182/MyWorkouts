@@ -4,7 +4,6 @@ import {Urls} from "../../../model/urls";
 import {Moment} from "moment";
 import {Workout} from "../../../model/workout/workout";
 import {Observable} from "rxjs";
-import {WorkoutExercise} from "../../../model/exercise/workoutExercise";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class WorkoutService {
     return this.http.post<Workout>(Urls.API_URL + Urls.WORKOUT_URL + '/create', workout);
   }
 
-  deleteWorkout(id: number): Observable<void> {
+  public deleteWorkout(id: number): Observable<void> {
     return this.http.delete<void>(Urls.API_URL + Urls.WORKOUT_URL + '/delete', { params: { id }});
   }
 }

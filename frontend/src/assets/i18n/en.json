@@ -130,6 +130,7 @@
     "category": "Category"
   },
   "LABELS": {
+    "date-picker": "Choose a date",
     "WEIGHT": "Weight",
     "BMI": "BMI",
     "BODY_FAT": "Body fat"
