@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Urls} from '../../../model/urls';
-import {HttpClient, HttpRequest} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Exercise} from '../../../model/exercise/exercise';
-import {Observable} from 'rxjs';
+import {Observable, take} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,7 @@ export class ExerciseService {
     }));
     formData.append('file', file);
 
-    const req = new HttpRequest('POST', Urls.API_URL + Urls.EXERCISE_URL, formData, {
-      reportProgress: false,
-      responseType: 'json'
-    });
-
-    return this.http.request(req);
+    return this.http.post<Exercise>(Urls.API_URL + Urls.EXERCISE_URL, formData);
   }
 
   public getAllExercisesByCategory(category: string): Observable<Exercise[]> {
@@ -34,14 +29,20 @@ export class ExerciseService {
   }
 
   public getAllCategories(): Observable<string[]> {
-    return this.http.get<string[]>(Urls.API_URL + Urls.EXERCISE_URL + '/categories');
+    return this.http.get<string[]>(Urls.API_URL + Urls.EXERCISE_URL + '/categories')
+      .pipe(
+        take(1)
+      );
   }
 
   public getAllTypes(): Observable<string[]> {
-    return this.http.get<string[]>(Urls.API_URL + Urls.EXERCISE_URL + '/types');
+    return this.http.get<string[]>(Urls.API_URL + Urls.EXERCISE_URL + '/types')
+      .pipe(
+        take(1)
+      );
   }
 
-  public updateExercise(exercise: Exercise, id: number, file: File) {
+  public updateExercise(exercise: Exercise, id: number, file: File): Observable<Exercise> {
     const formData: FormData = new FormData();
 
     formData.append('exercise', new Blob([JSON.stringify(exercise)], {
@@ -49,12 +50,7 @@ export class ExerciseService {
     }));
     formData.append('file', file);
 
-    const req = new HttpRequest('PATCH', Urls.API_URL + Urls.EXERCISE_URL + id, formData, {
-      reportProgress: false,
-      responseType: 'json'
-    });
-
-    return this.http.request(req);
+    return this.http.patch<Exercise>(Urls.API_URL + Urls.EXERCISE_URL + '/' + id, formData);
   }
 
   public deleteExercise(id: number) {

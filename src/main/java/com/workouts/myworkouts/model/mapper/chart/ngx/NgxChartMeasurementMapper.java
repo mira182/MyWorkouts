@@ -1,6 +1,6 @@
 package com.workouts.myworkouts.model.mapper.chart.ngx;
 
-import com.workouts.myworkouts.model.dto.weight.chart.ngx.NgxChartDataPointDto;
+import com.workouts.myworkouts.model.dto.chart.ngx.NgxChartDataPointDto;
 import com.workouts.myworkouts.model.dto.weight.projections.SingleMeasurement;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

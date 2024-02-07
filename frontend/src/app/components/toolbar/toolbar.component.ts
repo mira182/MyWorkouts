@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
+import {MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatTooltip} from "@angular/material/tooltip";
@@ -21,7 +21,6 @@ import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {MatDialog} from "@angular/material/dialog";
 import {User} from "../../model/user/user";
 import {Unsubscribe} from "../unsubscribe/unsubscribe";
-import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-toolbar',
@@ -60,8 +59,7 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
               private exportImportService: ExportImportService,
               private snackBar: SnackBarService,
               private dialog: MatDialog,
-              private spinner: NgxSpinnerService,
-              private readonly overlayContainer: OverlayContainer) {
+              private spinner: NgxSpinnerService) {
     super();
   }
 
@@ -74,7 +72,6 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
   }
 
   protected selectionChanged(selectedLanguage: string): void {
-    console.log(selectedLanguage);
     this.translateService.use(selectedLanguage);
   }
 

@@ -58,20 +58,16 @@ export class WeightRepsExerciseComponent implements OnInit {
     return this.weightRepsForm.get('sets') as FormArray;
   }
 
-  newSet(): FormGroup {
-    return this.formBuilder.group({
-      weight: new FormControl(0),
-      reps: new FormControl(0)
-    });
-  }
-
   protected addSet() {
     const weight = isNil(this.sets.at(this.sets.length - 1)?.value?.weight) ? 0 : this.sets.at(this.sets.length - 1)?.value?.weight;
     const reps = isNil(this.sets.at(this.sets.length - 1)?.value?.reps) ? 0 : this.sets.at(this.sets.length - 1)?.value?.reps;
 
     this.sets.push(this.formBuilder.group({
       weight: new FormControl(weight),
-      reps: new FormControl(reps)
+      reps: new FormControl(reps),
+      distance: [0],
+      durationMin: [0],
+      durationSec: [0],
     }));
   }
 

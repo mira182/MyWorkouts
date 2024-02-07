@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Urls} from '../../../model/urls';
-import {WorkoutExercise} from '../../../model/exercise/workoutExercise';
+import {WorkoutExercise} from '../../../model/workout-exercise/workoutExercise';
 import {Observable} from 'rxjs';
 import {Moment} from 'moment';
 

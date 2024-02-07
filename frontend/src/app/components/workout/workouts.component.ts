@@ -16,6 +16,8 @@ import {Workout} from "../../model/workout/workout";
 import {isNil} from "lodash";
 import {API_DATE_FORMAT} from "../../app.config";
 import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.component";
+import {ActivatedRoute} from "@angular/router";
+import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
 
 @Component({
   selector: 'app-workouts',
@@ -29,7 +31,8 @@ import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.com
     DaySelectComponent,
     MatProgressSpinner,
     NgxSpinnerModule,
-    WorkoutExerciseComponent
+    WorkoutExerciseComponent,
+    PageHeaderLayoutComponent
   ],
   templateUrl: './workouts.component.html',
 })
@@ -44,21 +47,23 @@ export class WorkoutsComponent implements OnInit {
   constructor(private readonly snackBarService: SnackBarService,
               private readonly workoutService: WorkoutService,
               private readonly dialogsHandler: DialogsHandlerService,
-              private readonly spinner: NgxSpinnerService,) {
+              private readonly spinner: NgxSpinnerService,
+              private readonly route: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
     this.getWorkoutForSelectedDay();
   }
 
-  protected openAddWorkoutDialog() {
+  protected openAddWorkoutExerciseDialog() {
     this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
       .pipe(
         filter((workoutExercise) => !isNil(workoutExercise)),
+        // TODO change create to add workoutExercise to workout with some ID
         mergeMap(workoutExercise => this.workoutService.createWorkout({
           date: this.selectedDate().format(API_DATE_FORMAT),
           note: 'test note',
-          exercises: [ workoutExercise ],
+          workoutExercises: [ workoutExercise ],
         })),
         tap(() => this.spinner.show()),
         finalize(() => this.spinner.hide()),
@@ -105,6 +110,16 @@ export class WorkoutsComponent implements OnInit {
   private getWorkoutForSelectedDay(): void {
     this.spinner.show()
 
+    this.route.queryParams
+      .pipe(
+        take(1),
+      )
+      .subscribe(params => {
+        if (!isNil(params['date'])) {
+          this.selectedDate.set(moment(params['date']));
+        }
+      });
+
     this.workoutService.getWorkoutForDay(this.selectedDate())
       .pipe(
         take(1),
@@ -113,5 +128,10 @@ export class WorkoutsComponent implements OnInit {
       .subscribe({
         next: workout => this.workout = workout,
       });
+  }
+
+  protected onWorkoutExerciseDeleted(workoutExerciseId: number): void {
+    this.workout.workoutExercises = this.workout.workoutExercises
+      .filter(workoutExercise => workoutExercise.id != workoutExerciseId);
   }
 }

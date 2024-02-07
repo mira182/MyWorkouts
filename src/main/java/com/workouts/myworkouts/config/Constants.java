@@ -14,4 +14,7 @@ public final class Constants {
     // IMAGES
     public static final  Path EXERCISE_IMAGES_LOCATION = Paths.get("img/exercises");
     public static final  Path EXERCISE_ICONS_LOCATION = Paths.get("img/exercises/icon");
+
+    // CACHE keys
+    public static final String EXERCISES_BY_CATEGORY_KEY = "exercises_by_category";
 }

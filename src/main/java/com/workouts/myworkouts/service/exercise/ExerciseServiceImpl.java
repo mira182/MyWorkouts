@@ -10,13 +10,13 @@ import com.workouts.myworkouts.model.mapper.ExerciseMapper;
 import com.workouts.myworkouts.repository.exercise.ExerciseRepository;
 import com.workouts.myworkouts.service.image.ImageService;
 import com.workouts.myworkouts.service.picture.PictureService;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,13 +43,13 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     @Transactional
-    public ExerciseDto createExercise(ExerciseDto exerciseDto) {
+    public ExerciseDto createExercise(@NonNull ExerciseDto exerciseDto) {
         return exerciseMapper.entityToDto(findOrCreateExercise(exerciseDto));
     }
 
     @Override
     @Transactional
-    public ExerciseDto createExercise(ExerciseDto exerciseDto, MultipartFile file) {
+    public ExerciseDto createExercise(@NonNull ExerciseDto exerciseDto, MultipartFile file) {
         Exercise foundOrCreatedExercise = findOrCreateExercise(exerciseDto);
 
         if (foundOrCreatedExercise != null) {
@@ -59,7 +59,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         return exerciseMapper.entityToDto(foundOrCreatedExercise);
     }
 
-    private Exercise findOrCreateExercise(ExerciseDto exerciseDto) {
+    private Exercise findOrCreateExercise(@NonNull ExerciseDto exerciseDto) {
         if (exerciseDto.getId() != null) {
             return exerciseRepository.findById(exerciseDto.getId()).orElseThrow(() -> new ExerciseNotFoundException(exerciseDto.getId()));
         } else {
@@ -70,19 +70,22 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     @Transactional
-    public ExerciseDto updateExercise(ExerciseDto exerciseDto, Long id, MultipartFile file) {
+    public ExerciseDto updateExercise(@NonNull ExerciseDto exerciseDto, long id, MultipartFile file) {
         final Exercise exercise = exerciseRepository.findById(id)
                 .orElseThrow(() -> new ExerciseNotFoundException(id));
+
         if (exerciseDto.getName() != null) exercise.setName(exerciseDto.getName());
         if (exerciseDto.getCategory() != null) exercise.setCategory(exerciseDto.getCategory());
         if (exerciseDto.getType() != null) exercise.setType(exerciseDto.getType());
+
         addImagesToExercise(exerciseDto.getName(), exercise, file);
+
         return exerciseMapper.entityToDto(exercise);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ExerciseDto> findAllByCategory(ExerciseCategory category) {
+    public List<ExerciseDto> findAllByCategory(@NonNull ExerciseCategory category) {
         return exerciseRepository.findByCategory(category).stream()
                 .map(exerciseMapper::entityToDto)
                 .toList();
@@ -90,9 +93,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     @Transactional
-    public boolean deleteExercise(Long id) {
+    public void deleteExercise(long id) {
         exerciseRepository.deleteById(id);
-        return true;
     }
 
     private void addImagesToExercise(String exerciseName, Exercise foundOrCreatedExercise, MultipartFile file) {

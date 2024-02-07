@@ -1,8 +1,8 @@
-import {WorkoutExercise} from "../exercise/workoutExercise";
+import {WorkoutExercise} from "../workout-exercise/workoutExercise";
 
 export class Workout {
   id?: number;
   date: string;
   note: string;
-  exercises: WorkoutExercise[];
+  workoutExercises: WorkoutExercise[];
 }

@@ -104,7 +104,13 @@
     "trainings": "Trainings",
     "exercises": "Exercises",
     "no-workouts": "No workouts for selected time",
-    "new-training": "New training"
+    "new-training": "New training",
+    "new-exercise": "New exercise",
+    "edit-exercise": "Edit exercise"
+  },
+  "TEXTS": {
+    "no-workouts": "No workouts today.",
+    "no-training-plans": "No training plans"
   },
   "MESSAGES": {
     "delete-exercise-question": "Do you really want to delete exercise?",
@@ -134,5 +140,15 @@
     "WEIGHT": "Weight",
     "BMI": "BMI",
     "BODY_FAT": "Body fat"
+  },
+  "DASHBOARD": {
+    "BREAKDOWN": {
+      "SETS_NUMBER": "Number of Sets",
+      "REPS_NUMBER": "Number of Reps",
+      "WORKOUTS_NUMBER": "Number of Workouts",
+      "WORKOUT_VOLUME": "Workout Volume",
+      "EXERCISE_CATEGORY": "CATEGORY",
+      "EXERCISE_NAME": "EXERCISE"
+    }
   }
 }

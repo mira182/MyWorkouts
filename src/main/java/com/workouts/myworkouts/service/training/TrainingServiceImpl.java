@@ -3,14 +3,11 @@ package com.workouts.myworkouts.service.training;
 import com.workouts.myworkouts.exceptions.TrainingNotFoundException;
 import com.workouts.myworkouts.model.dto.training.TrainingPlanDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
-import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
 import com.workouts.myworkouts.model.entity.training.TrainingPlan;
 import com.workouts.myworkouts.model.entity.workout.Workout;
 import com.workouts.myworkouts.model.mapper.TrainingMapper;
-import com.workouts.myworkouts.model.mapper.WorkoutExerciseMapper;
 import com.workouts.myworkouts.model.mapper.WorkoutMapper;
 import com.workouts.myworkouts.repository.training.TrainingRepository;
-import com.workouts.myworkouts.service.workout.WorkoutExerciseService;
 import com.workouts.myworkouts.service.workout.WorkoutService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,7 +74,7 @@ public class TrainingServiceImpl implements TrainingService {
         WorkoutDto workoutDto = workoutMapper.entityToDto(workout);
         workoutDto.setDate(dateTime);
 
-        workoutService.createWorkout(workoutDto);
+        workoutService.addWorkoutExerciseToWorkout(workoutDto);
 
         return true;
     }

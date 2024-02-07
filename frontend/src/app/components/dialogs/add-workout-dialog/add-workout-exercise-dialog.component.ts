@@ -1,14 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
-import {ExerciseCategory} from "../../../model/exercise/exerciseCategory";
-import {MatStepper, MatStepperModule} from "@angular/material/stepper";
+import {MatStepperModule} from "@angular/material/stepper";
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {FormGroup} from "@angular/forms";
-import {WorkoutSet} from "../../../model/exercise/workoutSet";
-import {WorkoutExercise} from "../../../model/exercise/workoutExercise";
-import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
+import {WorkoutExercise} from "../../../model/workout-exercise/workoutExercise";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateModule} from "@ngx-translate/core";
 import {Urls} from "../../../model/urls";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
@@ -20,6 +17,8 @@ import {RepsExerciseComponent} from "../../exercise-types/reps-exercise/reps-exe
 import {TimeExerciseComponent} from "../../exercise-types/time-exercise/time-exercise.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {take} from "rxjs";
+import {PageHeaderLayoutComponent} from "../../layouts/page-header-layout/page-header-layout.component";
+import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 
 @Component({
   selector: 'app-add-workout-dialog',
@@ -39,6 +38,7 @@ import {take} from "rxjs";
     RepsExerciseComponent,
     TimeExerciseComponent,
     MatTooltip,
+    PageHeaderLayoutComponent,
   ],
   standalone: true
 })
@@ -76,15 +76,6 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
     this.setsForm = setsForm;
   }
 
-  protected saveWorkoutExercise() {
-    let workoutExercise: WorkoutExercise = {
-      exercise: this.selectedExercise,
-      workoutSets: this.setsForm.value.sets,
-    };
-
-    this.dialogRef.close(workoutExercise);
-  }
-
   protected selectCategory(exerciseCategory: string): void {
     this.exerciseService.getAllExercisesByCategory(exerciseCategory)
       .pipe(take(1))
@@ -92,5 +83,14 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
         next: exercises => this.exercisesByCategory = exercises,
         error: err => this.snackBarService.showErrorSnackBar(err),
       });
+  }
+
+  protected saveWorkoutExercise() {
+    let workoutExercise: WorkoutExercise = {
+      exercise: this.selectedExercise,
+      workoutSets: this.setsForm.value.sets,
+    };
+
+    this.dialogRef.close(workoutExercise);
   }
 }

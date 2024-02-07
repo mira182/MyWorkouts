@@ -49,7 +49,11 @@ export class RepsExerciseComponent implements OnInit {
 
   protected newSet(): FormGroup {
     return this.formBuilder.group({
-      reps: new FormControl(0)
+      reps: new FormControl(0),
+      weight: [0],
+      distance: [0],
+      durationMin: [0],
+      durationSec: [0],
     });
   }
 

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {RangeType} from "../../model/utils/rangeType";
-import {Interval} from "../../model/time/interval";
 import {Moment} from "moment";
 
 @Injectable()
@@ -76,13 +75,5 @@ export class DateTimeService {
       case RangeType.MONTH:
         return startOfRange.add(1, 'M');
     }
-  }
-
-  public static monthDiff(interval: Interval) {
-    let months;
-    months = (new Date(interval.endDate).getFullYear() - new Date(interval.startDate).getFullYear()) * 12;
-    months -= new Date(interval.startDate).getMonth();
-    months += new Date(interval.endDate).getMonth();
-    return months <= 0 ? 0 : months;
   }
 }

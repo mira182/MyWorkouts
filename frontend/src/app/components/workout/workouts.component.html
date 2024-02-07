@@ -6,43 +6,43 @@
   [fullScreen]="true"
 ></ngx-spinner>
 
-<div class="flex flex-col gap-2 mt-4">
+<div class="flex flex-col gap-2">
 
-  <div class="flex flex-row justify-center gap-2 mx-4">
-    <div>
+  <app-page-header-layout>
+    <div headerTitle>
       <div>{{ 'TITLES.workouts' | translate }}</div>
       <div class="flex-grow text-sm">{{ selectedDate().format('LL') }}</div>
     </div>
 
-    <span class="flex-auto"></span>
-
-    <div>
-      <button mat-mini-fab matTooltip="{{'BUTTON.add-workout' | translate}}" (click)="openAddWorkoutDialog()">
+    <div headerActions>
+      <button mat-mini-fab matTooltip="{{'BUTTON.add-workout' | translate}}" (click)="openAddWorkoutExerciseDialog()">
         <mat-icon>add</mat-icon>
       </button>
-    </div>
-    <div>
+
       <button mat-mini-fab matTooltip="{{'BUTTON.delete-workouts' | translate}}" (click)="deleteWorkout()">
         <mat-icon>delete</mat-icon>
       </button>
-    </div>
-    <div>
+
       <button mat-mini-fab (click)="today()">
         <mat-icon>today</mat-icon>
       </button>
     </div>
-  </div>
+  </app-page-header-layout>
 
   <div>
 
     <app-day-select [inputDate]="selectedDate()" (dateChanged)="getWorkoutsForDay($event)"></app-day-select>
 
-    <div *ngIf="workout; else noWorkouts" class="flex flex-col justify-center items-center">
-      <app-workout-exercise *ngFor="let workoutExercise of workout.exercises" [workoutExercise]="workoutExercise"></app-workout-exercise>
+    <div *ngIf="workout; else noWorkouts">
+      <app-workout-exercise
+        *ngFor="let workoutExercise of workout.workoutExercises"
+        [workoutExercise]="workoutExercise"
+        (workoutExerciseDeleted)="onWorkoutExerciseDeleted($event)">
+      </app-workout-exercise>
     </div>
 
     <ng-template #noWorkouts>
-      <h2>No workouts today.</h2>
+      <div class="text-center">{{ 'TEXTS.no-workouts' | translate }}</div>
     </ng-template>
 
   </div>

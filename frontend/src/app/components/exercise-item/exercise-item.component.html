@@ -1,0 +1,34 @@
+<app-expansion-panel>
+  <div panelTitle>
+    {{ exercise.name }}
+  </div>
+
+  <div panelDescription>
+    {{ exercise.type }}
+  </div>
+
+  <div panelContent>
+    <img [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseImagePath(exercise)" width="300px" height="200px"
+         loading="lazy">
+
+    <mat-divider></mat-divider>
+
+    <div class="flex flex-row justify-end m-2">
+      <button mat-button (click)="editExercise()" color="primary">
+        {{ 'BUTTON.edit-exercise' | translate }}
+      </button>
+      <button mat-button (click)="deleteExercise()" color="primary">
+        {{ 'BUTTON.delete-exercise' | translate }}
+      </button>
+    </div>
+  </div>
+</app-expansion-panel>
+
+<!--      <div class="flex flex-row justify-center items-center">-->
+<!--        <button mat-icon-button (click)="editExercise()" color="primary" [matTooltip]="'BUTTON.edit-exercise' | translate">-->
+<!--          <mat-icon>edit</mat-icon>-->
+<!--        </button>-->
+<!--        <button mat-button (click)="deleteExercise()" color="primary" [matTooltip]="'BUTTON.delete-exercise' | translate">-->
+<!--          <mat-icon>delete</mat-icon>-->
+<!--        </button>-->
+<!--      </div>-->

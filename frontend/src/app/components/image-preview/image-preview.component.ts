@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {CommonModule} from "@angular/common";
 import {MatIconButton} from "@angular/material/button";
@@ -36,12 +36,6 @@ export class ImagePreviewComponent {
     this.selectedImage.emit(files[0])
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-      let image = new Image();
-
-      image.onload = function() {
-        console.log(image.width);
-      };
-
       this.imgURL = reader.result;
     }
   }

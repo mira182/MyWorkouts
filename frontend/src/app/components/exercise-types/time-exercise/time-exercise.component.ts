@@ -52,7 +52,10 @@ export class TimeExerciseComponent implements OnInit {
   protected newSet(): FormGroup {
     return this.formBuilder.group({
       minutes: new FormControl(0),
-      seconds: new FormControl(0)
+      seconds: new FormControl(0),
+      weight: [0],
+      reps: [0],
+      distance: [0],
     });
   }
 

@@ -1,0 +1,14 @@
+<div class="flex flex-col sm:flex-row sm:gap-8">
+
+  <div>
+    <app-week-date-picker (dateUpdated)="dateRangeSelected($event)"></app-week-date-picker>
+  </div>
+
+  <div class=" h-80">
+    <ngx-charts-number-card
+      [results]="data"
+      [cardColor]="'#232837'">
+    </ngx-charts-number-card>
+  </div>
+
+</div>

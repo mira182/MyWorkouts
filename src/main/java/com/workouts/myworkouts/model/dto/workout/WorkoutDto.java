@@ -16,5 +16,5 @@ public class WorkoutDto {
 
     private String note;
 
-    private List<WorkoutExerciseDto> exercises;
+    private List<WorkoutExerciseDto> workoutExercises;
 }

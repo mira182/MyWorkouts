@@ -8,10 +8,11 @@ import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatInput} from "@angular/material/input";
 import {ImagePreviewComponent} from "../../image-preview/image-preview.component";
-import {ExerciseCategory} from "../../../model/exercise/exerciseCategory";
 import {MatButton} from "@angular/material/button";
-import {ExerciseType} from "../../../model/exercise/exerciseType";
 import {EditExerciseDialogInputModel} from "./model/edit-exercise-dialog-input.model";
+import {combineLatest, take} from "rxjs";
+import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
+import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 
 @Component({
   selector: 'app-edit-exercise-dialog',
@@ -35,9 +36,9 @@ import {EditExerciseDialogInputModel} from "./model/edit-exercise-dialog-input.m
 })
 export class EditExerciseDialogComponent implements OnInit {
 
-  protected exerciseCategories: ExerciseCategory[] = [];
+  protected exerciseCategories: string[] = [];
 
-  protected exerciseTypes: ExerciseType[] = [];
+  protected exerciseTypes: string[] = [];
 
   protected exercise: Exercise;
 
@@ -45,15 +46,32 @@ export class EditExerciseDialogComponent implements OnInit {
 
   protected editExerciseForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: EditExerciseDialogInputModel,
-              public dialogRef: MatDialogRef<EditExerciseDialogComponent>) {
+  constructor(private readonly formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) private readonly data: EditExerciseDialogInputModel,
+              protected readonly dialogRef: MatDialogRef<EditExerciseDialogComponent>,
+              private readonly exerciseService: ExerciseService,
+              private readonly snackBarService: SnackBarService) {
+    this.exercise = data.exercise;
   }
 
   public ngOnInit(): void {
-    this.exerciseCategories = this.data.exerciseCategories;
     this.exercise = this.data.exercise;
-    this.exerciseTypes = this.data.exerciseTypes;
+
+    combineLatest([
+      this.exerciseService.getAllCategories(),
+      this.exerciseService.getAllTypes()
+    ])
+      .pipe(
+        take(1),
+      )
+      .subscribe({
+        next: ([categories, types]) => {
+          this.exerciseCategories = categories;
+          this.exerciseTypes = types;
+        },
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+
     this.editExerciseForm = this.formBuilder.group({
       id: new FormControl(this.exercise.id),
       name: new FormControl(this.exercise.name, Validators.required),

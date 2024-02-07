@@ -104,7 +104,13 @@
     "trainings": "Tréninky",
     "exercises": "Cviky",
     "no-workouts": "Žádné cvičení pro vybraný čas",
-    "new-training": "Nový trénink"
+    "new-training": "Nový trénink",
+    "new-exercise": "Nový cvik",
+    "edit-exercise": "Upravit cvik"
+  },
+  "TEXTS": {
+    "no-workouts": "Žádný trénink",
+    "no-training-plans": "Žádné tréninkové plány"
   },
   "MESSAGES": {
     "delete-exercise-question": "Opravdu chcete smazat cvik?",
@@ -134,5 +140,15 @@
     "WEIGHT": "Váha",
     "BMI": "BMI",
     "BODY_FAT": "Tuk"
+  },
+  "DASHBOARD": {
+    "BREAKDOWN": {
+      "SETS_NUMBER": "Počet setů",
+      "REPS_NUMBER": "Počet opakování",
+      "WORKOUTS_NUMBER": "Počet cviků",
+      "WORKOUT_VOLUME": "Váha na cviky",
+      "EXERCISE_CATEGORY": "KATEGORIE",
+      "EXERCISE_NAME": "CVIK"
+    }
   }
 }

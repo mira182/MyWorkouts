@@ -16,8 +16,11 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {BaseWeightClass} from "../base-weight/base-weight.class";
 import {take} from "rxjs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {NgxChartData, NgxChartService} from "../../../services/rest/chart/ngx-chart.service";
-import moment, {Moment} from "moment";
+import {
+  NgxWeightChartData,
+  NgxWeightChartService
+} from "../../../services/rest/chart/weight/ngx/ngx-weight-chart.service";
+import moment from "moment";
 
 @Component({
   selector: 'app-tanita-weight',
@@ -58,13 +61,13 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
 
   protected checkboxLabelKeys: string[] = ['WEIGHT', 'BMI', 'BODY_FAT'];
 
-  public tanitaWeightData: NgxChartData[];
+  public tanitaWeightData: NgxWeightChartData[];
 
   constructor(private readonly tanitaService: TanitaService,
               private readonly translateService: TranslateService,
               private readonly snackBar: SnackBarService,
               private readonly spinner: NgxSpinnerService,
-              private readonly chartService: NgxChartService,
+              private readonly chartService: NgxWeightChartService,
               private readonly formBuilder: FormBuilder) {
     super();
   }

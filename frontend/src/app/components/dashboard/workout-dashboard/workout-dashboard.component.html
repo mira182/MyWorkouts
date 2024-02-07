@@ -1,0 +1,103 @@
+<div class="flex flex-col w-full gap-4">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{'TITLES.breakdown' | translate}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-dashboard-breakdown></app-dashboard-breakdown>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{'TITLES.totals' | translate}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-dashboard-totals></app-dashboard-totals>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+
+<!--<mat-grid-list [cols]="2">-->
+<!--    <mat-grid-tile [colspan]="2">-->
+<!--      <mat-card>-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>-->
+<!--            {{'TITLES.breakdown' | translate}}-->
+<!--          </mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-card-content class="flex items-stretch">-->
+<!--          -->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
+<!--    </mat-grid-tile>-->
+
+<!--    <mat-grid-tile [colspan]="2">-->
+<!--      <mat-card class="dashboard-card">-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>-->
+<!--            {{'TITLES.totals' | translate}}-->
+<!--            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">-->
+<!--              <mat-icon>more_vert</mat-icon>-->
+<!--            </button>-->
+<!--            <mat-menu #menu="matMenu" xPosition="before">-->
+<!--              <button mat-menu-item>Expand</button>-->
+<!--              <button mat-menu-item>Remove</button>-->
+<!--            </mat-menu>-->
+<!--          </mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-card-content class="dashboard-card-content" [style.overflow]="'auto'" [style.height.px]="'380'">-->
+<!--&lt;!&ndash;          <app-dashboard-totals></app-dashboard-totals>&ndash;&gt;-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
+<!--    </mat-grid-tile>-->
+
+<!--    <mat-grid-tile [colspan]="1">-->
+
+<!--      <mat-card>-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>-->
+<!--            {{'TITLES.workouts' | translate}}-->
+<!--            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">-->
+<!--              <mat-icon>more_vert</mat-icon>-->
+<!--            </button>-->
+<!--            <mat-menu #menu="matMenu" xPosition="before">-->
+<!--              <button mat-menu-item>Expand</button>-->
+<!--              <button mat-menu-item>Remove</button>-->
+<!--            </mat-menu>-->
+<!--          </mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-card-content class="dashboard-card-content">-->
+<!--&lt;!&ndash;          <app-dashboard-workouts></app-dashboard-workouts>&ndash;&gt;-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
+<!--    </mat-grid-tile>-->
+
+<!--    <mat-grid-tile [colspan]="1">-->
+<!--      <mat-card>-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>-->
+<!--            {{'TITLES.exercises' | translate}}-->
+<!--            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">-->
+<!--              <mat-icon>more_vert</mat-icon>-->
+<!--            </button>-->
+<!--            <mat-menu #menu="matMenu" xPosition="before">-->
+<!--              <button mat-menu-item>Expand</button>-->
+<!--              <button mat-menu-item>Remove</button>-->
+<!--            </mat-menu>-->
+<!--          </mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-card-content class="dashboard-card-content">-->
+<!--&lt;!&ndash;          <app-dashboard-exercises></app-dashboard-exercises>&ndash;&gt;-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
+<!--    </mat-grid-tile>-->
+<!--  </mat-grid-list>-->

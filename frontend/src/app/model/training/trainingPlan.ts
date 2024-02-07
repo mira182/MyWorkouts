@@ -1,4 +1,4 @@
-import {WorkoutExercise} from "../exercise/workoutExercise";
+import {Workout} from "../workout/workout";
 
 export class TrainingPlan {
 
@@ -6,7 +6,7 @@ export class TrainingPlan {
 
   name: string;
 
-  workouts: WorkoutExercise[];
+  workout: Workout;
 
   trainingDay: string;
 

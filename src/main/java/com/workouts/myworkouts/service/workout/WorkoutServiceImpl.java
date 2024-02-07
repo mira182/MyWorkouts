@@ -3,7 +3,6 @@ package com.workouts.myworkouts.service.workout;
 import com.workouts.myworkouts.exceptions.WorkoutNotFoundException;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
-import com.workouts.myworkouts.model.entity.workout.Workout;
 import com.workouts.myworkouts.model.mapper.WorkoutExerciseMapper;
 import com.workouts.myworkouts.model.mapper.WorkoutMapper;
 import com.workouts.myworkouts.repository.workout.WorkoutExerciseRepository;
@@ -13,8 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,15 +38,25 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<WorkoutDto> findBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
+        return workoutRepository.findWorkoutsBetweenDates(startDate, endDate).stream()
+                .map(workoutMapper::entityToDto)
+                .toList();
+    }
+
+    @Override
     @Transactional
-    public WorkoutDto createWorkout(@NonNull WorkoutDto workoutDto) {
-        Optional<Workout> workout = workoutRepository.findByDate(workoutDto.getDate());
+    public WorkoutDto addWorkoutExerciseToWorkout(@NonNull WorkoutDto workoutDto) {
+        return workoutMapper.entityToDto(workoutRepository.findByDate(workoutDto.getDate())
+                .map(workout -> {
+                    workoutDto.getWorkoutExercises().stream()
+                            .map(workoutExerciseMapper::dtoToEntity)
+                            .forEach(workout::addWorkoutExercise);
 
-        if (workout.isPresent()) {
-            return workoutMapper.entityToDto(workout.get());
-        }
-
-        return workoutMapper.entityToDto(workoutRepository.save(workoutMapper.dtoToEntity(workoutDto)));
+                    return workoutRepository.save(workout);
+                })
+                .orElseGet(() -> workoutRepository.save(workoutMapper.dtoToEntity(workoutDto))));
     }
 
 
@@ -55,7 +65,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     public void addWorkoutExerciseToWorkout(long workoutId, @NonNull WorkoutExerciseDto workoutExerciseDto) {
         workoutRepository.findById(workoutId)
                 .orElseThrow(() -> new WorkoutNotFoundException(workoutId))
-                .getExercises()
+                .getWorkoutExercises()
                 .add(workoutExerciseRepository.save(workoutExerciseMapper.dtoToEntity(workoutExerciseDto)));
     }
 
@@ -63,5 +73,16 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Transactional
     public void deleteWorkout(long id) {
         workoutRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long countWorkouts(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
+        return workoutRepository.countAllByDateBetween(startDate, endDate);
+    }
+
+    @Override
+    public BigDecimal sumWorkoutsVolumeBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
+        return workoutRepository.sumWorkoutsVolumeBetweenDates(startDate, endDate);
     }
 }

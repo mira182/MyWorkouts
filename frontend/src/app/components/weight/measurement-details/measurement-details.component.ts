@@ -13,7 +13,6 @@ import {DaySelectComponent} from "../../day-select/day-select.component";
 import {TanitaMeasurementModel} from "../../../model/weight/tanita-measurement.model";
 import {WithingsMeasurementModel} from "../../../model/weight/withings-measurement.model";
 import {take} from "rxjs";
-import {isNil} from "lodash";
 
 export interface MeasurementDetails {
   name: string;
@@ -82,7 +81,6 @@ export class MeasurementDetailsComponent implements OnInit, OnChanges {
           )
           .subscribe(measurementData => {
             this.measurementData = measurementData;
-            console.log(this.measurementData);
           });
         break;
       case ScaleType.WITHINGS:

@@ -6,11 +6,13 @@ import {HttpClient, provideHttpClient, withInterceptors} from "@angular/common/h
 import {createTranslateLoader} from "./app.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-browser/animations";
-import {MAT_DATE_FORMATS} from "@angular/material/core";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
 import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
 import {jwtInterceptor} from "./services/interceptors/jwt-interceptor";
 import {errorInterceptor} from "./services/interceptors/error-interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {restCacheInterceptor} from "./services/interceptors/rest-cache-interceptor";
+import {MyDateAdapter} from "./config/date-picker-adapter";
 
 export const API_DATE_FORMAT = 'yyyy-MM-DD';
 export const MY_DATE_FORMATS = {
@@ -28,7 +30,7 @@ export const MY_DATE_FORMATS = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([jwtInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([jwtInterceptor, errorInterceptor, restCacheInterceptor])),
     importProvidersFrom(TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -39,6 +41,7 @@ export const appConfig: ApplicationConfig = {
     })),
     provideMomentDateAdapter(),
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MyDateAdapter, deps: [MAT_DATE_LOCALE] },
     importProvidersFrom(BrowserAnimationsModule),
     // provideNoopAnimations(),
     importProvidersFrom(NgxSpinnerModule.forRoot()),

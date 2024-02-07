@@ -1,9 +1,13 @@
-<div class="flex flex-row justify-between items-center m-4">
-  <div class="text-xl">{{ 'BUTTON.add-workout' | translate }}</div>
-  <button mat-icon-button matTooltip="{{ 'BUTTON.close' | translate }}" (click)="dialogRef.close(null)">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
+<app-page-header-layout>
+  <div headerTitle>
+    {{ 'BUTTON.add-workout' | translate }}
+  </div>
+  <div headerActions>
+    <button mat-icon-button matTooltip="{{ 'BUTTON.close' | translate }}" (click)="dialogRef.close(null)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</app-page-header-layout>
 
 <mat-dialog-content>
   <mat-stepper labelPosition="bottom" linear="true">
@@ -35,7 +39,7 @@
           </div>
         </button>
       </mat-action-list>
-      <div class="flex flex-row justify-center">
+      <div class="flex flex-row justify-end items-center">
         <button mat-button matStepperPrevious>{{ 'BUTTON.back' | translate }}</button>
       </div>
     </mat-step>

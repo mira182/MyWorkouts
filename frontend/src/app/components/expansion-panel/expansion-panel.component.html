@@ -1,0 +1,23 @@
+<div class="rounded shadow-lg m-2 border-2 border-gray-100">
+  <div class="flex items-center cursor-pointer m-2 gap-4" (click)="onSwitch()">
+    <div class="grow ml-4 text-lg">
+      <ng-content select="[panelTitle]"></ng-content>
+    </div>
+
+    <div class="text-gray-500">
+      <ng-content select="[panelDescription]"></ng-content>
+    </div>
+
+    <div class="ml-auto" [@animationRotate]="sStatus">
+      <button mat-icon-button>
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="toggleContent">
+    <div [@animationShowHide]="sStatus">
+      <ng-content select="[panelContent]"></ng-content>
+    </div>
+  </ng-container>
+</div>

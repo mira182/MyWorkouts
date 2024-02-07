@@ -1,0 +1,49 @@
+<div class="flex flex-col gap-2">
+  <app-page-header-layout>
+    <div headerTitle>
+      <div>{{ 'TITLES.exercises' | translate }}</div>
+    </div>
+
+    <div headerActions>
+      <button mat-mini-fab matTooltip="{{'BUTTON.create-exercise' | translate}}" (click)="createExercise()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </app-page-header-layout>
+
+
+  <div>
+
+    <div class="flex flex-row justify-center">
+      <mat-form-field>
+        <input matInput
+               placeholder="Exercise name"
+               aria-label="Exercise"
+               [matAutocomplete]="auto"
+               [formControl]="searchExerciseFormControl">
+        <span matSuffix>
+          <mat-icon>search</mat-icon>
+        </span>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let exercise of filteredExercises | async" [value]="exercise.name">
+            <div class="flex flex-row justify-start items-start">
+              <div>
+                <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)" height="50">
+              </div>
+              <div>
+                <span>{{ exercise.name }}</span><br/>
+                <small>{{ exercise.category }}</small>
+              </div>
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <mat-tab-group (selectedTabChange)="tabChange($event)">
+      <mat-tab *ngFor="let category of exerciseCategories" label="{{ category }}">
+        <app-exercise-item *ngFor="let exercise of exercisesByCategory" [exercise]="exercise" (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

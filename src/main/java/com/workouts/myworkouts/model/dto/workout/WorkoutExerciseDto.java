@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 public class WorkoutExerciseDto {
 
-    private long id;
+    private Long id;
 
     private ExerciseDto exercise;
 

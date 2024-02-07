@@ -1,0 +1,104 @@
+<app-page-header-layout>
+  <div headerTitle>
+    {{'TITLES.trainings' | translate}}
+  </div>
+  <div headerActions>
+    <button mat-mini-fab matTooltip="{{'BUTTON.add-training' | translate}}" (click)="addTraining()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</app-page-header-layout>
+
+<div class="flex flex-col justify-center items-center">
+  <form [formGroup]="form">
+    <div formArrayName="trainingPlans">
+      <div *ngIf="loading">
+        <mat-spinner [diameter]="40"></mat-spinner>
+      </div>
+      <div *ngIf="trainingPlans.controls.length === 0 && !loading">
+        <div>{{ 'TEXTS.no-training-plans' | translate }}</div>
+      </div>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let trainingPlan of trainingPlans.controls; let trainingIndex = index" [formGroup]="trainingPlan"
+                             (afterExpand)="getWorkoutsForTraining(trainingIndex)">
+          <mat-expansion-panel-header [ngClass]="{'active-training': trainingPlan.value.scheduled}" >
+            <mat-panel-title>
+              {{trainingPlan.value.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{trainingPlan.value.startDate}} {{trainingPlan.value.trainingDay}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <ng-template matExpansionPanelContent>
+          <div class="flex flex-row justify-center sm:hidden">
+            <button *ngIf="form.dirty" mat-icon-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="trainingPlan.enabled ? trainingPlan.disable() : trainingPlan.enable()">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="deleteTraining(trainingPlan)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="addWorkoutToTraining(trainingIndex)">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="logTraining(trainingPlan)">
+              <mat-icon>check_box</mat-icon>
+            </button>
+          </div>
+
+          <div class="flex flex-col">
+            <mat-form-field>
+              <input matInput placeholder="Training name" formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Schedule day</mat-label>
+              <mat-select formControlName="trainingDay">
+                <mat-option *ngFor="let day of weekDays" [value]="day">
+                  {{day}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Start day</mat-label>
+              <input matInput [matDatepicker]="datePicker" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+              <mat-datepicker #datePicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Training time"
+                     formControlName="trainingTime">
+              <ngx-material-timepicker #timePicker></ngx-material-timepicker>
+            </mat-form-field>
+
+            <mat-checkbox [formControl]="trainingPlan.get('scheduled')">Scheduled</mat-checkbox>
+          </div>
+
+            <mat-progress-bar *ngIf="workoutsLoading" mode="indeterminate"></mat-progress-bar>
+<!--            <app-workout-exercise-->
+<!--              *ngFor="let workoutExercise of trainingPlan.get('workout').value.workoutExercises"-->
+<!--              [workoutExercise]="workoutExercise">-->
+<!--            </app-workout-exercise>-->
+<!--            <app-workouts-handler [workoutsInput]="trainingPlan.value.workouts" [withDate]="false"-->
+<!--                                  (workoutUpdated)="initForm()"></app-workouts-handler>-->
+
+          <mat-action-row class="" fxHide.lt-md fxShow.gt-sm>
+            <button *ngIf="form.dirty" mat-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">Save training</button>
+            <button mat-button color="primary" (click)="trainingPlan.enabled ? trainingPlan.disable() : trainingPlan.enable()">
+              Edit training
+            </button>
+            <button mat-button color="primary" (click)="deleteTraining(trainingPlan)">Delete training</button>
+            <button mat-button color="primary" (click)="addWorkoutToTraining(trainingIndex)">Add workout</button>
+            <button mat-button color="primary" (click)="logTraining(trainingPlan)">Log training</button>
+          </mat-action-row>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </form>
+</div>

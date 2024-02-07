@@ -1,0 +1,24 @@
+<div class="flex flex-col mt-4">
+
+    <div *ngFor="let set of workoutSetsFormArray.controls; let setIndex = index"
+         class="flex flex-row justify-center gap-4">
+
+      <mat-form-field *ngFor="let formControl of config?.formControls">
+        <input matInput type="number" [formControl]="getWorkoutSetFormControl(formControl.name, setIndex)" min="0"
+               [step]="formControl.step">
+        <span class="text-xs" matTextSuffix>{{ formControl.unit }}</span>
+      </mat-form-field>
+      <button *ngIf="form.enabled" mat-icon-button matTooltip="Remove Set"
+              (click)="workoutSetsFormArray.removeAt(setIndex)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+
+    </div>
+
+    <div class="flex flex-row justify-end mt-2" *ngIf="form.enabled">
+      <button mat-icon-button matTooltip="Add Set" (click)="addNewWorkoutSet()">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
+
+</div>

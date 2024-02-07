@@ -1,0 +1,166 @@
+<app-page-header-layout>
+  <div headerTitle>
+    {{ 'TITLES.new-training' | translate }}
+  </div>
+  <div headerActions>
+    <button mat-icon-button matTooltip="{{'BUTTON.close' | translate}}" (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</app-page-header-layout>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="flex flex-col">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="trainingName">
+        <mat-error>{{ 'ERROR.required.name' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Start day</mat-label>
+        <input matInput [matDatepicker]="datePicker" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Schedule day</mat-label>
+        <mat-select formControlName="trainingDay">
+          <mat-option *ngFor="let day of weekDays" [value]="day">
+            {{ day }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Training time"
+               formControlName="trainingTime">
+        <ngx-material-timepicker #timePicker></ngx-material-timepicker>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="scheduled">Scheduled</mat-checkbox>
+
+<!--      <app-expansion-panel *ngFor="let workoutExercise of workoutExercises.controls; let workoutExerciseIndex = index">-->
+<!--        <div panelTitle>-->
+<!--          {{ workoutExercise.value.exercise.name }}-->
+<!--          {{ workoutExercises.at(workoutExerciseIndex).value | json }}-->
+<!--        </div>-->
+<!--        <div panelContent>-->
+<!--          <app-workout-exercise [workoutExercise]="workoutExercise.value"></app-workout-exercise>-->
+<!--          <app-workout-sets [form]="workoutExercises.at(workoutExerciseIndex)" [workoutSets]="workoutExercise.get('workoutSets').value">-->
+<!--          </app-workout-sets>-->
+<!--        </div>-->
+<!--      </app-expansion-panel>-->
+
+      <div  *ngFor="let workoutExercise of workoutExercises.controls; let workoutExerciseIndex = index">
+        {{ workoutExercises.value | json }}
+
+<!--        <app-workout-exercise [workoutExercise]="workoutExercise.value"></app-workout-exercise>-->
+      </div>
+
+<!--              <mat-accordion>-->
+<!--                <mat-expansion-panel >-->
+<!--<div *ngFor="let workout of workoutExercises.controls; let workoutIndex = index">-->
+<!--                  <div [formGroupName]="workoutIndex">-->
+<!--                    <div fxLayout="column" formArrayName="workoutSets">-->
+<!--                      <div fxLayout="row" fxLayoutAlign="end center">-->
+<!--                        <button mat-icon-button matTooltip="{{'BUTTON.edit' | translate}}"-->
+<!--                                (click)="workout.disabled ? workout.enable() : workout.disable()">-->
+<!--                          <mat-icon>edit</mat-icon>-->
+<!--                        </button>-->
+<!--                        <button mat-icon-button matTooltip="{{'BUTTON.delete' | translate}}">-->
+<!--                          <mat-icon>delete</mat-icon>-->
+<!--                        </button>-->
+<!--                      </div>-->
+
+<!--                      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="workout.enabled" style="margin-top: 5px">-->
+<!--                        <span fxFlex="1 1 auto"></span>-->
+<!--                        <div fxFlex="0 1 10%" *ngIf="workout.enabled">-->
+<!--                          <button mat-icon-button matTooltip="Add Set">-->
+<!--                            <mat-icon>add_circle_outline</mat-icon>-->
+<!--                          </button>-->
+<!--                        </div>-->
+<!--                      </div>-->
+
+<!--                      <div *ngFor="let set of workout.controls; let setIndex = index">-->
+<!--                        <div [formGroupName]="setIndex">-->
+<!--                          <div [ngSwitch]="workout.value.exercise.type">-->
+<!--                            <div *ngSwitchCase="'WEIGHTED_REPS'" fxLayout="row" fxLayout="center" fxLayoutGap="10px">-->
+<!--                              <div fxFlex="0 1 45%">-->
+<!--                                <mat-form-field>-->
+<!--                                  <input matInput type="number" formControlName="weight" min="0" step="2.5">-->
+<!--                                  <span matSuffix>kg</span>-->
+<!--                                </mat-form-field>-->
+<!--                              </div>-->
+<!--                              <div fxFlex="0 1 45%">-->
+<!--                                <mat-form-field>-->
+<!--                                  <input matInput type="number" formControlName="reps" min="0" step="1">-->
+<!--                                  <span matSuffix>reps</span>-->
+<!--                                </mat-form-field>-->
+<!--                              </div>-->
+<!--                              <div fxFlex="10" fxFlexAlign="center" *ngIf="workout.enabled">-->
+<!--                                <button mat-icon-button matTooltip="Remove Set">-->
+<!--                                  <mat-icon>delete_forever</mat-icon>-->
+<!--                                </button>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                            <div *ngSwitchCase="'REPS'" fxLayout="row" fxLayout="center" fxLayoutGap="10px">-->
+<!--                              <div fxFlex>-->
+<!--                                <mat-form-field fxFlex="45">-->
+<!--                                  <input matInput type="number" formControlName="reps" min="0" step="1">-->
+<!--                                  <span matSuffix>reps</span>-->
+<!--                                </mat-form-field>-->
+<!--                              </div>-->
+<!--                              <div fxFlex="10" fxFlexAlign="center" *ngIf="workout.enabled">-->
+<!--                                <button mat-icon-button matTooltip="Remove Set">-->
+<!--                                  <mat-icon>delete_forever</mat-icon>-->
+<!--                                </button>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                            <div *ngSwitchCase="'TIME'" fxLayout="row" fxLayout="center" fxLayoutGap="10px">-->
+<!--                              <div fxFlex>-->
+<!--                                <mat-form-field fxFlex="0 1 60%">-->
+<!--                                  <input matInput type="number" formControlName="durationMin" min="0" step="1">-->
+<!--                                  <span matSuffix>min</span>-->
+<!--                                </mat-form-field>-->
+<!--                              </div>-->
+<!--                              <div fxFlex>-->
+<!--                                <mat-form-field fxFlex="0 1 60%">-->
+<!--                                  <input matInput type="number" formControlName="durationSec" min="0" step="1">-->
+<!--                                  <span matSuffix>sec</span>-->
+<!--                                </mat-form-field>-->
+<!--                              </div>-->
+<!--                              <div fxFlex="10" fxFlexAlign="center" *ngIf="workout.enabled">-->
+<!--                                <button mat-icon-button matTooltip="Remove Set">-->
+<!--                                  <mat-icon>delete_forever</mat-icon>-->
+<!--                                </button>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </mat-expansion-panel>-->
+<!--              </mat-accordion>-->
+    </div>
+  </form>
+<!--  </div>-->
+</mat-dialog-content>
+
+<div class="flex flex-row justify-end items-center">
+  <button mat-icon-button (click)="addWorkoutExerciseToTraining()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>
+    {{ 'BUTTON.cancel' | translate }}
+  </button>
+  <button mat-raised-button (click)="saveTraining()" [disabled]="!form.valid" color="primary">
+    {{ 'BUTTON.save' | translate }}
+  </button>
+</mat-dialog-actions>

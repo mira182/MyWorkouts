@@ -1,14 +1,5 @@
-import {inject, Injectable} from "@angular/core";
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpHandlerFn,
-  HttpInterceptor,
-  HttpInterceptorFn,
-  HttpRequest
-} from "@angular/common/http";
+import {HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {TokenService} from "../rest/auth/token.service";
 
 export const securityHeadersInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,

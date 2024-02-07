@@ -1,20 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {WorkoutExercise} from "../../model/exercise/workoutExercise";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {WorkoutExercise} from "../../model/workout-exercise/workoutExercise";
 import {CommonModule, JsonPipe, NgForOf, NgSwitchCase} from "@angular/common";
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators
-} from "@angular/forms";
-import {WorkoutSet} from "../../model/exercise/workoutSet";
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCard, MatCardContent, MatCardSubtitle} from "@angular/material/card";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatDivider} from "@angular/material/divider";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
@@ -26,6 +17,8 @@ import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import moment from "moment";
 import {WorkoutExerciseService} from "../../services/rest/workout-exercise/workout-exercise.service";
 import {filter, finalize, switchMap, take, tap} from "rxjs";
+import {DatePickerComponent} from "../date-picker/date-picker.component";
+import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
 
 @Component({
   selector: 'app-workout-exercise',
@@ -50,7 +43,10 @@ import {filter, finalize, switchMap, take, tap} from "rxjs";
     NgSwitchCase,
     ReactiveFormsModule,
     TranslateModule,
-    MatCard
+    MatCard,
+    DatePickerComponent,
+    MatFormFieldModule,
+    WorkoutSetsComponent
   ],
   templateUrl: './workout-exercise.component.html',
 })
@@ -58,6 +54,9 @@ export class WorkoutExerciseComponent implements OnInit {
 
   @Input()
   public workoutExercise: WorkoutExercise;
+
+  @Output()
+  public workoutExerciseDeleted: EventEmitter<number> = new EventEmitter<number>();
 
   protected form: FormGroup;
 
@@ -71,49 +70,22 @@ export class WorkoutExerciseComponent implements OnInit {
   public ngOnInit(): void {
     this.initForm();
   }
-
-  protected get workoutSets(): FormArray {
-    return this.form.get('workoutSets') as FormArray;
+  protected get date(): FormControl {
+    return this.form.get('date') as FormControl;
   }
 
   private initForm(): void {
     this.form = this.formBuilder.group({
       id: [this.workoutExercise.id],
       date: [ moment().format('yyyy-MM-DD') ],
-      exercise: [ this.workoutExercise?.exercise ],
-      workoutSets: this.formBuilder.array([])
+      exercise: [ this.workoutExercise?.exercise, Validators.required ],
     });
 
-    this.initWorkoutSets(this.workoutExercise?.workoutSets);
     this.form.disable();
   }
 
-  private initWorkoutSets(workoutSets: WorkoutSet[]) {
-    workoutSets.forEach(set => {
-      this.workoutSets.push(this.formBuilder.group({
-        weight: new FormControl({value: set.weight, disabled: true}, Validators.required),
-        reps: new FormControl({value: set.reps, disabled: true}, Validators.required),
-        distance: new FormControl({value: set.distance, disabled: true}, Validators.required),
-        durationMin: new FormControl({value: Math.floor(set.duration / 60), disabled: true}, Validators.required),
-        durationSec: new FormControl({value: set.duration % 60, disabled: true}, Validators.required)
-      }));
-    });
-  }
-
-  protected addWorkoutSet(): void {
-    this.workoutSets.push(this.formBuilder.group({
-      weight: new FormControl(0, Validators.required),
-      reps: new FormControl(0, Validators.required),
-      distance: new FormControl(0, Validators.required),
-      durationMin: new FormControl(0, Validators.required),
-      durationSec: new FormControl(0, Validators.required)
-    }));
-  }
-
-  protected saveWorkout() {
+  protected updateWorkoutExercise() {
     this.spinner.show();
-
-    console.log(this.form.value);
 
     this.workoutExerciseService.updateWorkoutExercise(this.form.value)
       .pipe(
@@ -140,6 +112,7 @@ export class WorkoutExerciseComponent implements OnInit {
       )
       .subscribe({
         next: () => {
+          this.workoutExerciseDeleted.emit(this.workoutExercise.id);
           this.snackBarService.showSuccessSnackBar('ALERT.deleted-successfully');
         },
         error: err => {

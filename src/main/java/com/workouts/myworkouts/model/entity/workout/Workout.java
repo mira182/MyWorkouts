@@ -26,13 +26,13 @@ public class Workout extends AuditableTime {
     private String note;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> exercises = new ArrayList<>();
+    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
     @OneToOne(mappedBy = "workout")
     private TrainingPlan trainingPlan;
 
     public void addWorkoutExercise(WorkoutExercise workoutExercise) {
-        exercises.add(workoutExercise);
+        workoutExercises.add(workoutExercise);
         workoutExercise.setWorkout(this);
     }
 }
