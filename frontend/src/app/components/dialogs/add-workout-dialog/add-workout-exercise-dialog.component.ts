@@ -23,7 +23,6 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
 @Component({
   selector: 'app-add-workout-dialog',
   templateUrl: './add-workout-exercise-dialog.component.html',
-  styleUrls: ['./add-workout-exercise-dialog.component.scss'],
   imports: [
     CommonModule,
     MatIcon,

@@ -1,0 +1,26 @@
+<div>
+  <mat-form-field>
+    <mat-label>{{'TITLES.workouts' | translate}}</mat-label>
+    <mat-select [formControl]="selectWorkoutControl" [compareWith]="compareChartTypes" (selectionChange)="updateChart(currentInterval)">
+      <mat-optgroup *ngFor="let group of workoutGroups" [label]="group.groupName">
+        <mat-option *ngFor="let chart of group.charts" [value]="chart">
+          {{chart.viewValue}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+
+  <app-chips-time-select [interval]="currentInterval" (chipSelected)="updateMonthInterval($event)"></app-chips-time-select>
+
+
+  <div class="grow flex justify-center max-h-80">
+    <canvas id="workoutChart"  aria-label="Hello ARIA World" role="img"></canvas>
+    <ngx-spinner
+      bdColor="rgba(51,51,51,0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
+  </div>
+</div>

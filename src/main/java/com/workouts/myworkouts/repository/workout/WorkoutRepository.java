@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
-    @Query("SELECT w from Workout w WHERE w.date BETWEEN :startDate AND :endDate")
+    @Query("SELECT w from Workout w WHERE w.date BETWEEN :startDate AND :endDate ORDER BY w.date ")
     List<Workout> findWorkoutsBetweenDates(LocalDate startDate, LocalDate endDate);
 
     Optional<Workout> findByDate(LocalDate date);
@@ -20,7 +20,7 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long> {
     long countAllByDateBetween(LocalDate startDate, LocalDate endDate);
 
     @Query("""
-            SELECT SUM(ws.weight) FROM Workout w
+            SELECT SUM(ws.weight * ws.reps) FROM Workout w
             JOIN WorkoutExercise we ON we.workout = w
             JOIN WorkoutSet ws ON ws.workoutExercise = we
             WHERE w.date BETWEEN :startDate AND :endDate

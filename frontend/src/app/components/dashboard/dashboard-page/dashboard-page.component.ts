@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatIconButton} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
@@ -8,10 +8,12 @@ import {DashboardBreakdownComponent} from "../dashboard-breakdown/dashboard-brea
 import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
 import {DashboardTotalsComponent} from "../dashboard-totals/dashboard-totals.component";
+import {DashboardWorkoutsComponent} from "../dashboard-workouts/dashboard-workouts.component";
+import {DashboardExercisesComponent} from "../dashboard-exercises/dashboard-exercises.component";
 
 @Component({
   selector: 'app-workout-dashboard',
-  templateUrl: './workout-dashboard.component.html',
+  templateUrl: './dashboard-page.component.html',
   standalone: true,
   imports: [
     TranslateModule,
@@ -22,18 +24,11 @@ import {DashboardTotalsComponent} from "../dashboard-totals/dashboard-totals.com
     MatMenuModule,
     MatIcon,
     DashboardBreakdownComponent,
-    DashboardTotalsComponent
+    DashboardTotalsComponent,
+    DashboardWorkoutsComponent,
+    DashboardExercisesComponent
   ]
 })
-export class WorkoutDashboardComponent implements OnInit {
+export class DashboardPageComponent {
 
-  breakdownDate: Date;
-
-  public isMobile: boolean = false;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 }

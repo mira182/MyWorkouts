@@ -2,13 +2,22 @@ package com.workouts.myworkouts.service.workout;
 
 
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
+import lombok.NonNull;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.function.Function;
 
 public interface WorkoutExerciseService {
 
-    WorkoutExerciseDto createWorkoutExercise(WorkoutExerciseDto workoutExerciseDto);
+    Map<LocalDate, BigDecimal> findByExerciseBetweenDates(@NonNull String exerciseName,
+                                                          @NonNull LocalDate startDate,
+                                                          @NonNull LocalDate endDate,
+                                                          @NonNull Function<WorkoutExerciseDto, BigDecimal> mappingFunction);
 
-    WorkoutExerciseDto updateWorkout(WorkoutExerciseDto workoutExerciseDto);
+    WorkoutExerciseDto updateWorkout(@NonNull WorkoutExerciseDto workoutExerciseDto);
 
-    void deleteWorkout(Long id);
+    void deleteWorkout(long id);
 
 }

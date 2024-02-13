@@ -24,8 +24,14 @@ export class WorkoutExerciseService {
     });
   }
 
-  public getWorkoutsForDay(day: Moment): Observable<WorkoutExercise[]> {
-    return this.http.get<WorkoutExercise[]>(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL + '/' +day.format('yyyy-MM-dd'));
+  public getWorkoutExercisesByExerciseNameBetweenDates(exerciseName: string, startDate: Moment, endDate: Moment): Observable<WorkoutExercise[]> {
+    return this.http.get<WorkoutExercise[]>(Urls.API_URL + Urls.WORKOUT_EXERCISE_URL, {
+      params: {
+        exerciseName: exerciseName,
+        startDate: startDate.format('yyyy-MM-dd'),
+        endDate: endDate.format('yyyy-MM-dd')
+      }
+    });
   }
 
   public updateWorkoutExercise(workout: WorkoutExercise): Observable<WorkoutExercise> {

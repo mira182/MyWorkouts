@@ -4,7 +4,8 @@
 // LIGHT THEME
 $angular-primary: mat.define-palette(mat.$indigo-palette, 500, 100, 900);
 $angular-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$angular-warn: mat.define-palette(mat.$red-palette);
+$angular-warn: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$angular-success: mat.define-palette(mat.$green-palette, 500, 100, 900);
 
 $angular-default-theme: mat.define-light-theme(
     (
@@ -12,6 +13,7 @@ $angular-default-theme: mat.define-light-theme(
         primary: $angular-primary,
         accent: $angular-accent,
         warn: $angular-warn,
+        success: $angular-success,
       ),
     )
 );
@@ -23,15 +25,23 @@ $angular-dark-theme: mat.define-dark-theme(
         primary: $angular-primary,
         accent: $angular-accent,
         warn: $angular-warn,
+        success: $angular-success,
       ),
     )
 );
+
+$danger-success: (
+  success: $angular-success,
+  danger: $angular-warn,
+);
+
 
 .dark-theme {
   @include mat.all-component-colors($angular-dark-theme);
 }
 
 @include mat.all-component-themes($angular-default-theme);
+//@include mat.angular-material-theme($angular-default-theme);
 
 //@use '@angular/material' as mat;
 //

@@ -13,6 +13,7 @@ import {errorInterceptor} from "./services/interceptors/error-interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {restCacheInterceptor} from "./services/interceptors/rest-cache-interceptor";
 import {MyDateAdapter} from "./config/date-picker-adapter";
+import {CookieModule} from "ngx-cookie";
 
 export const API_DATE_FORMAT = 'yyyy-MM-DD';
 export const MY_DATE_FORMATS = {
@@ -46,5 +47,6 @@ export const appConfig: ApplicationConfig = {
     // provideNoopAnimations(),
     importProvidersFrom(NgxSpinnerModule.forRoot()),
     provideAnimations(),
+    importProvidersFrom(CookieModule.withOptions())
   ]
 };

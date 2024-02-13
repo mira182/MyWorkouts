@@ -1,10 +1,14 @@
-<div class="flex flex-row justify-center">
-  <button mat-icon-button class="bg-red-700" (click)="decrement()"><mat-icon>remove</mat-icon></button>
-  <mat-form-field appearance="outline">
+<div class="flex flex-row justify-center items-baseline gap-2">
+  <div>
+    <button mat-mini-fab color="success" (click)="decrement()"><mat-icon>remove</mat-icon></button>
+  </div>
+  <mat-form-field class="max-w-28">
     <mat-label>{{ label }}</mat-label>
-    <input [formControl]="formControl" matInput type="number" min="{{ minimumValue }}">
+    <input matInput [formControl]="formControl" type="number" min="{{ minimumValue }}">
     <span matSuffix>{{suffix}}</span>
     <mat-error *ngIf="formControl.invalid">{{ errorMessage }}</mat-error>
   </mat-form-field>
-  <button mat-icon-button class="bg-green-700" (click)="increment()"><mat-icon>add</mat-icon></button>
+  <div>
+    <button mat-mini-fab color="warn" (click)="increment()"><mat-icon>add</mat-icon></button>
+  </div>
 </div>

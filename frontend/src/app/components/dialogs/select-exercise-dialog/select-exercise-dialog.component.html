@@ -1,0 +1,23 @@
+<mat-horizontal-stepper labelPosition="bottom" [linear]="true" #stepper>
+  <mat-step> <!-- STEP 1 -->
+    <ng-template matStepLabel>{{'WORKOUTS.select-category' | translate}}</ng-template>
+    <mat-action-list>
+      <button mat-list-item matStepperNext *ngFor="let exerciseCategory of exerciseCategories"
+              (click)="selectCategory(exerciseCategory)">
+        {{exerciseCategory}}
+      </button>
+    </mat-action-list>
+  </mat-step>
+  <mat-step> <!-- STEP 2 -->
+    <ng-template matStepLabel>{{"WORKOUTS.select-exercise" | translate}}</ng-template>
+    <mat-action-list>
+      <button mat-list-item matStepperNext (click)="setSelectedExercise(exercise)"
+              *ngFor="let exercise of exercisesBySelectedCategory" >
+        <img [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)"> {{exercise.name}}
+      </button>
+    </mat-action-list>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button matStepperPrevious>{{'BUTTON.back' | translate}}</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

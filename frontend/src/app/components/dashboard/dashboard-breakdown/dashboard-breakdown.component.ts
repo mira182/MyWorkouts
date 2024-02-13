@@ -4,7 +4,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {Interval} from "../../../model/time/interval";
 import {CommonModule} from "@angular/common";
 import {MatSelectModule} from "@angular/material/select";
-import {combineLatest, take} from "rxjs";
+import {combineLatest, finalize, take} from "rxjs";
 import {LineChartModule, NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
 import {WeekDatePickerComponent} from "../week-date-picker/week-date-picker.component";
 import moment from "moment";
@@ -12,10 +12,11 @@ import {GoogleChartsModule} from "angular-google-charts";
 import {
   ChartJsDashboardService
 } from "../../../services/rest/chart/dashborad/charts/chartjs/chart-js-dashboard.service";
-import {createBreakdownChartConfig} from "../../../model/charts/configuration/create-breakdown-chart.config";
+import {createChartConfig} from "../../../model/charts/configuration/create-chart.config";
 import {isNil} from "lodash";
 import {ChartsService} from "../../../services/rest/chart/dashborad/charts/charts.service";
 import {Chart} from 'chart.js';
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-dashboard-breakdown',
@@ -32,6 +33,7 @@ import {Chart} from 'chart.js';
     WeekDatePickerComponent,
     NgxChartsModule,
     GoogleChartsModule,
+    NgxSpinnerModule,
   ]
 })
 export class DashboardBreakdownComponent implements OnInit {
@@ -50,7 +52,8 @@ export class DashboardBreakdownComponent implements OnInit {
   }
 
   constructor(private readonly chartsService: ChartsService,
-              private readonly chartJsDashboardService: ChartJsDashboardService) {
+              private readonly chartJsDashboardService: ChartJsDashboardService,
+              private readonly spinnerService: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -81,6 +84,8 @@ export class DashboardBreakdownComponent implements OnInit {
   }
 
   private getBreakDownChartData(): void {
+    this.spinnerService.show();
+
     this.chartJsDashboardService.getBreakdownChartData(
       this.selectedBreakdownValue.value.group,
       this.selectedBreakdownValue.value.option,
@@ -88,16 +93,17 @@ export class DashboardBreakdownComponent implements OnInit {
       this.selectedInterval.endDate,
     )
       .pipe(
-        take(1)
+        finalize(() => this.spinnerService.hide())
       )
       .subscribe(data => {
         if (!isNil(this.chart)) {
           this.chart.destroy();
         }
 
-        this.chart = createBreakdownChartConfig(
+        this.chart = createChartConfig(
           data.data.map(point => point.key),
-          data.data.map(point => point.value));
+          data.data.map(point => point.value)
+        );
       });
   }
 }

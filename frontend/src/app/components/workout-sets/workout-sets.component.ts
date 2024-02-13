@@ -44,8 +44,6 @@ export class WorkoutSetsComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    console.log(this.form);
-
     this.form.addControl('workoutSets', this.formBuilder.array([]));
 
     this.initWorkoutSets(this.workoutSets);

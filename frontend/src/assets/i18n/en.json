@@ -149,6 +149,10 @@
       "WORKOUT_VOLUME": "Workout Volume",
       "EXERCISE_CATEGORY": "CATEGORY",
       "EXERCISE_NAME": "EXERCISE"
+    },
+    "TOTALS": {
+      "WORKOUTS_COUNT": "Workouts count",
+      "WORKOUTS_VOLUME": "Workouts volume"
     }
   }
 }

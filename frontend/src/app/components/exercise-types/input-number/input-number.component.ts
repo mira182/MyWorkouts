@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconButton} from "@angular/material/button";
+import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {CommonModule} from "@angular/common";
 import {MatInput} from "@angular/material/input";
@@ -10,7 +10,6 @@ import {isNil} from "lodash";
 @Component({
   selector: 'input-number',
   templateUrl: './input-number.component.html',
-  styleUrls: ['./input-number.component.scss'],
   imports: [
     MatIconButton,
     MatFormField,
@@ -20,6 +19,7 @@ import {isNil} from "lodash";
     MatIcon,
     MatError,
     MatLabel,
+    MatMiniFabButton,
   ],
   standalone: true
 })

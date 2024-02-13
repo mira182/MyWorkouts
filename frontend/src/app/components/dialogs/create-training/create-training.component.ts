@@ -132,8 +132,6 @@ export class CreateTrainingComponent implements OnInit {
     this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
       .pipe(
         map(workoutExercise => {
-          console.log('return from dialog:', workoutExercise);
-
           const form: FormGroup = this.formBuilder.group({
             exercise: [workoutExercise.exercise],
             workoutSets: this.formBuilder.array([workoutExercise.workoutSets])

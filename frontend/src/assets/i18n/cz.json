@@ -150,5 +150,9 @@
       "EXERCISE_CATEGORY": "KATEGORIE",
       "EXERCISE_NAME": "CVIK"
     }
+  },
+  "TOTALS": {
+    "WORKOUTS_COUNT": "Počet cviků",
+    "WORKOUTS_VOLUME": "Objem za cviky"
   }
 }

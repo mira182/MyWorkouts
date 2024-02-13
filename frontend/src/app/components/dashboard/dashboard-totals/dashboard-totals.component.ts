@@ -9,6 +9,9 @@ import {NumberCardModule} from "@swimlane/ngx-charts";
 import {NgxDashboardService} from "../../../services/rest/chart/dashborad/charts/ngx/ngx-dashboard.service";
 import moment from "moment";
 import {NgxDataPoint} from "../../../services/rest/chart/weight/ngx/ngx-weight-chart.service";
+import {MatFormField} from "@angular/material/form-field";
+import {MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker} from "@angular/material/datepicker";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-dashboard-totals',
@@ -21,7 +24,11 @@ import {NgxDataPoint} from "../../../services/rest/chart/weight/ngx/ngx-weight-c
     MatDivider,
     WeekDatePickerComponent,
     NumberCardModule,
-
+    MatFormField,
+    MatDateRangeInput,
+    MatDatepickerToggle,
+    MatDateRangePicker,
+    ReactiveFormsModule
   ],
 })
 export class DashboardTotalsComponent implements OnInit {
@@ -51,4 +58,10 @@ export class DashboardTotalsComponent implements OnInit {
       });
   }
 
+  // protected translateLabel() {
+  //   return (label: any) => {
+  //     console.log(this.translateService.instant('DASHBOARD.TOTALS.' + label.label));
+  //     !isNil(label) ? this.translateService.instant('DASHBOARD.TOTALS.' + label.label) : '';
+  //   }
+  // }
 }

@@ -52,10 +52,10 @@ export class ChipsTimeSelectComponent implements OnInit {
   ];
 
   @Input()
-  interval: Interval;
+  public interval: Interval;
 
   @Output()
-  chipSelected: EventEmitter<Interval> = new EventEmitter<Interval>();
+  public chipSelected: EventEmitter<Interval> = new EventEmitter<Interval>();
 
   constructor() { }
 
@@ -81,7 +81,7 @@ export class ChipsTimeSelectComponent implements OnInit {
       case 24:
         return this.chips[4]
       default:
-        return undefined;
+        return this.chips[0];
     }
   }
 

@@ -1,0 +1,27 @@
+<div class="flex flex-col">
+  <button mat-stroked-button (click)="openSelectExerciseDialog()">
+    <span *ngIf="!selectedExercise">Select exercise...</span><span *ngIf="selectedExercise">{{selectedExercise.name}}</span>
+  </button>
+
+  <mat-form-field>
+    <mat-label>Chart type</mat-label>
+    <mat-select [formControl]="selectedChartTypeControl" (selectionChange)="chartTypeSelected()">
+      <mat-option *ngFor="let chartType of exerciseChartType" [value]="chartType.value">
+        {{chartType.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-chips-time-select [interval]="currentInterval" (chipSelected)="intervalSelected($event)"></app-chips-time-select>
+
+  <div class="grow flex justify-center max-h-80">
+    <canvas id="workoutExerciseChart"  aria-label="Hello ARIA World" role="img"></canvas>
+    <ngx-spinner
+      bdColor="rgba(51,51,51,0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
+  </div>
+</div>
