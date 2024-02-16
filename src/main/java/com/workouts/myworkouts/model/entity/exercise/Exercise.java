@@ -1,7 +1,7 @@
 package com.workouts.myworkouts.model.entity.exercise;
 
 import com.workouts.myworkouts.model.entity.audit.AuditableTime;
-import com.workouts.myworkouts.model.entity.picture.Picture;
+import com.workouts.myworkouts.model.entity.picture.ExercisePicture;
 import com.workouts.myworkouts.model.entity.workout.WorkoutExercise;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.ExerciseType;
@@ -36,18 +36,12 @@ public class Exercise extends AuditableTime {
     @OneToMany(mappedBy = "exercise")
     private List<WorkoutExercise> workoutExercises;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "picture_id")
-    )
-    private List<Picture> pictures = new ArrayList<>();
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExercisePicture> exercisePictures = new ArrayList<>();
 
-    public void addPicture(Picture picture) {
-        pictures.add(picture);
+    public void addPicture(ExercisePicture exercisePicture) {
+        exercisePictures.add(exercisePicture);
+        exercisePicture.setExercise(this);
     }
 
 }

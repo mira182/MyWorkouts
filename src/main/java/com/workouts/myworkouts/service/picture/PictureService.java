@@ -2,11 +2,11 @@ package com.workouts.myworkouts.service.picture;
 
 
 import com.workouts.myworkouts.model.dto.picture.PictureDto;
-import com.workouts.myworkouts.model.entity.picture.Picture;
+import com.workouts.myworkouts.model.entity.picture.ExercisePicture;
 
 public interface PictureService {
 
-    Picture createOrUpdatePicture(PictureDto picture);
+    ExercisePicture createOrUpdatePicture(PictureDto picture);
 
     byte[] getPictureDataById(long pictureId);
 }

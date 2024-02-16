@@ -2,8 +2,11 @@ package com.workouts.myworkouts.config;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Consumer;
 
 public final class Constants {
+
+    static final Consumer<Object> DO_NOTHING = x -> {};
 
     // API
     public static final String API_BASE_URL = "/api/v1";

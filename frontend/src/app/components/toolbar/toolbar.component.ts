@@ -12,11 +12,10 @@ import {MatDrawer, MatDrawerContainer} from "@angular/material/sidenav";
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {UserService} from "../../services/rest/user/user.service";
-import {take, takeUntil} from "rxjs";
-import {SelectImportComponent} from "../dialogs/select-import/select-import.component";
+import {take} from "rxjs";
 import {LoginService} from "../../services/rest/auth/login.service";
 import {ThemeService} from "../../services/theme/theme.service";
-import {ExportImportService} from "../../services/rest/export-import/export-import.service";
+import {ImportService} from "../../services/rest/export-import/import.service";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {MatDialog} from "@angular/material/dialog";
 import {User} from "../../model/user/user";
@@ -45,7 +44,6 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
     RouterOutlet,
   ],
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent extends Unsubscribe implements OnInit {
 
@@ -56,7 +54,7 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
   constructor(private readonly translateService: TranslateService,
               private loginService : LoginService,
               protected readonly themeService: ThemeService,
-              private exportImportService: ExportImportService,
+              private exportImportService: ImportService,
               private snackBar: SnackBarService,
               private dialog: MatDialog,
               private spinner: NgxSpinnerService) {
@@ -83,49 +81,9 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
     this.loginService.logout();
   }
 
-  protected export() {
-    this.spinner.show();
-    this.exportImportService.export()
-      .pipe(
-        take(1),
-        takeUntil(this.unSubscribe),
-      )
-      .subscribe(result => {
-        if (result) {
-          this.spinner.hide();
-          this.snackBar.showSuccessSnackBar("Successfully exported.");
-        }
-      }, error => {
-        this.spinner.hide();
-        this.snackBar.showErrorSnackBar(error.error);
-      });
-  }
-
   protected import() {
-    const dialogRef = this.dialog.open(SelectImportComponent, {
-      height: 'auto',
-      width: '400px',
-      hasBackdrop: true
-    });
-
-    dialogRef.afterClosed()
-      .pipe(
-        take(1),
-        takeUntil(this.unSubscribe),
-      )
-      .subscribe(folderName => {
-        if (folderName) {
-          this.spinner.show();
-          this.exportImportService.importFromFolder(folderName).subscribe(result => {
-            if (result) {
-              this.spinner.hide();
-              this.snackBar.showSuccessSnackBar("Successfully imported.");
-            }
-          }, error => {
-            this.spinner.hide();
-            this.snackBar.showErrorSnackBar(error.error);
-          });
-        }
-      });
+    this.exportImportService.importLatest()
+      .pipe(take(1))
+      .subscribe(() => this.snackBar.showSuccessSnackBar('ALERT.success'));
   }
 }

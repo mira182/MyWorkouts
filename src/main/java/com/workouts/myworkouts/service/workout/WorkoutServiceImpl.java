@@ -1,10 +1,13 @@
 package com.workouts.myworkouts.service.workout;
 
 import com.workouts.myworkouts.exceptions.WorkoutNotFoundException;
+import com.workouts.myworkouts.model.dto.export.WorkoutExerciseExportDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
+import com.workouts.myworkouts.model.entity.workout.Workout;
 import com.workouts.myworkouts.model.mapper.WorkoutExerciseMapper;
 import com.workouts.myworkouts.model.mapper.WorkoutMapper;
+import com.workouts.myworkouts.model.mapper.export.WorkoutExerciseExportMapper;
 import com.workouts.myworkouts.repository.workout.WorkoutExerciseRepository;
 import com.workouts.myworkouts.repository.workout.WorkoutRepository;
 import lombok.NonNull;
@@ -26,6 +29,8 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     private final WorkoutExerciseMapper workoutExerciseMapper;
 
+    private final WorkoutExerciseExportMapper workoutExerciseExportMapper;
+
     private final WorkoutMapper workoutMapper;
 
     @Override
@@ -34,7 +39,6 @@ public class WorkoutServiceImpl implements WorkoutService {
         return workoutRepository.findByDate(date)
                 .map(workoutMapper::entityToDto)
                 .orElse(null);
-
     }
 
     @Override
@@ -84,5 +88,25 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Override
     public BigDecimal sumWorkoutsVolumeBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
         return workoutRepository.sumWorkoutsVolumeBetweenDates(startDate, endDate);
+    }
+
+    @Override
+    @Transactional
+    public void importWorkoutExercises(@NonNull WorkoutExerciseExportDto workoutExerciseExportDto) {
+        workoutRepository.findByDate(workoutExerciseExportDto.getDate())
+                .map(workout -> {
+                    workout.addWorkoutExercise(workoutExerciseExportMapper.dtoToEntity(workoutExerciseExportDto));
+
+                    return workoutRepository.save(workout);
+                })
+                .orElseGet(() -> {
+                    Workout workout = new Workout();
+                    workout.setDate(workoutExerciseExportDto.getDate());
+                    workout.addWorkoutExercise(workoutExerciseExportMapper.dtoToEntity(workoutExerciseExportDto));
+
+                    workoutRepository.save(workout);
+
+                    return workout;
+                });
     }
 }

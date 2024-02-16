@@ -1,5 +1,6 @@
 package com.workouts.myworkouts.service.workout;
 
+import com.workouts.myworkouts.model.dto.export.WorkoutExerciseExportDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
 import lombok.NonNull;
@@ -23,4 +24,6 @@ public interface WorkoutService {
     long countWorkouts(@NonNull LocalDate startDate, @NonNull LocalDate endDate);
 
     BigDecimal sumWorkoutsVolumeBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate);
+
+    void importWorkoutExercises(@NonNull WorkoutExerciseExportDto workoutExerciseExportDto);
 }

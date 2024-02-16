@@ -3,11 +3,13 @@ package com.workouts.myworkouts.service.exercise;
 import com.workouts.myworkouts.exceptions.ExerciseNotFoundException;
 import com.workouts.myworkouts.model.dto.exercise.ExerciseDto;
 import com.workouts.myworkouts.model.entity.exercise.Exercise;
-import com.workouts.myworkouts.model.entity.picture.Picture;
+import com.workouts.myworkouts.model.entity.picture.ExercisePicture;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.PictureType;
 import com.workouts.myworkouts.model.mapper.ExerciseMapper;
+import com.workouts.myworkouts.model.mapper.PictureMapper;
 import com.workouts.myworkouts.repository.exercise.ExerciseRepository;
+import com.workouts.myworkouts.repository.exercise.PictureRepository;
 import com.workouts.myworkouts.service.image.ImageService;
 import com.workouts.myworkouts.service.picture.PictureService;
 import lombok.NonNull;
@@ -28,6 +30,10 @@ public class ExerciseServiceImpl implements ExerciseService {
     private final ExerciseRepository exerciseRepository;
 
     private final ExerciseMapper exerciseMapper;
+
+    private final PictureMapper pictureMapper;
+
+    private final PictureRepository pictureRepository;
 
     private final ImageService imageService;
 
@@ -102,16 +108,16 @@ public class ExerciseServiceImpl implements ExerciseService {
             log.info("Storing image with filename: {} for exercise: {}", file.getOriginalFilename(), exerciseName);
 
             // add exercise picture
-            Picture picture = pictureService.createOrUpdatePicture(
+            ExercisePicture exercisePicture = pictureService.createOrUpdatePicture(
                     imageService.storeImage(exerciseName, file, PictureType.EXERCISE_IMAGE));
-            foundOrCreatedExercise.getPictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_IMAGE);
-            foundOrCreatedExercise.addPicture(picture);
+            foundOrCreatedExercise.getExercisePictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_IMAGE);
+            foundOrCreatedExercise.addPicture(exercisePicture);
 
             // add exercise icon
-            picture = pictureService.createOrUpdatePicture(
+            exercisePicture = pictureService.createOrUpdatePicture(
                     imageService.storeImage(exerciseName, file, PictureType.EXERCISE_ICON));
-            foundOrCreatedExercise.getPictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_ICON);
-            foundOrCreatedExercise.addPicture(picture);
+            foundOrCreatedExercise.getExercisePictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_ICON);
+            foundOrCreatedExercise.addPicture(exercisePicture);
         } else {
             log.info("No image was added for exercise {}", exerciseName);
         }
