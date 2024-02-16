@@ -301,7 +301,7 @@
                         <configuration>
                             <nodeVersion>v12.8.1</nodeVersion>
                             <npmVersion>6.13.4</npmVersion>
-                            <workingDirectory>web/</workingDirectory>
+                            <workingDirectory>frontend/</workingDirectory>
                         </configuration>
 
                         <executions>
@@ -313,7 +313,7 @@
                             </execution>
 
                             <execution>
-                                <id>npm install --no-optional --force</id>
+                                <id>npm install</id>
                                 <goals>
                                     <goal>npm</goal>
                                 </goals>
