@@ -86,6 +86,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BigDecimal sumWorkoutsVolumeBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
         return workoutRepository.sumWorkoutsVolumeBetweenDates(startDate, endDate);
     }

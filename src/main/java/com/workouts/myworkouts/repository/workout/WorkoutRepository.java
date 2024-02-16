@@ -20,7 +20,7 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long> {
     long countAllByDateBetween(LocalDate startDate, LocalDate endDate);
 
     @Query("""
-            SELECT SUM(ws.weight * ws.reps) FROM Workout w
+            SELECT COALESCE(SUM(ws.weight * ws.reps), 0) FROM Workout w
             JOIN WorkoutExercise we ON we.workout = w
             JOIN WorkoutSet ws ON ws.workoutExercise = we
             WHERE w.date BETWEEN :startDate AND :endDate
