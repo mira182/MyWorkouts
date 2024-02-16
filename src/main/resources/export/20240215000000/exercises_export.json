@@ -1,0 +1,3961 @@
+[ {
+  "name" : "Arnold Dumbbell Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 71,
+    "name" : "Arnold Dumbbell Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 71,
+    "name" : "Arnold Dumbbell Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 71,
+    "name" : "Arnold Dumbbell Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 72,
+    "name" : "Arnold Dumbbell Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 72,
+    "name" : "Arnold Dumbbell Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 72,
+    "name" : "Arnold Dumbbell Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Criss Cross",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 115,
+    "name" : "Criss Cross.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 115,
+    "name" : "Criss Cross.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 115,
+    "name" : "Criss Cross.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 116,
+    "name" : "Criss Cross_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 116,
+    "name" : "Criss Cross_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 116,
+    "name" : "Criss Cross_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Plank Leg Raise",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 123,
+    "name" : "Plank Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 123,
+    "name" : "Plank Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 123,
+    "name" : "Plank Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 124,
+    "name" : "Plank Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 124,
+    "name" : "Plank Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 124,
+    "name" : "Plank Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Flat Barbell Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 101,
+    "name" : "Flat Barbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 101,
+    "name" : "Flat Barbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 101,
+    "name" : "Flat Barbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 102,
+    "name" : "Flat Barbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 102,
+    "name" : "Flat Barbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 102,
+    "name" : "Flat Barbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 99,
+    "name" : "Dumbbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 99,
+    "name" : "Dumbbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 99,
+    "name" : "Dumbbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 100,
+    "name" : "Dumbbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 100,
+    "name" : "Dumbbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 100,
+    "name" : "Dumbbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Incline Dumbbell Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 107,
+    "name" : "Incline Dumbbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 107,
+    "name" : "Incline Dumbbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 107,
+    "name" : "Incline Dumbbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 108,
+    "name" : "Incline Dumbbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 108,
+    "name" : "Incline Dumbbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 108,
+    "name" : "Incline Dumbbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Flat Dumbbell Fly",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 103,
+    "name" : "Flat Dumbbell Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 103,
+    "name" : "Flat Dumbbell Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 103,
+    "name" : "Flat Dumbbell Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 104,
+    "name" : "Flat Dumbbell Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 104,
+    "name" : "Flat Dumbbell Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 104,
+    "name" : "Flat Dumbbell Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Incline Dumbbell Fly",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 109,
+    "name" : "Incline Dumbbell Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 109,
+    "name" : "Incline Dumbbell Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 109,
+    "name" : "Incline Dumbbell Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 110,
+    "name" : "Incline Dumbbell Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 110,
+    "name" : "Incline Dumbbell Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 110,
+    "name" : "Incline Dumbbell Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Lunges",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 51,
+    "name" : "Dumbbell Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 51,
+    "name" : "Dumbbell Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 51,
+    "name" : "Dumbbell Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 52,
+    "name" : "Dumbbell Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 52,
+    "name" : "Dumbbell Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 52,
+    "name" : "Dumbbell Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Lunges",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 41,
+    "name" : "Barbell Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 41,
+    "name" : "Barbell Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 41,
+    "name" : "Barbell Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 42,
+    "name" : "Barbell Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 42,
+    "name" : "Barbell Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 42,
+    "name" : "Barbell Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Leg Extension Machine",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 63,
+    "name" : "Leg Extension Machine.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 63,
+    "name" : "Leg Extension Machine.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 63,
+    "name" : "Leg Extension Machine.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 64,
+    "name" : "Leg Extension Machine_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 64,
+    "name" : "Leg Extension Machine_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 64,
+    "name" : "Leg Extension Machine_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Sumo Deadlift",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 67,
+    "name" : "Sumo Deadlift.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 67,
+    "name" : "Sumo Deadlift.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 67,
+    "name" : "Sumo Deadlift.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 68,
+    "name" : "Sumo Deadlift_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 68,
+    "name" : "Sumo Deadlift_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 68,
+    "name" : "Sumo Deadlift_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Army Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 69,
+    "name" : "Army Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 69,
+    "name" : "Army Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 69,
+    "name" : "Army Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 70,
+    "name" : "Army Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 70,
+    "name" : "Army Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 70,
+    "name" : "Army Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Rope Push Down",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 95,
+    "name" : "Rope Push Down.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 95,
+    "name" : "Rope Push Down.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 95,
+    "name" : "Rope Push Down.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 96,
+    "name" : "Rope Push Down_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 96,
+    "name" : "Rope Push Down_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 96,
+    "name" : "Rope Push Down_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 81,
+    "name" : "Barbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 81,
+    "name" : "Barbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 81,
+    "name" : "Barbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 82,
+    "name" : "Barbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 82,
+    "name" : "Barbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 82,
+    "name" : "Barbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 5,
+    "name" : "Barbell Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 5,
+    "name" : "Barbell Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 5,
+    "name" : "Barbell Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 6,
+    "name" : "Barbell Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 6,
+    "name" : "Barbell Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 6,
+    "name" : "Barbell Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Chin Up",
+  "type" : "REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 9,
+    "name" : "Chin Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 9,
+    "name" : "Chin Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 9,
+    "name" : "Chin Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 10,
+    "name" : "Chin Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 10,
+    "name" : "Chin Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 10,
+    "name" : "Chin Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Lat Pulldown",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 19,
+    "name" : "Lat Pulldown.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 19,
+    "name" : "Lat Pulldown.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 19,
+    "name" : "Lat Pulldown.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 20,
+    "name" : "Lat Pulldown_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 20,
+    "name" : "Lat Pulldown_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 20,
+    "name" : "Lat Pulldown_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Lat Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 21,
+    "name" : "Lat Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 21,
+    "name" : "Lat Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 21,
+    "name" : "Lat Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 22,
+    "name" : "Lat Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 22,
+    "name" : "Lat Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 22,
+    "name" : "Lat Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Pull Up",
+  "type" : "REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 25,
+    "name" : "Pull Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 25,
+    "name" : "Pull Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 25,
+    "name" : "Pull Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 26,
+    "name" : "Pull Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 26,
+    "name" : "Pull Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 26,
+    "name" : "Pull Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "TRX Row",
+  "type" : "REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 35,
+    "name" : "TRX Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 35,
+    "name" : "TRX Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 35,
+    "name" : "TRX Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 36,
+    "name" : "TRX Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 36,
+    "name" : "TRX Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 36,
+    "name" : "TRX Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Crunch",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 117,
+    "name" : "Crunch.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 117,
+    "name" : "Crunch.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 117,
+    "name" : "Crunch.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 118,
+    "name" : "Crunch_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 118,
+    "name" : "Crunch_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 118,
+    "name" : "Crunch_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Windshield Wipers",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 135,
+    "name" : "Windshield Wipers.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 135,
+    "name" : "Windshield Wipers.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 135,
+    "name" : "Windshield Wipers.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 136,
+    "name" : "Windshield Wipers_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 136,
+    "name" : "Windshield Wipers_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 136,
+    "name" : "Windshield Wipers_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Plank",
+  "type" : "TIME",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 121,
+    "name" : "Plank.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 121,
+    "name" : "Plank.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 121,
+    "name" : "Plank.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 122,
+    "name" : "Plank_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 122,
+    "name" : "Plank_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 122,
+    "name" : "Plank_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Side Plank",
+  "type" : "TIME",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 131,
+    "name" : "Side Plank.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 131,
+    "name" : "Side Plank.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 131,
+    "name" : "Side Plank.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 132,
+    "name" : "Side Plank_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 132,
+    "name" : "Side Plank_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 132,
+    "name" : "Side Plank_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Hip raise",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 119,
+    "name" : "Hip raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 119,
+    "name" : "Hip raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 119,
+    "name" : "Hip raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 120,
+    "name" : "Hip raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 120,
+    "name" : "Hip raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 120,
+    "name" : "Hip raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Pullover",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 13,
+    "name" : "Dumbbell Pullover.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 13,
+    "name" : "Dumbbell Pullover.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 13,
+    "name" : "Dumbbell Pullover.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 14,
+    "name" : "Dumbbell Pullover_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 14,
+    "name" : "Dumbbell Pullover_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 14,
+    "name" : "Dumbbell Pullover_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Reverse Fly",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 15,
+    "name" : "Dumbbell Reverse Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 15,
+    "name" : "Dumbbell Reverse Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 15,
+    "name" : "Dumbbell Reverse Fly.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 16,
+    "name" : "Dumbbell Reverse Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 16,
+    "name" : "Dumbbell Reverse Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 16,
+    "name" : "Dumbbell Reverse Fly_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 17,
+    "name" : "Dumbbell Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 17,
+    "name" : "Dumbbell Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 17,
+    "name" : "Dumbbell Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 18,
+    "name" : "Dumbbell Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 18,
+    "name" : "Dumbbell Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 18,
+    "name" : "Dumbbell Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 75,
+    "name" : "Dumbbell Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 75,
+    "name" : "Dumbbell Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 75,
+    "name" : "Dumbbell Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 76,
+    "name" : "Dumbbell Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 76,
+    "name" : "Dumbbell Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 76,
+    "name" : "Dumbbell Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 83,
+    "name" : "Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 83,
+    "name" : "Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 83,
+    "name" : "Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 84,
+    "name" : "Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 84,
+    "name" : "Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 84,
+    "name" : "Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Hammer Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 85,
+    "name" : "Dumbbell Hammer Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 85,
+    "name" : "Dumbbell Hammer Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 85,
+    "name" : "Dumbbell Hammer Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 86,
+    "name" : "Dumbbell Hammer Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 86,
+    "name" : "Dumbbell Hammer Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 86,
+    "name" : "Dumbbell Hammer Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Seated Incline Dumbbell Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 89,
+    "name" : "Seated Incline Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 89,
+    "name" : "Seated Incline Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 89,
+    "name" : "Seated Incline Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 90,
+    "name" : "Seated Incline Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 90,
+    "name" : "Seated Incline Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 90,
+    "name" : "Seated Incline Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Leg Bench Hip Raise",
+  "type" : "REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 61,
+    "name" : "Leg Bench Hip Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 61,
+    "name" : "Leg Bench Hip Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 61,
+    "name" : "Leg Bench Hip Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 62,
+    "name" : "Leg Bench Hip Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 62,
+    "name" : "Leg Bench Hip Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 62,
+    "name" : "Leg Bench Hip Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "TRX Wide Row",
+  "type" : "REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 37,
+    "name" : "TRX Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 37,
+    "name" : "TRX Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 37,
+    "name" : "TRX Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 38,
+    "name" : "TRX Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 38,
+    "name" : "TRX Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 38,
+    "name" : "TRX Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Sandbag Lunges",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 65,
+    "name" : "Sandbag Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 65,
+    "name" : "Sandbag Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 65,
+    "name" : "Sandbag Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 66,
+    "name" : "Sandbag Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 66,
+    "name" : "Sandbag Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 66,
+    "name" : "Sandbag Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Incline Barbell Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 105,
+    "name" : "Incline Barbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 105,
+    "name" : "Incline Barbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 105,
+    "name" : "Incline Barbell Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 106,
+    "name" : "Incline Barbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 106,
+    "name" : "Incline Barbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 106,
+    "name" : "Incline Barbell Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Seated Cuban Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 77,
+    "name" : "Seated Cuban Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 77,
+    "name" : "Seated Cuban Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 77,
+    "name" : "Seated Cuban Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 78,
+    "name" : "Seated Cuban Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 78,
+    "name" : "Seated Cuban Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 78,
+    "name" : "Seated Cuban Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Lateral Raise",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 73,
+    "name" : "Dumbbell Lateral Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 73,
+    "name" : "Dumbbell Lateral Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 73,
+    "name" : "Dumbbell Lateral Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 74,
+    "name" : "Dumbbell Lateral Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 74,
+    "name" : "Dumbbell Lateral Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 74,
+    "name" : "Dumbbell Lateral Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Seated Dumbbell Lateral raise",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 79,
+    "name" : "Seated Dumbbell Lateral raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 79,
+    "name" : "Seated Dumbbell Lateral raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 79,
+    "name" : "Seated Dumbbell Lateral raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 80,
+    "name" : "Seated Dumbbell Lateral raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 80,
+    "name" : "Seated Dumbbell Lateral raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 80,
+    "name" : "Seated Dumbbell Lateral raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Plank Opposite Arm Leg Raise",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 125,
+    "name" : "Plank Opposite Arm Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 125,
+    "name" : "Plank Opposite Arm Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 125,
+    "name" : "Plank Opposite Arm Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 126,
+    "name" : "Plank Opposite Arm Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 126,
+    "name" : "Plank Opposite Arm Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 126,
+    "name" : "Plank Opposite Arm Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Russian Twists",
+  "type" : "WEIGHTED_REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 129,
+    "name" : "Russian Twists.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 129,
+    "name" : "Russian Twists.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 129,
+    "name" : "Russian Twists.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 130,
+    "name" : "Russian Twists_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 130,
+    "name" : "Russian Twists_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 130,
+    "name" : "Russian Twists_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Sumo Squats",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 55,
+    "name" : "Dumbbell Sumo Squats.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 55,
+    "name" : "Dumbbell Sumo Squats.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 55,
+    "name" : "Dumbbell Sumo Squats.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 56,
+    "name" : "Dumbbell Sumo Squats_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 56,
+    "name" : "Dumbbell Sumo Squats_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 56,
+    "name" : "Dumbbell Sumo Squats_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Side Lunges",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 53,
+    "name" : "Dumbbell Side Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 53,
+    "name" : "Dumbbell Side Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 53,
+    "name" : "Dumbbell Side Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 54,
+    "name" : "Dumbbell Side Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 54,
+    "name" : "Dumbbell Side Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 54,
+    "name" : "Dumbbell Side Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Wide Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 7,
+    "name" : "Barbell Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 7,
+    "name" : "Barbell Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 7,
+    "name" : "Barbell Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 8,
+    "name" : "Barbell Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 8,
+    "name" : "Barbell Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 8,
+    "name" : "Barbell Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Australian Pull Up",
+  "type" : "REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 2,
+    "name" : "Australian Pull Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 2,
+    "name" : "Australian Pull Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 2,
+    "name" : "Australian Pull Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 1,
+    "name" : "Australian Pull Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 1,
+    "name" : "Australian Pull Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 1,
+    "name" : "Australian Pull Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  } ]
+}, {
+  "name" : "Resistance Band Hip Rotations",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 127,
+    "name" : "Resistance Band Hip Rotations.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 127,
+    "name" : "Resistance Band Hip Rotations.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 127,
+    "name" : "Resistance Band Hip Rotations.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 128,
+    "name" : "Resistance Band Hip Rotations_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 128,
+    "name" : "Resistance Band Hip Rotations_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 128,
+    "name" : "Resistance Band Hip Rotations_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Lat Wide Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 23,
+    "name" : "Lat Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 23,
+    "name" : "Lat Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 23,
+    "name" : "Lat Wide Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 24,
+    "name" : "Lat Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 24,
+    "name" : "Lat Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 24,
+    "name" : "Lat Wide Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Calf Single Leg Raise",
+  "type" : "REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 49,
+    "name" : "Calf Single Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 49,
+    "name" : "Calf Single Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 49,
+    "name" : "Calf Single Leg Raise.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 50,
+    "name" : "Calf Single Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 50,
+    "name" : "Calf Single Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 50,
+    "name" : "Calf Single Leg Raise_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Resistance Band Row",
+  "type" : "REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 27,
+    "name" : "Resistance Band Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 27,
+    "name" : "Resistance Band Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 27,
+    "name" : "Resistance Band Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 28,
+    "name" : "Resistance Band Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 28,
+    "name" : "Resistance Band Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 28,
+    "name" : "Resistance Band Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Bulgarian Lunges",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 45,
+    "name" : "Bulgarian Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 45,
+    "name" : "Bulgarian Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 45,
+    "name" : "Bulgarian Lunges.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 46,
+    "name" : "Bulgarian Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 46,
+    "name" : "Bulgarian Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 46,
+    "name" : "Bulgarian Lunges_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Incline Dumbbell Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 87,
+    "name" : "Incline Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 87,
+    "name" : "Incline Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 87,
+    "name" : "Incline Dumbbell Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 88,
+    "name" : "Incline Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 88,
+    "name" : "Incline Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 88,
+    "name" : "Incline Dumbbell Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Seated Underhand Lat Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 31,
+    "name" : "Seated Underhand Lat Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 31,
+    "name" : "Seated Underhand Lat Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 31,
+    "name" : "Seated Underhand Lat Row.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 32,
+    "name" : "Seated Underhand Lat Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 32,
+    "name" : "Seated Underhand Lat Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 32,
+    "name" : "Seated Underhand Lat Row_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Pullover",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 4,
+    "name" : "Barbell Pullover_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 4,
+    "name" : "Barbell Pullover_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 4,
+    "name" : "Barbell Pullover_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 3,
+    "name" : "Barbell Pullover.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 3,
+    "name" : "Barbell Pullover.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 3,
+    "name" : "Barbell Pullover.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  } ]
+}, {
+  "name" : "Barbell Sumo Squats",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ ]
+}, {
+  "name" : "Ball Crunches",
+  "type" : "REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 113,
+    "name" : "Ball Crunches.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 113,
+    "name" : "Ball Crunches.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 113,
+    "name" : "Ball Crunches.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 114,
+    "name" : "Ball Crunches_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 114,
+    "name" : "Ball Crunches_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 114,
+    "name" : "Ball Crunches_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Jumping Jacks",
+  "type" : "TIME",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 57,
+    "name" : "Jumping Jacks.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 57,
+    "name" : "Jumping Jacks.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 57,
+    "name" : "Jumping Jacks.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 58,
+    "name" : "Jumping Jacks_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 58,
+    "name" : "Jumping Jacks_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 58,
+    "name" : "Jumping Jacks_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Burpees",
+  "type" : "TIME",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 47,
+    "name" : "Burpees.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 47,
+    "name" : "Burpees.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 47,
+    "name" : "Burpees.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 48,
+    "name" : "Burpees_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 48,
+    "name" : "Burpees_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 48,
+    "name" : "Burpees_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Single Leg Romanian Deadlift",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 33,
+    "name" : "Single Leg Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 33,
+    "name" : "Single Leg Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 33,
+    "name" : "Single Leg Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 34,
+    "name" : "Single Leg Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 34,
+    "name" : "Single Leg Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 34,
+    "name" : "Single Leg Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Side Bend",
+  "type" : "WEIGHTED_REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 157,
+    "name" : "Dumbbell Side Bend.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 157,
+    "name" : "Dumbbell Side Bend.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 157,
+    "name" : "Dumbbell Side Bend.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 158,
+    "name" : "Dumbbell Side Bend_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 158,
+    "name" : "Dumbbell Side Bend_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 158,
+    "name" : "Dumbbell Side Bend_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "TRX Biceps Curl",
+  "type" : "REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 91,
+    "name" : "TRX Biceps Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 91,
+    "name" : "TRX Biceps Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 91,
+    "name" : "TRX Biceps Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 92,
+    "name" : "TRX Biceps Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 92,
+    "name" : "TRX Biceps Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 92,
+    "name" : "TRX Biceps Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Squat",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 43,
+    "name" : "Barbell Squat.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 43,
+    "name" : "Barbell Squat.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 43,
+    "name" : "Barbell Squat.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 44,
+    "name" : "Barbell Squat_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 44,
+    "name" : "Barbell Squat_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 44,
+    "name" : "Barbell Squat_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Jumping Squats",
+  "type" : "TIME",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 59,
+    "name" : "Jumping Squats.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 59,
+    "name" : "Jumping Squats.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 59,
+    "name" : "Jumping Squats.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 60,
+    "name" : "Jumping Squats_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 60,
+    "name" : "Jumping Squats_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 60,
+    "name" : "Jumping Squats_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Twisted Mountain Climber",
+  "type" : "TIME",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 133,
+    "name" : "Twisted Mountain Climber.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 133,
+    "name" : "Twisted Mountain Climber.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 133,
+    "name" : "Twisted Mountain Climber.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 134,
+    "name" : "Twisted Mountain Climber_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 134,
+    "name" : "Twisted Mountain Climber_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 134,
+    "name" : "Twisted Mountain Climber_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Ball Reverse Leg Curl",
+  "type" : "REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 39,
+    "name" : "Ball Reverse Leg Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 39,
+    "name" : "Ball Reverse Leg Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 39,
+    "name" : "Ball Reverse Leg Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 40,
+    "name" : "Ball Reverse Leg Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 40,
+    "name" : "Ball Reverse Leg Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 40,
+    "name" : "Ball Reverse Leg Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Cable Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 137,
+    "name" : "Cable Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 137,
+    "name" : "Cable Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 137,
+    "name" : "Cable Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 138,
+    "name" : "Cable Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 138,
+    "name" : "Cable Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 138,
+    "name" : "Cable Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Bench Triceps Dips",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 93,
+    "name" : "Bench Triceps Dips.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 93,
+    "name" : "Bench Triceps Dips.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 93,
+    "name" : "Bench Triceps Dips.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 94,
+    "name" : "Bench Triceps Dips_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 94,
+    "name" : "Bench Triceps Dips_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 94,
+    "name" : "Bench Triceps Dips_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Hip Thrust",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 139,
+    "name" : "Hip Thrust.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 139,
+    "name" : "Hip Thrust.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 139,
+    "name" : "Hip Thrust.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 140,
+    "name" : "Hip Thrust_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 140,
+    "name" : "Hip Thrust_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 140,
+    "name" : "Hip Thrust_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Triceps Extension",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 97,
+    "name" : "Triceps Extension.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 97,
+    "name" : "Triceps Extension.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 97,
+    "name" : "Triceps Extension.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 98,
+    "name" : "Triceps Extension_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 98,
+    "name" : "Triceps Extension_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 98,
+    "name" : "Triceps Extension_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Triceps Extension",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 141,
+    "name" : "Barbell Triceps Extension.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 141,
+    "name" : "Barbell Triceps Extension.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 141,
+    "name" : "Barbell Triceps Extension.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 142,
+    "name" : "Barbell Triceps Extension_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 142,
+    "name" : "Barbell Triceps Extension_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 142,
+    "name" : "Barbell Triceps Extension_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Goblet Squat",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 145,
+    "name" : "Goblet Squat.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 145,
+    "name" : "Goblet Squat.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 145,
+    "name" : "Goblet Squat.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 146,
+    "name" : "Goblet Squat_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 146,
+    "name" : "Goblet Squat_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 146,
+    "name" : "Goblet Squat_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Push Up",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 111,
+    "name" : "Push Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 111,
+    "name" : "Push Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 111,
+    "name" : "Push Up.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 112,
+    "name" : "Push Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 112,
+    "name" : "Push Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 112,
+    "name" : "Push Up_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Farmers Walk",
+  "type" : "WEIGHTED",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 149,
+    "name" : "Dumbbell Farmers Walk.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 149,
+    "name" : "Dumbbell Farmers Walk.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 149,
+    "name" : "Dumbbell Farmers Walk.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 150,
+    "name" : "Dumbbell Farmers Walk_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 150,
+    "name" : "Dumbbell Farmers Walk_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 150,
+    "name" : "Dumbbell Farmers Walk_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Romanian Deadlift",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 29,
+    "name" : "Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 29,
+    "name" : "Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 29,
+    "name" : "Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 30,
+    "name" : "Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 30,
+    "name" : "Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 30,
+    "name" : "Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Triceps Pushups",
+  "type" : "REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 151,
+    "name" : "Triceps Pushups.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 151,
+    "name" : "Triceps Pushups.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 151,
+    "name" : "Triceps Pushups.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 152,
+    "name" : "Triceps Pushups_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 152,
+    "name" : "Triceps Pushups_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 152,
+    "name" : "Triceps Pushups_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Good Morning",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 153,
+    "name" : "Good Morning.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 153,
+    "name" : "Good Morning.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 153,
+    "name" : "Good Morning.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 154,
+    "name" : "Good Morning_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 154,
+    "name" : "Good Morning_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 154,
+    "name" : "Good Morning_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Triceps Dips",
+  "type" : "REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 155,
+    "name" : "Triceps Dips.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 155,
+    "name" : "Triceps Dips.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 155,
+    "name" : "Triceps Dips.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 156,
+    "name" : "Triceps Dips_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 156,
+    "name" : "Triceps Dips_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 156,
+    "name" : "Triceps Dips_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Standing Cable Crunch",
+  "type" : "WEIGHTED_REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 159,
+    "name" : "Standing Cable Crunch.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 159,
+    "name" : "Standing Cable Crunch.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 159,
+    "name" : "Standing Cable Crunch.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 160,
+    "name" : "Standing Cable Crunch_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 160,
+    "name" : "Standing Cable Crunch_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 160,
+    "name" : "Standing Cable Crunch_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Single Leg Hipthrust",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 161,
+    "name" : "Single Leg Hipthrust.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 161,
+    "name" : "Single Leg Hipthrust.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 161,
+    "name" : "Single Leg Hipthrust.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 162,
+    "name" : "Single Leg Hipthrust_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 162,
+    "name" : "Single Leg Hipthrust_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 162,
+    "name" : "Single Leg Hipthrust_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Front Squat",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 163,
+    "name" : "Front Squat.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 163,
+    "name" : "Front Squat.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 163,
+    "name" : "Front Squat.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 164,
+    "name" : "Front Squat_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 164,
+    "name" : "Front Squat_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 164,
+    "name" : "Front Squat_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Close Grip Barbell Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 165,
+    "name" : "Close Grip Barbell Bench Press.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 165,
+    "name" : "Close Grip Barbell Bench Press.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 165,
+    "name" : "Close Grip Barbell Bench Press.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 166,
+    "name" : "Close Grip Barbell Bench Press_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 166,
+    "name" : "Close Grip Barbell Bench Press_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 166,
+    "name" : "Close Grip Barbell Bench Press_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Push Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 167,
+    "name" : "Dumbbell Push Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 167,
+    "name" : "Dumbbell Push Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 167,
+    "name" : "Dumbbell Push Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 168,
+    "name" : "Dumbbell Push Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 168,
+    "name" : "Dumbbell Push Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 168,
+    "name" : "Dumbbell Push Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "TRX Chest Fly",
+  "type" : "REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 169,
+    "name" : "TRX Chest Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 169,
+    "name" : "TRX Chest Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 169,
+    "name" : "TRX Chest Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 170,
+    "name" : "TRX Chest Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 170,
+    "name" : "TRX Chest Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 170,
+    "name" : "TRX Chest Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Floor Flys",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 171,
+    "name" : "Dumbbell Floor Flys.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 171,
+    "name" : "Dumbbell Floor Flys.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 171,
+    "name" : "Dumbbell Floor Flys.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 172,
+    "name" : "Dumbbell Floor Flys_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 172,
+    "name" : "Dumbbell Floor Flys_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 172,
+    "name" : "Dumbbell Floor Flys_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Flat Reverse Grip Dumbbell Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 173,
+    "name" : "Flat Reverse Grip Dumbbell Bench Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 173,
+    "name" : "Flat Reverse Grip Dumbbell Bench Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 173,
+    "name" : "Flat Reverse Grip Dumbbell Bench Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 174,
+    "name" : "Flat Reverse Grip Dumbbell Bench Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 174,
+    "name" : "Flat Reverse Grip Dumbbell Bench Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 174,
+    "name" : "Flat Reverse Grip Dumbbell Bench Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "TRX Hamstring Pull",
+  "type" : "REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 175,
+    "name" : "TRX Hamstring Pull.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 175,
+    "name" : "TRX Hamstring Pull.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 175,
+    "name" : "TRX Hamstring Pull.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 176,
+    "name" : "TRX Hamstring Pull_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 176,
+    "name" : "TRX Hamstring Pull_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 176,
+    "name" : "TRX Hamstring Pull_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Single Hand Triceps Extension",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 177,
+    "name" : "Single Hand Triceps Extension.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 177,
+    "name" : "Single Hand Triceps Extension.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 177,
+    "name" : "Single Hand Triceps Extension.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 178,
+    "name" : "Single Hand Triceps Extension_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 178,
+    "name" : "Single Hand Triceps Extension_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 178,
+    "name" : "Single Hand Triceps Extension_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "TRX Push Up",
+  "type" : "REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 179,
+    "name" : "TRX Push Up.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 179,
+    "name" : "TRX Push Up.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 179,
+    "name" : "TRX Push Up.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 180,
+    "name" : "TRX Push Up_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 180,
+    "name" : "TRX Push Up_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 180,
+    "name" : "TRX Push Up_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "EZ Bar Reverse Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 183,
+    "name" : "EZ Bar Reverse Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 183,
+    "name" : "EZ Bar Reverse Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 183,
+    "name" : "EZ Bar Reverse Curl.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 184,
+    "name" : "EZ Bar Reverse Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 184,
+    "name" : "EZ Bar Reverse Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 184,
+    "name" : "EZ Bar Reverse Curl_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Band Flyes",
+  "type" : "REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 185,
+    "name" : "Band Flyes.gif",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 185,
+    "name" : "Band Flyes.gif",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 185,
+    "name" : "Band Flyes.gif",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 186,
+    "name" : "Band Flyes_32x32.gif",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 186,
+    "name" : "Band Flyes_32x32.gif",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 186,
+    "name" : "Band Flyes_32x32.gif",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Incline Dumbbell Reverse Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 187,
+    "name" : "Incline Dumbbell Reverse Row.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 187,
+    "name" : "Incline Dumbbell Reverse Row.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 187,
+    "name" : "Incline Dumbbell Reverse Row.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 188,
+    "name" : "Incline Dumbbell Reverse Row_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 188,
+    "name" : "Incline Dumbbell Reverse Row_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 188,
+    "name" : "Incline Dumbbell Reverse Row_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Cable Face Pull",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 181,
+    "name" : "Cable Face Pull.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 181,
+    "name" : "Cable Face Pull.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 181,
+    "name" : "Cable Face Pull.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 182,
+    "name" : "Cable Face Pull_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 182,
+    "name" : "Cable Face Pull_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 182,
+    "name" : "Cable Face Pull_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Decline Push Up",
+  "type" : "REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 189,
+    "name" : "Decline Push Up.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 189,
+    "name" : "Decline Push Up.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 189,
+    "name" : "Decline Push Up.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 190,
+    "name" : "Decline Push Up_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 190,
+    "name" : "Decline Push Up_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 190,
+    "name" : "Decline Push Up_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Alternating Dumbbell Inclune Bench Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 191,
+    "name" : "Alternating Dumbbell Inclune Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 191,
+    "name" : "Alternating Dumbbell Inclune Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 191,
+    "name" : "Alternating Dumbbell Inclune Bench Press.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 192,
+    "name" : "Alternating Dumbbell Inclune Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 192,
+    "name" : "Alternating Dumbbell Inclune Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 192,
+    "name" : "Alternating Dumbbell Inclune Bench Press_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Single Hand Lat Pulldown",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 193,
+    "name" : "Single Hand Lat Pulldown.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 193,
+    "name" : "Single Hand Lat Pulldown.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 193,
+    "name" : "Single Hand Lat Pulldown.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 194,
+    "name" : "Single Hand Lat Pulldown_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 194,
+    "name" : "Single Hand Lat Pulldown_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 194,
+    "name" : "Single Hand Lat Pulldown_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Single Leg Dumbbell Romanian Deadlift",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 195,
+    "name" : "Single Leg Dumbbell Romanian Deadlift.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 195,
+    "name" : "Single Leg Dumbbell Romanian Deadlift.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 195,
+    "name" : "Single Leg Dumbbell Romanian Deadlift.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 196,
+    "name" : "Single Leg Dumbbell Romanian Deadlift_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 196,
+    "name" : "Single Leg Dumbbell Romanian Deadlift_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 196,
+    "name" : "Single Leg Dumbbell Romanian Deadlift_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Incline Fly",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 197,
+    "name" : "Dumbbell Incline Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 197,
+    "name" : "Dumbbell Incline Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 197,
+    "name" : "Dumbbell Incline Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 198,
+    "name" : "Dumbbell Incline Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 198,
+    "name" : "Dumbbell Incline Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 198,
+    "name" : "Dumbbell Incline Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Standing Dumbbell Preacher Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 200,
+    "name" : "Standing Dumbbell Preacher Hammer Curl.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 200,
+    "name" : "Standing Dumbbell Preacher Hammer Curl.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 200,
+    "name" : "Standing Dumbbell Preacher Hammer Curl.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 201,
+    "name" : "Standing Dumbbell Preacher Hammer Curl_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 201,
+    "name" : "Standing Dumbbell Preacher Hammer Curl_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 201,
+    "name" : "Standing Dumbbell Preacher Hammer Curl_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Bent Over Cable Chest Fly",
+  "type" : "WEIGHTED_REPS",
+  "category" : "CHEST",
+  "pictures" : [ {
+    "id" : 202,
+    "name" : "Bent Over Cable Chest Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 202,
+    "name" : "Bent Over Cable Chest Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 202,
+    "name" : "Bent Over Cable Chest Fly.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 203,
+    "name" : "Bent Over Cable Chest Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 203,
+    "name" : "Bent Over Cable Chest Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 203,
+    "name" : "Bent Over Cable Chest Fly_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Cable Hammer Curl",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BICEPS",
+  "pictures" : [ {
+    "id" : 204,
+    "name" : "Cable Hammer Curl.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 204,
+    "name" : "Cable Hammer Curl.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 204,
+    "name" : "Cable Hammer Curl.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 205,
+    "name" : "Cable Hammer Curl_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 205,
+    "name" : "Cable Hammer Curl_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 205,
+    "name" : "Cable Hammer Curl_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Hamstring Curls",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 206,
+    "name" : "Hamstring Curls.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 206,
+    "name" : "Hamstring Curls.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 206,
+    "name" : "Hamstring Curls.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 207,
+    "name" : "Hamstring Curls_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 207,
+    "name" : "Hamstring Curls_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 207,
+    "name" : "Hamstring Curls_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Cable Overhead Triceps Extension",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 208,
+    "name" : "Cable Overhead Triceps Extension.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 208,
+    "name" : "Cable Overhead Triceps Extension.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 208,
+    "name" : "Cable Overhead Triceps Extension.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 209,
+    "name" : "Cable Overhead Triceps Extension_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 209,
+    "name" : "Cable Overhead Triceps Extension_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 209,
+    "name" : "Cable Overhead Triceps Extension_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Single Hand Cable Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 210,
+    "name" : "Single Hand Cable Row.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 210,
+    "name" : "Single Hand Cable Row.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 210,
+    "name" : "Single Hand Cable Row.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 211,
+    "name" : "Single Hand Cable Row_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 211,
+    "name" : "Single Hand Cable Row_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 211,
+    "name" : "Single Hand Cable Row_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Wide Row",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 212,
+    "name" : "Dumbbell Wide Row.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 212,
+    "name" : "Dumbbell Wide Row.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 212,
+    "name" : "Dumbbell Wide Row.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 213,
+    "name" : "Dumbbell Wide Row_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 213,
+    "name" : "Dumbbell Wide Row_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 213,
+    "name" : "Dumbbell Wide Row_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Deadlift",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 11,
+    "name" : "Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 11,
+    "name" : "Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 11,
+    "name" : "Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 12,
+    "name" : "Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 12,
+    "name" : "Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 12,
+    "name" : "Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Front Raises",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 214,
+    "name" : "Dumbbell Front Raises.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 214,
+    "name" : "Dumbbell Front Raises.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 214,
+    "name" : "Dumbbell Front Raises.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 215,
+    "name" : "Dumbbell Front Raises_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 215,
+    "name" : "Dumbbell Front Raises_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 215,
+    "name" : "Dumbbell Front Raises_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Neutral Grip Lat Pulldown",
+  "type" : "WEIGHTED_REPS",
+  "category" : "BACK",
+  "pictures" : [ {
+    "id" : 216,
+    "name" : "Neutral Grip Lat Pulldown.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 216,
+    "name" : "Neutral Grip Lat Pulldown.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 216,
+    "name" : "Neutral Grip Lat Pulldown.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 217,
+    "name" : "Neutral Grip Lat Pulldown_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 217,
+    "name" : "Neutral Grip Lat Pulldown_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 217,
+    "name" : "Neutral Grip Lat Pulldown_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Seated Army Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 218,
+    "name" : "Seated Army Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 218,
+    "name" : "Seated Army Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 218,
+    "name" : "Seated Army Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 219,
+    "name" : "Seated Army Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 219,
+    "name" : "Seated Army Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 219,
+    "name" : "Seated Army Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Nordic Curls",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 222,
+    "name" : "Nordic Curls.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 222,
+    "name" : "Nordic Curls.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 222,
+    "name" : "Nordic Curls.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 223,
+    "name" : "Nordic Curls_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 223,
+    "name" : "Nordic Curls_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 223,
+    "name" : "Nordic Curls_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Barbell Romanian Deadlift",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 147,
+    "name" : "Barbell Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 147,
+    "name" : "Barbell Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 147,
+    "name" : "Barbell Romanian Deadlift.png",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 148,
+    "name" : "Barbell Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 148,
+    "name" : "Barbell Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 148,
+    "name" : "Barbell Romanian Deadlift_32x32.png",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Landmine Twist",
+  "type" : "WEIGHTED_REPS",
+  "category" : "ABS",
+  "pictures" : [ {
+    "id" : 224,
+    "name" : "Landmine Twist.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 224,
+    "name" : "Landmine Twist.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 224,
+    "name" : "Landmine Twist.jpeg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 225,
+    "name" : "Landmine Twist_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 225,
+    "name" : "Landmine Twist_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 225,
+    "name" : "Landmine Twist_32x32.jpeg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Dumbbell Single Arm Lunge",
+  "type" : "WEIGHTED_REPS",
+  "category" : "LEGS",
+  "pictures" : [ {
+    "id" : 226,
+    "name" : "Dumbbell Single Arm Lunge.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 226,
+    "name" : "Dumbbell Single Arm Lunge.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 226,
+    "name" : "Dumbbell Single Arm Lunge.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 227,
+    "name" : "Dumbbell Single Arm Lunge_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 227,
+    "name" : "Dumbbell Single Arm Lunge_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 227,
+    "name" : "Dumbbell Single Arm Lunge_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "Alternating Dumbbell Shoulder Press",
+  "type" : "WEIGHTED_REPS",
+  "category" : "SHOULDERS",
+  "pictures" : [ {
+    "id" : 228,
+    "name" : "Alternating Dumbbell Shoulder Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 228,
+    "name" : "Alternating Dumbbell Shoulder Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 228,
+    "name" : "Alternating Dumbbell Shoulder Press.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 229,
+    "name" : "Alternating Dumbbell Shoulder Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 229,
+    "name" : "Alternating Dumbbell Shoulder Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 229,
+    "name" : "Alternating Dumbbell Shoulder Press_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+}, {
+  "name" : "EZ Bar Skull Crushers",
+  "type" : "WEIGHTED_REPS",
+  "category" : "TRICEPS",
+  "pictures" : [ {
+    "id" : 230,
+    "name" : "EZ Bar Skull Crushers.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 230,
+    "name" : "EZ Bar Skull Crushers.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 230,
+    "name" : "EZ Bar Skull Crushers.jpg",
+    "relativePath" : "img/exercises",
+    "type" : "EXERCISE_IMAGE"
+  }, {
+    "id" : 231,
+    "name" : "EZ Bar Skull Crushers_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 231,
+    "name" : "EZ Bar Skull Crushers_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  }, {
+    "id" : 231,
+    "name" : "EZ Bar Skull Crushers_32x32.jpg",
+    "relativePath" : "img/exercises/icon",
+    "type" : "EXERCISE_ICON"
+  } ]
+} ]
