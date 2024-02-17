@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: "http://workouts.mira182.synology.me/api",
-  localUrl: "http://workouts.mira182.synology.me",
-  imageBaseUrl: "http://workouts.mira182.synology.me/"
+  apiUrl: "http://workouts2.mira182.synology.me/api/v1",
+  localUrl: "http://workouts2.mira182.synology.me",
+  imageBaseUrl: "http://workouts2.mira182.synology.me/"
 };

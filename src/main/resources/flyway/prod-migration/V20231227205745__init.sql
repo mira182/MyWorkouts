@@ -8,8 +8,6 @@ $$
 
             RAISE NOTICE 'Role "webappuser" already exists. Skipping.';
         ELSE
-            CREATE ROLE webappuser LOGIN PASSWORD 'macos';
-
             -- CREATE DATABASE IF NOT EXISTS
             CREATE DATABASE my_workouts WITH OWNER webappuser;
 

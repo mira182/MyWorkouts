@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_SNACK_BAR_DATA} from "@angular/material/snack-bar";
-import {CommonModule, NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {AlertSnackBarModel} from "./model/alert-snack-bar.model";
 import {CustomErrorResponse} from "../../../model/error/error.model";
@@ -17,11 +17,11 @@ import {CustomErrorResponse} from "../../../model/error/error.model";
 })
 export class AlertSnackBarComponent implements OnInit {
 
-  messageTranslationKey: string | undefined;
+  protected messageTranslationKey: string | undefined;
 
-  errorMessageTranslationKey: string | undefined;
+  protected errorMessageTranslationKey: string | undefined;
 
-  error : CustomErrorResponse | undefined;
+  protected error : CustomErrorResponse | undefined;
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: AlertSnackBarModel) {
     this.messageTranslationKey = data.message;

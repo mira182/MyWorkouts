@@ -295,6 +295,7 @@
                     <plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.15.0</version>
 
                         <configuration>
                             <nodeVersion>v20.11.0</nodeVersion>
@@ -311,10 +312,52 @@
                             </execution>
 
                             <execution>
-                                <id>npm install</id>
+                                <id>npm config rm proxy</id>
                                 <goals>
                                     <goal>npm</goal>
                                 </goals>
+                                <configuration>
+                                    <arguments>
+                                        config rm proxy
+                                    </arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>npm config rm https-proxy</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>
+                                        config rm https-proxy
+                                    </arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>npm set registry</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>
+                                        config set registry http://registry.npmjs.org/
+                                    </arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>npm install</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>
+                                        install
+                                    </arguments>
+                                </configuration>
                             </execution>
 
                             <execution>
@@ -322,7 +365,6 @@
                                 <goals>
                                     <goal>npm</goal>
                                 </goals>
-                                <phase>generate-resources</phase>
                                 <configuration>
                                     <arguments>run prod</arguments>
                                 </configuration>
@@ -343,7 +385,7 @@
                                     <outputDirectory>${project.build.directory}/classes/static/</outputDirectory>
                                     <resources>
                                         <resource>
-                                            <directory>web/dist/web</directory>
+                                            <directory>frontend/dist/frontend/browser</directory>
                                         </resource>
                                     </resources>
                                 </configuration>

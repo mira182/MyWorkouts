@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +28,7 @@ import java.util.Collections;
 class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     static final long ACCESS_TOKEN_VALIDITY_SECONDS = 36000; // seconds
-    static final String SIGNING_KEY = "mycenter_key";
+    static final String SIGNING_KEY = "myworkout_key";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String HEADER_STRING = "Authorization";
 

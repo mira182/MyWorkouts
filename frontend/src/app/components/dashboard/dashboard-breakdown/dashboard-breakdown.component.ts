@@ -8,7 +8,6 @@ import {combineLatest, finalize, take} from "rxjs";
 import {LineChartModule, NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
 import {WeekDatePickerComponent} from "../week-date-picker/week-date-picker.component";
 import moment from "moment";
-import {GoogleChartsModule} from "angular-google-charts";
 import {
   ChartJsDashboardService
 } from "../../../services/rest/chart/dashborad/charts/chartjs/chart-js-dashboard.service";
@@ -32,7 +31,6 @@ import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
     LineChartModule,
     WeekDatePickerComponent,
     NgxChartsModule,
-    GoogleChartsModule,
     NgxSpinnerModule,
   ]
 })

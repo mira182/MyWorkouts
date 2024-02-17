@@ -1,26 +1,40 @@
 pipeline {
     agent any
+
+    environment {
+        MAVEN_HOME = tool 'Maven' // Make sure you have configured Maven tool in Jenkins
+    }
+
     stages {
-        stage('Clone repo') {
+        stage('Clone Repository') {
+            steps {
+                git credentialsId: 'github', url: 'https://github.com/mira182/MyWorkouts.git'
+            }
+        }
+
+        stage('Build with Maven') {
+            steps {
+                sh "${env.MAVEN_HOME}/bin/mvn -P generate-querydsl,prod -DskipTests clean install" // Adjust the Maven command as per your project needs
+            }
+        }
+
+        stage('Run with Docker Compose') {
             steps {
                 script {
-                    dir("${WORKSPACE}") {
-                        git branch: "master",
-                        url: "https://github.com/mira182/MyWorkout.git"
-                    }
+                    dockerComposeBuild()
+                    dockerComposeUp()
                 }
             }
         }
-        stage('Build') {
-            steps {
-                sh 'mvn -P generate-querydsl,prod -DskipTests clean install'
-                sh 'docker compose up'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'docker compose up'
-            }
-        }
     }
+}
+
+// Function to run docker-compose build
+def dockerComposeBuild() {
+    sh "docker-compose build"
+}
+
+// Function to run docker-compose up
+def dockerComposeUp() {
+    sh "docker-compose up -d"
 }
