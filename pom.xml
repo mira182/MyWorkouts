@@ -210,7 +210,7 @@
                             <locations>
                                 <location>filesystem:src/main/resources/flyway/dev-migration</location>
                             </locations>
-                            <url>jdbc:postgresql://localhost:5432/my_workouts</url>
+                            <url>jdbc:postgresql://postgres_for_my_apps:5432/my_workouts</url>
                             <user>webappuser</user>
                             <password>macos</password>
                         </configuration>
@@ -264,7 +264,7 @@
                         <artifactId>flyway-maven-plugin</artifactId>
                         <version>${flyway.version}</version>
                         <configuration>
-                            <url>jdbc:postgresql://localhost:5432/my_center</url>
+                            <url>jdbc:postgresql://postgres_for_my_apps:5432/my_workouts</url>
                             <user>webappuser</user>
                             <password>macos</password>
                         </configuration>
@@ -290,107 +290,6 @@
                                 </path>
                             </annotationProcessorPaths>
                         </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <version>1.15.0</version>
-
-                        <configuration>
-                            <nodeVersion>v20.11.0</nodeVersion>
-                            <npmVersion>10.3.0</npmVersion>
-                            <workingDirectory>frontend/</workingDirectory>
-                        </configuration>
-
-                        <executions>
-                            <execution>
-                                <id>install node and npm</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                            </execution>
-
-                            <execution>
-                                <id>npm config rm proxy</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>
-                                        config rm proxy
-                                    </arguments>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>npm config rm https-proxy</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>
-                                        config rm https-proxy
-                                    </arguments>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>npm set registry</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>
-                                        config set registry http://registry.npmjs.org/
-                                    </arguments>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>npm install</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>
-                                        install
-                                    </arguments>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>npm run prod</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>run prod</arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}/classes/static/</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>frontend/dist/frontend/browser</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>

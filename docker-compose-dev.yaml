@@ -1,10 +1,40 @@
 version: "3.1"
 services:
+  # FRONTEND
+  myworkouts_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: myworkouts_frontend
+    container_name: myworkouts_frontend
+    ports:
+      - "80:80"
+    networks:
+      - myworkouts_frontend
+  # BACKEND
+  myworkouts_backend:
+    build: ./
+    image: myworkouts_backend
+    container_name: myworkouts_backend
+    ports:
+      - "8081:8081"
+    networks:
+      - myworkouts_frontend
+      - myworkouts_backend
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    volumes:
+      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/logs:/usr/app/logs"
+      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/img:/usr/app/img"
+    restart: unless-stopped
+  # DB
   postgres:
     image: postgres:latest
     container_name: postgres_for_my_apps
     expose:
       - 5432
+    networks:
+      - myworkouts_backend
     ports:
       - "5432:5432"
     environment:
@@ -13,5 +43,8 @@ services:
       - POSTGRES_DB=my_workouts
     volumes:
       - "C:/Users/mira1/IdeaProjects/MyWorkouts/PostgreData:/var/lib/postgresql/data"
-      - "C:/Users/mira1/IdeaProjects/MyWorkouts/PostgreData:/docker-entrypoint-initdb.d"
     restart: unless-stopped
+
+networks:
+  myworkouts_frontend:
+  myworkouts_backend:

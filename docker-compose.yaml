@@ -1,14 +1,34 @@
 version: "3.1"
 services:
-  # APP*****************************************
-  myworkouts:
+  # FRONTEND
+  myworkouts-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: myworkouts-frontend
+    container_name: myworkouts-frontend
+    ports:
+      - "8082:80"
+    networks:
+      - myworkouts-frontend
+  # BACKEND
+  myworkouts-backend:
     build: ./
-    image: myworkouts
-    network_mode: host
-    container_name: myworkouts
+    image: myworkouts-backend
+    container_name: myworkouts-backend
+    ports:
+      - "8084:8084"
+    networks:
+      - myworkouts-frontend
+      - myworkouts-backend
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     volumes:
       - "/var/services/homes/mira/Drive/Apps/MyWorkouts/logs:/usr/app/logs"
       - "/var/services/homes/mira/Drive/Apps/MyWorkouts/img:/usr/app/img"
-    restart: unless-stopped
+
+networks:
+  myworkouts-frontend:
+    driver: bridge
+  myworkouts-backend:
+    driver: bridge
