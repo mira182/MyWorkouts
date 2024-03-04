@@ -28,9 +28,8 @@ export const errorInterceptor: HttpInterceptorFn = (
         //   errorMessageService.storeError(err);
         } else if (err.status === 404) {
           snackBarService.showErrorSnackBar(error);
-        // } else if (err.status === 500) {
-        //   router.navigate(['/500']);
-        //   errorMessageService.storeError(err);
+        } else if (err.status === 500) {
+          snackBarService.showErrorSnackBar(error);
         } else if (err.status === 0) {
           snackBarService.showErrorSnackBar(error);
         }

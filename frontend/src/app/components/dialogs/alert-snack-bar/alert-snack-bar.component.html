@@ -2,11 +2,7 @@
 
 <div *ngIf="errorMessageTranslationKey">{{ errorMessageTranslationKey | translate }}</div>
 
-<div *ngIf="error; else noError">
+<div *ngIf="error">
   <div>{{ 'ALERT.statusCode' | translate }} : {{ error.statusCode }}</div>
   <div>{{ error.message }}</div>
 </div>
-
-<ng-template #noError>
-  <div>{{ 'ALERT.connection-error' | translate }}</div>
-</ng-template>

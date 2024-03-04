@@ -12,7 +12,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatMenu, MatMenuModule} from "@angular/material/menu";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatListItem, MatNavList} from "@angular/material/list";
-import {MatDrawer, MatDrawerContainer, MatSidenavContainer} from "@angular/material/sidenav";
+import {MatDrawer, MatDrawerContainer, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {CommonModule} from "@angular/common";
@@ -47,6 +47,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatDrawer,
     MatMenuModule,
     MatTooltip,
+    MatSidenavContent,
   ],
   providers: [LoginService, ThemeService, TokenService],
   templateUrl: './app.component.html',

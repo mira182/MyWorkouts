@@ -1,143 +1,84 @@
+<mat-toolbar color="primary">
+  <!--  MOBILE LAYOUT  -->
+  <div class="flex flex-row justify-center basis-full lg:hidden">
+    <button mat-icon-button (click)="sidenavToggle.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="flex-1"></span>
 
-  <mat-toolbar *ngIf="showNavBar()" color="primary">
-    <!--  MOBILE LAYOUT  -->
-    <div class="flex justify-center basis-full md:hidden">
-      <button mat-icon-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
+    <div>
+      <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+        <mat-icon>import_export</mat-icon>
       </button>
-      <span class="flex-1"></span>
-
-      <div>
-        <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-          <mat-icon>import_export</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="import()">{{'BUTTON.import' | translate}}</button>
-        </mat-menu>
-      </div>
-      <div>
-        <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
-      </div>
-      <div class="btn-group flex justify-center items-center" role="group">
-        <button mat-icon-button type="button">
-          <mat-icon svgIcon="cz" (click)="selectionChanged('cz')"></mat-icon>
-        </button>
-        <button mat-icon-button type="button">
-          <mat-icon svgIcon="en" (click)="selectionChanged('en')"></mat-icon>
-        </button>
-      </div>
-
-      <button mat-button routerLink="/login" routerLinkActive="active" (click)="logOut()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>{{'BUTTON.logout' | translate }}</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="import()">{{ 'BUTTON.import' | translate }}</button>
+      </mat-menu>
+    </div>
+    <div>
+      <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
+    </div>
+    <div class="btn-group flex justify-center items-center" role="group">
+      <button mat-icon-button type="button">
+        <mat-icon svgIcon="cz" (click)="selectionChanged('cz')"></mat-icon>
+      </button>
+      <button mat-icon-button type="button">
+        <mat-icon svgIcon="en" (click)="selectionChanged('en')"></mat-icon>
       </button>
     </div>
 
-    <!--  DESKTOP LAYOUT  -->
-    <div class="hidden md:flex md:flex-row md:items-center md:justify-center md:basis-full">
-      <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-      <button mat-button routerLinkActive routerLink="/home">
-        <mat-icon>home</mat-icon>
-      </button>
-      <button mat-button routerLinkActive routerLink="/weight">
-        {{'WEIGHT.weight' | translate}}
-      </button>
-      <button mat-button routerLinkActive routerLink="/exercises">
-        {{'TITLES.exercises' | translate}}
-      </button>
-      <button mat-button routerLinkActive routerLink="/workouts">
-        {{'WORKOUTS.workouts' | translate}}
-      </button>
-      <button mat-button routerLinkActive routerLink="/trainings">
-        {{'BUTTON.trainings' | translate}}
-      </button>
-      <button mat-button routerLinkActive routerLink="/dashboard">
-        {{'BUTTON.dashboard' | translate}}
-      </button>
+    <button mat-button routerLink="/login" routerLinkActive="active" (click)="logOut()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>{{ 'BUTTON.logout' | translate }}</span>
+    </button>
+  </div>
 
-      <span class="flex-1"></span>
+  <!--  DESKTOP LAYOUT  -->
+  <div class="hidden md:flex md:flex-row md:items-center md:justify-center md:basis-full">
+    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+    <button mat-button routerLinkActive routerLink="/home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-button routerLinkActive routerLink="/weight">
+      {{ 'WEIGHT.weight' | translate }}
+    </button>
+    <button mat-button routerLinkActive routerLink="/exercises">
+      {{ 'TITLES.exercises' | translate }}
+    </button>
+    <button mat-button routerLinkActive routerLink="/workouts">
+      {{ 'WORKOUTS.workouts' | translate }}
+    </button>
+    <button mat-button routerLinkActive routerLink="/trainings">
+      {{ 'BUTTON.trainings' | translate }}
+    </button>
+    <button mat-button routerLinkActive routerLink="/dashboard">
+      {{ 'BUTTON.dashboard' | translate }}
+    </button>
 
-      <div>
-        <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-          <mat-icon>import_export</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="import()">{{'BUTTON.import' | translate}}</button>
-        </mat-menu>
-      </div>
-      <div>
-        <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
-      </div>
-      <div class="btn-group items-center justify-center" role="group">
-        <button mat-icon-button type="button" (click)="selectionChanged('cz')"><mat-icon svgIcon="cz"></mat-icon></button>
-        <button mat-icon-button type="button" (click)="selectionChanged('en')"><mat-icon svgIcon="en"></mat-icon></button>
-      </div>
+    <span class="flex-1"></span>
 
-      <button mat-button routerLink="/login" routerLinkActive="active" (click)="logOut()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>{{'BUTTON.logout' | translate }}</span>
+    <div>
+      <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+        <mat-icon>import_export</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="import()">{{ 'BUTTON.import' | translate }}</button>
+      </mat-menu>
+    </div>
+    <div>
+      <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
+    </div>
+    <div class="btn-group items-center justify-center" role="group">
+      <button mat-icon-button type="button" (click)="selectionChanged('cz')">
+        <mat-icon svgIcon="cz"></mat-icon>
+      </button>
+      <button mat-icon-button type="button" (click)="selectionChanged('en')">
+        <mat-icon svgIcon="en"></mat-icon>
       </button>
     </div>
-  </mat-toolbar>
 
-
-<div class="flex flex-row">
-  <mat-drawer-container class="flex-auto" [class.dark-theme]="isDarkTheme">
-    <mat-drawer #drawer mode="side">
-      <mat-nav-list>
-        <a routerLinkActive routerLink="/home" mat-list-item (click)="drawer.close()">
-          <mat-icon class="mr-2" svgIcon="home"></mat-icon>
-          {{'HOME.home' | translate}}
-        </a>
-        <a routerLinkActive routerLink="/weight" mat-list-item (click)="drawer.close()">
-          <mat-icon svgIcon="bathroom-scale" class="mr-2"></mat-icon> {{'WEIGHT.weight' | translate}}
-        </a>
-        <a routerLink="/exercises" routerLinkActive="active" mat-list-item (click)="drawer.close()">
-          <mat-icon svgIcon="exercises" class="mr-2"></mat-icon>
-          {{'TITLES.exercises' | translate}}
-        </a>
-        <a routerLinkActive routerLink="/workouts" mat-list-item (click)="drawer.close()">
-          <mat-icon svgIcon="workout" class="mr-2"></mat-icon>
-          {{'WORKOUTS.workouts' | translate}}
-        </a>
-        <a routerLinkActive routerLink="/trainings" mat-list-item (click)="drawer.close()">
-          <mat-icon svgIcon="training" class="mr-2"></mat-icon>
-          {{'BUTTON.trainings' | translate}}
-        </a>
-        <a routerLink="/dashboard" routerLinkActive="active" mat-list-item (click)="drawer.close()">
-          <mat-icon svgIcon="dashboard" class="mr-2"></mat-icon>
-          {{'BUTTON.dashboard' | translate}}
-        </a>
-        <a routerLink="/login" routerLinkActive="active" (click)="logOut()" mat-list-item>
-          <mat-icon svgIcon="logout" class="mr-2"></mat-icon>
-          {{'BUTTON.logout' | translate }}
-        </a>
-        <div class="items-center justify-center">
-          <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-            <mat-icon>import_export</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="import()">{{'BUTTON.import' | translate}}</button>
-          </mat-menu>
-        </div>
-        <div class="items-center justify-center">
-          <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
-        </div>
-        <div class="btn-group items-center justify-center" role="group">
-          <button mat-icon-button type="button" (click)="selectionChanged('cz')"><mat-icon svgIcon="cz"></mat-icon></button>
-          <button mat-icon-button type="button" (click)="selectionChanged('en')"><mat-icon svgIcon="en"></mat-icon></button>
-        </div>
-      </mat-nav-list>
-    </mat-drawer>
-<!--    <div [class.dark-theme]="isDarkTheme">-->
-<!--      <div class="flex flex-col">-->
-<!--        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate" [fullScreen] = "false">-->
-<!--          <p style="color: white" > Loading... </p>-->
-<!--        </ngx-spinner>-->
-<!--        <div class="app-view">-->
-<!--          <router-outlet></router-outlet>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-  </mat-drawer-container>
-</div>
+    <button mat-button routerLink="/login" routerLinkActive="active" (click)="logOut()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>{{ 'BUTTON.logout' | translate }}</span>
+    </button>
+  </div>
+</mat-toolbar>

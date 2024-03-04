@@ -19,16 +19,17 @@ services:
     ports:
       - "8084:8084"
     networks:
-      - myworkouts-frontend
       - myworkouts-backend
+      - myworkouts-frontend
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     volumes:
       - "/var/services/homes/mira/Drive/Apps/MyWorkouts/logs:/usr/app/logs"
       - "/var/services/homes/mira/Drive/Apps/MyWorkouts/img:/usr/app/img"
+      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/export:/usr/app/export"
 
 networks:
-  myworkouts-frontend:
-    driver: bridge
   myworkouts-backend:
     driver: bridge
+  myworkouts-frontend:
+      driver: bridge

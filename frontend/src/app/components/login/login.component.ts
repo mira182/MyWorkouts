@@ -1,10 +1,8 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../services/rest/auth/login.service";
-import {ErrorMessageService} from "../../services/error/error-message.service";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {isNil} from "lodash";
+import {TranslateModule} from "@ngx-translate/core";
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatError, MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
@@ -42,22 +40,19 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup;
   public hidePassword = true;
-  submitted = false;
-  returnUrl: string;
-  loggingIn : boolean = false;
+  private submitted = false;
+  private returnUrl: string;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly loginService: LoginService,
-    private readonly errorService : ErrorMessageService,
-    private readonly translate : TranslateService,
     private readonly formBuilder: FormBuilder,
     private readonly spinner: NgxSpinnerService,
     private readonly snackBarService: SnackBarService) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

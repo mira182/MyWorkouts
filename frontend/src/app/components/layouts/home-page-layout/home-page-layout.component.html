@@ -1,4 +1,62 @@
 <div [class.dark-theme]="isDarkTheme">
-  <app-toolbar></app-toolbar>
-  <router-outlet></router-outlet>
+  <app-toolbar (sidenavToggle)="sidenav.toggle()"></app-toolbar>
+
+  <mat-sidenav-container class="h-screen">
+    <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+      <mat-nav-list>
+        <a routerLinkActive routerLink="/home" mat-list-item (click)="sidenav.close()">
+          <mat-icon class="mr-2" svgIcon="home"></mat-icon>
+          {{ 'HOME.home' | translate }}
+        </a>
+        <a routerLinkActive routerLink="/weight" mat-list-item (click)="sidenav.close()">
+          <mat-icon svgIcon="bathroom-scale" class="mr-2"></mat-icon>
+          {{ 'WEIGHT.weight' | translate }}
+        </a>
+        <a routerLink="/exercises" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+          <mat-icon svgIcon="exercises" class="mr-2"></mat-icon>
+          {{ 'TITLES.exercises' | translate }}
+        </a>
+        <a routerLinkActive routerLink="/workouts" mat-list-item (click)="sidenav.close()">
+          <mat-icon svgIcon="workout" class="mr-2"></mat-icon>
+          {{ 'WORKOUTS.workouts' | translate }}
+        </a>
+        <a routerLinkActive routerLink="/trainings" mat-list-item (click)="sidenav.close()">
+          <mat-icon svgIcon="training" class="mr-2"></mat-icon>
+          {{ 'BUTTON.trainings' | translate }}
+        </a>
+        <a routerLink="/dashboard" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+          <mat-icon svgIcon="dashboard" class="mr-2"></mat-icon>
+          {{ 'BUTTON.dashboard' | translate }}
+        </a>
+        <a routerLink="/login" routerLinkActive="active" (click)="logOut()" mat-list-item>
+          <mat-icon svgIcon="logout" class="mr-2"></mat-icon>
+          {{ 'BUTTON.logout' | translate }}
+        </a>
+        <div class="items-center justify-center">
+          <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+            <mat-icon>import_export</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="import()">{{ 'BUTTON.import' | translate }}</button>
+          </mat-menu>
+        </div>
+        <div class="items-center justify-center">
+          <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)"
+                            matTooltip="Dark theme"></mat-slide-toggle>
+        </div>
+        <div class="btn-group items-center justify-center" role="group">
+          <button mat-icon-button type="button" (click)="selectionChanged('cz')">
+            <mat-icon svgIcon="cz"></mat-icon>
+          </button>
+          <button mat-icon-button type="button" (click)="selectionChanged('en')">
+            <mat-icon svgIcon="en"></mat-icon>
+          </button>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

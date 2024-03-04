@@ -69,7 +69,7 @@ FROM nginx:alpine
 # Copy the built Angular app from the previous stage
 COPY --from=builder /usr/src/app/dist/frontend/browser /usr/share/nginx/html
 
-#COPY myworkouts-nginx.conf /etc/nginx/conf.d/
+COPY myworkouts-nginx.conf /etc/nginx/conf.d/
 
 # Command to run nginx
 CMD ["nginx", "-g", "daemon off;"]

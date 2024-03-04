@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +28,10 @@ public class ExportImportServiceImpl implements ExportImportService {
     @Override
     @Transactional
     public boolean importLatest() throws FileNotFoundException {
-        final File importFolder = ResourceUtils.getFile("classpath:export");
+        final File importFolder = new File("export");
+
+        log.info("Import folder: {}", importFolder);
+
         if (importFolder.listFiles() == null) return false;
 
         Optional<String> latestExportFolderName = Arrays.stream(importFolder.listFiles())
@@ -42,6 +44,8 @@ public class ExportImportServiceImpl implements ExportImportService {
             try {
                 importExerciseService.importExercises(latestExportFolder);
                 importWorkoutsService.importWorkouts(latestExportFolder);
+
+                log.info("Import from latest export");
             } catch (IOException e) {
                 log.error("Failed to import data", e);
                 throw new IllegalStateException("Failed to import data", e);
@@ -53,12 +57,17 @@ public class ExportImportServiceImpl implements ExportImportService {
     @Override
     public boolean importFromFolder(String folderName) {
         final File importFolder = new File("export");
+
+        log.info("Import folder: {}", folderName);
+
         if (importFolder.listFiles() == null) return false;
 
         final File exportFolder = new File(importFolder, folderName);
         try {
             importExerciseService.importExercises(exportFolder);
             importWorkoutsService.importWorkouts(exportFolder);
+
+            log.info("Import from folder {} finished", folderName);
         } catch (IOException e) {
             log.error("Failed to import data", e);
             throw new IllegalStateException("Failed to import data", e);

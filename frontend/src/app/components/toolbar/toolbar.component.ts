@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
@@ -10,15 +10,12 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {MatDrawer, MatDrawerContainer} from "@angular/material/sidenav";
 import {MatListItem, MatNavList} from "@angular/material/list";
-import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
-import {UserService} from "../../services/rest/user/user.service";
+import {NgxSpinnerModule} from "ngx-spinner";
 import {take} from "rxjs";
 import {LoginService} from "../../services/rest/auth/login.service";
 import {ThemeService} from "../../services/theme/theme.service";
 import {ImportService} from "../../services/rest/export-import/import.service";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
-import {MatDialog} from "@angular/material/dialog";
-import {User} from "../../model/user/user";
 import {Unsubscribe} from "../unsubscribe/unsubscribe";
 
 @Component({
@@ -47,17 +44,14 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
 })
 export class ToolbarComponent extends Unsubscribe implements OnInit {
 
-  private user : User = new User();
-
-  public isDarkTheme: boolean = false;
+  @Output()
+  public sidenavToggle : EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private readonly translateService: TranslateService,
-              private loginService : LoginService,
+              private readonly loginService : LoginService,
               protected readonly themeService: ThemeService,
-              private exportImportService: ImportService,
-              private snackBar: SnackBarService,
-              private dialog: MatDialog,
-              private spinner: NgxSpinnerService) {
+              private readonly exportImportService: ImportService,
+              private readonly snackBar: SnackBarService) {
     super();
   }
 
@@ -65,16 +59,10 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
 
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     this.translateService.use('en');
-
-    this.user = UserService.getCurrentUser();
   }
 
   protected selectionChanged(selectedLanguage: string): void {
     this.translateService.use(selectedLanguage);
-  }
-
-  protected showNavBar() {
-    return !!UserService.getCurrentUser();
   }
 
   protected logOut() {
