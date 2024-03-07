@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "exercise_pictures")
+@Table(name = "exercise_picture")
 public class ExercisePicture extends AuditableTime {
 
     @Id

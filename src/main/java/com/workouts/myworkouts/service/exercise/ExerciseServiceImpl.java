@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,6 +95,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     public List<ExerciseDto> findAllByCategory(@NonNull ExerciseCategory category) {
         return exerciseRepository.findByCategory(category).stream()
                 .map(exerciseMapper::entityToDto)
+                .sorted(Comparator.comparing(ExerciseDto::getName))
                 .toList();
     }
 
@@ -110,13 +112,13 @@ public class ExerciseServiceImpl implements ExerciseService {
             // add exercise picture
             ExercisePicture exercisePicture = pictureService.createOrUpdatePicture(
                     imageService.storeImage(exerciseName, file, PictureType.EXERCISE_IMAGE));
-            foundOrCreatedExercise.getExercisePictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_IMAGE);
+            foundOrCreatedExercise.getPictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_IMAGE);
             foundOrCreatedExercise.addPicture(exercisePicture);
 
             // add exercise icon
             exercisePicture = pictureService.createOrUpdatePicture(
                     imageService.storeImage(exerciseName, file, PictureType.EXERCISE_ICON));
-            foundOrCreatedExercise.getExercisePictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_ICON);
+            foundOrCreatedExercise.getPictures().removeIf(picture1 -> picture1.getType() == PictureType.EXERCISE_ICON);
             foundOrCreatedExercise.addPicture(exercisePicture);
         } else {
             log.info("No image was added for exercise {}", exerciseName);

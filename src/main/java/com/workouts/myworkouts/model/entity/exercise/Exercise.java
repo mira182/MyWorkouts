@@ -37,10 +37,10 @@ public class Exercise extends AuditableTime {
     private List<WorkoutExercise> workoutExercises;
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExercisePicture> exercisePictures = new ArrayList<>();
+    private List<ExercisePicture> pictures = new ArrayList<>();
 
     public void addPicture(ExercisePicture exercisePicture) {
-        exercisePictures.add(exercisePicture);
+        pictures.add(exercisePicture);
         exercisePicture.setExercise(this);
     }
 

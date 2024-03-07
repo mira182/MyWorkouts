@@ -29,7 +29,7 @@
       <mat-action-list>
         <button mat-list-item matStepperNext (click)="selectExercise(exercise)"
                 *ngFor="let exercise of exercisesByCategory">
-          <div class="flex flex-row">
+          <div class="flex flex-row gap-x-2">
             <div>
               <img [src]="IMAGE_BASE_URL + imageUtilsService.getExerciseIconPath(exercise)">
             </div>
