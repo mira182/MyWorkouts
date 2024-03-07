@@ -52,6 +52,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Override
     @Transactional
     public WorkoutDto addWorkoutExerciseToWorkout(@NonNull WorkoutDto workoutDto) {
+        // TODO check if workout exercise doesn't already exist with the same exercise name
         return workoutMapper.entityToDto(workoutRepository.findByDate(workoutDto.getDate())
                 .map(workout -> {
                     workoutDto.getWorkoutExercises().stream()

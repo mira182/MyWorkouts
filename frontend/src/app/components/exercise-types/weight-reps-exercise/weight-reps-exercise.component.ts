@@ -7,7 +7,7 @@ import {MatIcon} from "@angular/material/icon";
 import {InputNumberComponent} from "../input-number/input-number.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatButton} from "@angular/material/button";
-import {isNil} from "lodash";
+import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 export class WeightReps {
   weight: number;
@@ -17,7 +17,6 @@ export class WeightReps {
 @Component({
   selector: 'app-weight-reps-exercise',
   templateUrl: './weight-reps-exercise.component.html',
-  styleUrls: ['./weight-reps-exercise.component.scss'],
   standalone: true,
 
   imports: [
@@ -37,11 +36,11 @@ export class WeightRepsExerciseComponent implements OnInit {
   weightRepsForm: FormGroup;
 
   @Output()
-  public update: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  public workoutSetsUpdated: EventEmitter<WorkoutSet[]> = new EventEmitter<WorkoutSet[]>();
 
-  initialWeight: number = 0;
+  protected currentWeight: number = 0;
 
-  initialReps: number = 0;
+  protected currentReps: number = 0;
 
   constructor(private formBuilder: FormBuilder) {
   }
@@ -51,7 +50,7 @@ export class WeightRepsExerciseComponent implements OnInit {
       sets: this.formBuilder.array([]),
     });
     this.addSet();
-    this.update.emit(this.weightRepsForm);
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
   get sets(): FormArray {
@@ -59,31 +58,32 @@ export class WeightRepsExerciseComponent implements OnInit {
   }
 
   protected addSet() {
-    const weight = isNil(this.sets.at(this.sets.length - 1)?.value?.weight) ? 0 : this.sets.at(this.sets.length - 1)?.value?.weight;
-    const reps = isNil(this.sets.at(this.sets.length - 1)?.value?.reps) ? 0 : this.sets.at(this.sets.length - 1)?.value?.reps;
+    const weight = this.currentWeight ? 0 : this.currentWeight;
+    const reps = this.currentReps ? 0 : this.currentReps;
 
     this.sets.push(this.formBuilder.group({
       weight: new FormControl(weight),
       reps: new FormControl(reps),
       distance: [0],
-      durationMin: [0],
-      durationSec: [0],
+      duration: [0]
     }));
   }
 
-  removeSet(i : number) {
+  protected removeSet(i : number) {
     this.sets.removeAt(i);
-    this.update.emit(this.weightRepsForm);
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
-  weightUpdated(weightValue: number, index: number) {
-    this.sets.at(index).patchValue({weight: weightValue});
-    this.update.emit(this.weightRepsForm);
+  protected weightUpdated(weightValue: number, index: number) {
+    this.sets.at(index).patchValue({ weight: weightValue });
+    this.currentWeight = weightValue;
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
-  repsUpdated(repsValue: number, index: number) {
-    this.sets.at(index).patchValue({reps: repsValue});
-    this.update.emit(this.weightRepsForm);
+  protected repsUpdated(repsValue: number, index: number) {
+    this.sets.at(index).patchValue({ reps: repsValue });
+    this.currentReps = repsValue;
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
 }

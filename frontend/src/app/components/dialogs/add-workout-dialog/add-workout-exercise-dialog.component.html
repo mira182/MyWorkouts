@@ -49,13 +49,13 @@
       <ng-template matStepLabel>{{'BUTTON.save' | translate }}</ng-template>
       <div [ngSwitch]="selectedExercise?.type">
         <div *ngSwitchCase="'WEIGHTED_REPS'">
-          <app-weight-reps-exercise (update)="setsUpdated($event)"></app-weight-reps-exercise>
+          <app-weight-reps-exercise (workoutSetsUpdated)="setsUpdated($event)"></app-weight-reps-exercise>
         </div>
         <div *ngSwitchCase="'REPS'">
-          <app-reps-exercise (update)="setsUpdated($event)"></app-reps-exercise>
+          <app-reps-exercise (workoutSetsUpdated)="setsUpdated($event)"></app-reps-exercise>
         </div>
         <div *ngSwitchCase="'TIME'">
-          <app-time-exercise (update)="setsUpdated($event)"></app-time-exercise>
+          <app-time-exercise (workoutSetUpdated)="setsUpdated($event)"></app-time-exercise>
         </div>
       </div>
       <div class="flex flex-row justify-end items-center">

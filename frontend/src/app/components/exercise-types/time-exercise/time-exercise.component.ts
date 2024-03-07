@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCard} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
@@ -7,11 +7,11 @@ import {InputNumberComponent} from "../input-number/input-number.component";
 import {MatIcon} from "@angular/material/icon";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatButton} from "@angular/material/button";
+import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
   selector: 'app-time-exercise',
   templateUrl: './time-exercise.component.html',
-  styleUrls: ['./time-exercise.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -27,7 +27,7 @@ import {MatButton} from "@angular/material/button";
 export class TimeExerciseComponent implements OnInit {
 
   @Output()
-  public update: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  public workoutSetUpdated: EventEmitter<WorkoutSet[]> = new EventEmitter<WorkoutSet[]>();
 
   protected timeForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class TimeExerciseComponent implements OnInit {
       sets: this.formBuilder.array([]),
     });
     this.addSet();
-    this.update.emit(this.timeForm);
+    this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
   protected get sets(): FormArray {
@@ -51,8 +51,7 @@ export class TimeExerciseComponent implements OnInit {
 
   protected newSet(): FormGroup {
     return this.formBuilder.group({
-      minutes: new FormControl(0),
-      seconds: new FormControl(0),
+      duration: [0, Validators.required],
       weight: [0],
       reps: [0],
       distance: [0],
@@ -65,22 +64,24 @@ export class TimeExerciseComponent implements OnInit {
       this.initialSeconds = this.sets.at(this.sets.length - 1).value.seconds;
     }
     this.sets.push(this.newSet());
-    this.update.emit(this.timeForm);
+    this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
   protected removeSet(i : number) {
     this.sets.removeAt(i);
-    this.update.emit(this.timeForm);
+    this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
   protected minutesUpdated(minutesValue: number, index: number) {
-    this.sets.at(index).patchValue({minutes: minutesValue});
-    this.update.emit(this.timeForm);
+    const newDuration: number = this.sets.at(index).get('duration').value + (minutesValue * 60);
+    this.sets.at(index).patchValue({ duration: newDuration });
+    this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
   protected secondsUpdated(secondsValue: number, index: number) {
-    this.sets.at(index).patchValue({seconds: secondsValue});
-    this.update.emit(this.timeForm);
+    const newDuration: number = this.sets.at(index).get('duration').value + secondsValue;
+    this.sets.at(index).patchValue({ seconds: newDuration });
+    this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
 }

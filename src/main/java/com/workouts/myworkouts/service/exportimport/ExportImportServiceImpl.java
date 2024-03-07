@@ -45,7 +45,7 @@ public class ExportImportServiceImpl implements ExportImportService {
                 importExerciseService.importExercises(latestExportFolder);
                 importWorkoutsService.importWorkouts(latestExportFolder);
 
-                log.info("Import from latest export");
+                log.info("Import from latest export finished");
             } catch (IOException e) {
                 log.error("Failed to import data", e);
                 throw new IllegalStateException("Failed to import data", e);

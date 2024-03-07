@@ -32,19 +32,17 @@
           <mat-icon svgIcon="logout" class="mr-2"></mat-icon>
           {{ 'BUTTON.logout' | translate }}
         </a>
-        <div class="items-center justify-center">
+        <div class="flex flex-col items-center justify-center">
           <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
             <mat-icon>import_export</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="import()">{{ 'BUTTON.import' | translate }}</button>
           </mat-menu>
+
+          <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
         </div>
-        <div class="items-center justify-center">
-          <mat-slide-toggle (change)="themeService.setDarkTheme($event.checked)"
-                            matTooltip="Dark theme"></mat-slide-toggle>
-        </div>
-        <div class="btn-group items-center justify-center" role="group">
+        <div class="flex items-center justify-center" role="group">
           <button mat-icon-button type="button" (click)="selectionChanged('cz')">
             <mat-icon svgIcon="cz"></mat-icon>
           </button>

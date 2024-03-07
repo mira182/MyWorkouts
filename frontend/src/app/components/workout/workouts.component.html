@@ -11,6 +11,7 @@
   <app-page-header-layout>
     <div headerTitle>
       <div>{{ 'TITLES.workouts' | translate }}</div>
+      <div class="flex-grow text-sm">{{ selectedDate().format('dddd') }}</div>
       <div class="flex-grow text-sm">{{ selectedDate().format('LL') }}</div>
     </div>
 

@@ -27,9 +27,9 @@ export class DialogsHandlerService {
   public openAddWorkoutExerciseDialog(data?: any): MatDialogRef<AddWorkoutExerciseDialogComponent> {
     return this.dialog.open(AddWorkoutExerciseDialogComponent, {
       height: 'auto',
-      width: '590px',
-      hasBackdrop: true,
       disableClose: true,
+      hasBackdrop: true,
+      maxWidth: '100vw',
       data: data
     });
   }

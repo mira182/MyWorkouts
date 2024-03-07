@@ -7,11 +7,11 @@ import {InputNumberComponent} from "../input-number/input-number.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatButton} from "@angular/material/button";
+import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
   selector: 'app-reps-exercise',
   templateUrl: './reps-exercise.component.html',
-  styleUrls: ['./reps-exercise.component.scss'],
   standalone: true,
   imports: [
     MatCard,
@@ -29,7 +29,7 @@ export class RepsExerciseComponent implements OnInit {
   protected repsForm: FormGroup;
 
   @Output()
-  public update: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  public workoutSetsUpdated: EventEmitter<WorkoutSet[]> = new EventEmitter<WorkoutSet[]>();
 
   protected initialReps: number = 0;
 
@@ -40,7 +40,7 @@ export class RepsExerciseComponent implements OnInit {
       sets: this.formBuilder.array([]),
     });
     this.addSet();
-    this.update.emit(this.repsForm);
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
   protected get sets(): FormArray {
@@ -52,8 +52,7 @@ export class RepsExerciseComponent implements OnInit {
       reps: new FormControl(0),
       weight: [0],
       distance: [0],
-      durationMin: [0],
-      durationSec: [0],
+      duration: [0]
     });
   }
 
@@ -62,16 +61,16 @@ export class RepsExerciseComponent implements OnInit {
       this.initialReps = this.sets.at(this.sets.length - 1).value.reps;
     }
     this.sets.push(this.newSet());
-    this.update.emit(this.repsForm);
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
   protected removeSet(i : number) {
     this.sets.removeAt(i);
-    this.update.emit(this.repsForm);
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
   protected repsUpdated(repsValue: number, index: number) {
     this.sets.at(index).patchValue({reps: repsValue});
-    this.update.emit(this.repsForm);
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 }

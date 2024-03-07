@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {FormGroup} from "@angular/forms";
 import {WorkoutExercise} from "../../../model/workout-exercise/workoutExercise";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
@@ -19,6 +18,7 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {take} from "rxjs";
 import {PageHeaderLayoutComponent} from "../../layouts/page-header-layout/page-header-layout.component";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
+import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
   selector: 'app-add-workout-dialog',
@@ -39,7 +39,7 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
     MatTooltip,
     PageHeaderLayoutComponent,
   ],
-  standalone: true
+  standalone: true,
 })
 export class AddWorkoutExerciseDialogComponent implements OnInit {
 
@@ -51,7 +51,7 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
 
   protected selectedExercise: Exercise;
 
-  protected setsForm: FormGroup;
+  protected workoutSets: WorkoutSet[];
 
   constructor(protected readonly dialogRef: MatDialogRef<AddWorkoutExerciseDialogComponent>,
               protected readonly exerciseService: ExerciseService,
@@ -71,8 +71,8 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
     this.selectedExercise = exercise;
   }
 
-  protected setsUpdated(setsForm: FormGroup) {
-    this.setsForm = setsForm;
+  protected setsUpdated(workoutSets: WorkoutSet[]) {
+    this.workoutSets = workoutSets;
   }
 
   protected selectCategory(exerciseCategory: string): void {
@@ -87,7 +87,7 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
   protected saveWorkoutExercise() {
     let workoutExercise: WorkoutExercise = {
       exercise: this.selectedExercise,
-      workoutSets: this.setsForm.value.sets,
+      workoutSets: this.workoutSets,
     };
 
     this.dialogRef.close(workoutExercise);

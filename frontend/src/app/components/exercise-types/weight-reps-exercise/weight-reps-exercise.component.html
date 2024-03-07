@@ -13,11 +13,11 @@
             <div [formGroupName]="i">
               <input-number [step]="2.5" [label]="'WORKOUTS.weight' | translate"
                             [errorMessage]="'ERROR.required.weight' | translate"
-                            [initialValue]="initialWeight"
+                            [initialValue]="currentWeight"
                             (change)="weightUpdated($event, i)"></input-number>
               <input-number [step]="1" [label]="'WORKOUTS.reps' | translate"
                             [errorMessage]="'ERROR.required.reps' | translate"
-                            [initialValue]="initialReps"
+                            [initialValue]="currentReps"
                             (change)="repsUpdated($event, i)"></input-number>
             </div>
           </mat-card-content>

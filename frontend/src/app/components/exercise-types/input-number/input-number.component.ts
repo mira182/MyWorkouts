@@ -49,10 +49,8 @@ export class InputNumberComponent implements OnInit {
   public minimumValue: number;
 
   public ngOnInit(): void {
-    if (this.formControl.value) {
-      this.formControl.setValue(this.initialValue);
-      this.change.emit(this.formControl.value);
-    }
+    this.formControl.setValue(this.initialValue);
+    this.change.emit(this.formControl.value);
   }
 
   public increment() {

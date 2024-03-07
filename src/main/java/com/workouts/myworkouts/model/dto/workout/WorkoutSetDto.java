@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class WorkoutSetDto {
+public class  WorkoutSetDto {
 
     private int reps;
 

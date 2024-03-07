@@ -1,5 +1,5 @@
 export class WorkoutSet {
-  id: number;
+  id?: number;
 
   reps: number;
 
