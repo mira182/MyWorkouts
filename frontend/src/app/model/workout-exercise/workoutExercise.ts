@@ -7,6 +7,8 @@ export class WorkoutExercise {
 
   exercise: Exercise;
 
+  date?: string;
+
   workoutSets: WorkoutSet[];
 
 }

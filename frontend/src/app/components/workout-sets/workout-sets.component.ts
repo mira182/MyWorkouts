@@ -67,8 +67,7 @@ export class WorkoutSetsComponent implements OnInit {
         weight: new FormControl(set.weight, Validators.required),
         reps: new FormControl(set.reps, Validators.required),
         distance: new FormControl(set.distance, Validators.required),
-        durationMin: new FormControl(Math.floor(set.duration / 60), Validators.required),
-        durationSec: new FormControl(set.duration % 60, Validators.required)
+        duration: new FormControl(set.duration, Validators.required),
       }));
     });
   }
@@ -78,8 +77,7 @@ export class WorkoutSetsComponent implements OnInit {
       weight: new FormControl(0, Validators.required),
       reps: new FormControl(0, Validators.required),
       distance: new FormControl(0, Validators.required),
-      durationMin: new FormControl(0, Validators.required),
-      durationSec: new FormControl(0, Validators.required)
+      duration: new FormControl(0, Validators.required),
     }));
   }
 

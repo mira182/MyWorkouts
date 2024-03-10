@@ -51,7 +51,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [LoginService, ThemeService, TokenService],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
   standalone: true,
 })
 export class AppComponent extends Unsubscribe {

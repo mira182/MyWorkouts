@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,8 @@ import java.util.List;
 public class WorkoutExerciseDto {
 
     private Long id;
+
+    private LocalDate date;
 
     private ExerciseDto exercise;
 

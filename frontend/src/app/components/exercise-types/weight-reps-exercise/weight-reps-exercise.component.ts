@@ -33,7 +33,7 @@ export class WeightReps {
 })
 export class WeightRepsExerciseComponent implements OnInit {
 
-  weightRepsForm: FormGroup;
+  protected weightRepsForm: FormGroup;
 
   @Output()
   public workoutSetsUpdated: EventEmitter<WorkoutSet[]> = new EventEmitter<WorkoutSet[]>();

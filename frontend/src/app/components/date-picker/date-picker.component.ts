@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 import {NgIf} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 
@@ -10,15 +10,13 @@ import {TranslateModule} from "@ngx-translate/core";
   selector: 'app-date-picker',
   standalone: true,
   imports: [
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatFormField,
-    MatInput,
     MatLabel,
     NgIf,
     TranslateModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   templateUrl: './date-picker.component.html',
 })

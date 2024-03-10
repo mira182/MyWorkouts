@@ -56,7 +56,7 @@ export class WorkoutExerciseComponent implements OnInit {
   public workoutExercise: WorkoutExercise;
 
   @Output()
-  public workoutExerciseDeleted: EventEmitter<number> = new EventEmitter<number>();
+  public workoutExerciseMovedOrDeleted: EventEmitter<number> = new EventEmitter<number>();
 
   protected form: FormGroup;
 
@@ -95,6 +95,7 @@ export class WorkoutExerciseComponent implements OnInit {
       .subscribe({
         next: () => {
           this.snackBarService.showSuccessSnackBar('ALERT.successfully-updated');
+          this.workoutExerciseMovedOrDeleted.emit(this.workoutExercise.id);
           this.form.disable();
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
@@ -112,7 +113,7 @@ export class WorkoutExerciseComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          this.workoutExerciseDeleted.emit(this.workoutExercise.id);
+          this.workoutExerciseMovedOrDeleted.emit(this.workoutExercise.id);
           this.snackBarService.showSuccessSnackBar('ALERT.deleted-successfully');
         },
         error: err => {
