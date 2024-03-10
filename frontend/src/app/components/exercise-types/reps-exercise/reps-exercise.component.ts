@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {MatCard} from "@angular/material/card";
+import {MatCard, MatCardContent} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {InputNumberComponent} from "../input-number/input-number.component";
@@ -22,6 +22,7 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
     TranslateModule,
     MatTooltip,
     MatButton,
+    MatCardContent,
   ]
 })
 export class RepsExerciseComponent implements OnInit {

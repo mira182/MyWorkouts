@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/datepicker";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {DateTimeService} from "../../services/date-time/date-time.service";
@@ -26,7 +26,7 @@ import {API_DATE_FORMAT} from "../../app.config";
     DateTimeService,
   ]
 })
-export class DaySelectComponent implements OnInit {
+export class DaySelectComponent implements OnInit, OnChanges {
 
   @Input()
   public inputDate: Moment;
@@ -40,13 +40,20 @@ export class DaySelectComponent implements OnInit {
               private readonly activatedRoute: ActivatedRoute) {
   }
 
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['inputDate'].firstChange && changes['inputDate'].previousValue != changes['inputDate'].currentValue) {
+      this.dateChanged.emit(changes['inputDate'].currentValue);
+      this.dateFormControl = new FormControl(changes['inputDate'].currentValue);
+      this.myMethodChangingQueryParams(changes['inputDate'].currentValue);
+    }
+  }
+
   public ngOnInit(): void {
     this.dateFormControl = new FormControl(this.inputDate);
     this.myMethodChangingQueryParams(this.inputDate);
   }
 
   public dateSelected(event: MatDatepickerInputEvent<Moment>) {
-    console.log('date selected');
     this.dateChanged.emit(event.value);
     this.myMethodChangingQueryParams(event.value);
   }
