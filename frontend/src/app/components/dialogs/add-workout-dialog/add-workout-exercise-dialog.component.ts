@@ -9,7 +9,7 @@ import {Urls} from "../../../model/urls";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatActionList, MatListItem} from "@angular/material/list";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {ImageUtilsService} from "../../../services/image/image.utils.service";
 import {WeightRepsExerciseComponent} from "../../exercise-types/weight-reps-exercise/weight-reps-exercise.component";
 import {RepsExerciseComponent} from "../../exercise-types/reps-exercise/reps-exercise.component";
@@ -38,6 +38,7 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
     TimeExerciseComponent,
     MatTooltip,
     PageHeaderLayoutComponent,
+    NgOptimizedImage,
   ],
   standalone: true,
 })

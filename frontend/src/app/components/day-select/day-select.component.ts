@@ -7,6 +7,8 @@ import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
 import {MatIconButton} from "@angular/material/button";
 import moment, {Moment} from "moment";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {API_DATE_FORMAT} from "../../app.config";
 
 @Component({
   selector: 'app-day-select',
@@ -34,21 +36,42 @@ export class DaySelectComponent implements OnInit {
 
   public dateFormControl = new FormControl();
 
-  ngOnInit(): void {
+  constructor(private readonly router: Router,
+              private readonly activatedRoute: ActivatedRoute) {
+  }
+
+  public ngOnInit(): void {
     this.dateFormControl = new FormControl(this.inputDate);
+    this.myMethodChangingQueryParams(this.inputDate);
   }
 
   public dateSelected(event: MatDatepickerInputEvent<Moment>) {
+    console.log('date selected');
     this.dateChanged.emit(event.value);
+    this.myMethodChangingQueryParams(event.value);
   }
 
   public incrementDay() {
     this.dateFormControl.setValue(moment(this.dateFormControl.value).add(1, 'days'));
     this.dateChanged.emit(this.dateFormControl.value);
+    this.myMethodChangingQueryParams(this.dateFormControl.value);
   }
 
   public decrementDay() {
     this.dateFormControl.setValue(moment(this.dateFormControl.value).subtract(1, 'days'));
     this.dateChanged.emit(this.dateFormControl.value);
+    this.myMethodChangingQueryParams(this.dateFormControl.value);
+  }
+
+  public myMethodChangingQueryParams(date: Moment) {
+    const queryParams: Params = { date: date.format(API_DATE_FORMAT) };
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams,
+      }
+    );
   }
 }

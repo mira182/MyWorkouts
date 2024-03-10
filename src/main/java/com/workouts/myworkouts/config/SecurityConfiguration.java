@@ -2,6 +2,7 @@ package com.workouts.myworkouts.config;
 
 import com.workouts.myworkouts.service.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,6 +60,7 @@ public class SecurityConfiguration {
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/img/**", "/assets/**", "/*", "/api/v1/login", "/api/v1/users/authenticate", "/api/v1/users/register", "/withings/**").permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider()).addFilterBefore(

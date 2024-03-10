@@ -11,13 +11,14 @@ import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutService} from "../../services/rest/workout/workout.service";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
-import {filter, finalize, mergeMap, switchMap, take, tap} from "rxjs";
+import {debounceTime, filter, finalize, mergeMap, switchMap, take, takeUntil, tap} from "rxjs";
 import {Workout} from "../../model/workout/workout";
 import {isNil} from "lodash";
 import {API_DATE_FORMAT} from "../../app.config";
 import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.component";
-import {ActivatedRoute} from "@angular/router";
 import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
+import {Unsubscribe} from "../unsubscribe/unsubscribe";
+import {WorkoutDayService} from "../../services/rest/workout/workout-day.service";
 
 @Component({
   selector: 'app-workouts',
@@ -36,23 +37,38 @@ import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-head
   ],
   templateUrl: './workouts.component.html',
 })
-export class WorkoutsComponent implements OnInit {
+export class WorkoutsComponent extends Unsubscribe implements OnInit {
 
   public workout: Workout;
 
   protected selectedDate: WritableSignal<Moment> = signal(moment());
 
-  protected loading: boolean = false;
-
   constructor(private readonly snackBarService: SnackBarService,
               private readonly workoutService: WorkoutService,
               private readonly dialogsHandler: DialogsHandlerService,
               private readonly spinner: NgxSpinnerService,
-              private readonly route: ActivatedRoute) {
+              private readonly workoutDayService: WorkoutDayService) {
+    super();
   }
 
   public ngOnInit(): void {
-    this.getWorkoutForSelectedDay();
+    this.workoutDayService.getWorkoutDay
+      .pipe(
+        debounceTime(200),
+        tap(() => this.spinner.show()),
+        switchMap(date => this.workoutService.getWorkoutForDay(date)),
+        takeUntil(this.unSubscribe),
+      )
+      .subscribe({
+        next: workout => {
+          this.workout = workout;
+          this.spinner.hide();
+        },
+        error: err => {
+          this.snackBarService.showErrorSnackBar(err);
+          this.spinner.hide();
+        },
+      });
   }
 
   protected openAddWorkoutExerciseDialog() {
@@ -81,9 +97,8 @@ export class WorkoutsComponent implements OnInit {
   }
 
   protected getWorkoutsForDay(date: Moment) {
-    this.loading = true;
     this.selectedDate.set(date);
-    this.getWorkoutForSelectedDay();
+    this.workoutDayService.setWorkoutDay(date);
   }
 
   protected deleteWorkout() {
@@ -105,29 +120,6 @@ export class WorkoutsComponent implements OnInit {
 
   public today() {
     this.selectedDate.set(moment());
-  }
-
-  private getWorkoutForSelectedDay(): void {
-    this.spinner.show()
-
-    this.route.queryParams
-      .pipe(
-        take(1),
-      )
-      .subscribe(params => {
-        if (!isNil(params['date'])) {
-          this.selectedDate.set(moment(params['date']));
-        }
-      });
-
-    this.workoutService.getWorkoutForDay(this.selectedDate())
-      .pipe(
-        take(1),
-        finalize(() => this.spinner.hide()),
-      )
-      .subscribe({
-        next: workout => this.workout = workout,
-      });
   }
 
   protected onWorkoutExerciseDeleted(workoutExerciseId: number): void {

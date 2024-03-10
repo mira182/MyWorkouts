@@ -1,7 +1,7 @@
 <div fxLayout="column">
   <form [formGroup]="repsForm">
     <div class="flex flex-row sm:flex-col flex-wrap" formArrayName="sets" [ngStyle]="{'justify-content': 'flex-start'}">
-      <div *ngFor="let set of sets.controls; let i = index">
+      <div *ngFor="let set of sets.controls; let i = index" class="flex-grow">
         <mat-card class="mat-elevation-z4">
           <div class="flex flex-row justify-start items-center">
             <div class="flex-1 font-bold text-lg">{{i + 1}}</div>
