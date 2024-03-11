@@ -1,5 +1,6 @@
 package com.workouts.myworkouts.service.workout;
 
+import com.workouts.myworkouts.exceptions.WorkoutExerciseNotFoundException;
 import com.workouts.myworkouts.exceptions.WorkoutNotFoundException;
 import com.workouts.myworkouts.model.dto.export.WorkoutExerciseExportDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
@@ -61,7 +62,21 @@ public class WorkoutServiceImpl implements WorkoutService {
 
                     return workoutRepository.save(workout);
                 })
-                .orElseGet(() -> workoutRepository.save(workoutMapper.dtoToEntity(workoutDto))));
+                .orElseGet(() -> {
+                    Workout workout = new Workout();
+                    workout.setDate(workoutDto.getDate());
+                    workoutDto.getWorkoutExercises()
+                            .forEach(workoutExerciseDto -> workoutExerciseRepository.findById(workoutExerciseDto.getId())
+                            .map(workoutExercise -> {
+                                workout.addWorkoutExercise(workoutExercise);
+                                return workoutExercise;
+                            })
+                            .orElseThrow(() -> new WorkoutExerciseNotFoundException(workoutExerciseDto.getId())));
+
+                    workoutRepository.save(workout);
+
+                    return workout;
+                }));
     }
 
 

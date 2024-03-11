@@ -2,10 +2,10 @@
   <div>
     <button mat-mini-fab color="success" (click)="decrement()"><mat-icon>remove</mat-icon></button>
   </div>
-  <mat-form-field class="max-w-28">
+  <mat-form-field class="w-36">
     <mat-label>{{ label }}</mat-label>
-    <input matInput [formControl]="formControl" type="number" min="{{ minimumValue }}">
-    <span matSuffix>{{suffix}}</span>
+    <input matInput [formControl]="formControl" type="number" step="{{ step }}" min="0">
+    <span matSuffix>{{ suffix }}</span>
     <mat-error *ngIf="formControl.invalid">{{ errorMessage }}</mat-error>
   </mat-form-field>
   <div>

@@ -1,7 +1,7 @@
 <div *ngIf="date">
   <mat-form-field>
     <mat-label>{{ 'LABELS.date-picker' | translate }}</mat-label>
-    <input matInput [matDatepicker]="picker" [formControl]="date">
+    <input matInput [matDatepicker]="picker" [formControl]="date" (dateChange)="dateChanged($event)">
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>

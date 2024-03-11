@@ -29,7 +29,8 @@
       <mat-divider></mat-divider>
 
       <mat-card-content>
-        <app-date-picker class="flex flex-row justify-center mt-4" *ngIf="form.enabled" [date]="date"></app-date-picker>
+        <app-date-picker class="flex flex-row justify-center mt-4" *ngIf="form.enabled" [date]="date"
+                         (datePicked)="workoutExerciseDateUpdated($event)"></app-date-picker>
 
         <app-workout-sets
           [form]="form"

@@ -122,8 +122,7 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
     this.selectedDate.set(moment());
   }
 
-  protected onWorkoutExerciseDeleted(workoutExerciseId: number): void {
-    this.workout.workoutExercises = this.workout.workoutExercises
-      .filter(workoutExercise => workoutExercise.id != workoutExerciseId);
+  protected onWorkoutExerciseUpdated(): void {
+    this.getWorkoutsForDay(this.selectedDate());
   }
 }

@@ -9,10 +9,6 @@ export class WorkoutDayService {
 
   private workoutDay: BehaviorSubject<Moment> = new BehaviorSubject(moment());
 
-  public get getWorkoutDayValue(): Moment {
-    return this.workoutDay.value;
-  }
-
   public get getWorkoutDay(): Observable<Moment> {
     return this.workoutDay.asObservable();
   }

@@ -13,15 +13,13 @@
             <div class="flex flex-row" [formGroupName]="i">
               <input-number [step]="1" label="Minutes"
                             [initialValue]="initialMinutes"
-                            [minimumValue]="0"
                             [errorMessage]="'ERROR.required.time' | translate"
-                            (change)="minutesUpdated($event, i)"
+                            (numberChanged)="minutesUpdated($event, i)"
                             suffix="m"></input-number>
               <input-number [step]="1" label="Seconds"
                             [initialValue]="initialSeconds"
-                            [minimumValue]="0"
                             [errorMessage]="'ERROR.required.time' | translate"
-                            (change)="secondsUpdated($event, i)"
+                            (numberChanged)="secondsUpdated($event, i)"
                             suffix="s"></input-number>
             </div>
           </mat-card-content>

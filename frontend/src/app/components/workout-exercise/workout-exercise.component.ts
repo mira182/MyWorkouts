@@ -14,11 +14,12 @@ import {TranslateModule} from "@ngx-translate/core";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
-import moment from "moment";
+import moment, {Moment} from "moment";
 import {WorkoutExerciseService} from "../../services/rest/workout-exercise/workout-exercise.service";
 import {filter, finalize, switchMap, take, tap} from "rxjs";
 import {DatePickerComponent} from "../date-picker/date-picker.component";
 import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
+import {API_DATE_FORMAT} from "../../app.config";
 
 @Component({
   selector: 'app-workout-exercise',
@@ -55,8 +56,11 @@ export class WorkoutExerciseComponent implements OnInit {
   @Input()
   public workoutExercise: WorkoutExercise;
 
+  @Input()
+  public workoutDate: string;
+
   @Output()
-  public workoutExerciseMovedOrDeleted: EventEmitter<number> = new EventEmitter<number>();
+  public workoutExerciseUpdated: EventEmitter<void> = new EventEmitter<void>();
 
   protected form: FormGroup;
 
@@ -77,11 +81,15 @@ export class WorkoutExerciseComponent implements OnInit {
   private initForm(): void {
     this.form = this.formBuilder.group({
       id: [this.workoutExercise.id],
-      date: [ moment().format('yyyy-MM-DD') ],
+      date: [ moment(this.workoutDate).format(API_DATE_FORMAT) ],
       exercise: [ this.workoutExercise?.exercise, Validators.required ],
     });
 
     this.form.disable();
+  }
+
+  protected workoutExerciseDateUpdated(date: Moment): void {
+    this.date.setValue(date.format(API_DATE_FORMAT));
   }
 
   protected updateWorkoutExercise() {
@@ -95,7 +103,7 @@ export class WorkoutExerciseComponent implements OnInit {
       .subscribe({
         next: () => {
           this.snackBarService.showSuccessSnackBar('ALERT.successfully-updated');
-          this.workoutExerciseMovedOrDeleted.emit(this.workoutExercise.id);
+          this.workoutExerciseUpdated.emit();
           this.form.disable();
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
@@ -113,7 +121,7 @@ export class WorkoutExerciseComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          this.workoutExerciseMovedOrDeleted.emit(this.workoutExercise.id);
+          this.workoutExerciseUpdated.emit();
           this.snackBarService.showSuccessSnackBar('ALERT.deleted-successfully');
         },
         error: err => {

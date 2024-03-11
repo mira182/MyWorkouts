@@ -6,6 +6,8 @@ import {CommonModule} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 import {MatIcon} from "@angular/material/icon";
 import {isNil} from "lodash";
+import {takeUntil} from "rxjs";
+import {Unsubscribe} from "../../unsubscribe/unsubscribe";
 
 @Component({
   selector: 'input-number',
@@ -23,12 +25,12 @@ import {isNil} from "lodash";
   ],
   standalone: true
 })
-export class InputNumberComponent implements OnInit {
+export class InputNumberComponent extends Unsubscribe implements OnInit {
 
   @Output()
-  public change: EventEmitter<number> = new EventEmitter<number>();
+  public numberChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  protected formControl = new FormControl(0, [Validators.required]);
+  protected formControl = new FormControl<number>(0, [Validators.required]);
 
   @Input()
   public step: number;
@@ -45,19 +47,21 @@ export class InputNumberComponent implements OnInit {
   @Input()
   public initialValue: number;
 
-  @Input()
-  public minimumValue: number;
-
   public ngOnInit(): void {
     this.formControl.setValue(this.initialValue);
-    this.change.emit(this.formControl.value);
+    this.formControl.valueChanges
+      .pipe(
+        takeUntil(this.unSubscribe)
+      )
+      .subscribe(value => {
+        this.numberChanged.emit(value);
+      });
   }
 
   public increment() {
     if (!isNil(this.formControl.value)) {
       const resultValue = this.formControl.value + this.step;
       this.formControl.setValue(resultValue);
-      this.change.emit(this.formControl.value);
     }
   }
 
@@ -66,7 +70,6 @@ export class InputNumberComponent implements OnInit {
       const resultValue = this.formControl.value - this.step;
       if (resultValue >= 0) {
         this.formControl.setValue(resultValue);
-        this.change.emit(this.formControl.value);
       }
     }
   }

@@ -37,8 +37,9 @@
     <div *ngIf="workout; else noWorkouts">
       <app-workout-exercise
         *ngFor="let workoutExercise of workout.workoutExercises"
+        [workoutDate]="workout.date"
         [workoutExercise]="workoutExercise"
-        (workoutExerciseMovedOrDeleted)="onWorkoutExerciseDeleted($event)">
+        (workoutExerciseUpdated)="onWorkoutExerciseUpdated()">
       </app-workout-exercise>
     </div>
 
