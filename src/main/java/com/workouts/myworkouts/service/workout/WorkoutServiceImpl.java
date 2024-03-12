@@ -1,6 +1,5 @@
 package com.workouts.myworkouts.service.workout;
 
-import com.workouts.myworkouts.exceptions.WorkoutExerciseNotFoundException;
 import com.workouts.myworkouts.exceptions.WorkoutNotFoundException;
 import com.workouts.myworkouts.model.dto.export.WorkoutExerciseExportDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
@@ -19,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +54,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Transactional
     public WorkoutDto addWorkoutExerciseToWorkout(@NonNull WorkoutDto workoutDto) {
         // TODO check if workout exercise doesn't already exist with the same exercise name
+        // TODO split into functions like "move exercise to workout"
         return workoutMapper.entityToDto(workoutRepository.findByDate(workoutDto.getDate())
                 .map(workout -> {
                     workoutDto.getWorkoutExercises().stream()
@@ -65,17 +66,22 @@ public class WorkoutServiceImpl implements WorkoutService {
                 .orElseGet(() -> {
                     Workout workout = new Workout();
                     workout.setDate(workoutDto.getDate());
-                    workoutDto.getWorkoutExercises()
-                            .forEach(workoutExerciseDto -> workoutExerciseRepository.findById(workoutExerciseDto.getId())
-                            .map(workoutExercise -> {
-                                workout.addWorkoutExercise(workoutExercise);
-                                return workoutExercise;
-                            })
-                            .orElseThrow(() -> new WorkoutExerciseNotFoundException(workoutExerciseDto.getId())));
 
-                    workoutRepository.save(workout);
+                    if (workoutDto.getWorkoutExercises().stream()
+                            .findFirst()
+                            .map(WorkoutExerciseDto::getId)
+                            .stream()
+                            .anyMatch(obj -> true)) {
+                        workoutDto.getWorkoutExercises().stream()
+                                .map(workoutExerciseDto -> workoutExerciseRepository.findById(workoutExerciseDto.getId()))
+                                .filter(Optional::isPresent)
+                                .map(Optional::get)
+                                .forEach(workout::addWorkoutExercise);
 
-                    return workout;
+                        return workoutRepository.save(workout);
+                    } else {
+                        return workoutRepository.save(workoutMapper.dtoToEntity(workoutDto));
+                    }
                 }));
     }
 
