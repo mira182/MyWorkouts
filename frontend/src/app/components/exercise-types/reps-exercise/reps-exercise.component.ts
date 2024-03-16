@@ -32,7 +32,7 @@ export class RepsExerciseComponent implements OnInit {
   @Output()
   public workoutSetsUpdated: EventEmitter<WorkoutSet[]> = new EventEmitter<WorkoutSet[]>();
 
-  protected initialReps: number = 0;
+  protected currentReps: number = 0;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -48,20 +48,16 @@ export class RepsExerciseComponent implements OnInit {
     return this.repsForm.get('sets') as FormArray;
   }
 
-  protected newSet(): FormGroup {
-    return this.formBuilder.group({
-      reps: new FormControl(0),
+  protected addSet() {
+    const reps = this.currentReps ? this.currentReps : 0;
+
+    this.sets.push(this.formBuilder.group({
+      reps: new FormControl(reps),
       weight: [0],
       distance: [0],
       duration: [0]
-    });
-  }
+    }));
 
-  protected addSet() {
-    if (this.sets.length > 0) {
-      this.initialReps = this.sets.at(this.sets.length - 1).value.reps;
-    }
-    this.sets.push(this.newSet());
     this.workoutSetsUpdated.emit(this.sets.value);
   }
 
@@ -72,6 +68,7 @@ export class RepsExerciseComponent implements OnInit {
 
   protected repsUpdated(repsValue: number, index: number) {
     this.sets.at(index).patchValue({reps: repsValue});
+    this.currentReps = repsValue;
     this.workoutSetsUpdated.emit(this.sets.value);
   }
 }

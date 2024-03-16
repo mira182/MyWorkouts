@@ -24,7 +24,7 @@ public class WorkoutExercise {
     @OneToMany(mappedBy = "workoutExercise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkoutSet> workoutSets = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, optional = false)
     private Workout workout;
 
     public void addWorkoutSet(WorkoutSet workoutSet) {

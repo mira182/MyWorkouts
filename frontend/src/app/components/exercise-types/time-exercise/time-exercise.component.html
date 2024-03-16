@@ -12,12 +12,12 @@
             </div>
             <div class="flex flex-row" [formGroupName]="i">
               <input-number [step]="1" label="Minutes"
-                            [initialValue]="initialMinutes"
+                            [initialValue]="currentMinutes"
                             [errorMessage]="'ERROR.required.time' | translate"
                             (numberChanged)="minutesUpdated($event, i)"
                             suffix="m"></input-number>
               <input-number [step]="1" label="Seconds"
-                            [initialValue]="initialSeconds"
+                            [initialValue]="currentSeconds"
                             [errorMessage]="'ERROR.required.time' | translate"
                             (numberChanged)="secondsUpdated($event, i)"
                             suffix="s"></input-number>

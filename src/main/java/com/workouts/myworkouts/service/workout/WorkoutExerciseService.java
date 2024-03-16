@@ -18,6 +18,6 @@ public interface WorkoutExerciseService {
 
     WorkoutExerciseDto updateWorkout(@NonNull WorkoutExerciseDto workoutExerciseDto);
 
-    void deleteWorkout(long id);
+    void deleteWorkoutExercise(long id);
 
 }

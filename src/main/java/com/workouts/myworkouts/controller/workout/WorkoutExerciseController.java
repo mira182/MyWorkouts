@@ -22,7 +22,7 @@ public class WorkoutExerciseController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteWorkout(@PathVariable Long id) {
-        workoutExerciseService.deleteWorkout(id);
+    public void deleteWorkoutExercise(@PathVariable Long id) {
+        workoutExerciseService.deleteWorkoutExercise(id);
     }
 }

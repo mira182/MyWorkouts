@@ -32,9 +32,9 @@ export class TimeExerciseComponent implements OnInit {
 
   protected timeForm: FormGroup;
 
-  protected initialMinutes: number = 0;
+  protected currentMinutes: number = 0;
 
-  protected initialSeconds: number = 0;
+  protected currentSeconds: number = 0;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -50,21 +50,17 @@ export class TimeExerciseComponent implements OnInit {
     return this.timeForm.get('sets') as FormArray;
   }
 
-  protected newSet(): FormGroup {
-    return this.formBuilder.group({
-      duration: [0, Validators.required],
+  protected addSet() {
+    const minutes = this.currentMinutes ? this.currentMinutes : 0;
+    const seconds = this.currentSeconds ? this.currentSeconds : 0;
+
+    this.sets.push(this.formBuilder.group({
+      duration: [(minutes * 60) + seconds, Validators.required],
       weight: [0],
       reps: [0],
       distance: [0],
-    });
-  }
+    }));
 
-  protected addSet() {
-    if (this.sets.length > 0) {
-      this.initialMinutes = this.sets.at(this.sets.length - 1).value.minutes;
-      this.initialSeconds = this.sets.at(this.sets.length - 1).value.seconds;
-    }
-    this.sets.push(this.newSet());
     this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
@@ -76,12 +72,14 @@ export class TimeExerciseComponent implements OnInit {
   protected minutesUpdated(minutesValue: number, index: number) {
     const newDuration: number = this.sets.at(index).get('duration').value + (minutesValue * 60);
     this.sets.at(index).patchValue({ duration: newDuration });
+    this.currentMinutes = minutesValue;
     this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 
   protected secondsUpdated(secondsValue: number, index: number) {
     const newDuration: number = this.sets.at(index).get('duration').value + secondsValue;
     this.sets.at(index).patchValue({ seconds: newDuration });
+    this.currentSeconds = secondsValue;
     this.workoutSetUpdated.emit(this.sets.value.sets);
   }
 

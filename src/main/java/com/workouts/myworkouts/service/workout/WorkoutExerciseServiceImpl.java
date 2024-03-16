@@ -80,7 +80,7 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
 
     @Override
     @Transactional
-    public void deleteWorkout(long id) {
+    public void deleteWorkoutExercise(long id) {
         workoutExerciseRepository.deleteById(id);
     }
 }

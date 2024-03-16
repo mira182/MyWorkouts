@@ -14,7 +14,7 @@
             <div [formGroupName]="i">
               <input-number [step]="1" [label]="'WORKOUTS.reps' | translate"
                             [errorMessage]="'ERROR.required.reps' | translate"
-                            [initialValue]="initialReps"
+                            [initialValue]="currentReps"
                             (numberChanged)="repsUpdated($event, i)"></input-number>
             </div>
           </mat-card-content>

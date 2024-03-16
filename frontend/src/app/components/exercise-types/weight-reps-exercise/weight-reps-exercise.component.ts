@@ -58,8 +58,8 @@ export class WeightRepsExerciseComponent implements OnInit {
   }
 
   protected addSet() {
-    const weight = this.currentWeight ? 0 : this.currentWeight;
-    const reps = this.currentReps ? 0 : this.currentReps;
+    const weight = this.currentWeight ? this.currentWeight : 0;
+    const reps = this.currentReps ? this.currentReps : 0;
 
     this.sets.push(this.formBuilder.group({
       weight: new FormControl(weight),
@@ -67,6 +67,7 @@ export class WeightRepsExerciseComponent implements OnInit {
       distance: [0],
       duration: [0]
     }));
+    this.workoutSetsUpdated.emit(this.sets.value);
   }
 
   protected removeSet(i : number) {
