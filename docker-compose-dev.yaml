@@ -24,8 +24,8 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     volumes:
-      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/logs:/usr/app/logs"
-      - "/var/services/homes/mira/Drive/Apps/MyWorkouts/img:/usr/app/img"
+      - "/volume2/Apps/MyWorkouts/logs:/usr/app/logs"
+      - "/volume2/Apps/MyWorkouts/img:/usr/app/img"
     restart: unless-stopped
   # DB
   postgres:
