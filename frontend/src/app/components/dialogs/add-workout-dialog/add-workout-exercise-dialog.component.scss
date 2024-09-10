@@ -1,0 +1,17 @@
+.dialog-content-container {
+  overflow-y: hidden;
+}
+
+:host ::ng-deep .mat-horizontal-content-container {
+  max-height: 45vh;
+  overflow-y: auto;
+}
+
+app-page-header-layout {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  padding: 16px 24px;
+}
+

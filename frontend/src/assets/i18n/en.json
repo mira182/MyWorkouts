@@ -62,7 +62,8 @@
     "error": "Error",
     "connection-error": "Connection error",
     "statusCode": "Status code: ",
-    "workout-id-missing": "Workout ID is missing"
+    "workout-id-missing": "Workout ID is missing",
+    "import-success": "Import was successful"
   },
   "BUTTON": {
     "logout": "Logout",

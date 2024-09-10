@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Exercise} from "../../model/exercise/exercise";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
@@ -11,7 +11,7 @@ import {ExerciseHelperService} from "../../services/exercise-helper/exercise-hel
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatTabChangeEvent, MatTabsModule} from "@angular/material/tabs";
+import {MatTabChangeEvent, MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -60,6 +60,8 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
   protected searchExerciseFormControl = new FormControl();
 
   protected exercisesByCategory: Exercise[] = [];
+
+  @ViewChild("exerciseTabs", { static: false }) exerciseTabs: MatTabGroup;
 
   constructor(private readonly exerciseService: ExerciseService,
               private readonly snackBarService: SnackBarService,
@@ -128,8 +130,23 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
         take(1),
       )
       .subscribe({
-        next: exercises => this.exercisesByCategory = exercises,
+        next: exercises => {
+          this.exercisesByCategory = exercises
+          this.goToTab(category)
+        },
         error: err => this.snackBarService.showErrorSnackBar(err),
       })
+  }
+
+  // Define a method to map the label to the tab index and switch tabs
+  private goToTab(label: string): void {
+    const tabLabels = this.exerciseTabs._tabs.toArray().map(tab => tab.textLabel);
+    const tabIndex = tabLabels.indexOf(label);
+
+    if (tabIndex !== -1) {
+      this.exerciseTabs.selectedIndex = tabIndex;
+    } else {
+      console.error(`Tab with label '${label}' not found!`);
+    }
   }
 }

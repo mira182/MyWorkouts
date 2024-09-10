@@ -9,7 +9,7 @@
   </div>
 </app-page-header-layout>
 
-<mat-dialog-content>
+<mat-dialog-content class="dialog-content-container">
   <mat-stepper labelPosition="bottom" linear="true">
 
     <!-- STEP 1 -->
@@ -34,7 +34,7 @@
               <img ngSrc="{{ IMAGE_BASE_URL + imageUtilsService.getExerciseIconPath(exercise) }}" width="32" height="32">
             </div>
             <span class="text-wrap">
-              {{exercise.name}}
+              {{ exercise.name }}
             </span>
           </div>
         </button>
@@ -46,7 +46,7 @@
 
     <!-- STEP 3 -->
     <mat-step>
-      <ng-template matStepLabel>{{'BUTTON.save' | translate }}</ng-template>
+      <ng-template matStepLabel>{{ 'BUTTON.save' | translate }}</ng-template>
       <div [ngSwitch]="selectedExercise?.type">
         <div *ngSwitchCase="'WEIGHTED_REPS'">
           <app-weight-reps-exercise (workoutSetsUpdated)="setsUpdated($event)"></app-weight-reps-exercise>

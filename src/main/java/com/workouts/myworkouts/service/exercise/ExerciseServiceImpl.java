@@ -7,9 +7,7 @@ import com.workouts.myworkouts.model.entity.picture.ExercisePicture;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.PictureType;
 import com.workouts.myworkouts.model.mapper.ExerciseMapper;
-import com.workouts.myworkouts.model.mapper.PictureMapper;
 import com.workouts.myworkouts.repository.exercise.ExerciseRepository;
-import com.workouts.myworkouts.repository.exercise.PictureRepository;
 import com.workouts.myworkouts.service.image.ImageService;
 import com.workouts.myworkouts.service.picture.PictureService;
 import lombok.NonNull;
@@ -31,10 +29,6 @@ public class ExerciseServiceImpl implements ExerciseService {
     private final ExerciseRepository exerciseRepository;
 
     private final ExerciseMapper exerciseMapper;
-
-    private final PictureMapper pictureMapper;
-
-    private final PictureRepository pictureRepository;
 
     private final ImageService imageService;
 

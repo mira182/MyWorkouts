@@ -72,6 +72,6 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
   protected import() {
     this.exportImportService.importLatest()
       .pipe(take(1))
-      .subscribe(() => this.snackBar.showSuccessSnackBar('ALERT.success'));
+      .subscribe(() => this.snackBar.showSuccessSnackBar('ALERT.import-success'));
   }
 }

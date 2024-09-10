@@ -62,7 +62,8 @@
     "error": "Chyba",
     "connection-error": "Chyba připojení",
     "statusCode": "Stavový kód: ",
-    "workout-id-missing": "Workout ID chybí"
+    "workout-id-missing": "Workout ID chybí",
+    "import-success": "Import proběhl úspěšně"
   },
   "BUTTON": {
     "logout": "Odhlásit",

@@ -23,6 +23,7 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
 @Component({
   selector: 'app-add-workout-dialog',
   templateUrl: './add-workout-exercise-dialog.component.html',
+  styleUrl: './add-workout-exercise-dialog.component.scss',
   imports: [
     CommonModule,
     MatIcon,
