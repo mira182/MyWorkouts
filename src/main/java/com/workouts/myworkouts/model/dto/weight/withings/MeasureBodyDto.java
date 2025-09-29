@@ -1,5 +1,6 @@
 package com.workouts.myworkouts.model.dto.weight.withings;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,5 +16,6 @@ public class MeasureBodyDto {
 
     private String timezone;
 
+    @JsonProperty("measuregrps")
     private List<WithingsMeasureGroupDto> measureGroups;
 }

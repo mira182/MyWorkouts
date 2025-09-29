@@ -59,7 +59,7 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/img/**", "/assets/**", "/*", "/api/v1/login", "/api/v1/users/authenticate", "/api/v1/users/register", "/withings/**").permitAll()
+                        .requestMatchers("/img/**", "/assets/**", "/*", "/api/v1/login", "/api/v1/users/authenticate", "/api/v1/users/register", "/api/v1/weight/withings/oauth/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated()
                 )

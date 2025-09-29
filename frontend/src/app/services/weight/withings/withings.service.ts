@@ -7,37 +7,32 @@ import {SnackBarService} from "../../snack-bar/snack-bar.service";
 import {TranslateService} from "@ngx-translate/core";
 import {take} from "rxjs";
 import {Moment} from "moment";
+import {environment} from "../../../../environments/environment";
 
 @Injectable()
 export class WithingsService {
-
-  public static REDIRECT_URI = Urls.LOCAL_URL + '/weight';
-
-  public static GET_TOKEN_URL = 'https://wbsapi.withings.net/v2/oauth2';
-
-  public static GET_CODE_URL = 'https://account.withings.com/oauth2_user/authorize2';
-
-  public static CLIENT_ID = '19b6af069d59c78fbd5527878afc2253fbe8a6bc3b829d7a685fbf42ea09b162';
-
-  public static CLIENT_SECRET = '6ca19742a74c896b8ae1625e862c5ac6bb7364cd1ca3a9ef554de9154f450b5a';
 
   constructor(private readonly http: HttpClient,
               private readonly snackBarService: SnackBarService,
               private readonly translate: TranslateService) {
   }
 
+  public redirectToWithingsAuthUrl(): void {
+    this.http.get<{authUrl: string}>(Urls.API_URL + '/weight/withings/oauth/auth-redirect')
+      .subscribe(response => {
+        if (response && response.authUrl) {
+          window.location.href = response.authUrl;
+        }
+      })
+  }
+
   public saveMeasurements(authorizationCode: string): void {
 
     const body = {
-      action: "requesttoken",
-      client_id: WithingsService.CLIENT_ID,
-      client_secret: WithingsService.CLIENT_SECRET,
-      grant_type: "authorization_code",
-      code: authorizationCode,
-      redirect_uri: WithingsService.REDIRECT_URI
+      code: authorizationCode
     }
 
-    this.http.post<any>(WithingsService.GET_TOKEN_URL, body)
+    this.http.post<any>(Urls.API_URL + '/weight/withings/oauth/exchange', body)
       .pipe(
         take(1),
       )

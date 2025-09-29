@@ -12,6 +12,7 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {CommonModule} from "@angular/common";
 import {WithingsService} from "../../../services/weight/withings/withings.service";
 import {BaseWeightClass} from "../base-weight/base-weight.class";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-withings-weight',
@@ -58,9 +59,8 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
     this.selectedTabIndex = tabIndex;
   }
 
-  redirectToGetCodeUrl() {
-    window.location.href =
-      WithingsService.GET_CODE_URL + '?response_type=code&client_id=' + WithingsService.CLIENT_ID + '&redirect_uri=' + WithingsService.REDIRECT_URI + '&state=test&scope=user.metrics';
+  redirectToWithingsAuthUrl() {
+    this.withingsService.redirectToWithingsAuthUrl()
   }
 
 }
