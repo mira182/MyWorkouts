@@ -25,7 +25,7 @@ import java.util.Collections;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     static final long ACCESS_TOKEN_VALIDITY_SECONDS = 36000; // seconds
     static final String SIGNING_KEY = "myworkout_key";
@@ -70,35 +70,5 @@ class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-
-
-//        try {
-//            String authHeader = request.getHeader("Authorization");
-//            String token = null;
-//            String username = null;
-//            if (authHeader != null && authHeader.startsWith("Bearer ")) {
-//                token = authHeader.substring(7);
-//                username = JwtTokenUtil.getUsernameFromToken(token);
-//            }
-////      If the accessToken is null. It will pass the request to next filter in the chain.
-////      Any login and signup requests will not have jwt token in their header, therefore they will be passed to next filter chain.
-//            if (token == null) {
-//                filterChain.doFilter(request, response);
-//                return;
-//            }
-////       If any accessToken is present, then it will validate the token and then authenticate the request in security context
-//            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-//                if (JwtTokenUtil.validateToken(token, userDetails)) {
-//                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
-//                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-//                }
-//            }
-//
-//            filterChain.doFilter(request, response);
-//        } catch (AccessDeniedException e) {
-//            throw new AccessDeniedException("Couldn't authenticate request. Token might be invalid.", e);
-//        }
     }
 }
