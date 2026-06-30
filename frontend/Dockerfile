@@ -60,6 +60,10 @@ FROM nginx:1.27-alpine
 # Copy the built Angular app from the previous stage
 COPY --from=builder /usr/src/app/dist/frontend/browser /usr/share/nginx/html
 
+# Normalize permissions: the build context may arrive from Windows/SMB with
+# broken (000) perms on static assets, which nginx then serves as 403.
+RUN chmod -R a+rX /usr/share/nginx/html
+
 # Replace nginx's stock server block (avoids two servers listening on port 80)
 COPY myworkouts-nginx.conf /etc/nginx/conf.d/default.conf
 
