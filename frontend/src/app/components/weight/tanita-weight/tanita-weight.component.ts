@@ -17,10 +17,10 @@ import {BaseWeightClass} from "../base-weight/base-weight.class";
 import {take} from "rxjs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {
-  NgxWeightChartData,
   NgxWeightChartService
 } from "../../../services/rest/chart/weight/ngx/ngx-weight-chart.service";
 import moment from "moment";
+import {NgxWeightChartData} from "../model/ngx-chart-data-model";
 
 @Component({
   selector: 'app-tanita-weight',

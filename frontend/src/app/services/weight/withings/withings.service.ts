@@ -26,19 +26,18 @@ export class WithingsService {
       })
   }
 
-  public saveMeasurements(authorizationCode: string): void {
-
+  public updateMeasurements(authorizationCode: string): void {
     const body = {
       code: authorizationCode
     }
 
-    this.http.post<any>(Urls.API_URL + '/weight/withings/oauth/exchange', body)
+    this.http.post<any>(Urls.API_URL + '/weight/withings/oauth/exchange', body.code)
       .pipe(
         take(1),
       )
       .subscribe(data => {
       if (data && data.status === 0) {
-        this.http.post(Urls.API_URL + '/weight/withings/measurements/saveMeasurements', data.body.access_token).subscribe(res => {
+        this.http.post(Urls.API_URL + '/weight/withings/measurements/updateMeasurements', data.body.access_token).subscribe(res => {
           if (res) {
             this.snackBarService.showSuccessSnackBar(this.translate.instant("ALERT.successfully-saved"));
           }

@@ -56,7 +56,7 @@ export class MeasurementDetailsComponent implements OnInit, OnChanges {
               private withingsService : WithingsService) {}
 
   ngOnInit(): void {
-    // this.loadMeasurement();
+    this.loadMeasurement();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

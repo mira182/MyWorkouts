@@ -22,8 +22,8 @@ public class WithingsController {
 
     private final WithingsService withingsService;
 
-    @PostMapping("/saveMeasurements")
-    public boolean saveMeasurements(@RequestBody String token) {
+    @PostMapping("/updateMeasurements")
+    public boolean updateMeasurements(@RequestBody String token) {
         return withingsRestService.retrieveAndStoreMeasurements(token);
     }
 

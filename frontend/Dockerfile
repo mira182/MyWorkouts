@@ -40,36 +40,28 @@
 ## Command to run nginx
 #CMD ["nginx", "-g", "daemon off;"]
 
-FROM node:alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /usr/src/app
 
-COPY . /usr/src/app
+# Install dependencies from the committed lockfile for reproducible builds.
+# Copying package files first keeps this layer cached when only source changes.
+COPY package.json package-lock.json ./
+RUN npm ci
 
-RUN npm config set fetch-retry-mintimeout 20000
-RUN npm config set fetch-retry-maxtimeout 120000
-RUN npm cache clear --force
-RUN rm -rf node_modules
-RUN rm -rf package-lock.json
-
-RUN npm install -g @angular/cli
-
-RUN npm install --verbose
-
-# Copy the rest of the application
+# Copy the rest of the application and build the production bundle
 COPY . .
-# TODO figure out how to use this as paramater dev-build/prod-build
-# Build the Angular app
 RUN npm run prod-build
 
 
 # Use nginx as the base image for serving the Angular app
-FROM nginx:alpine
+FROM nginx:1.27-alpine
 
 # Copy the built Angular app from the previous stage
 COPY --from=builder /usr/src/app/dist/frontend/browser /usr/share/nginx/html
 
-COPY myworkouts-nginx.conf /etc/nginx/conf.d/
+# Replace nginx's stock server block (avoids two servers listening on port 80)
+COPY myworkouts-nginx.conf /etc/nginx/conf.d/default.conf
 
 # Command to run nginx
 CMD ["nginx", "-g", "daemon off;"]
