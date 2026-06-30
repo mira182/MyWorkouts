@@ -1,35 +1,64 @@
-version: "3.1"
 services:
-  # FRONTEND
+  # DATABASE — dedicated to MyWorkouts, not published to the host
+  myworkouts-postgres:
+    image: postgres:16-alpine
+    container_name: myworkouts-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - "/volume2/Apps/MyWorkouts/pgdata:/var/lib/postgresql/data"
+    networks:
+      - myworkouts-backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # FRONTEND — the only service published to the host / reverse proxy
   myworkouts-frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     image: myworkouts-frontend
     container_name: myworkouts-frontend
+    depends_on:
+      - myworkouts-backend
     ports:
       - "8082:80"
     networks:
       - myworkouts-frontend
-  # BACKEND
+    restart: unless-stopped
+
+  # BACKEND — not published; reached only via the frontend nginx proxy
   myworkouts-backend:
     build: ./
     image: myworkouts-backend
     container_name: myworkouts-backend
-    ports:
-      - "8084:8084"
+    depends_on:
+      myworkouts-postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://myworkouts-postgres:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
     networks:
       - myworkouts-backend
       - myworkouts-frontend
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
     volumes:
       - "/volume2/Apps/MyWorkouts/logs:/usr/app/logs"
       - "/volume2/Apps/MyWorkouts/img:/usr/app/img"
       - "/volume2/Apps/MyWorkouts/export:/usr/app/export"
+    restart: unless-stopped
 
 networks:
   myworkouts-backend:
     driver: bridge
   myworkouts-frontend:
-      driver: bridge
+    driver: bridge

@@ -7,7 +7,7 @@ COPY . .
 RUN mvn -DskipTests -P generate-querydsl,prod clean install
 
 
-FROM openjdk:21-jdk-oracle AS runstage
+FROM eclipse-temurin:21-jre AS runstage
 
 WORKDIR /usr/app
 
