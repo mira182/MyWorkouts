@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, take} from 'rxjs';
 import {Moment} from "moment";
 import {API_DATE_FORMAT} from "../../../../../../app.config";
-import {NgxDataPoint} from "../../../weight/ngx/ngx-weight-chart.service";
+import {NgxDataPoint} from "../../../../../../components/weight/model/ngx-chart-data-model";
 
 export interface NgxDashboardChartData {
   data: NgxDataPoint[];

@@ -18,9 +18,8 @@ public class WithingsOAuthController {
     private final WithingsOAuthService withingsOAuthService;
 
     @PostMapping("/exchange")
-    public WithingsTokenResponseDto exchange(@RequestBody Map<String, String> payload) {
-        String code = payload.get("code");
-        return withingsOAuthService.exchangeAuthorizationCode(code);
+    public WithingsTokenResponseDto exchange(@RequestBody String authorizationCode) {
+        return withingsOAuthService.exchangeAuthorizationCode(authorizationCode);
     }
 
     @GetMapping("/auth-redirect")

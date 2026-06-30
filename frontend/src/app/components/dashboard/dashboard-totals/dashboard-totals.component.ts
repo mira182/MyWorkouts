@@ -8,10 +8,10 @@ import {WeekDatePickerComponent} from "../week-date-picker/week-date-picker.comp
 import {NumberCardModule} from "@swimlane/ngx-charts";
 import {NgxDashboardService} from "../../../services/rest/chart/dashborad/charts/ngx/ngx-dashboard.service";
 import moment from "moment";
-import {NgxDataPoint} from "../../../services/rest/chart/weight/ngx/ngx-weight-chart.service";
 import {MatFormField} from "@angular/material/form-field";
 import {MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker} from "@angular/material/datepicker";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgxDataPoint} from "../../weight/model/ngx-chart-data-model";
 
 @Component({
   selector: 'app-dashboard-totals',

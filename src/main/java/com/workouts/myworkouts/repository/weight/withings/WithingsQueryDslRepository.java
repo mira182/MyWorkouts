@@ -34,9 +34,9 @@ public class WithingsQueryDslRepository implements MeasurementQueryDslRepository
                 .fetch();
     }
 
-    private Expression<?> getColumnByMeasurementType(MeasurementType measurementType, QWithingsMeasurement qTanitaMeasurement) {
+    private Expression<?> getColumnByMeasurementType(MeasurementType measurementType, QWithingsMeasurement qWithingsMeasurement) {
         return switch (measurementType) {
-            case WEIGHT -> qTanitaMeasurement.weight;
+            case WEIGHT -> qWithingsMeasurement.weight;
         };
     }
 }
