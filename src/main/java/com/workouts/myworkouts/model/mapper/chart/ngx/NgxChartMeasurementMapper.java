@@ -8,6 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface NgxChartMeasurementMapper {
 
-    @Mapping(target = "name", source = "date", dateFormat = "dd/MM/yyyy")
+    @Mapping(target = "name", source = "date", dateFormat = "yyyy-MM-dd")
     NgxChartDataPointDto measurementToNgxDataPointDto(SingleMeasurement singleMeasurement);
 }

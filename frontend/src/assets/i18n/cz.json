@@ -63,7 +63,8 @@
     "connection-error": "Chyba připojení",
     "statusCode": "Stavový kód: ",
     "workout-id-missing": "Workout ID chybí",
-    "import-success": "Import proběhl úspěšně"
+    "import-success": "Import proběhl úspěšně",
+    "login-failed": "Nesprávné uživatelské jméno nebo heslo"
   },
   "BUTTON": {
     "logout": "Odhlásit",

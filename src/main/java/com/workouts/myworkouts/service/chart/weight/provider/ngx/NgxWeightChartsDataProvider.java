@@ -2,12 +2,13 @@ package com.workouts.myworkouts.service.chart.weight.provider.ngx;
 
 import com.workouts.myworkouts.model.dto.chart.ngx.weight.NgxWeightChartDataDto;
 import com.workouts.myworkouts.model.enums.MeasurementType;
-import com.workouts.myworkouts.model.enums.MeasurementsProviderType;
+import com.workouts.myworkouts.model.enums.MeasurementsProvider;
 import com.workouts.myworkouts.model.mapper.chart.ngx.NgxChartMapper;
 import com.workouts.myworkouts.service.chart.weight.provider.MeasurementDataProvider;
 import com.workouts.myworkouts.service.chart.weight.provider.WeightChartsDataProvider;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +20,9 @@ public class NgxWeightChartsDataProvider implements WeightChartsDataProvider<Ngx
     private final NgxChartMapper ngxChartMapper;
 
     @Override
-    public NgxWeightChartDataDto provideData(@NonNull MeasurementsProviderType measurementsProviderType, @NonNull MeasurementType measurementType) {
+    @Cacheable(value = "weightCharts", key = "#measurementsProvider + '-' + #measurementType")
+    public NgxWeightChartDataDto provideData(@NonNull MeasurementsProvider measurementsProvider, @NonNull MeasurementType measurementType) {
         return ngxChartMapper.measurementsToNgxChartData(measurementType,
-                measurementDataProvider.provideData(measurementsProviderType, measurementType));
+                measurementDataProvider.provideData(measurementsProvider, measurementType));
     }
 }

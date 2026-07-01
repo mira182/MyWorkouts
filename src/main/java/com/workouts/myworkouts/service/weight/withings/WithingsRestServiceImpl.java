@@ -1,10 +1,14 @@
 package com.workouts.myworkouts.service.weight.withings;
 
+import com.workouts.myworkouts.model.dto.weight.withings.MeasureBodyDto;
 import com.workouts.myworkouts.model.dto.weight.withings.MeasureResponseDto;
+import com.workouts.myworkouts.model.dto.weight.withings.WithingsMeasureGroupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -15,12 +19,31 @@ public class WithingsRestServiceImpl extends AbstractWithingsClient implements W
 
     @Override
     public boolean retrieveAndStoreMeasurements(String token) {
-        final HttpEntity<MeasureResponseDto> response = callGetMeas(token);
-        final MeasureResponseDto responseDto = response.getBody();
+        final List<WithingsMeasureGroupDto> allGroups = new ArrayList<>();
+        String timezone = null;
+        int offset = 0;
+        boolean more = true;
 
-        if (responseDto != null && responseDto.getStatus() == 0) {
-            withingsService.saveMeasurements(responseDto.getBody());
+        while (more) {
+            final MeasureResponseDto responseDto = callGetMeas(token, offset).getBody();
+            if (responseDto == null || responseDto.getStatus() != 0 || responseDto.getBody() == null) {
+                log.warn("Withings getmeas returned no usable data (offset {}), aborting.", offset);
+                return false;
+            }
+
+            final MeasureBodyDto body = responseDto.getBody();
+            if (body.getMeasureGroups() != null) {
+                allGroups.addAll(body.getMeasureGroups());
+            }
+            timezone = body.getTimezone();
+            more = body.isMore();
+            offset = body.getOffset();
         }
+
+        final MeasureBodyDto allMeasurements = new MeasureBodyDto();
+        allMeasurements.setTimezone(timezone);
+        allMeasurements.setMeasureGroups(allGroups);
+        withingsService.saveMeasurements(allMeasurements);
 
         return true;
     }

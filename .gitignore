@@ -40,3 +40,6 @@ build/
 ### Runtime output ###
 logs/
 tokens/
+
+### graphify ###
+graphify-out/

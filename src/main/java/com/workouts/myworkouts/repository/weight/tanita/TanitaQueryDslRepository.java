@@ -36,6 +36,14 @@ public class TanitaQueryDslRepository implements MeasurementQueryDslRepository {
     private Expression<?> getColumnByMeasurementType(MeasurementType measurementType, QTanitaMeasurement qTanitaMeasurement) {
         return switch (measurementType) {
             case WEIGHT -> qTanitaMeasurement.weight;
+            case BMI -> qTanitaMeasurement.bmi;
+            case FAT_RATIO -> qTanitaMeasurement.bodyFat;
+            case FAT_MASS -> qTanitaMeasurement.bodyFatMass;
+            case MUSCLE_MASS -> qTanitaMeasurement.muscleMass;
+            case MUSCLE_MASS_RATIO -> qTanitaMeasurement.muscleMassRatio;
+            case BONE_MASS -> qTanitaMeasurement.boneMass;
+            case WATER_MASS -> qTanitaMeasurement.bodyWatterMass;
+            case WATER_RATIO -> qTanitaMeasurement.bodyWatter;
         };
     }
 }

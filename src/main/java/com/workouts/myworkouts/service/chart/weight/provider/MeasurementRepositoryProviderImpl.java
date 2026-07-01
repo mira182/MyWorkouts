@@ -1,6 +1,6 @@
 package com.workouts.myworkouts.service.chart.weight.provider;
 
-import com.workouts.myworkouts.model.enums.MeasurementsProviderType;
+import com.workouts.myworkouts.model.enums.MeasurementsProvider;
 import com.workouts.myworkouts.repository.weight.MeasurementQueryDslRepository;
 import com.workouts.myworkouts.repository.weight.tanita.TanitaQueryDslRepository;
 import com.workouts.myworkouts.repository.weight.withings.WithingsQueryDslRepository;
@@ -17,8 +17,8 @@ public class MeasurementRepositoryProviderImpl implements MeasurementRepositoryP
     private final WithingsQueryDslRepository withingsQueryDslRepository;
 
     @Override
-    public MeasurementQueryDslRepository provideQueryDslRepository(@NonNull MeasurementsProviderType measurementsProviderType) {
-        return switch(measurementsProviderType) {
+    public MeasurementQueryDslRepository provideQueryDslRepository(@NonNull MeasurementsProvider measurementsProvider) {
+        return switch(measurementsProvider) {
             case TANITA -> tanitaQueryDslRepository;
             case WITHINGS -> withingsQueryDslRepository;
         };

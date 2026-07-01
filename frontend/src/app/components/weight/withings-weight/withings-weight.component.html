@@ -1,7 +1,16 @@
 <div class="flex flex-col">
 <mat-tab-group (selectedIndexChange)="selectedTab($event)" [selectedIndex]="selectedTabIndex">
   <mat-tab label="Charts">
+    <div class="flex flex-col items-center w-full py-4">
+      <mat-button-toggle-group class="mb-4" [value]="selectedRangeDays" (change)="onRangeChange($event.value)">
+        <mat-button-toggle *ngFor="let range of ranges" [value]="range.days">{{ range.label }}</mat-button-toggle>
+      </mat-button-toggle-group>
 
+      <ng-container *ngFor="let chart of charts">
+        <h3 class="chart-title">{{ chart.title }}</h3>
+        <app-ngx-line-chart class="w-4/5" [chartData]="viewData[chart.key]" [showDots]="selectedRangeDays !== 0"></app-ngx-line-chart>
+      </ng-container>
+    </div>
   </mat-tab>
 
   <mat-tab label="Tables">
@@ -13,7 +22,6 @@
 <!--                             [date]="measurementDate"-->
 <!--                             [scaleType]="selectedScaleType">-->
 <!--    </app-measurement-details>-->
-    <app-ngx-line-chart [chartData]="measurementData"></app-ngx-line-chart>
   </mat-tab>
 
   <mat-tab>

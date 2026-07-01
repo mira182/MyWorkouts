@@ -86,7 +86,13 @@ export class LoginComponent implements OnInit {
       )
       .subscribe({
         next: () => this.router.navigateByUrl(this.returnUrl),
-        error: (error) => this.snackBarService.showErrorSnackBar(error?.error)
+        error: (error) => {
+          if (error?.status === 401 || error?.status === 403) {
+            this.snackBarService.showErrorMessageSnackBar('ALERT.login-failed');
+          } else {
+            this.snackBarService.showErrorSnackBar(error?.error);
+          }
+        }
       });
   }
 }

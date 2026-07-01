@@ -37,6 +37,14 @@ public class WithingsQueryDslRepository implements MeasurementQueryDslRepository
     private Expression<?> getColumnByMeasurementType(MeasurementType measurementType, QWithingsMeasurement qWithingsMeasurement) {
         return switch (measurementType) {
             case WEIGHT -> qWithingsMeasurement.weight;
+            case BMI -> qWithingsMeasurement.bmi;
+            case FAT_RATIO -> qWithingsMeasurement.fatRatio;
+            case FAT_MASS -> qWithingsMeasurement.fatMassWeight;
+            case MUSCLE_MASS -> qWithingsMeasurement.muscleMass;
+            case MUSCLE_MASS_RATIO -> qWithingsMeasurement.muscleMassRatio;
+            case BONE_MASS -> qWithingsMeasurement.boneMass;
+            case WATER_MASS -> qWithingsMeasurement.hydration;
+            case WATER_RATIO -> qWithingsMeasurement.hydrationRatio;
         };
     }
 }

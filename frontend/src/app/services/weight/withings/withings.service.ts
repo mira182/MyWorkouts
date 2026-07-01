@@ -8,13 +8,15 @@ import {TranslateService} from "@ngx-translate/core";
 import {take} from "rxjs";
 import {Moment} from "moment";
 import {environment} from "../../../../environments/environment";
+import {NgxWeightChartService} from "../../rest/chart/weight/ngx/ngx-weight-chart.service";
 
 @Injectable()
 export class WithingsService {
 
   constructor(private readonly http: HttpClient,
               private readonly snackBarService: SnackBarService,
-              private readonly translate: TranslateService) {
+              private readonly translate: TranslateService,
+              private readonly chartService: NgxWeightChartService) {
   }
 
   public redirectToWithingsAuthUrl(): void {
@@ -39,6 +41,8 @@ export class WithingsService {
       if (data && data.status === 0) {
         this.http.post(Urls.API_URL + '/weight/withings/measurements/updateMeasurements', data.body.access_token).subscribe(res => {
           if (res) {
+            // Fresh data was imported — drop the cached chart responses.
+            this.chartService.clearCache();
             this.snackBarService.showSuccessSnackBar(this.translate.instant("ALERT.successfully-saved"));
           }
         });

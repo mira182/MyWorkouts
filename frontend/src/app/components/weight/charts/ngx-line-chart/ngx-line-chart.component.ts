@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgxDataPoint, NgxWeightChartData} from "../../model/ngx-chart-data-model";
+import {Component, HostBinding, Input} from '@angular/core';
+import {NgxWeightChartData} from "../../model/ngx-chart-data-model";
 import {LineChartModule} from "@swimlane/ngx-charts";
+import {curveMonotoneX} from "d3-shape";
 
 @Component({
   selector: 'app-ngx-line-chart',
@@ -11,14 +12,28 @@ import {LineChartModule} from "@swimlane/ngx-charts";
   templateUrl: './ngx-line-chart.component.html',
   styleUrl: './ngx-line-chart.component.scss'
 })
-export class NgxLineChartComponent implements OnInit {
+export class NgxLineChartComponent {
+
+  private _chartData: NgxWeightChartData[] = [];
 
   @Input()
-  chartData: NgxWeightChartData[];
+  set chartData(data: NgxWeightChartData[]) {
+    this._chartData = (data ?? []).filter(Boolean).map(series => ({
+      ...series,
+      series: (series.series ?? [])
+        // Drop 0 values — those are missing metrics (double defaults to 0.0), not real measurements.
+        .filter(point => point.value > 0)
+        .map(point => ({
+          name: new Date(point.name as unknown as string),
+          value: point.value
+        }))
+    })) as unknown as NgxWeightChartData[];
+  }
 
-  multi: any[];
-  view: any[] = [700, 300];
-  // options
+  get chartData(): NgxWeightChartData[] {
+    return this._chartData;
+  }
+
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -26,11 +41,15 @@ export class NgxLineChartComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel: string = 'Date';
+  yAxisLabel: string = 'Value';
   timeline: boolean = true;
+  autoScale: boolean = true;
+  curve = curveMonotoneX;
 
-  ngOnInit(): void {
-    this.multi = this.chartData
-  }
+  // Render a dot at each data point. The parent turns this off for the "All" range,
+  // where the points are too dense to stay legible.
+  @Input()
+  @HostBinding('class.show-dots')
+  showDots = true;
 }

@@ -16,6 +16,10 @@ public class MeasureBodyDto {
 
     private String timezone;
 
+    private boolean more;
+
+    private int offset;
+
     @JsonProperty("measuregrps")
     private List<WithingsMeasureGroupDto> measureGroups;
 }

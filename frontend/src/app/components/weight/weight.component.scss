@@ -5,6 +5,15 @@
   align-items: center;
 }
 
+// Constrain the Withings/Tanita tab header to 80% width, centered, so it lines up
+// with the charts (which are 80% wide). Scoped to the direct child so it only hits
+// this outer tab group, not the nested Charts/Tables/Details header.
+:host ::ng-deep > div > .mat-mdc-tab-group > .mat-mdc-tab-header {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 mat-tab-body-wrapper {
   height: 100%;
 }

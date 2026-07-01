@@ -1,6 +1,6 @@
 package com.workouts.myworkouts.model.enums;
 
-public enum MeasurementsProviderType {
+public enum MeasurementsProvider {
     TANITA,
     WITHINGS
 }

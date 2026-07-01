@@ -1,6 +1,7 @@
 package com.workouts.myworkouts.service.weight.withings;
 
 import com.workouts.myworkouts.model.dto.weight.withings.MeasureResponseDto;
+import com.workouts.myworkouts.model.dto.weight.withings.WithingsMeasureType;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,17 +13,21 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public abstract class AbstractWithingsClient {
 
     private static final String MEASURES_URL = "https://wbsapi.withings.net/measure";
 
-    private static final String MEAS_TYPES = "1,6";
+    private static final String MEAS_TYPES = Arrays.stream(WithingsMeasureType.values())
+            .map(type -> String.valueOf(type.getCode()))
+            .collect(Collectors.joining(","));
 
     private final RestTemplate restTemplate = new RestTemplate();
 
     @SneakyThrows
-    HttpEntity<MeasureResponseDto> callGetMeas(String token) {
+    HttpEntity<MeasureResponseDto> callGetMeas(String token, int offset) {
         LocalDateTime time = LocalDateTime.of(2021, 7, 4, 0, 0);
         ZoneId zoneId = ZoneId.of("Europe/Prague");
         long lastUpdate = time.atZone(zoneId).toEpochSecond();
@@ -36,6 +41,9 @@ public abstract class AbstractWithingsClient {
         body.add("meastype", MEAS_TYPES);
         body.add("category", "1");
         body.add("lastupdate", String.valueOf(lastUpdate));
+        if (offset > 0) {
+            body.add("offset", String.valueOf(offset));
+        }
 
         HttpEntity<?> entity = new HttpEntity<>(body, headers);
 

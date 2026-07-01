@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +53,7 @@ public class TanitaServiceImpl implements TanitaService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "weightCharts", allEntries = true)
     public GenericResponseDto saveWeightReport() throws IOException, GeneralSecurityException {
         final byte[] csvFileBytes = gmailService.getAttachmentFromMailByQuery();
 

@@ -7,6 +7,7 @@ import com.workouts.myworkouts.model.mapper.WithingsMeasurementsMapper;
 import com.workouts.myworkouts.repository.weight.withings.WithingsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ public class WithingsServiceImpl implements WithingsService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "weightCharts", allEntries = true)
     public void saveMeasurements(MeasureBodyDto measureBodyDto) {
         withingsRepository.deleteAll();
 

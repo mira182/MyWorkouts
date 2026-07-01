@@ -1,5 +1,14 @@
+<!-- Marker used to render a dot at every vertex of the line path (attached via SCSS).
+     context-stroke makes each dot match its series line colour. -->
+<svg class="chart-defs" aria-hidden="true">
+  <defs>
+    <marker id="ngx-line-dot" markerWidth="8" markerHeight="8" refX="4" refY="4" markerUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="3" fill="context-stroke"></circle>
+    </marker>
+  </defs>
+</svg>
+
 <ngx-charts-line-chart
-  [view]=[700,300]
   [legend]="legend"
   [showXAxisLabel]="showXAxisLabel"
   [showYAxisLabel]="showYAxisLabel"
@@ -8,6 +17,8 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
   [timeline]="timeline"
-  [results]="multi"
+  [autoScale]="autoScale"
+  [curve]="curve"
+  [results]="chartData"
 >
 </ngx-charts-line-chart>
