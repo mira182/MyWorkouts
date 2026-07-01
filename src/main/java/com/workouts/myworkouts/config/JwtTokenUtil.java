@@ -3,12 +3,14 @@ package com.workouts.myworkouts.config;
 import com.workouts.myworkouts.model.entity.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
 import java.util.function.Function;
@@ -19,6 +21,9 @@ import static com.workouts.myworkouts.config.JwtAuthenticationFilter.SIGNING_KEY
 
 @Component
 public class JwtTokenUtil implements Serializable {
+
+    // jjwt 0.12 signs/verifies with a SecretKey and requires >= 256 bits for HS256.
+    private static final SecretKey KEY = Keys.hmacShaKeyFor(SIGNING_KEY.getBytes(StandardCharsets.UTF_8));
 
     public static String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -35,9 +40,10 @@ public class JwtTokenUtil implements Serializable {
 
     private static Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(SIGNING_KEY)
-                .parseClaimsJws(token)
-                .getBody();
+                .verifyWith(KEY)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     private static Boolean isTokenExpired(String token) {
@@ -50,15 +56,12 @@ public class JwtTokenUtil implements Serializable {
     }
 
     private String doGenerateToken(String subject) {
-
-        Claims claims = Jwts.claims().setSubject(subject);
-        claims.put("scopes", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
-
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
-                .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
+                .subject(subject)
+                .claim("scopes", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
+                .signWith(KEY)
                 .compact();
     }
 

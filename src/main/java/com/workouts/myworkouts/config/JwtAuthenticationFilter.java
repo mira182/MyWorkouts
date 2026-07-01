@@ -1,7 +1,7 @@
 package com.workouts.myworkouts.config;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private static String resolveSigningKey() {
         final String key = System.getenv("JWT_SECRET");
-        return (key != null && !key.isBlank()) ? key : "myworkout_key";
+        return (key != null && !key.isBlank()) ? key : "wSbo0MvuLt6QDwSDvGupowEYFnqrbIG7BTM5GzgSZmVIGnzHH8mYhnpnFueyJZ92";
     }
 
     private final UserDetailsService userDetailsService;
