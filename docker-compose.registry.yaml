@@ -1,0 +1,92 @@
+# Pull-based deployment: images are built in GitHub Actions and pushed to GHCR;
+# the NAS only pulls them. Watchtower auto-updates the two app containers.
+#
+# Usage on the NAS (keep your .env beside this file):
+#   docker compose -f docker-compose.registry.yaml pull
+#   docker compose -f docker-compose.registry.yaml up -d
+#
+# If the GHCR packages are private, run `docker login ghcr.io` first (PAT with
+# read:packages) so both the pull above and Watchtower can authenticate.
+
+services:
+  # DATABASE — dedicated to MyWorkouts, not published to the host.
+  # No watchtower label: the DB must never be auto-updated.
+  myworkouts-postgres:
+    image: postgres:16-alpine
+    container_name: myworkouts-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - "/volume2/Apps/MyWorkouts/pgdata:/var/lib/postgresql/data"
+    networks:
+      - myworkouts-backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # FRONTEND — pulled from GHCR; the only service published to the host / reverse proxy.
+  myworkouts-frontend:
+    image: ghcr.io/mira182/myworkouts-frontend:latest
+    container_name: myworkouts-frontend
+    depends_on:
+      - myworkouts-backend
+    ports:
+      - "8082:80"
+    volumes:
+      - "/volume2/Apps/MyWorkouts/img:/usr/share/nginx/html/img:ro"
+    networks:
+      - myworkouts-frontend
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  # BACKEND — pulled from GHCR; not published, reached only via the frontend proxy.
+  myworkouts-backend:
+    image: ghcr.io/mira182/myworkouts-backend:latest
+    container_name: myworkouts-backend
+    depends_on:
+      myworkouts-postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://myworkouts-postgres:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - "/volume2/Apps/MyWorkouts/logs:/usr/app/logs"
+      - "/volume2/Apps/MyWorkouts/img:/usr/app/img"
+      - "/volume2/Apps/MyWorkouts/export:/usr/app/export"
+      - "/volume2/Apps/MyWorkouts/tokens:/usr/app/tokens"
+    networks:
+      - myworkouts-backend
+      - myworkouts-frontend
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  # WATCHTOWER — polls GHCR and recreates the two labelled app containers on new images.
+  watchtower:
+    image: containrrr/watchtower
+    container_name: myworkouts-watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Only needed if the GHCR packages are private (holds the ghcr.io login):
+      # - /volume2/Apps/MyWorkouts/docker-config.json:/config.json:ro
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true    # only watch the labelled app containers (not Postgres)
+      - WATCHTOWER_CLEANUP=true         # remove old images after updating
+      - WATCHTOWER_POLL_INTERVAL=300    # check GHCR every 5 minutes
+    restart: unless-stopped
+
+networks:
+  myworkouts-backend:
+    driver: bridge
+  myworkouts-frontend:
+    driver: bridge
