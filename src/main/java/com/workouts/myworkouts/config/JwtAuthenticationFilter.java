@@ -28,9 +28,14 @@ import java.util.Collections;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     static final long ACCESS_TOKEN_VALIDITY_SECONDS = 36000; // seconds
-    static final String SIGNING_KEY = "myworkout_key";
+    static final String SIGNING_KEY = resolveSigningKey();
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String HEADER_STRING = "Authorization";
+
+    private static String resolveSigningKey() {
+        final String key = System.getenv("JWT_SECRET");
+        return (key != null && !key.isBlank()) ? key : "myworkout_key";
+    }
 
     private final UserDetailsService userDetailsService;
 
