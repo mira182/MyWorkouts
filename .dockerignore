@@ -1,0 +1,17 @@
+# Keeps the backend image build context small and reproducible.
+# The backend is a pure Maven build (src/ + pom.xml); it does not need the
+# frontend, local build output, IDE files, or secrets.
+
+.git
+.idea
+*.iml
+
+# Maven build output (the image rebuilds it inside the container)
+target/
+logs/
+
+# Frontend is built by its own image (frontend/Dockerfile) — not needed here
+frontend/
+
+# Secrets must never enter an image layer
+.env
