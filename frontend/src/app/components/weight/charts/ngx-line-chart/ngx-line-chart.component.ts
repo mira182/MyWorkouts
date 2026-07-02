@@ -1,6 +1,6 @@
 import {Component, HostBinding, Input} from '@angular/core';
 import {NgxWeightChartData} from "../../model/ngx-chart-data-model";
-import {LineChartModule} from "@swimlane/ngx-charts";
+import {Color, LineChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {curveMonotoneX} from "d3-shape";
 
 @Component({
@@ -46,6 +46,23 @@ export class NgxLineChartComponent {
   timeline: boolean = true;
   autoScale: boolean = true;
   curve = curveMonotoneX;
+  // Bright, well-separated line colors that stay readable on the dark theme
+  // (ngx-charts' default scheme is muted blues that vanish on dark surfaces).
+  scheme: Color = {
+    name: 'weightCharts',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: [
+      '#ffa726', // orange
+      '#26c6da', // cyan
+      '#66bb6a', // green
+      '#ec407a', // pink
+      '#ab47bc', // purple
+      '#42a5f5', // blue
+      '#ffee58', // yellow
+      '#ef5350', // red
+    ],
+  };
 
   // Render a dot at each data point. The parent turns this off for the "All" range,
   // where the points are too dense to stay legible.

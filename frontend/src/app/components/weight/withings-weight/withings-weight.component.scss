@@ -3,13 +3,6 @@
   height: 300px;
 }
 
-.mat-tab-labels :last-child.mat-tab-label {
-  min-width: 0;
-  padding: 0 12px;
-  color: unset;
-  opacity: unset;
-}
-
 //mat-cell, mat-header-cell, mat-footer-cell {
 //  overflow: visible;
 //  //padding-right: 12px;
@@ -33,6 +26,11 @@ w-100 {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+:host-context(.dark-theme) .chart-title {
+  color: #fb8c00;               // orange 600
+  border-bottom-color: #ef6c00; // orange 800
 }
 
 // Constrain the tab header row to the same 80% width as the charts (and titles)

@@ -10,6 +10,11 @@
   height: 0;
 }
 
+// Slightly thicker lines for readability (ngx-charts default is a thin 1.5px).
+:host ::ng-deep path.line {
+  stroke-width: 2.5px;
+}
+
 // Attach the dot marker to every vertex of the series line so each measurement
 // shows as a persistent dot. ngx-charts renders the series as <path class="line">.
 // Only applied when the host has .show-dots (few enough points to stay legible).
