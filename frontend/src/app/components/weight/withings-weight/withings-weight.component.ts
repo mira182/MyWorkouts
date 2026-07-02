@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {NgxSpinnerService} from "ngx-spinner";
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {TranslateModule} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {MeasurementDetailsComponent} from "../measurement-details/measurement-details.component";
@@ -45,6 +45,7 @@ interface RangeOption {
     TranslateModule,
     NgxLineChartComponent,
     MatButtonToggleModule,
+    NgxSpinnerModule,
   ],
   providers: [
     WithingsService,
@@ -91,13 +92,34 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.pipe(take(1)).subscribe(params => {
       const withingsCode = params['code'];
       if (withingsCode) {
-        this.withingsService.updateMeasurements(withingsCode);
+        this.importMeasurements(withingsCode);
+      } else {
+        this.loadAllCharts();
       }
     });
+  }
 
+  private importMeasurements(code: string): void {
+    this.spinner.show();
+    this.withingsService.updateMeasurements(code)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.showSuccessSnackBar('ALERT.successfully-saved');
+          this.loadAllCharts();
+          this.spinner.hide();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.snackBar.showErrorSnackBar(err?.error);
+        },
+      });
+  }
+
+  private loadAllCharts(): void {
     this.charts.forEach(chart => this.loadChart(chart));
   }
 
@@ -136,8 +158,23 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
     this.selectedTabIndex = tabIndex;
   }
 
-  redirectToWithingsAuthUrl() {
-    this.withingsService.redirectToWithingsAuthUrl()
+  redirectToWithingsAuthUrl(): void {
+    this.spinner.show();
+    this.withingsService.getWithingsAuthUrl()
+      .pipe(take(1))
+      .subscribe({
+        next: response => {
+          if (response?.authUrl) {
+            window.location.href = response.authUrl;
+          } else {
+            this.spinner.hide();
+          }
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.snackBar.showErrorSnackBar(err?.error);
+        },
+      });
   }
 
 }
