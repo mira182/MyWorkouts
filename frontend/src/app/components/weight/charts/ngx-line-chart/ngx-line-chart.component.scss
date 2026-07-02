@@ -15,9 +15,11 @@
   stroke-width: 2.5px;
 }
 
-// Attach the dot marker to every vertex of the series line so each measurement
-// shows as a persistent dot. ngx-charts renders the series as <path class="line">.
-// Only applied when the host has .show-dots (few enough points to stay legible).
+:host ::ng-deep .ngx-charts-tooltip-content {
+  display: none !important;
+}
+
+
 :host.show-dots ::ng-deep path.line {
   marker-start: url(#ngx-line-dot);
   marker-mid: url(#ngx-line-dot);

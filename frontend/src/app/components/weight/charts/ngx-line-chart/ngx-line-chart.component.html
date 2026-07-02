@@ -18,8 +18,14 @@
   [yAxisLabel]="yAxisLabel"
   [timeline]="timeline"
   [autoScale]="autoScale"
+  [xAxisTicks]="xAxisTicks"
+  [xScaleMin]="xScaleMin"
+  [xAxisTickFormatting]="xAxisFormat"
   [curve]="curve"
   [scheme]="scheme"
   [results]="chartData"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate()"
 >
 </ngx-charts-line-chart>

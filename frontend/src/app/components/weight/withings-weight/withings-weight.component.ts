@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {WithingsMeasurementModel} from "../../../model/weight/withings-measurement.model";
 import {MeasurementsTableComponent} from "../measurements-table/measurements-table.component";
+import {DayDetailsComponent} from "../day-details/day-details.component";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {TranslateModule} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
-import {MeasurementDetailsComponent} from "../measurement-details/measurement-details.component";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatIcon} from "@angular/material/icon";
 import {MatFabButton, MatIconButton} from "@angular/material/button";
@@ -40,7 +40,6 @@ interface RangeOption {
     CommonModule,
     MatTooltip,
     MatTabsModule,
-    MeasurementDetailsComponent,
     MatIcon,
     MatIconButton,
     MatFabButton,
@@ -49,6 +48,7 @@ interface RangeOption {
     MatButtonToggleModule,
     NgxSpinnerModule,
     MeasurementsTableComponent,
+    DayDetailsComponent,
   ],
   providers: [
     WithingsService,
@@ -95,6 +95,10 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 
   protected viewData: { [key: string]: NgxWeightChartData[] } = {};
   private readonly allData: { [key: string]: NgxWeightChartData[] } = {};
+
+  protected tooltip: { visible: boolean; date: Date | null; x: number; y: number } =
+    {visible: false, date: null, x: 0, y: 0};
+  private tooltipHideTimer: ReturnType<typeof setTimeout> | undefined;
 
   constructor(private route: ActivatedRoute,
               private snackBar: SnackBarService,
@@ -180,6 +184,21 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 
   selectedTab(tabIndex: number) {
     this.selectedTabIndex = tabIndex;
+  }
+
+  protected onPointHovered(event: { date: Date; x: number; y: number }): void {
+    clearTimeout(this.tooltipHideTimer);
+    this.tooltip = {
+      visible: true,
+      date: event.date,
+      x: Math.min(event.x + 16, window.innerWidth - 360),
+      y: Math.min(event.y + 16, window.innerHeight - 340),
+    };
+  }
+
+  protected onPointLeft(): void {
+    clearTimeout(this.tooltipHideTimer);
+    this.tooltipHideTimer = setTimeout(() => this.tooltip = {...this.tooltip, visible: false}, 150);
   }
 
   redirectToWithingsAuthUrl(): void {

@@ -160,6 +160,11 @@
     "metabolicAge": "Metabolický věk",
     "physiqueRating": "Hodnocení postavy"
   },
+  "DETAILS": {
+    "metric": "Veličina",
+    "hint": "Kliknutím na bod v grafu zobrazíte všechna měření daného dne.",
+    "no-data": "Žádná měření pro tento den."
+  },
   "DASHBOARD": {
     "BREAKDOWN": {
       "SETS_NUMBER": "Počet setů",

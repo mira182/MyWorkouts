@@ -9,7 +9,9 @@
 
       <ng-container *ngFor="let chart of charts">
         <h3 class="chart-title">{{ chart.title }}</h3>
-        <app-ngx-line-chart class="w-4/5" [chartData]="viewData[chart.key]" [showDots]="selectedRangeDays !== 0"></app-ngx-line-chart>
+        <app-ngx-line-chart class="w-4/5" [chartData]="viewData[chart.key]" [showDots]="selectedRangeDays !== 0"
+                            (pointHovered)="onPointHovered($event)"
+                            (pointLeft)="onPointLeft()"></app-ngx-line-chart>
       </ng-container>
     </div>
   </mat-tab>
@@ -18,17 +20,15 @@
     <app-measurements-table [data]="tableData" [numericColumns]="numericColumns" [units]="units"></app-measurements-table>
   </mat-tab>
 
-  <mat-tab label="Details">
-<!--    <app-measurement-details [measurementData]="measurementData"-->
-<!--                             [date]="measurementDate"-->
-<!--                             [scaleType]="selectedScaleType">-->
-<!--    </app-measurement-details>-->
-  </mat-tab>
-
 </mat-tab-group>
 
 <button mat-fab class="update-fab" color="primary" matTooltip="{{'WEIGHT.update' | translate}}"
         (click)="redirectToWithingsAuthUrl()">
   <mat-icon>update</mat-icon>
 </button>
+
+<div class="day-tooltip" *ngIf="tooltip.visible && tooltip.date"
+     [style.left.px]="tooltip.x" [style.top.px]="tooltip.y">
+  <app-day-details [date]="tooltip.date" [data]="tableData" [numericColumns]="numericColumns" [units]="units"></app-day-details>
+</div>
 </div>

@@ -160,6 +160,11 @@
     "metabolicAge": "Metabolic age",
     "physiqueRating": "Physique rating"
   },
+  "DETAILS": {
+    "metric": "Metric",
+    "hint": "Click a point in any chart to see all measurements for that day.",
+    "no-data": "No measurements for this day."
+  },
   "DASHBOARD": {
     "BREAKDOWN": {
       "SETS_NUMBER": "Number of Sets",

@@ -101,3 +101,19 @@ w-100 {
   bottom: 24px;
   z-index: 100;
 }
+
+.day-tooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  max-width: 24rem;
+  padding: 0 0.75rem;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+:host-context(.dark-theme) .day-tooltip {
+  background: #2b2b2b;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+}

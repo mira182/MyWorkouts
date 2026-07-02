@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input} from '@angular/core';
+import {Component, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
 import {NgxWeightChartData} from "../../model/ngx-chart-data-model";
 import {Color, LineChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {curveMonotoneX} from "d3-shape";
@@ -28,6 +28,7 @@ export class NgxLineChartComponent {
           value: point.value
         }))
     })) as unknown as NgxWeightChartData[];
+    this.computeXAxisTicks();
   }
 
   get chartData(): NgxWeightChartData[] {
@@ -69,4 +70,78 @@ export class NgxLineChartComponent {
   @Input()
   @HostBinding('class.show-dots')
   showDots = true;
+
+  @Output() pointSelected = new EventEmitter<Date>();
+  @Output() pointHovered = new EventEmitter<{ date: Date; x: number; y: number }>();
+  @Output() pointLeft = new EventEmitter<void>();
+
+  private lastMouse = {x: 0, y: 0};
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    this.lastMouse = {x: event.clientX, y: event.clientY};
+  }
+
+  protected onSelect(event: any): void {
+    if (event?.name instanceof Date) {
+      this.pointSelected.emit(event.name);
+      this.pointHovered.emit({date: event.name, ...this.lastMouse});
+    }
+  }
+
+  protected onActivate(event: any): void {
+    const item = event?.value ?? event;
+    if (item?.name instanceof Date) {
+      this.pointHovered.emit({date: item.name, ...this.lastMouse});
+    }
+  }
+
+  protected onDeactivate(): void {
+    this.pointLeft.emit();
+  }
+
+  private static readonly DAILY_TICKS_MAX_DAYS = 31;
+
+  xAxisTicks?: Date[];
+  xScaleMin?: Date;
+
+  xAxisFormat = (value: any): string => {
+    const d = new Date(value);
+    return `${d.getDate()}.${d.getMonth() + 1}.`;
+  };
+
+  private computeXAxisTicks(): void {
+    const times = this._chartData
+      .flatMap(series => series.series ?? [])
+      .map(point => (point.name as unknown as Date).getTime());
+
+    if (!times.length) {
+      this.xAxisTicks = undefined;
+      this.xScaleMin = undefined;
+      return;
+    }
+
+    const startOfDay = (t: number) => {
+      const d = new Date(t);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    };
+
+    const first = startOfDay(Math.min(...times));
+    const last = startOfDay(Math.max(...times));
+    const days = Math.round((last.getTime() - first.getTime()) / 86_400_000) + 1;
+
+    if (days > NgxLineChartComponent.DAILY_TICKS_MAX_DAYS) {
+      this.xAxisTicks = undefined;
+      this.xScaleMin = undefined;
+      return;
+    }
+
+    const ticks: Date[] = [];
+    for (let i = 0; i < days; i++) {
+      ticks.push(new Date(first.getTime() + i * 86_400_000));
+    }
+    this.xAxisTicks = ticks;
+    this.xScaleMin = first;
+  }
 }
