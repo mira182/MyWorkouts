@@ -8,13 +8,12 @@ import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {MeasurementDetailsComponent} from "../measurement-details/measurement-details.component";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatFabButton, MatIconButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
 import {CommonModule} from "@angular/common";
 import {WithingsService} from "../../../services/weight/withings/withings.service";
 import {BaseWeightClass} from "../base-weight/base-weight.class";
 import {forkJoin, take} from "rxjs";
-import {FormBuilder, FormGroup} from "@angular/forms";
 import {NgxWeightChartData} from "../model/ngx-chart-data-model";
 import {MeasurementType} from "../../../model/weight/measurement-type.enum";
 import {NgxWeightChartService} from "../../../services/rest/chart/weight/ngx/ngx-weight-chart.service";
@@ -44,6 +43,7 @@ interface RangeOption {
     MeasurementDetailsComponent,
     MatIcon,
     MatIconButton,
+    MatFabButton,
     TranslateModule,
     NgxLineChartComponent,
     MatButtonToggleModule,

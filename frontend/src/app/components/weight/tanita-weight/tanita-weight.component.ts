@@ -60,7 +60,7 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
     'muscleMass', 'muscleMassRatio', 'muscleQuality', 'boneMass', 'visceralFat', 'bmr',
     'metabolicAge', 'physiqueRating'
   ];
-
+ 
   protected readonly units: Record<string, string> = {
     weight: 'kg',
     bmi: '',

@@ -3,14 +3,9 @@
 <mat-tab-group (selectedIndexChange)="selectedTab($event)" [selectedIndex]="selectedTabIndex">
   <mat-tab label="Charts">
     <div class="flex flex-col items-center w-full py-4">
-      <div class="flex items-center gap-3 mb-4">
-        <mat-button-toggle-group [value]="selectedRangeDays" (change)="onRangeChange($event.value)">
-          <mat-button-toggle *ngFor="let range of ranges" [value]="range.days">{{ range.label }}</mat-button-toggle>
-        </mat-button-toggle-group>
-        <button mat-icon-button matTooltip="{{'WEIGHT.update' | translate}}" (click)="redirectToWithingsAuthUrl()">
-          <mat-icon>update</mat-icon>
-        </button>
-      </div>
+      <mat-button-toggle-group class="range-toggle mb-4" [value]="selectedRangeDays" (change)="onRangeChange($event.value)">
+        <mat-button-toggle *ngFor="let range of ranges" [value]="range.days">{{ range.label }}</mat-button-toggle>
+      </mat-button-toggle-group>
 
       <ng-container *ngFor="let chart of charts">
         <h3 class="chart-title">{{ chart.title }}</h3>
@@ -31,4 +26,9 @@
   </mat-tab>
 
 </mat-tab-group>
+
+<button mat-fab class="update-fab" color="primary" matTooltip="{{'WEIGHT.update' | translate}}"
+        (click)="redirectToWithingsAuthUrl()">
+  <mat-icon>update</mat-icon>
+</button>
 </div>
