@@ -143,6 +143,23 @@
     "BMI": "BMI",
     "BODY_FAT": "Body fat"
   },
+  "TABLE": {
+    "date": "Date",
+    "weight": "Weight",
+    "bmi": "BMI",
+    "bodyFatRatio": "Fat ratio",
+    "bodyFatMass": "Fat mass",
+    "bodyWatterRatio": "Water ratio",
+    "bodyWatterMass": "Water mass",
+    "muscleMass": "Muscle mass",
+    "muscleMassRatio": "Muscle ratio",
+    "boneMass": "Bone mass",
+    "visceralFat": "Visceral fat",
+    "muscleQuality": "Muscle quality",
+    "bmr": "BMR",
+    "metabolicAge": "Metabolic age",
+    "physiqueRating": "Physique rating"
+  },
   "DASHBOARD": {
     "BREAKDOWN": {
       "SETS_NUMBER": "Number of Sets",

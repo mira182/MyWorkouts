@@ -10,9 +10,6 @@
         <button mat-icon-button matTooltip="{{'WEIGHT.update' | translate}}" (click)="redirectToWithingsAuthUrl()">
           <mat-icon>update</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="{{'WEIGHT.report' | translate}}">
-          <mat-icon>preview</mat-icon>
-        </button>
       </div>
 
       <ng-container *ngFor="let chart of charts">
@@ -23,7 +20,7 @@
   </mat-tab>
 
   <mat-tab label="Tables">
-
+    <app-measurements-table [data]="tableData" [numericColumns]="numericColumns" [units]="units"></app-measurements-table>
   </mat-tab>
 
   <mat-tab label="Details">

@@ -33,11 +33,11 @@ export class WithingsService {
   }
 
   public getMeasurements(): Observable<WithingsMeasurementModel[]> {
-    return this.http.get<WithingsMeasurementModel[]>(Urls.API_URL + '/weight/withings/getMeasurements')
+    return this.http.get<WithingsMeasurementModel[]>(Urls.API_URL + '/weight/withings/measurements/getMeasurements')
   }
 
   public getMeasurementByDate(date: Moment): Observable<WithingsMeasurementModel[]> {
     let params = new HttpParams().set('date', date.format('dd-MM-yyyy'));
-    return this.http.get<WithingsMeasurementModel[]>(Urls.API_URL + '/weight/withings/getMeasurementByDate', {params})
+    return this.http.get<WithingsMeasurementModel[]>(Urls.API_URL + '/weight/withings/measurements/getMeasurementByDate', {params})
   }
 }

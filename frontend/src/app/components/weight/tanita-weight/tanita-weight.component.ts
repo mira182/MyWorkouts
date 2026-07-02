@@ -21,6 +21,8 @@ import {
 } from "../../../services/rest/chart/weight/ngx/ngx-weight-chart.service";
 import moment from "moment";
 import {NgxWeightChartData} from "../model/ngx-chart-data-model";
+import {MeasurementsTableComponent} from "../measurements-table/measurements-table.component";
+import {TanitaMeasurementModel} from "../../../model/weight/tanita-measurement.model";
 
 @Component({
   selector: 'app-tanita-weight',
@@ -41,6 +43,7 @@ import {NgxWeightChartData} from "../model/ngx-chart-data-model";
     TranslateModule,
     NgxChartsModule,
     NgxSpinnerModule,
+    MeasurementsTableComponent,
   ],
   providers: [
     TanitaService,
@@ -52,10 +55,29 @@ import {NgxWeightChartData} from "../model/ngx-chart-data-model";
 export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
 
 
-  displayedColumns = ['date', 'weight', 'bmi', 'bmr', 'bodyFatRatio', 'bodyWatterRatio', 'muscleMass', 'muscleMassRatio', 'muscleQuality', 'physiqueRating', 'visceralFat', 'metabolicAge'];
-  smallFirstTableColumns = ['date', 'weight', 'bmi', 'bodyFatRatio', 'visceralFat'];
-  smallSecondTableColumns = ['date', 'bmr', 'bodyWatterRatio', 'muscleMass',  'muscleMassRatio'];
-  differenceTableColumns = ['date', 'weightDifference', 'bodyFatRatioDifference', 'bodyFatMassDifference', 'visceralFatDifference'];
+  protected readonly numericColumns = [
+    'weight', 'bmi', 'bodyFatRatio', 'bodyFatMass', 'bodyWatterRatio', 'bodyWatterMass',
+    'muscleMass', 'muscleMassRatio', 'muscleQuality', 'boneMass', 'visceralFat', 'bmr',
+    'metabolicAge', 'physiqueRating'
+  ];
+
+  protected readonly units: Record<string, string> = {
+    weight: 'kg',
+    bmi: '',
+    bodyFatRatio: '%',
+    bodyFatMass: 'kg',
+    bodyWatterRatio: '%',
+    bodyWatterMass: 'kg',
+    muscleMass: 'kg',
+    muscleMassRatio: '%',
+    muscleQuality: '',
+    boneMass: 'kg',
+    visceralFat: '',
+    bmr: 'kcal',
+    metabolicAge: '',
+    physiqueRating: '',
+  };
+  protected tableData: TanitaMeasurementModel[] = [];
 
   public showChartsFormGroup: FormGroup;
 
@@ -86,6 +108,17 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
           this.tanitaWeightData = [data];
         },
         error: (err) => this.snackBar.showErrorSnackBar(err),
+      });
+
+    this.loadTable();
+  }
+
+  private loadTable(): void {
+    this.tanitaService.getMeasurements()
+      .pipe(take(1))
+      .subscribe({
+        next: measurements => this.tableData = measurements,
+        error: (err) => this.snackBar.showErrorSnackBar(err?.error),
       });
   }
 

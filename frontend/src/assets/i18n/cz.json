@@ -143,6 +143,23 @@
     "BMI": "BMI",
     "BODY_FAT": "Tuk"
   },
+  "TABLE": {
+    "date": "Datum",
+    "weight": "Váha",
+    "bmi": "BMI",
+    "bodyFatRatio": "Podíl tuku",
+    "bodyFatMass": "Hmotnost tuku",
+    "bodyWatterRatio": "Podíl vody",
+    "bodyWatterMass": "Hmotnost vody",
+    "muscleMass": "Hmotnost svalů",
+    "muscleMassRatio": "Podíl svalů",
+    "boneMass": "Hmotnost kostí",
+    "visceralFat": "Viscerální tuk",
+    "muscleQuality": "Kvalita svalů",
+    "bmr": "BMR",
+    "metabolicAge": "Metabolický věk",
+    "physiqueRating": "Hodnocení postavy"
+  },
   "DASHBOARD": {
     "BREAKDOWN": {
       "SETS_NUMBER": "Počet setů",

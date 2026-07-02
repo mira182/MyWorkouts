@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {WithingsMeasurementModel} from "../../../model/weight/withings-measurement.model";
+import {MeasurementsTableComponent} from "../measurements-table/measurements-table.component";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {TranslateModule} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
@@ -46,6 +48,7 @@ interface RangeOption {
     NgxLineChartComponent,
     MatButtonToggleModule,
     NgxSpinnerModule,
+    MeasurementsTableComponent,
   ],
   providers: [
     WithingsService,
@@ -53,12 +56,23 @@ interface RangeOption {
 })
 export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 
-  displayedColumns = ['date', 'weight', 'bmi', 'bodyFatRatio', 'bodyFatMass', 'bodyWatterRatio', 'bodyWatterMass', 'muscleMass', 'muscleMassRatio'];
-  smallFirstTableColumns = ['date', 'weight', 'bmi', 'bodyFatRatio', 'bodyFatMass',];
-  smallSecondTableColumns = ['date', 'bodyWatterRatio', 'bodyWatterMass', 'muscleMass', 'muscleMassRatio'];
-  differenceTableColumns = ['date', 'weightDifference', 'bodyFatRatioDifference', 'bodyFatMassDifference'];
+  protected readonly numericColumns = [
+    'weight', 'bmi', 'bodyFatRatio', 'bodyFatMass', 'bodyWatterRatio', 'bodyWatterMass',
+    'muscleMass', 'muscleMassRatio', 'boneMass'
+  ];
 
-  public showChartsFormGroup: FormGroup;
+  protected readonly units: Record<string, string> = {
+    weight: 'kg',
+    bmi: '',
+    bodyFatRatio: '%',
+    bodyFatMass: 'kg',
+    bodyWatterRatio: '%',
+    bodyWatterMass: 'kg',
+    muscleMass: 'kg',
+    muscleMassRatio: '%',
+    boneMass: 'kg',
+  };
+  protected tableData: WithingsMeasurementModel[] = [];
 
   protected readonly charts: ChartDefinition[] = [
     {key: 'weight', title: 'Weight', types: ['WEIGHT']},
@@ -86,8 +100,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
               private snackBar: SnackBarService,
               private withingsService: WithingsService,
               private spinner: NgxSpinnerService,
-              private readonly chartService: NgxWeightChartService,
-              private readonly formBuilder: FormBuilder) {
+              private readonly chartService: NgxWeightChartService) {
     super();
   }
 
@@ -98,6 +111,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
         this.importMeasurements(withingsCode);
       } else {
         this.loadAllCharts();
+        this.loadTable();
       }
     });
   }
@@ -110,6 +124,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
         next: () => {
           this.snackBar.showSuccessSnackBar('ALERT.successfully-saved');
           this.loadAllCharts();
+          this.loadTable();
           this.spinner.hide();
         },
         error: (err) => {
@@ -121,6 +136,15 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 
   private loadAllCharts(): void {
     this.charts.forEach(chart => this.loadChart(chart));
+  }
+
+  private loadTable(): void {
+    this.withingsService.getMeasurements()
+      .pipe(take(1))
+      .subscribe({
+        next: measurements => this.tableData = measurements,
+        error: (err) => this.snackBar.showErrorSnackBar(err?.error),
+      });
   }
 
   protected onRangeChange(days: number): void {
