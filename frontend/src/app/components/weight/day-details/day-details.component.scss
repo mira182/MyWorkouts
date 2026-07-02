@@ -1,0 +1,36 @@
+.day-title {
+  margin: 0.5rem 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.day-table {
+  border-collapse: collapse;
+  min-width: 20rem;
+
+  th, td {
+    padding: 0.5rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  th {
+    font-weight: 600;
+  }
+
+  .metric {
+    font-weight: 500;
+    opacity: 0.75;
+  }
+}
+
+.hint {
+  opacity: 0.7;
+  padding: 1.5rem 0;
+}
+
+:host-context(.dark-theme) .day-table th,
+:host-context(.dark-theme) .day-table td {
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
