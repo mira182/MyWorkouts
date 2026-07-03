@@ -15,6 +15,8 @@ public interface WorkoutService {
 
     List<WorkoutDto> findBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate);
 
+    List<LocalDate> findWorkoutDatesBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate);
+
     WorkoutDto addWorkoutExerciseToWorkout(@NonNull WorkoutDto workoutDto);
 
     void deleteWorkout(long id);

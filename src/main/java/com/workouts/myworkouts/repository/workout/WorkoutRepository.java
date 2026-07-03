@@ -15,6 +15,9 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long> {
     @Query("SELECT w from Workout w WHERE w.date BETWEEN :startDate AND :endDate ORDER BY w.date ")
     List<Workout> findWorkoutsBetweenDates(LocalDate startDate, LocalDate endDate);
 
+    @Query("SELECT w.date FROM Workout w WHERE w.date BETWEEN :startDate AND :endDate ORDER BY w.date")
+    List<LocalDate> findWorkoutDatesBetweenDates(LocalDate startDate, LocalDate endDate);
+
     Optional<Workout> findByDate(LocalDate date);
 
     long countAllByDateBetween(LocalDate startDate, LocalDate endDate);

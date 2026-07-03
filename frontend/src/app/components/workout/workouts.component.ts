@@ -6,7 +6,6 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatMiniFabButton} from "@angular/material/button";
 import {DaySelectComponent} from "../day-select/day-select.component";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutService} from "../../services/rest/workout/workout.service";
@@ -30,7 +29,6 @@ import {WorkoutDayService} from "../../services/rest/workout/workout-day.service
     TranslateModule,
     MatMiniFabButton,
     DaySelectComponent,
-    MatProgressSpinner,
     NgxSpinnerModule,
     WorkoutExerciseComponent,
     PageHeaderLayoutComponent

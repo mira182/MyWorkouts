@@ -2,7 +2,22 @@
   "app.home.title": "My Center",
   "HOME": {
     "welcome": "Vítej",
-    "home": "Domů"
+    "home": "Domů",
+    "good-morning": "Dobré ráno",
+    "good-afternoon": "Dobré odpoledne",
+    "good-evening": "Dobrý večer",
+    "weight-title": "Aktuální váha",
+    "no-weight-data": "Zatím žádná data o váze.",
+    "no-weight-week": "V tomto týdnu žádná měření.",
+    "delta-7-tooltip": "Změna oproti stavu 7 dní před zobrazeným měřením",
+    "delta-30-tooltip": "Změna oproti stavu 30 dní před zobrazeným měřením",
+    "delta-average-7-tooltip": "Průměr vybraného týdne oproti předchozímu týdnu",
+    "today-workout": "Dnešní trénink",
+    "no-workout-today": "Dnes zatím žádný trénink.",
+    "open-workout": "Otevřít trénink",
+    "sets": "sérií",
+    "calendar-title": "Kalendář tréninků",
+    "sync-withings": "Synchronizovat Withings"
   },
   "USER": {
     "user-details": "Detaily o uživateli",

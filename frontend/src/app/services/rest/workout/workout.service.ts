@@ -16,6 +16,15 @@ export class WorkoutService {
     return this.http.get<Workout>(Urls.API_URL + Urls.WORKOUT_URL, { params: { date: date.format('yyyy-MM-DD') } });
   }
 
+  public getWorkoutDates(startDate: Moment, endDate: Moment): Observable<string[]> {
+    return this.http.get<string[]>(Urls.API_URL + Urls.WORKOUT_URL + '/dates', {
+      params: {
+        startDate: startDate.format('yyyy-MM-DD'),
+        endDate: endDate.format('yyyy-MM-DD'),
+      }
+    });
+  }
+
   public createWorkout(workout: Workout): Observable<Workout> {
     return this.http.post<Workout>(Urls.API_URL + Urls.WORKOUT_URL + '/create', workout);
   }

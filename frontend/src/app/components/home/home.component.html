@@ -1,5 +1,97 @@
-  <p>
-    {{ 'HOME.welcome' | translate }} {{ user.firstName }}
-  </p>
+<div class="home flex flex-col items-center w-full py-6 px-4 gap-5">
+  <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true"></ngx-spinner>
 
-<!--  <app-calendar-workouts></app-calendar-workouts>-->
+  <h2 class="greeting">{{ greetingKey | translate }}, {{ user?.firstName }}!</h2>
+
+  <div class="quick-actions flex flex-wrap justify-center gap-3">
+    <button mat-flat-button color="primary" routerLink="/workouts">
+      <mat-icon>add</mat-icon>
+      {{ 'BUTTON.add-workout' | translate }}
+    </button>
+    <button mat-stroked-button routerLink="/weight">
+      <mat-icon>monitor_weight</mat-icon>
+      {{ 'WEIGHT.weight' | translate }}
+    </button>
+    <button mat-stroked-button routerLink="/dashboard">
+      <mat-icon>insights</mat-icon>
+      {{ 'BUTTON.dashboard' | translate }}
+    </button>
+    <button mat-stroked-button (click)="syncWithings()">
+      <mat-icon>sync</mat-icon>
+      {{ 'HOME.sync-withings' | translate }}
+    </button>
+  </div>
+
+  <div class="cards flex flex-wrap justify-center items-start gap-5 w-full">
+    <!-- WEIGHT AT A GLANCE -->
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title>{{ 'HOME.weight-title' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="week-nav">
+          <button mat-icon-button type="button" (click)="previousWeek()">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <span class="week-label">{{ weekLabel }}</span>
+          <button mat-icon-button type="button" (click)="nextWeek()" [disabled]="isCurrentWeek">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+        <ng-container *ngIf="latestWeight; else noWeight">
+          <div class="current-weight">{{ latestWeight | number: '1.1-1' }} <span class="unit">kg</span></div>
+          <div class="deltas">
+            <span class="delta" [ngClass]="deltaClass(deltaWeek)" *ngIf="deltaWeek !== undefined"
+                  [matTooltip]="'HOME.delta-7-tooltip' | translate">
+              {{ deltaArrow(deltaWeek) }} {{ deltaAbs(deltaWeek) | number: '1.1-1' }} kg / 7d
+            </span>
+            <span class="delta" [ngClass]="deltaClass(deltaMonth)" *ngIf="deltaMonth !== undefined"
+                  [matTooltip]="'HOME.delta-30-tooltip' | translate">
+              {{ deltaArrow(deltaMonth) }} {{ deltaAbs(deltaMonth) | number: '1.1-1' }} kg / 30d
+            </span>
+            <span class="delta" [ngClass]="deltaClass(deltaAvgWeek)" *ngIf="deltaAvgWeek !== undefined"
+                  [matTooltip]="'HOME.delta-average-7-tooltip' | translate">
+              {{ deltaArrow(deltaAvgWeek) }} {{ deltaAbs(deltaAvgWeek) | number: '1.1-1' }} kg / WAVG
+            </span>
+          </div>
+          <app-ngx-line-chart [compact]="true" [showDots]="false" [chartData]="sparkData"></app-ngx-line-chart>
+        </ng-container>
+        <ng-template #noWeight>
+          <p class="hint">{{ 'HOME.no-weight-week' | translate }}</p>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- TODAY'S WORKOUT -->
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title>{{ 'HOME.today-workout' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ng-container *ngIf="todayWorkout?.workoutExercises?.length; else noWorkout">
+          <ul class="exercise-list">
+            <li *ngFor="let we of todayWorkout!.workoutExercises">
+              {{ we.exercise.name }}
+              <span class="sets">({{ we.workoutSets?.length || 0 }} {{ 'HOME.sets' | translate }})</span>
+            </li>
+          </ul>
+          <button mat-button color="primary" routerLink="/workouts">{{ 'HOME.open-workout' | translate }}</button>
+        </ng-container>
+        <ng-template #noWorkout>
+          <p class="hint">{{ 'HOME.no-workout-today' | translate }}</p>
+          <button mat-flat-button color="primary" routerLink="/workouts">{{ 'BUTTON.add-workout' | translate }}</button>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- WORKOUT CALENDAR -->
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title>{{ 'HOME.calendar-title' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-workout-calendar></app-workout-calendar>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class WorkoutDto {
 
+    private Long id;
+
     private LocalDate date;
 
     private String note;

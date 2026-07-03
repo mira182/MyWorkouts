@@ -27,21 +27,25 @@
     <mat-step>
       <ng-template matStepLabel>{{ 'WORKOUTS.select-exercise' | translate }}</ng-template>
       <mat-action-list>
-        <button mat-list-item matStepperNext (click)="selectExercise(exercise)"
-                *ngFor="let exercise of exercisesByCategory">
-          <div class="flex flex-row gap-x-2">
-            <div>
-              <img ngSrc="{{ IMAGE_BASE_URL + imageUtilsService.getExerciseIconPath(exercise) }}" width="32" height="32">
+        <div *ngIf="exercisesByCategory.length > 0; else noExercisesByCategory">
+          <button mat-list-item matStepperNext (click)="selectExercise(exercise)"
+                  *ngFor="let exercise of exercisesByCategory">
+            <div class="flex flex-row gap-x-2">
+              <div>
+                <img ngSrc="{{ IMAGE_BASE_URL + imageUtilsService.getExerciseIconPath(exercise) }}" width="32" height="32">
+              </div>
+              <span class="text-wrap">{{ exercise.name }}</span>
             </div>
-            <span class="text-wrap">
-              {{ exercise.name }}
-            </span>
-          </div>
-        </button>
-      </mat-action-list>
+          </button>
+        </div>
+        <ng-template #noExercisesByCategory>
+          No exercises found in this category
+        </ng-template>
+
       <div class="flex flex-row justify-end items-center action-buttons">
         <button mat-button matStepperPrevious>{{ 'BUTTON.back' | translate }}</button>
       </div>
+      </mat-action-list>
     </mat-step>
 
     <!-- STEP 3 -->

@@ -71,6 +71,24 @@ export class NgxLineChartComponent {
   @HostBinding('class.show-dots')
   showDots = true;
 
+  private _compact = false;
+
+  @Input()
+  @HostBinding('class.compact')
+  set compact(value: boolean) {
+    this._compact = value;
+    if (value) {
+      this.legend = false;
+      this.showXAxisLabel = false;
+      this.showYAxisLabel = false;
+    }
+    this.computeXAxisTicks();
+  }
+
+  get compact(): boolean {
+    return this._compact;
+  }
+
   @Output() pointSelected = new EventEmitter<Date>();
   @Output() pointHovered = new EventEmitter<{ date: Date; x: number; y: number }>();
   @Output() pointLeft = new EventEmitter<void>();
@@ -115,7 +133,7 @@ export class NgxLineChartComponent {
       .flatMap(series => series.series ?? [])
       .map(point => (point.name as unknown as Date).getTime());
 
-    if (!times.length) {
+    if (this._compact || !times.length) {
       this.xAxisTicks = undefined;
       this.xScaleMin = undefined;
       return;

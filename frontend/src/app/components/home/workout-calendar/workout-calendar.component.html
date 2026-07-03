@@ -1,0 +1,22 @@
+<div class="cal-header">
+  <button mat-icon-button type="button" (click)="previousMonth()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span class="month-label">{{ month.format('MMMM YYYY') }}</span>
+  <button mat-icon-button type="button" (click)="nextMonth()">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
+
+<div class="cal-grid">
+  <span class="weekday" *ngFor="let d of weekdayLabels">{{ d }}</span>
+  <ng-container *ngFor="let week of weeks">
+    <button type="button" class="day" *ngFor="let day of week"
+            [class.out]="!day.inMonth"
+            [class.today]="day.isToday"
+            [class.has-workout]="day.hasWorkout"
+            (click)="openDay(day)">
+      {{ day.date.date() }}
+    </button>
+  </ng-container>
+</div>

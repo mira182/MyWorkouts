@@ -8,7 +8,6 @@ import org.mapstruct.Mapper;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.List;
 
 @Mapper(componentModel = "spring", collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED, uses = { WorkoutExerciseMapper.class })
 public interface WorkoutMapper {
@@ -28,7 +27,8 @@ public interface WorkoutMapper {
     default BigDecimal workoutSetsCount(WorkoutDto workoutDto) {
         return BigDecimal.valueOf(workoutDto.getWorkoutExercises().stream()
                 .map(WorkoutExerciseDto::getWorkoutSets)
-                .map(List::size).count());
+                .mapToLong(Collection::size)
+                .sum());
     }
 
     default BigDecimal workoutRepsCount(WorkoutDto workoutDto) {

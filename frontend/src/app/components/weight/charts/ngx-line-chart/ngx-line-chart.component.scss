@@ -3,7 +3,10 @@
   height: 350px;
 }
 
-// Hidden container that only holds the <marker> definition.
+:host.compact {
+  height: 180px;
+}
+
 .chart-defs {
   position: absolute;
   width: 0;

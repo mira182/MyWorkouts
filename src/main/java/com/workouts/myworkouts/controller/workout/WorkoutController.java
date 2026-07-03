@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.workouts.myworkouts.config.Constants.API_BASE_URL;
 
@@ -20,6 +21,11 @@ public class WorkoutController {
     @GetMapping()
     public WorkoutDto getWorkoutByDate(@RequestParam LocalDate date) {
         return workoutService.findByDate(date);
+    }
+
+    @GetMapping("/dates")
+    public List<LocalDate> getWorkoutDates(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
+        return workoutService.findWorkoutDatesBetweenDates(startDate, endDate);
     }
 
     @PostMapping("/create")

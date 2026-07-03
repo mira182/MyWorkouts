@@ -2,7 +2,22 @@
   "app.home.title": "My Center",
   "HOME": {
     "welcome": "Welcome user",
-    "home": "Home"
+    "home": "Home",
+    "good-morning": "Good morning",
+    "good-afternoon": "Good afternoon",
+    "good-evening": "Good evening",
+    "weight-title": "Current weight",
+    "no-weight-data": "No weight data yet.",
+    "no-weight-week": "No measurements in this week.",
+    "delta-7-tooltip": "Change compared to 7 days before the shown measurement",
+    "delta-30-tooltip": "Change compared to 30 days before the shown measurement",
+    "delta-average-7-tooltip": "Average of the selected week compared to the previous week",
+    "today-workout": "Today's workout",
+    "no-workout-today": "No workout logged today.",
+    "open-workout": "Open workout",
+    "sets": "sets",
+    "calendar-title": "Workout calendar",
+    "sync-withings": "Sync Withings"
   },
   "USER": {
     "user-details": "User details",

@@ -51,6 +51,12 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<LocalDate> findWorkoutDatesBetweenDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
+        return workoutRepository.findWorkoutDatesBetweenDates(startDate, endDate);
+    }
+
+    @Override
     @Transactional
     public WorkoutDto addWorkoutExerciseToWorkout(@NonNull WorkoutDto workoutDto) {
         // TODO check if workout exercise doesn't already exist with the same exercise name
