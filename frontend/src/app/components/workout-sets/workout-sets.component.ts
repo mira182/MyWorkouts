@@ -12,10 +12,9 @@ import {WorkoutSetComponentConfigurationModel} from "../workout-exercise/model/w
 import {ExerciseType} from "../../model/exercise/exerciseType";
 
 @Component({
-  selector: 'app-workout-sets',
+  selector: 'workout-sets',
   standalone: true,
   imports: [
-    DatePickerComponent,
     MatFormField,
     MatIcon,
     MatIconButton,
@@ -24,8 +23,7 @@ import {ExerciseType} from "../../model/exercise/exerciseType";
     MatTooltip,
     NgForOf,
     NgIf,
-    ReactiveFormsModule,
-    JsonPipe
+    ReactiveFormsModule
   ],
   templateUrl: './workout-sets.component.html',
 })

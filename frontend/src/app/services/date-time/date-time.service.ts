@@ -1,11 +1,18 @@
 import {Injectable} from '@angular/core';
 import {RangeType} from "../../model/utils/rangeType";
-import {Moment} from "moment";
+import moment, {Moment} from "moment";
+import "moment/locale/cs";
 
 @Injectable()
 export class DateTimeService {
 
   constructor() { }
+
+  // Localised long date (Czech by default); returns '' for an invalid/empty date.
+  public static formatDate(date, format: string = 'LL', locale: string = 'cs'): string {
+    const parsed = moment(date);
+    return parsed.isValid() ? parsed.locale(locale).format(format) : '';
+  }
 
   public static startOfWeek(date: Date) {
     const diff = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);

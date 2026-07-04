@@ -1,14 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WorkoutExercise} from "../../model/workout-exercise/workoutExercise";
-import {CommonModule, JsonPipe, NgForOf, NgSwitchCase} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCard, MatCardContent, MatCardSubtitle} from "@angular/material/card";
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatDivider} from "@angular/material/divider";
-import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
-import {MatInput} from "@angular/material/input";
 import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
@@ -22,26 +20,17 @@ import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
 import {API_DATE_FORMAT} from "../../app.config";
 
 @Component({
-  selector: 'app-workout-exercise',
+  selector: 'workout-exercise',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    JsonPipe,
     MatCardContent,
     MatCardSubtitle,
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
     MatDivider,
-    MatFormField,
     MatIcon,
     MatIconButton,
-    MatInput,
-    MatLabel,
     MatTooltip,
-    NgForOf,
-    NgSwitchCase,
     ReactiveFormsModule,
     TranslateModule,
     MatCard,

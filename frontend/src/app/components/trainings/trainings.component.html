@@ -26,7 +26,7 @@
               {{trainingPlan.value.name}}
             </mat-panel-title>
             <mat-panel-description>
-              {{trainingPlan.value.startDate}} {{trainingPlan.value.trainingDay}}
+              {{ formatDate(trainingPlan.value.startDate) }} {{ trainingPlan.value.trainingDay }}
             </mat-panel-description>
           </mat-expansion-panel-header>
 
@@ -41,7 +41,7 @@
             <button mat-icon-button color="primary" (click)="deleteTraining(trainingPlan)">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-icon-button color="primary" (click)="addWorkoutToTraining(trainingIndex)">
+            <button mat-icon-button color="primary" (click)="addExerciseToTraining(trainingIndex)">
               <mat-icon>add</mat-icon>
             </button>
             <button mat-icon-button color="primary" (click)="logTraining(trainingPlan)">
@@ -71,21 +71,38 @@
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Training time"
-                     formControlName="trainingTime">
-              <ngx-material-timepicker #timePicker></ngx-material-timepicker>
+              <mat-label>Training time</mat-label>
+              <input matInput type="time" formControlName="trainingTime">
             </mat-form-field>
 
             <mat-checkbox [formControl]="trainingPlan.get('scheduled')">Scheduled</mat-checkbox>
           </div>
 
             <mat-progress-bar *ngIf="workoutsLoading" mode="indeterminate"></mat-progress-bar>
-<!--            <app-workout-exercise-->
-<!--              *ngFor="let workoutExercise of trainingPlan.get('workout').value.workoutExercises"-->
-<!--              [workoutExercise]="workoutExercise">-->
-<!--            </app-workout-exercise>-->
-<!--            <app-workouts-handler [workoutsInput]="trainingPlan.value.workouts" [withDate]="false"-->
-<!--                                  (workoutUpdated)="initForm()"></app-workouts-handler>-->
+            <mat-accordion multi>
+              <mat-expansion-panel *ngFor="let trainingExercise of trainingPlan.get('trainingExercises').controls; let i = index">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>{{ trainingExercise.get('exercise').value?.name }}</mat-panel-title>
+                  <mat-panel-description>
+                    {{ (trainingExercise.get('workoutSets')?.value || trainingExercise.get('trainingSets').value)?.length || 0 }}
+                    {{ 'HOME.sets' | translate }}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="flex flex-row justify-end">
+                  <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.edit' | translate }}"
+                          (click)="trainingExercise.enabled ? trainingExercise.disable() : trainingExercise.enable()">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.delete' | translate }}"
+                          (click)="removeTrainingExercise(trainingPlan, i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+                <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value"></workout-sets>
+              </mat-expansion-panel>
+            </mat-accordion>
 
           <mat-action-row class="" fxHide.lt-md fxShow.gt-sm>
             <button *ngIf="form.dirty" mat-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">Save training</button>
@@ -93,7 +110,7 @@
               Edit training
             </button>
             <button mat-button color="primary" (click)="deleteTraining(trainingPlan)">Delete training</button>
-            <button mat-button color="primary" (click)="addWorkoutToTraining(trainingIndex)">Add workout</button>
+            <button mat-button color="primary" (click)="addExerciseToTraining(trainingIndex)">Add workout</button>
             <button mat-button color="primary" (click)="logTraining(trainingPlan)">Log training</button>
           </mat-action-row>
           </ng-template>

@@ -1,7 +1,7 @@
 package com.workouts.myworkouts.controller.workout;
 
+import com.workouts.myworkouts.model.dto.training.TrainingExerciseDto;
 import com.workouts.myworkouts.model.dto.training.TrainingPlanDto;
-import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.service.training.TrainingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,9 +29,10 @@ public class TrainingController {
         return trainingService.getTrainingWithFetchedWorkoutExercise(trainingId);
     }
 
-    @GetMapping("/{trainingId}/workouts")
-    public WorkoutDto getWorkoutsForTraining(@PathVariable long trainingId) {
-        return trainingService.getWorkoutForTraining(trainingId);
+    @PostMapping("/{trainingId}/exercises")
+    public TrainingPlanDto addExerciseToTraining(@PathVariable long trainingId,
+                                                 @RequestBody TrainingExerciseDto trainingExerciseDto) {
+        return trainingService.addExerciseToTraining(trainingId, trainingExerciseDto);
     }
 
     @GetMapping("/{trainingId}/{date}")

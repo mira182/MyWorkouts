@@ -75,7 +75,8 @@
     "deleted-successfully": "Successfully deleted.",
     "delete-failed": "Deleting failed.",
     "error": "Error",
-    "connection-error": "Connection error",
+    "connection-error": "Unable to reach the server. Check your connection.",
+    "unexpected-error": "Something went wrong. Please try again.",
     "statusCode": "Status code: ",
     "workout-id-missing": "Workout ID is missing",
     "import-success": "Import was successful",
@@ -145,7 +146,9 @@
     "select-category": "Select category",
     "select-exercise": "Select exercise",
     "weight": "Weight",
-    "reps": "Reps"
+    "reps": "Reps",
+    "apply-training": "Apply training template",
+    "no-templates": "No training plans yet"
   },
   "EXERCISE": {
     "name": "Name",

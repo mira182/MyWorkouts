@@ -1,7 +1,5 @@
 package com.workouts.myworkouts.model.entity.training;
 
-import com.workouts.myworkouts.model.entity.workout.Workout;
-import com.workouts.myworkouts.model.entity.workout.WorkoutExercise;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +22,8 @@ public class TrainingPlan {
 
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "workout_id", referencedColumnName = "id")
-    private Workout workout;
+    @OneToMany(mappedBy = "trainingPlan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TrainingExercise> trainingExercises = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private DayOfWeek trainingDay;
@@ -38,4 +35,9 @@ public class TrainingPlan {
     private LocalDate startDate;
 
     private boolean isApplied;
+
+    public void addTrainingExercise(TrainingExercise trainingExercise) {
+        trainingExercises.add(trainingExercise);
+        trainingExercise.setTrainingPlan(this);
+    }
 }

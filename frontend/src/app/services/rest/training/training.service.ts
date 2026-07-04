@@ -3,7 +3,8 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Urls} from "../../../model/urls";
 import {TrainingPlan} from "../../../model/training/trainingPlan";
-import {Workout} from "../../../model/workout/workout";
+import {TrainingExercise} from "../../../model/training/trainingExercise";
+import moment from "moment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,6 @@ export class TrainingService {
 
   public createTraining(training: TrainingPlan): Observable<TrainingPlan> {
     return this.http.post<TrainingPlan>(Urls.API_URL + "/trainings", training);
-  }
-
-  public addWorkoutToTraining(trainingId: number, workout: Workout): Observable<TrainingPlan> {
-    return this.http.post<TrainingPlan>(Urls.API_URL + "/trainings/" +  trainingId + "/addWorkout", workout);
   }
 
   public setScheduledForTraining(trainingId: number, scheduled: boolean): Observable<boolean> {
@@ -32,12 +29,13 @@ export class TrainingService {
     return this.http.get<TrainingPlan[]>(Urls.API_URL + "/trainings");
   }
 
-  public getWorkoutsForTraining(trainingId: number): Observable<Workout[]> {
-    return this.http.get<Workout[]>(Urls.API_URL + "/trainings/" + trainingId + "/workouts");
+  public addExerciseToTraining(trainingId: number, trainingExercise: TrainingExercise): Observable<TrainingPlan> {
+    return this.http.post<TrainingPlan>(Urls.API_URL + "/trainings/" + trainingId + "/exercises", trainingExercise);
   }
 
   public applyTraining(trainingId: number, dateTime: Date): Observable<boolean> {
-    return this.http.get<boolean>(Urls.API_URL + "/trainings/" + trainingId + "/" + dateTime.toJSON());
+    const localDate = moment(dateTime).format('YYYY-MM-DD') + 'T00:00:00';
+    return this.http.get<boolean>(Urls.API_URL + "/trainings/" + trainingId + "/" + localDate);
   }
 
   public deleteTraining(trainingId: number): Observable<boolean> {

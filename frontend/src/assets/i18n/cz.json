@@ -75,7 +75,8 @@
     "deleted-successfully": "Úspěšně odstraněno.",
     "delete-failed": "Mazání selhalo.",
     "error": "Chyba",
-    "connection-error": "Chyba připojení",
+    "connection-error": "Nepodařilo se spojit se serverem. Zkontrolujte připojení.",
+    "unexpected-error": "Něco se pokazilo. Zkuste to prosím znovu.",
     "statusCode": "Stavový kód: ",
     "workout-id-missing": "Workout ID chybí",
     "import-success": "Import proběhl úspěšně",
@@ -145,7 +146,9 @@
     "select-category": "Vyber kategorii",
     "select-exercise": "Vyber cvik",
     "weight": "Váha",
-    "reps": "Opakování"
+    "reps": "Opakování",
+    "apply-training": "Použít tréninkovou šablonu",
+    "no-templates": "Zatím žádné tréninkové plány"
   },
   "EXERCISE": {
     "name": "Název",

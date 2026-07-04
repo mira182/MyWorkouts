@@ -6,13 +6,13 @@ import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED, uses = { WorkoutMapper.class })
+@Mapper(componentModel = "spring", collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED, uses = { TrainingExerciseMapper.class })
 public interface TrainingMapper {
 
     TrainingPlan dtoToEntity(TrainingPlanDto trainingDTO);
 
-    @Mapping(target = "workout", ignore = true)
-    TrainingPlanDto entityToDtoWithoutWorkouts(TrainingPlan training);
+    @Mapping(target = "trainingExercises", ignore = true)
+    TrainingPlanDto entityToDtoWithoutExercises(TrainingPlan training);
 
-    TrainingPlanDto entityToDtoWithWorkouts(TrainingPlan training);
+    TrainingPlanDto entityToDtoWithExercises(TrainingPlan training);
 }

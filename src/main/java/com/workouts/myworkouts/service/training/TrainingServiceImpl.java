@@ -1,12 +1,17 @@
 package com.workouts.myworkouts.service.training;
 
 import com.workouts.myworkouts.exceptions.TrainingNotFoundException;
+import com.workouts.myworkouts.model.dto.training.TrainingExerciseDto;
 import com.workouts.myworkouts.model.dto.training.TrainingPlanDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
+import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
+import com.workouts.myworkouts.model.dto.workout.WorkoutSetDto;
+import com.workouts.myworkouts.model.entity.training.TrainingExercise;
 import com.workouts.myworkouts.model.entity.training.TrainingPlan;
-import com.workouts.myworkouts.model.entity.workout.Workout;
+import com.workouts.myworkouts.model.entity.training.TrainingSet;
+import com.workouts.myworkouts.model.mapper.ExerciseMapper;
+import com.workouts.myworkouts.model.mapper.TrainingExerciseMapper;
 import com.workouts.myworkouts.model.mapper.TrainingMapper;
-import com.workouts.myworkouts.model.mapper.WorkoutMapper;
 import com.workouts.myworkouts.repository.training.TrainingRepository;
 import com.workouts.myworkouts.service.workout.WorkoutService;
 import lombok.RequiredArgsConstructor;
@@ -27,38 +32,43 @@ public class TrainingServiceImpl implements TrainingService {
 
     private final TrainingMapper trainingMapper;
 
-    private final WorkoutMapper workoutMapper;
+    private final TrainingExerciseMapper trainingExerciseMapper;
+
+    private final ExerciseMapper exerciseMapper;
 
     private final WorkoutService workoutService;
 
     @Override
     @Transactional
     public TrainingPlanDto createTraining(TrainingPlanDto trainingDTO) {
-        return trainingMapper.entityToDtoWithWorkouts(trainingRepository.save(trainingMapper.dtoToEntity(trainingDTO)));
+        return trainingMapper.entityToDtoWithExercises(trainingRepository.save(trainingMapper.dtoToEntity(trainingDTO)));
     }
 
     @Override
     @Transactional
     public List<TrainingPlanDto> getAllTrainings() {
         return trainingRepository.findAll().stream()
-                .map(trainingMapper::entityToDtoWithoutWorkouts)
+                .map(trainingMapper::entityToDtoWithoutExercises)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public TrainingPlanDto getTrainingWithFetchedWorkoutExercise(long trainingId) {
-        return trainingMapper.entityToDtoWithWorkouts(
+        return trainingMapper.entityToDtoWithExercises(
                 trainingRepository.findTrainingPlanWithWorkoutExercisesFetched(trainingId)
                         .orElseThrow(() -> new TrainingNotFoundException(trainingId)));
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public WorkoutDto getWorkoutForTraining(long trainingId) {
-        return workoutMapper.entityToDto(trainingRepository.findById(trainingId)
-                .orElseThrow(() -> new TrainingNotFoundException(trainingId))
-                .getWorkout());
+    @Transactional
+    public TrainingPlanDto addExerciseToTraining(long trainingId, TrainingExerciseDto trainingExerciseDto) {
+        final TrainingPlan trainingPlan = trainingRepository.findById(trainingId)
+                .orElseThrow(() -> new TrainingNotFoundException(trainingId));
+
+        trainingPlan.addTrainingExercise(trainingExerciseMapper.dtoToEntity(trainingExerciseDto));
+
+        return trainingMapper.entityToDtoWithExercises(trainingRepository.save(trainingPlan));
     }
 
     @Override
@@ -69,10 +79,11 @@ public class TrainingServiceImpl implements TrainingService {
 
         trainingPlan.setApplied(true);
 
-        final Workout workout = trainingPlan.getWorkout();
-
-        WorkoutDto workoutDto = workoutMapper.entityToDto(workout);
+        final WorkoutDto workoutDto = new WorkoutDto();
         workoutDto.setDate(dateTime);
+        workoutDto.setWorkoutExercises(trainingPlan.getTrainingExercises().stream()
+                .map(this::toWorkoutExerciseDto)
+                .collect(Collectors.toList()));
 
         workoutService.addWorkoutExerciseToWorkout(workoutDto);
 
@@ -103,11 +114,19 @@ public class TrainingServiceImpl implements TrainingService {
                     trainingPlan.setScheduled(trainingDTO.isScheduled());
                     trainingPlan.setStartDate(trainingDTO.getStartDate());
 
+                    // null = caller didn't load/edit exercises -> leave them untouched.
+                    // A non-null list replaces them (orphanRemoval deletes the old rows).
+                    if (trainingDTO.getTrainingExercises() != null) {
+                        trainingPlan.getTrainingExercises().clear();
+                        trainingDTO.getTrainingExercises().forEach(dto ->
+                                trainingPlan.addTrainingExercise(trainingExerciseMapper.dtoToEntity(dto)));
+                    }
+
                     return trainingPlan;
                 })
                 .orElseThrow(() -> new TrainingNotFoundException(trainingId));
 
-        return trainingMapper.entityToDtoWithWorkouts(training);
+        return trainingMapper.entityToDtoWithExercises(training);
     }
 
     @Override
@@ -121,6 +140,24 @@ public class TrainingServiceImpl implements TrainingService {
         training.setScheduled(scheduled);
 
         return true;
+    }
+
+    private WorkoutExerciseDto toWorkoutExerciseDto(TrainingExercise trainingExercise) {
+        final WorkoutExerciseDto dto = new WorkoutExerciseDto();
+        dto.setExercise(exerciseMapper.entityToDto(trainingExercise.getExercise()));
+        dto.setWorkoutSets(trainingExercise.getTrainingSets().stream()
+                .map(this::toWorkoutSetDto)
+                .collect(Collectors.toList()));
+        return dto;
+    }
+
+    private WorkoutSetDto toWorkoutSetDto(TrainingSet trainingSet) {
+        final WorkoutSetDto dto = new WorkoutSetDto();
+        dto.setReps(trainingSet.getReps());
+        dto.setWeight(trainingSet.getWeight());
+        dto.setDuration(trainingSet.getDuration());
+        dto.setDistance(trainingSet.getDistance());
+        return dto;
     }
 
 }

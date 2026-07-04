@@ -32,10 +32,10 @@
         <app-date-picker class="flex flex-row justify-center mt-4" *ngIf="form.enabled" [date]="date"
                          (datePicked)="workoutExerciseDateUpdated($event)"></app-date-picker>
 
-        <app-workout-sets
+        <workout-sets
           [form]="form"
           [workoutSets]="workoutExercise.workoutSets">
-        </app-workout-sets>
+        </workout-sets>
       </mat-card-content>
     </mat-card>
   </form>

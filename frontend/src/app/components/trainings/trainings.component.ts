@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {TrainingService} from "../../services/rest/training/training.service";
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
@@ -17,13 +17,14 @@ import {MatInput} from "@angular/material/input";
 import {MatDatepicker, MatDatepickerModule, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatProgressBar} from "@angular/material/progress-bar";
-import {filter, finalize, take} from "rxjs";
+import {filter, finalize, switchMap, take} from "rxjs";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.component";
 import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
+import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
+import {TrainingExercise} from "../../model/training/trainingExercise";
+import {DateTimeService} from "../../services/date-time/date-time.service";
 import moment from "moment";
-import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 @Component({
   selector: 'app-trainings',
@@ -49,9 +50,8 @@ import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
     MatProgressSpinner,
     MatDatepickerModule,
     ReactiveFormsModule,
-    WorkoutExerciseComponent,
     PageHeaderLayoutComponent,
-    NgxMaterialTimepickerModule,
+    WorkoutSetsComponent,
   ]
 })
 export class TrainingsComponent implements OnInit {
@@ -88,16 +88,19 @@ export class TrainingsComponent implements OnInit {
     return AppComponent.weekDays;
   }
 
+  protected readonly formatDate = DateTimeService.formatDate;
+
   initForm() {
     this.loading = true;
 
-    this.trainingService.getTrainingWithWorkouts(1)
+    this.trainingService.getAllTrainingsWithoutWorkouts()
       .pipe(
         finalize(() => this.loading = false),
         take(1),
       )
-      .subscribe(trainingPlan => {
-        // trainingPlans.forEach(trainingPlan => {
+      .subscribe(trainingPlans => {
+        this.trainingPlans.clear();
+        trainingPlans.forEach(trainingPlan => {
           this.trainingTime = trainingPlan.trainingTime;
           this.trainingPlans.push(this.formBuilder.group({
             id: [trainingPlan.id],
@@ -106,21 +109,43 @@ export class TrainingsComponent implements OnInit {
             trainingTime: [trainingPlan.trainingTime ? trainingPlan.trainingTime.substr(0, 5) : ""],
             scheduled: [trainingPlan.scheduled],
             startDate: [moment(trainingPlan.startDate)],
-            workout: [trainingPlan.workout],
-            workoutExercises: this.formBuilder.array([])
+            trainingExercises: this.formBuilder.array([]),
+            exercisesLoaded: [false]
           }));
-        // });
+        });
       });
   }
 
   updateTraining(trainingId, training) {
-    this.trainingService.updateTraining(trainingId, training.value).subscribe(ok => {
-      if (ok) {
-        this.snackBar.showSuccessSnackBar('ALERT.successfully-updated');
-      }
-    }, error =>
-      this.snackBar.showErrorSnackBar(error)
-    );
+    const value = training.getRawValue();
+    const payload: any = {
+      id: value.id,
+      name: value.name,
+      trainingDay: value.trainingDay,
+      trainingTime: value.trainingTime,
+      scheduled: value.scheduled,
+      startDate: value.startDate ? moment(value.startDate).format('YYYY-MM-DD') : null,
+    };
+
+    if (value.exercisesLoaded) {
+      payload.trainingExercises = (value.trainingExercises || []).map(trainingExercise => ({
+        exercise: trainingExercise.exercise,
+        trainingSets: (trainingExercise.workoutSets ?? trainingExercise.trainingSets ?? []).map(set => ({
+          reps: set.reps,
+          weight: set.weight,
+          duration: set.duration,
+          distance: set.distance,
+        })),
+      }));
+    }
+
+    this.trainingService.updateTraining(trainingId, payload)
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.snackBar.showSuccessSnackBar('ALERT.successfully-updated'),
+        error: err => this.snackBar.showErrorSnackBar(err),
+      });
+
     this.form.markAsPristine();
     this.form.disable();
   }
@@ -144,20 +169,29 @@ export class TrainingsComponent implements OnInit {
     });
   }
 
-  addWorkoutToTraining(trainingIndex) {
-    this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed().subscribe(workout => {
-      if (workout) {
-        const trainingId = this.trainingPlans.controls[trainingIndex].get('id');
-        this.trainingService.addWorkoutToTraining(trainingId.value, workout).subscribe(updatedTraining => {
-          if (updatedTraining) {
-            this.snackBar.showSuccessSnackBar('ALERT.successfully-saved');
-            this.initForm();
-          }
-        }, error => {
-          this.snackBar.showErrorSnackBar(error);
-        });
-      }
-    });
+  addExerciseToTraining(trainingIndex: number) {
+    const trainingControl = this.trainingPlans.at(trainingIndex);
+    const trainingId = trainingControl.get('id').value;
+    if (!trainingId) {
+      return;
+    }
+
+    this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
+      .pipe(
+        filter(workoutExercise => !!workoutExercise),
+        switchMap(workoutExercise => this.trainingService.addExerciseToTraining(trainingId, {
+          exercise: workoutExercise.exercise,
+          trainingSets: workoutExercise.workoutSets,
+        })),
+        take(1),
+      )
+      .subscribe({
+        next: training => {
+          this.setTrainingExercises(trainingControl, training.trainingExercises);
+          this.snackBar.showSuccessSnackBar('ALERT.successfully-saved');
+        },
+        error: err => this.snackBar.showErrorSnackBar(err),
+      });
   }
 
   protected addTraining() {
@@ -188,19 +222,42 @@ export class TrainingsComponent implements OnInit {
     });
   }
 
-  getWorkoutsForTraining(trainingIndex) {
-    // this.workoutsLoading = true;
-    // this.trainingService.getWorkoutsForTraining(this.trainingPlans.at(trainingIndex).get("id").value).subscribe(workouts => {
-    //   const workoutsArray = this.trainingPlans.at(trainingIndex).get("workouts") as FormArray;
-    //   workoutsArray.clear();
-    //   workouts.forEach(workout => {
-    //     workoutsArray.push(this.formBuilder.group({
-    //
-    //     }));
-    //     this.workoutFormService.addWorkout(workoutsArray, new WorkoutExercise(workout), true);
-    //   });
-    //   this.workoutsLoading = false;
-    // })
+  getWorkoutsForTraining(trainingIndex: number) {
+    const trainingControl = this.trainingPlans.at(trainingIndex);
+    const trainingId = trainingControl.get('id').value;
+    if (!trainingId) {
+      return;
+    }
+
+    this.workoutsLoading = true;
+    this.trainingService.getTrainingWithWorkouts(trainingId)
+      .pipe(
+        finalize(() => this.workoutsLoading = false),
+        take(1),
+      )
+      .subscribe({
+        next: training => this.setTrainingExercises(trainingControl, training.trainingExercises),
+        error: err => this.snackBar.showErrorSnackBar(err),
+      });
+  }
+
+  // Rebuilds a training plan's exercises as a FormArray of {exercise, trainingSets}
+  // groups so each one can drive its own WorkoutSetsComponent.
+  private setTrainingExercises(trainingControl: AbstractControl, exercises: TrainingExercise[]): void {
+    const exercisesArray = trainingControl.get('trainingExercises') as FormArray;
+    exercisesArray.clear();
+    (exercises || []).forEach(trainingExercise => exercisesArray.push(this.formBuilder.group({
+      id: [trainingExercise.id],
+      exercise: [trainingExercise.exercise],
+      trainingSets: [trainingExercise.trainingSets || []],
+    })));
+    // Mark loaded so updateTraining knows it's safe to sync exercises.
+    trainingControl.get('exercisesLoaded').setValue(true);
+  }
+
+  protected removeTrainingExercise(trainingControl: AbstractControl, exerciseIndex: number): void {
+    (trainingControl.get('trainingExercises') as FormArray).removeAt(exerciseIndex);
+    this.form.markAsDirty();
   }
 
 }

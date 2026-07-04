@@ -1,7 +1,6 @@
 package com.workouts.myworkouts.model.entity.workout;
 
 import com.workouts.myworkouts.model.entity.audit.AuditableTime;
-import com.workouts.myworkouts.model.entity.training.TrainingPlan;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +26,6 @@ public class Workout extends AuditableTime {
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkoutExercise> workoutExercises = new ArrayList<>();
-
-    @OneToOne(mappedBy = "workout")
-    private TrainingPlan trainingPlan;
 
     public void addWorkoutExercise(WorkoutExercise workoutExercise) {
         workoutExercises.add(workoutExercise);

@@ -5,7 +5,10 @@ import {MatIcon} from "@angular/material/icon";
 import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatMiniFabButton} from "@angular/material/button";
+import {MatMenuModule} from "@angular/material/menu";
 import {DaySelectComponent} from "../day-select/day-select.component";
+import {TrainingService} from "../../services/rest/training/training.service";
+import {TrainingPlan} from "../../model/training/trainingPlan";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutService} from "../../services/rest/workout/workout.service";
@@ -28,6 +31,7 @@ import {WorkoutDayService} from "../../services/rest/workout/workout-day.service
     MatTooltip,
     TranslateModule,
     MatMiniFabButton,
+    MatMenuModule,
     DaySelectComponent,
     NgxSpinnerModule,
     WorkoutExerciseComponent,
@@ -41,8 +45,11 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
 
   protected selectedDate: WritableSignal<Moment> = signal(moment());
 
+  protected trainings: TrainingPlan[] = [];
+
   constructor(private readonly snackBarService: SnackBarService,
               private readonly workoutService: WorkoutService,
+              private readonly trainingService: TrainingService,
               private readonly dialogsHandler: DialogsHandlerService,
               private readonly spinner: NgxSpinnerService,
               private readonly workoutDayService: WorkoutDayService) {
@@ -65,6 +72,33 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
         error: err => {
           this.snackBarService.showErrorSnackBar(err);
           this.spinner.hide();
+        },
+      });
+
+    this.loadTrainingTemplates();
+  }
+
+  private loadTrainingTemplates(): void {
+    this.trainingService.getAllTrainingsWithoutWorkouts()
+      .pipe(take(1))
+      .subscribe({
+        next: trainings => this.trainings = trainings,
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+  }
+
+  protected applyTemplate(training: TrainingPlan): void {
+    this.spinner.show();
+    this.trainingService.applyTraining(training.id, this.selectedDate().toDate())
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
+          this.getWorkoutsForDay(this.selectedDate()); // reloads the day's workout
+        },
+        error: err => {
+          this.spinner.hide();
+          this.snackBarService.showErrorSnackBar(err);
         },
       });
   }

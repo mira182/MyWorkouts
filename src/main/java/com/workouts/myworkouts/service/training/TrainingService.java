@@ -1,12 +1,10 @@
 package com.workouts.myworkouts.service.training;
 
 
+import com.workouts.myworkouts.model.dto.training.TrainingExerciseDto;
 import com.workouts.myworkouts.model.dto.training.TrainingPlanDto;
-import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
-import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TrainingService {
@@ -17,7 +15,7 @@ public interface TrainingService {
 
     TrainingPlanDto getTrainingWithFetchedWorkoutExercise(long id);
 
-    WorkoutDto getWorkoutForTraining(long trainingId);
+    TrainingPlanDto addExerciseToTraining(long trainingId, TrainingExerciseDto trainingExerciseDto);
 
     boolean applyTraining(long trainingId, LocalDate dateTime);
 

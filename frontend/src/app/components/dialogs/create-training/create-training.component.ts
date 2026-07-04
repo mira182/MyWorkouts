@@ -17,16 +17,13 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {WorkoutSetsComponent} from "../../workout-sets/workout-sets.component";
 import {PageHeaderLayoutComponent} from "../../layouts/page-header-layout/page-header-layout.component";
-import {take} from "rxjs";
-import {ExpansionPanelComponent} from "../../expansion-panel/expansion-panel.component";
-import {ExerciseItemComponent} from "../../exercise-item/exercise-item.component";
-import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
-import {ExercisesComponent} from "../../exercises/exercises.component";
-import {WorkoutExerciseComponent} from "../../workout-exercise/workout-exercise.component";
+import {WorkoutSetsComponent} from "../../workout-sets/workout-sets.component";
+import {filter, take} from "rxjs";
 import {map} from "rxjs/operators";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
+import {TrainingPlan} from "../../../model/training/trainingPlan";
+import moment from "moment";
 
 @Component({
   selector: 'app-create-training',
@@ -47,13 +44,8 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
     MatButton,
     MatDialogModule,
     MatInput,
-    WorkoutSetsComponent,
     PageHeaderLayoutComponent,
-    ExpansionPanelComponent,
-    ExerciseItemComponent,
-    NgxMaterialTimepickerModule,
-    ExercisesComponent,
-    WorkoutExerciseComponent,
+    WorkoutSetsComponent,
   ]
 })
 export class CreateTrainingComponent implements OnInit {
@@ -77,9 +69,7 @@ export class CreateTrainingComponent implements OnInit {
       trainingTime: ['', Validators.required],
       scheduled: [false, Validators.required],
       startDate: ['', Validators.required],
-      workout: this.formBuilder.group({
-        workoutExercises: this.formBuilder.array([])
-      }),
+      trainingExercises: this.formBuilder.array([]),
     });
   }
 
@@ -87,57 +77,52 @@ export class CreateTrainingComponent implements OnInit {
     return AppComponent.weekDays;
   }
 
-  get workoutExercises() {
-    return this.form.get('workout').get('workoutExercises') as FormArray;
+  get trainingExercises() {
+    return this.form.get('trainingExercises') as FormArray;
   }
 
   saveTraining() {
-    // const workouts: Workout[] = [];
-    // this.workouts.value.forEach(workout => {
-    //   let workoutSets = [];
-    //   workout.workoutSets.forEach(set => {
-    //     const workoutSet = new WorkoutSet();
-    //     workoutSet.weight = set.weight;
-    //     workoutSet.reps = set.reps;
-    //     workoutSet.distance = set.reps;
-    //     workoutSet.duration = set.durationMin * 60 + set.durationSec;
-    //     workoutSets.push(workoutSet);
-    //   });
-    //   workouts.push(new WorkoutExercise({
-    //     id: workout.workoutId,
-    //     exercise: workout.exercise,
-    //     dateTime: null,
-    //     workoutSets: workoutSets
-    //   }));
-    // });
-    // const training = new Training({
-    //   id: null,
-    //   name: this.workoutsForm.value.trainingName,
-    //   workouts: workouts,
-    //   trainingDay: this.workoutsForm.value.trainingDay,
-    //   trainingTime: this.workoutsForm.value.trainingTime,
-    //   scheduled: this.workoutsForm.value.scheduled,
-    //   startDate: this.workoutsForm.value.startDate
-    // });
-    // this.trainingService.createTraining(training).subscribe((savedTraining) => {
-    //   this.snackBar.showSuccessSnackBar(this.translate.instant("ALERT.successfully-saved"));
-    //   this.dialogRef.close(savedTraining);
-    // }, error => {
-    //   this.snackBar.showErrorSnackBar(this.translate.instant("ALERT.get-exercises"), error.message);
-    //   this.dialogRef.close();
-    // });
+    const value = this.form.getRawValue();
+
+    const training = {
+      name: value.trainingName,
+      trainingDay: value.trainingDay,
+      trainingTime: value.trainingTime,
+      scheduled: value.scheduled,
+      startDate: value.startDate ? moment(value.startDate).format('YYYY-MM-DD') : null,
+      trainingExercises: (value.trainingExercises ?? []).map(trainingExercise => ({
+        exercise: trainingExercise.exercise,
+        trainingSets: (trainingExercise.workoutSets ?? trainingExercise.trainingSets ?? []).map(set => ({
+          reps: set.reps,
+          weight: set.weight,
+          duration: set.duration,
+          distance: set.distance,
+        })),
+      })),
+    } as TrainingPlan;
+
+    this.trainingService.createTraining(training)
+      .pipe(take(1))
+      .subscribe({
+        next: savedTraining => {
+          this.snackBar.showSuccessSnackBar('ALERT.successfully-saved');
+          this.dialogRef.close(savedTraining);
+        },
+        error: err => this.snackBar.showErrorSnackBar(err),
+      });
   }
 
   protected addWorkoutExerciseToTraining() {
     this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
       .pipe(
+        filter(workoutExercise => !!workoutExercise),
         map(workoutExercise => {
           const form: FormGroup = this.formBuilder.group({
             exercise: [workoutExercise.exercise],
-            workoutSets: this.formBuilder.array([workoutExercise.workoutSets])
+            trainingSets: [workoutExercise.workoutSets]
           });
 
-          this.workoutExercises.push(form);
+          this.trainingExercises.push(form);
 
           return form;
         }),

@@ -9,8 +9,9 @@ import java.util.Optional;
 public interface TrainingRepository extends JpaRepository<TrainingPlan, Long> {
 
     @Query("""
-            SELECT tp FROM TrainingPlan tp
-            JOIN FETCH Workout w ON w = tp.workout
+            SELECT DISTINCT tp FROM TrainingPlan tp
+            LEFT JOIN FETCH tp.trainingExercises te
+            LEFT JOIN FETCH te.exercise
             WHERE tp.id = :trainingId
             """)
     Optional<TrainingPlan> findTrainingPlanWithWorkoutExercisesFetched(long trainingId);
