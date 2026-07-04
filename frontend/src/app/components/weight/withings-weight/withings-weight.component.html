@@ -27,8 +27,10 @@
   <mat-icon>update</mat-icon>
 </button>
 
-<div class="day-tooltip" *ngIf="tooltip.visible && tooltip.date"
-     [style.left.px]="tooltip.x" [style.top.px]="tooltip.y">
+<div class="day-tooltip top-3 left-1/2 -translate-x-1/2 w-max max-w-[calc(100vw_-_1.5rem)]
+            sm:top-[var(--tt-y)] sm:left-[var(--tt-x)] sm:translate-x-0 sm:w-auto sm:max-w-[24rem]"
+     *ngIf="tooltip.visible && tooltip.date"
+     [style.--tt-x]="tooltip.x + 'px'" [style.--tt-y]="tooltip.y + 'px'">
   <app-day-details [date]="tooltip.date" [data]="tableData" [numericColumns]="numericColumns" [units]="units"></app-day-details>
 </div>
 </div>
