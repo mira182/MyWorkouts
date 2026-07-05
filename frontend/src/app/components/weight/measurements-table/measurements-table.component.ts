@@ -12,17 +12,16 @@ export interface MeasurementRow {
 }
 
 @Component({
-  selector: 'app-measurements-table',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    TranslateModule,
-  ],
-  templateUrl: './measurements-table.component.html',
-  styleUrl: './measurements-table.component.scss'
+    selector: 'app-measurements-table',
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        TranslateModule,
+    ],
+    templateUrl: './measurements-table.component.html',
+    styleUrl: './measurements-table.component.scss'
 })
 export class MeasurementsTableComponent {
 

@@ -26,25 +26,24 @@ interface WeightPoint {
 }
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    RouterLink,
-    MatCardModule,
-    MatButtonModule,
-    MatIcon,
-    MatTooltip,
-    NgxSpinnerModule,
-    NgxLineChartComponent,
-    WorkoutCalendarComponent,
-  ],
-  providers: [
-    WithingsService,
-  ]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        RouterLink,
+        MatCardModule,
+        MatButtonModule,
+        MatIcon,
+        MatTooltip,
+        NgxSpinnerModule,
+        NgxLineChartComponent,
+        WorkoutCalendarComponent,
+    ],
+    providers: [
+        WithingsService,
+    ]
 })
 export class HomeComponent implements OnInit {
 

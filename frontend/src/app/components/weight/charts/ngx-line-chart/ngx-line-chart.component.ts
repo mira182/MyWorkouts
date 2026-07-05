@@ -4,13 +4,12 @@ import {Color, LineChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {curveMonotoneX} from "d3-shape";
 
 @Component({
-  selector: 'app-ngx-line-chart',
-  standalone: true,
-  imports: [
-    LineChartModule
-  ],
-  templateUrl: './ngx-line-chart.component.html',
-  styleUrl: './ngx-line-chart.component.scss'
+    selector: 'app-ngx-line-chart',
+    imports: [
+        LineChartModule
+    ],
+    templateUrl: './ngx-line-chart.component.html',
+    styleUrl: './ngx-line-chart.component.scss'
 })
 export class NgxLineChartComponent {
 

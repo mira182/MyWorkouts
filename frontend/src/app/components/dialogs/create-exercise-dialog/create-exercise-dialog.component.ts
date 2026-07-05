@@ -15,23 +15,22 @@ import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 
 @Component({
-  selector: 'app-create-exercise-dialog',
-  templateUrl: './create-exercise-dialog.component.html',
-  standalone: true,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    ImagePreviewComponent,
-    MatIconButton,
-    MatButton,
-    MatInput,
-    MatIcon,
-    PageHeaderLayoutComponent
-  ]
+    selector: 'app-create-exercise-dialog',
+    templateUrl: './create-exercise-dialog.component.html',
+    imports: [
+        TranslateModule,
+        CommonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        ImagePreviewComponent,
+        MatIconButton,
+        MatButton,
+        MatInput,
+        MatIcon,
+        PageHeaderLayoutComponent
+    ]
 })
 export class CreateExerciseDialogComponent implements OnInit {
 

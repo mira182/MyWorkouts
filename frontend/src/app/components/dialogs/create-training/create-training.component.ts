@@ -26,27 +26,26 @@ import {TrainingPlan} from "../../../model/training/trainingPlan";
 import moment from "moment";
 
 @Component({
-  selector: 'app-create-training',
-  templateUrl: './create-training.component.html',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    TranslateModule,
-    CommonModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    ReactiveFormsModule,
-    MatTooltipModule,
-    MatIcon,
-    MatIconButton,
-    MatButton,
-    MatDialogModule,
-    MatInput,
-    PageHeaderLayoutComponent,
-    WorkoutSetsComponent,
-  ]
+    selector: 'app-create-training',
+    templateUrl: './create-training.component.html',
+    imports: [
+        MatFormFieldModule,
+        TranslateModule,
+        CommonModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        ReactiveFormsModule,
+        MatTooltipModule,
+        MatIcon,
+        MatIconButton,
+        MatButton,
+        MatDialogModule,
+        MatInput,
+        PageHeaderLayoutComponent,
+        WorkoutSetsComponent,
+    ]
 })
 export class CreateTrainingComponent implements OnInit {
 

@@ -17,15 +17,14 @@ interface CalendarDay {
 }
 
 @Component({
-  selector: 'app-workout-calendar',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIcon,
-    MatIconButton,
-  ],
-  templateUrl: './workout-calendar.component.html',
-  styleUrl: './workout-calendar.component.scss'
+    selector: 'app-workout-calendar',
+    imports: [
+        CommonModule,
+        MatIcon,
+        MatIconButton,
+    ],
+    templateUrl: './workout-calendar.component.html',
+    styleUrl: './workout-calendar.component.scss'
 })
 export class WorkoutCalendarComponent implements OnInit {
 

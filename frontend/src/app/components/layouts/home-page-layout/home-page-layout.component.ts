@@ -26,37 +26,36 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-home-layout',
-  templateUrl: './home-page-layout.component.html',
-  styles: [],
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    ToolbarComponent,
-    MatDrawer,
-    MatDrawerContainer,
-    MatIcon,
-    MatIconButton,
-    MatListItem,
-    MatMenu,
-    MatMenuItem,
-    MatNavList,
-    MatSlideToggle,
-    MatTooltip,
-    RouterLink,
-    RouterLinkActive,
-    TranslateModule,
-    MatMenuModule,
-    MatSidenavContainer,
-    MatSidenav,
-    MatCheckbox,
-    MatButton,
-    FormsModule,
-    MatSidenavModule
-  ],
-  providers: [
-    ThemeService,
-  ]
+    selector: 'app-home-layout',
+    templateUrl: './home-page-layout.component.html',
+    styles: [],
+    imports: [
+        RouterOutlet,
+        ToolbarComponent,
+        MatDrawer,
+        MatDrawerContainer,
+        MatIcon,
+        MatIconButton,
+        MatListItem,
+        MatMenu,
+        MatMenuItem,
+        MatNavList,
+        MatSlideToggle,
+        MatTooltip,
+        RouterLink,
+        RouterLinkActive,
+        TranslateModule,
+        MatMenuModule,
+        MatSidenavContainer,
+        MatSidenav,
+        MatCheckbox,
+        MatButton,
+        FormsModule,
+        MatSidenavModule
+    ],
+    providers: [
+        ThemeService,
+    ]
 })
 export class HomeLayoutComponent extends Unsubscribe implements OnInit {
 

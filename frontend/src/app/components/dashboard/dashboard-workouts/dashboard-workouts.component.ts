@@ -36,20 +36,19 @@ export interface WorkoutChartSettings {
 }
 
 @Component({
-  selector: 'app-dashboard-workouts',
-  templateUrl: './dashboard-workouts.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatProgressSpinner,
-    ChipsTimeSelectComponent,
-    MatSelectModule,
-    CookieModule,
-    NgxSpinnerModule
-  ],
+    selector: 'app-dashboard-workouts',
+    templateUrl: './dashboard-workouts.component.html',
+    imports: [
+        CommonModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatProgressSpinner,
+        ChipsTimeSelectComponent,
+        MatSelectModule,
+        CookieModule,
+        NgxSpinnerModule
+    ]
 })
 export class DashboardWorkoutsComponent implements OnInit {
 

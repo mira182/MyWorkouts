@@ -18,21 +18,20 @@ import {ExpansionPanelComponent} from "../expansion-panel/expansion-panel.compon
 import {ExerciseService} from "../../services/rest/exercise/exercise.service";
 
 @Component({
-  selector: 'app-exercise-item',
-  standalone: true,
-  imports: [
-    PageHeaderLayoutComponent,
-    NgIf,
-    MatIcon,
-    MatButton,
-    MatExpansionPanelActionRow,
-    TranslateModule,
-    MatIconButton,
-    MatTooltip,
-    MatDivider,
-    ExpansionPanelComponent
-  ],
-  templateUrl: './exercise-item.component.html',
+    selector: 'app-exercise-item',
+    imports: [
+        PageHeaderLayoutComponent,
+        NgIf,
+        MatIcon,
+        MatButton,
+        MatExpansionPanelActionRow,
+        TranslateModule,
+        MatIconButton,
+        MatTooltip,
+        MatDivider,
+        ExpansionPanelComponent
+    ],
+    templateUrl: './exercise-item.component.html'
 })
 export class ExerciseItemComponent {
 

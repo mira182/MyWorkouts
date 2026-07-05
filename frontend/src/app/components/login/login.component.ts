@@ -14,26 +14,25 @@ import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  standalone: true,
-  imports: [
-    MatCard,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatIcon,
-    MatError,
-    TranslateModule,
-    FormsModule,
-    MatInput,
-    CommonModule,
-    MatCardContent,
-    MatButton,
-    NgxSpinnerModule,
-    MatIconButton,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    imports: [
+        MatCard,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatIcon,
+        MatError,
+        TranslateModule,
+        FormsModule,
+        MatInput,
+        CommonModule,
+        MatCardContent,
+        MatButton,
+        NgxSpinnerModule,
+        MatIconButton,
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginComponent implements OnInit {
 

@@ -32,27 +32,26 @@ interface RangeOption {
 }
 
 @Component({
-  selector: 'app-withings-weight',
-  templateUrl: './withings-weight.component.html',
-  styleUrls: ['./withings-weight.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTooltip,
-    MatTabsModule,
-    MatIcon,
-    MatIconButton,
-    MatFabButton,
-    TranslateModule,
-    NgxLineChartComponent,
-    MatButtonToggleModule,
-    NgxSpinnerModule,
-    MeasurementsTableComponent,
-    DayDetailsComponent,
-  ],
-  providers: [
-    WithingsService,
-  ]
+    selector: 'app-withings-weight',
+    templateUrl: './withings-weight.component.html',
+    styleUrls: ['./withings-weight.component.scss'],
+    imports: [
+        CommonModule,
+        MatTooltip,
+        MatTabsModule,
+        MatIcon,
+        MatIconButton,
+        MatFabButton,
+        TranslateModule,
+        NgxLineChartComponent,
+        MatButtonToggleModule,
+        NgxSpinnerModule,
+        MeasurementsTableComponent,
+        DayDetailsComponent,
+    ],
+    providers: [
+        WithingsService,
+    ]
 })
 export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 

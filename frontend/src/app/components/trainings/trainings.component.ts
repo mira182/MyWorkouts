@@ -27,32 +27,31 @@ import {DateTimeService} from "../../services/date-time/date-time.service";
 import moment from "moment";
 
 @Component({
-  selector: 'app-trainings',
-  templateUrl: './trainings.component.html',
-  styleUrls: ['./trainings.component.scss'],
-  standalone: true,
-  imports: [
-    MatExpansionModule,
-    TranslateModule,
-    CommonModule,
-    MatFormFieldModule,
-    MatIcon,
-    MatSelectModule,
-    MatIconButton,
-    MatInput,
-    MatDatepickerToggle,
-    MatDatepicker,
-    MatCheckbox,
-    MatProgressBar,
-    MatButton,
-    MatMiniFabButton,
-    MatTooltipModule,
-    MatProgressSpinner,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    PageHeaderLayoutComponent,
-    WorkoutSetsComponent,
-  ]
+    selector: 'app-trainings',
+    templateUrl: './trainings.component.html',
+    styleUrls: ['./trainings.component.scss'],
+    imports: [
+        MatExpansionModule,
+        TranslateModule,
+        CommonModule,
+        MatFormFieldModule,
+        MatIcon,
+        MatSelectModule,
+        MatIconButton,
+        MatInput,
+        MatDatepickerToggle,
+        MatDatepicker,
+        MatCheckbox,
+        MatProgressBar,
+        MatButton,
+        MatMiniFabButton,
+        MatTooltipModule,
+        MatProgressSpinner,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        PageHeaderLayoutComponent,
+        WorkoutSetsComponent,
+    ]
 })
 export class TrainingsComponent implements OnInit {
 

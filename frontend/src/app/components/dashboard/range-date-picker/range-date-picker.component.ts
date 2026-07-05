@@ -5,14 +5,13 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular
 import moment from "moment";
 
 @Component({
-  selector: 'app-range-date-picker',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatDatepickerModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './range-date-picker.component.html',
+    selector: 'app-range-date-picker',
+    imports: [
+        MatFormFieldModule,
+        MatDatepickerModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './range-date-picker.component.html'
 })
 export class RangeDatePickerComponent implements OnInit {
 

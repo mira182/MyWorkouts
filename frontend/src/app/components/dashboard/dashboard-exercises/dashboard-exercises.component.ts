@@ -22,21 +22,20 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {DialogsHandlerService} from "../../../services/dialogs-handler/dialogs-handler.service";
 
 @Component({
-  selector: 'app-dashboard-exercises',
-  templateUrl: './dashboard-exercises.component.html',
-  imports: [
-    MatFormField,
-    MatSelect,
-    MatOption,
-    CommonModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    ChipsTimeSelectComponent,
-    MatButton,
-    MatLabel,
-    NgxSpinnerModule
-  ],
-  standalone: true
+    selector: 'app-dashboard-exercises',
+    templateUrl: './dashboard-exercises.component.html',
+    imports: [
+        MatFormField,
+        MatSelect,
+        MatOption,
+        CommonModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        ChipsTimeSelectComponent,
+        MatButton,
+        MatLabel,
+        NgxSpinnerModule
+    ]
 })
 export class DashboardExercisesComponent implements OnInit {
 

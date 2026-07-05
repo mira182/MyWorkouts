@@ -15,24 +15,23 @@ import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 
 @Component({
-  selector: 'app-edit-exercise-dialog',
-  templateUrl: './edit-exercise-dialog.component.html',
-  styleUrls: ['./edit-exercise-dialog.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatDialogModule,
-    MatFormField,
-    MatSelect,
-    MatOption,
-    ReactiveFormsModule,
-    MatInput,
-    ImagePreviewComponent,
-    MatButton,
-    MatLabel,
-    MatError,
-  ]
+    selector: 'app-edit-exercise-dialog',
+    templateUrl: './edit-exercise-dialog.component.html',
+    styleUrls: ['./edit-exercise-dialog.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        MatDialogModule,
+        MatFormField,
+        MatSelect,
+        MatOption,
+        ReactiveFormsModule,
+        MatInput,
+        ImagePreviewComponent,
+        MatButton,
+        MatLabel,
+        MatError,
+    ]
 })
 export class EditExerciseDialogComponent implements OnInit {
 

@@ -13,18 +13,17 @@ import {take} from "rxjs";
 import {MatButton} from "@angular/material/button";
 
 @Component({
-  selector: 'app-select-exercise-dialog',
-  templateUrl: './select-exercise-dialog.component.html',
-  standalone: true,
-  imports: [
-    MatStepperModule,
-    CommonModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    MatActionList,
-    MatListItem,
-    MatButton
-  ]
+    selector: 'app-select-exercise-dialog',
+    templateUrl: './select-exercise-dialog.component.html',
+    imports: [
+        MatStepperModule,
+        CommonModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        MatActionList,
+        MatListItem,
+        MatButton
+    ]
 })
 export class SelectExerciseDialogComponent implements OnInit {
 

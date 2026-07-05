@@ -6,14 +6,13 @@ import {AlertSnackBarModel} from "./model/alert-snack-bar.model";
 import {CustomErrorResponse} from "../../../model/error/error.model";
 
 @Component({
-  selector: 'app-alert-snack-bar',
-  templateUrl: './alert-snack-bar.component.html',
-  styleUrls: ['./alert-snack-bar.component.scss'],
-  standalone: true,
-  imports: [
-    TranslateModule,
-    CommonModule,
-  ]
+    selector: 'app-alert-snack-bar',
+    templateUrl: './alert-snack-bar.component.html',
+    styleUrls: ['./alert-snack-bar.component.scss'],
+    imports: [
+        TranslateModule,
+        CommonModule,
+    ]
 })
 export class AlertSnackBarComponent implements OnInit {
 

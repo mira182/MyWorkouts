@@ -23,21 +23,20 @@ export interface MeasurementDetails {
 }
 
 @Component({
-  selector: ' app-measurement-details',
-  templateUrl: './measurement-details.component.html',
-  styleUrls: ['./measurement-details.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatDivider,
-    MatListModule,
-    DaySelectComponent,
-  ],
-  providers: [
-    TanitaService,
-    WithingsService,
-  ]
+    selector: ' app-measurement-details',
+    templateUrl: './measurement-details.component.html',
+    styleUrls: ['./measurement-details.component.scss'],
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatDivider,
+        MatListModule,
+        DaySelectComponent,
+    ],
+    providers: [
+        TanitaService,
+        WithingsService,
+    ]
 })
 export class MeasurementDetailsComponent implements OnInit, OnChanges {
 

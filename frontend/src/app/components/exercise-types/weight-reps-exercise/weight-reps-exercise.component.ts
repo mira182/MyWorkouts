@@ -15,21 +15,19 @@ export class WeightReps {
 }
 
 @Component({
-  selector: 'app-weight-reps-exercise',
-  templateUrl: './weight-reps-exercise.component.html',
-  standalone: true,
-
-  imports: [
-    CommonModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    MatCard,
-    MatCardContent,
-    MatIcon,
-    InputNumberComponent,
-    MatTooltip,
-    MatButton,
-  ]
+    selector: 'app-weight-reps-exercise',
+    templateUrl: './weight-reps-exercise.component.html',
+    imports: [
+        CommonModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        MatCard,
+        MatCardContent,
+        MatIcon,
+        InputNumberComponent,
+        MatTooltip,
+        MatButton,
+    ]
 })
 export class WeightRepsExerciseComponent implements OnInit {
 

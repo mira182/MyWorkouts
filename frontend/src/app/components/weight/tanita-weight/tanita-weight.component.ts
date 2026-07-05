@@ -25,32 +25,31 @@ import {MeasurementsTableComponent} from "../measurements-table/measurements-tab
 import {TanitaMeasurementModel} from "../../../model/weight/tanita-measurement.model";
 
 @Component({
-  selector: 'app-tanita-weight',
-  templateUrl: './tanita-weight.component.html',
-  styleUrls: ['./tanita-weight.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatTabsModule,
-    MatCheckbox,
-    FormsModule,
-    MeasurementDetailsComponent,
-    MatTableModule,
-    MatIconButton,
-    MatIcon,
-    MatTooltip,
-    TranslateModule,
-    NgxChartsModule,
-    NgxSpinnerModule,
-    MeasurementsTableComponent,
-  ],
-  providers: [
-    TanitaService,
-    WithingsService,
-    MatCheckboxModule,
-    MatTableModule,
-  ],
+    selector: 'app-tanita-weight',
+    templateUrl: './tanita-weight.component.html',
+    styleUrls: ['./tanita-weight.component.scss'],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatTabsModule,
+        MatCheckbox,
+        FormsModule,
+        MeasurementDetailsComponent,
+        MatTableModule,
+        MatIconButton,
+        MatIcon,
+        MatTooltip,
+        TranslateModule,
+        NgxChartsModule,
+        NgxSpinnerModule,
+        MeasurementsTableComponent,
+    ],
+    providers: [
+        TanitaService,
+        WithingsService,
+        MatCheckboxModule,
+        MatTableModule,
+    ]
 })
 export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
 

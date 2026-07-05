@@ -11,20 +11,19 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {API_DATE_FORMAT} from "../../app.config";
 
 @Component({
-  selector: 'app-day-select',
-  templateUrl: './day-select.component.html',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatIcon,
-    MatInput,
-    MatIconButton,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    DateTimeService,
-  ]
+    selector: 'app-day-select',
+    templateUrl: './day-select.component.html',
+    imports: [
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatIcon,
+        MatInput,
+        MatIconButton,
+        ReactiveFormsModule,
+    ],
+    providers: [
+        DateTimeService,
+    ]
 })
 export class DaySelectComponent implements OnInit, OnChanges {
 

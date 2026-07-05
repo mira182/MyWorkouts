@@ -24,26 +24,25 @@ import {isNil} from "lodash";
 import {ExerciseService} from "../../services/rest/exercise/exercise.service";
 
 @Component({
-  selector: 'app-exercises',
-  templateUrl: './exercises.component.html',
-  styleUrls: ['./exercises.component.scss'],
-  standalone: true,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatButton,
-    MatMiniFabButton,
-    MatTooltipModule,
-    MatIcon,
-    MatInput,
-    PageHeaderLayoutComponent,
-    ExerciseItemComponent,
-  ]
+    selector: 'app-exercises',
+    templateUrl: './exercises.component.html',
+    styleUrls: ['./exercises.component.scss'],
+    imports: [
+        TranslateModule,
+        CommonModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatTabsModule,
+        MatExpansionModule,
+        MatButton,
+        MatMiniFabButton,
+        MatTooltipModule,
+        MatIcon,
+        MatInput,
+        PageHeaderLayoutComponent,
+        ExerciseItemComponent,
+    ]
 })
 export class ExercisesComponent extends Unsubscribe implements OnInit {
 

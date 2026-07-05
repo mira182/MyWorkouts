@@ -5,15 +5,14 @@ import {MatIconButton} from "@angular/material/button";
 import {isNil} from "lodash";
 
 @Component({
-  selector: 'app-image-preview',
-  templateUrl: './image-preview.component.html',
-  styleUrls: ['./image-preview.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIcon,
-    MatIconButton
-  ]
+    selector: 'app-image-preview',
+    templateUrl: './image-preview.component.html',
+    styleUrls: ['./image-preview.component.scss'],
+    imports: [
+        CommonModule,
+        MatIcon,
+        MatIconButton
+    ]
 })
 export class ImagePreviewComponent {
 

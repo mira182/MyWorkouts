@@ -10,15 +10,14 @@ import {MatButton} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-confirmation-dialog',
-  templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.scss'],
-  imports: [
-    MatButton,
-    MatDialogModule,
-    TranslateModule,
-  ],
-  standalone: true
+    selector: 'app-confirmation-dialog',
+    templateUrl: './confirmation-dialog.component.html',
+    styleUrls: ['./confirmation-dialog.component.scss'],
+    imports: [
+        MatButton,
+        MatDialogModule,
+        TranslateModule,
+    ]
 })
 export class ConfirmationDialogComponent implements OnInit {
 

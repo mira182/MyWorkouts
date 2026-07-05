@@ -20,25 +20,24 @@ import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
 import {API_DATE_FORMAT} from "../../app.config";
 
 @Component({
-  selector: 'workout-exercise',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatCardContent,
-    MatCardSubtitle,
-    MatDivider,
-    MatIcon,
-    MatIconButton,
-    MatTooltip,
-    ReactiveFormsModule,
-    TranslateModule,
-    MatCard,
-    DatePickerComponent,
-    MatFormFieldModule,
-    WorkoutSetsComponent
-  ],
-  templateUrl: './workout-exercise.component.html',
+    selector: 'workout-exercise',
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatCardContent,
+        MatCardSubtitle,
+        MatDivider,
+        MatIcon,
+        MatIconButton,
+        MatTooltip,
+        ReactiveFormsModule,
+        TranslateModule,
+        MatCard,
+        DatePickerComponent,
+        MatFormFieldModule,
+        WorkoutSetsComponent
+    ],
+    templateUrl: './workout-exercise.component.html'
 })
 export class WorkoutExerciseComponent implements OnInit {
 

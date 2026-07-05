@@ -10,9 +10,8 @@ import {MatButton} from "@angular/material/button";
 import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
-  selector: 'app-time-exercise',
-  templateUrl: './time-exercise.component.html',
-  standalone: true,
+    selector: 'app-time-exercise',
+    templateUrl: './time-exercise.component.html',
     imports: [
         CommonModule,
         MatCard,

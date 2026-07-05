@@ -12,22 +12,21 @@ import {DashboardWorkoutsComponent} from "../dashboard-workouts/dashboard-workou
 import {DashboardExercisesComponent} from "../dashboard-exercises/dashboard-exercises.component";
 
 @Component({
-  selector: 'app-workout-dashboard',
-  templateUrl: './dashboard-page.component.html',
-  standalone: true,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    MatGridListModule,
-    MatCardModule,
-    MatIconButton,
-    MatMenuModule,
-    MatIcon,
-    DashboardBreakdownComponent,
-    DashboardTotalsComponent,
-    DashboardWorkoutsComponent,
-    DashboardExercisesComponent
-  ]
+    selector: 'app-workout-dashboard',
+    templateUrl: './dashboard-page.component.html',
+    imports: [
+        TranslateModule,
+        CommonModule,
+        MatGridListModule,
+        MatCardModule,
+        MatIconButton,
+        MatMenuModule,
+        MatIcon,
+        DashboardBreakdownComponent,
+        DashboardTotalsComponent,
+        DashboardWorkoutsComponent,
+        DashboardExercisesComponent
+    ]
 })
 export class DashboardPageComponent {
 

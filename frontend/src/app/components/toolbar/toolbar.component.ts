@@ -19,28 +19,27 @@ import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {Unsubscribe} from "../unsubscribe/unsubscribe";
 
 @Component({
-  selector: 'app-toolbar',
-  standalone: true,
-  imports: [
-    MatButton,
-    MatIcon,
-    MatIconButton,
-    MatMenuModule,
-    MatSlideToggle,
-    MatToolbar,
-    MatTooltip,
-    NgIf,
-    RouterLink,
-    RouterLinkActive,
-    TranslateModule,
-    MatDrawer,
-    MatDrawerContainer,
-    MatListItem,
-    MatNavList,
-    NgxSpinnerModule,
-    RouterOutlet,
-  ],
-  templateUrl: './toolbar.component.html',
+    selector: 'app-toolbar',
+    imports: [
+        MatButton,
+        MatIcon,
+        MatIconButton,
+        MatMenuModule,
+        MatSlideToggle,
+        MatToolbar,
+        MatTooltip,
+        NgIf,
+        RouterLink,
+        RouterLinkActive,
+        TranslateModule,
+        MatDrawer,
+        MatDrawerContainer,
+        MatListItem,
+        MatNavList,
+        NgxSpinnerModule,
+        RouterOutlet,
+    ],
+    templateUrl: './toolbar.component.html'
 })
 export class ToolbarComponent extends Unsubscribe implements OnInit {
 

@@ -23,21 +23,20 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
 import {WorkoutDayService} from "../../services/rest/workout/workout-day.service";
 
 @Component({
-  selector: 'app-workouts',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIcon,
-    MatTooltip,
-    TranslateModule,
-    MatMiniFabButton,
-    MatMenuModule,
-    DaySelectComponent,
-    NgxSpinnerModule,
-    WorkoutExerciseComponent,
-    PageHeaderLayoutComponent
-  ],
-  templateUrl: './workouts.component.html',
+    selector: 'app-workouts',
+    imports: [
+        CommonModule,
+        MatIcon,
+        MatTooltip,
+        TranslateModule,
+        MatMiniFabButton,
+        MatMenuModule,
+        DaySelectComponent,
+        NgxSpinnerModule,
+        WorkoutExerciseComponent,
+        PageHeaderLayoutComponent
+    ],
+    templateUrl: './workouts.component.html'
 })
 export class WorkoutsComponent extends Unsubscribe implements OnInit {
 

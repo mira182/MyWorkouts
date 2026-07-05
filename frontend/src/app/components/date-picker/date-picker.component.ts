@@ -8,18 +8,17 @@ import {TranslateModule} from "@ngx-translate/core";
 import {Moment} from "moment";
 
 @Component({
-  selector: 'app-date-picker',
-  standalone: true,
-  imports: [
-    MatLabel,
-    NgIf,
-    TranslateModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule
-  ],
-  templateUrl: './date-picker.component.html',
+    selector: 'app-date-picker',
+    imports: [
+        MatLabel,
+        NgIf,
+        TranslateModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule
+    ],
+    templateUrl: './date-picker.component.html'
 })
 export class DatePickerComponent {
 

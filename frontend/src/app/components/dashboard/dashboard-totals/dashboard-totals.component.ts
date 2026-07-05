@@ -14,22 +14,21 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {NgxDataPoint} from "../../weight/model/ngx-chart-data-model";
 
 @Component({
-  selector: 'app-dashboard-totals',
-  templateUrl: './dashboard-totals.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatCardModule,
-    MatDivider,
-    WeekDatePickerComponent,
-    NumberCardModule,
-    MatFormField,
-    MatDateRangeInput,
-    MatDatepickerToggle,
-    MatDateRangePicker,
-    ReactiveFormsModule
-  ],
+    selector: 'app-dashboard-totals',
+    templateUrl: './dashboard-totals.component.html',
+    imports: [
+        CommonModule,
+        TranslateModule,
+        MatCardModule,
+        MatDivider,
+        WeekDatePickerComponent,
+        NumberCardModule,
+        MatFormField,
+        MatDateRangeInput,
+        MatDatepickerToggle,
+        MatDateRangePicker,
+        ReactiveFormsModule
+    ]
 })
 export class DashboardTotalsComponent implements OnInit {
 

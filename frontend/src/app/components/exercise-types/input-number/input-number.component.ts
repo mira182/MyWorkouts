@@ -10,20 +10,19 @@ import {takeUntil} from "rxjs";
 import {Unsubscribe} from "../../unsubscribe/unsubscribe";
 
 @Component({
-  selector: 'input-number',
-  templateUrl: './input-number.component.html',
-  imports: [
-    MatIconButton,
-    MatFormField,
-    CommonModule,
-    ReactiveFormsModule,
-    MatInput,
-    MatIcon,
-    MatError,
-    MatLabel,
-    MatMiniFabButton,
-  ],
-  standalone: true
+    selector: 'input-number',
+    templateUrl: './input-number.component.html',
+    imports: [
+        MatIconButton,
+        MatFormField,
+        CommonModule,
+        ReactiveFormsModule,
+        MatInput,
+        MatIcon,
+        MatError,
+        MatLabel,
+        MatMiniFabButton,
+    ]
 })
 export class InputNumberComponent extends Unsubscribe implements OnInit {
 

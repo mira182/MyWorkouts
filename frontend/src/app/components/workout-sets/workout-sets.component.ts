@@ -12,20 +12,19 @@ import {WorkoutSetComponentConfigurationModel} from "../workout-exercise/model/w
 import {ExerciseType} from "../../model/exercise/exerciseType";
 
 @Component({
-  selector: 'workout-sets',
-  standalone: true,
-  imports: [
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatSuffix,
-    MatTooltip,
-    NgForOf,
-    NgIf,
-    ReactiveFormsModule
-  ],
-  templateUrl: './workout-sets.component.html',
+    selector: 'workout-sets',
+    imports: [
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatSuffix,
+        MatTooltip,
+        NgForOf,
+        NgIf,
+        ReactiveFormsModule
+    ],
+    templateUrl: './workout-sets.component.html'
 })
 export class WorkoutSetsComponent implements OnInit {
 

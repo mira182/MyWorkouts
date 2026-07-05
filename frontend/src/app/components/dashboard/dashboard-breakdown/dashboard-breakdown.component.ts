@@ -18,21 +18,20 @@ import {Chart} from 'chart.js';
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Component({
-  selector: 'app-dashboard-breakdown',
-  templateUrl: './dashboard-breakdown.component.html',
-  standalone: true,
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    PieChartModule,
-    LineChartModule,
-    WeekDatePickerComponent,
-    NgxChartsModule,
-    NgxSpinnerModule,
-  ]
+    selector: 'app-dashboard-breakdown',
+    templateUrl: './dashboard-breakdown.component.html',
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TranslateModule,
+        CommonModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        PieChartModule,
+        LineChartModule,
+        WeekDatePickerComponent,
+        NgxChartsModule,
+        NgxSpinnerModule,
+    ]
 })
 export class DashboardBreakdownComponent implements OnInit {
 

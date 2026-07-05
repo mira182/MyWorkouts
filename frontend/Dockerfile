@@ -46,7 +46,7 @@ WORKDIR /usr/src/app
 
 # Install dependencies from the committed lockfile for reproducible builds.
 # Copying package files first keeps this layer cached when only source changes.
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 
 # Copy the rest of the application and build the production bundle

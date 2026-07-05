@@ -21,27 +21,26 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
 import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
-  selector: 'app-add-workout-dialog',
-  templateUrl: './add-workout-exercise-dialog.component.html',
-  styleUrl: './add-workout-exercise-dialog.component.scss',
-  imports: [
-    CommonModule,
-    MatIcon,
-    MatDialogModule,
-    MatStepperModule,
-    MatIconButton,
-    TranslateModule,
-    MatActionList,
-    MatListItem,
-    MatButton,
-    WeightRepsExerciseComponent,
-    RepsExerciseComponent,
-    TimeExerciseComponent,
-    MatTooltip,
-    PageHeaderLayoutComponent,
-    NgOptimizedImage,
-  ],
-  standalone: true,
+    selector: 'app-add-workout-dialog',
+    templateUrl: './add-workout-exercise-dialog.component.html',
+    styleUrl: './add-workout-exercise-dialog.component.scss',
+    imports: [
+        CommonModule,
+        MatIcon,
+        MatDialogModule,
+        MatStepperModule,
+        MatIconButton,
+        TranslateModule,
+        MatActionList,
+        MatListItem,
+        MatButton,
+        WeightRepsExerciseComponent,
+        RepsExerciseComponent,
+        TimeExerciseComponent,
+        MatTooltip,
+        PageHeaderLayoutComponent,
+        NgOptimizedImage,
+    ]
 })
 export class AddWorkoutExerciseDialogComponent implements OnInit {
 

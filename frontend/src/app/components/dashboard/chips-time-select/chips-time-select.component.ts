@@ -12,14 +12,13 @@ export class MonthChip {
 }
 
 @Component({
-  selector: 'app-chips-time-select',
-  templateUrl: './chips-time-select.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatChipsModule,
-    MatChipOption,
-  ]
+    selector: 'app-chips-time-select',
+    templateUrl: './chips-time-select.component.html',
+    imports: [
+        CommonModule,
+        MatChipsModule,
+        MatChipOption,
+    ]
 })
 export class ChipsTimeSelectComponent implements OnInit {
 

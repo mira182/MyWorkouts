@@ -10,20 +10,19 @@ import {MatButton} from "@angular/material/button";
 import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
-  selector: 'app-reps-exercise',
-  templateUrl: './reps-exercise.component.html',
-  standalone: true,
-  imports: [
-    MatCard,
-    CommonModule,
-    ReactiveFormsModule,
-    MatIcon,
-    InputNumberComponent,
-    TranslateModule,
-    MatTooltip,
-    MatButton,
-    MatCardContent,
-  ]
+    selector: 'app-reps-exercise',
+    templateUrl: './reps-exercise.component.html',
+    imports: [
+        MatCard,
+        CommonModule,
+        ReactiveFormsModule,
+        MatIcon,
+        InputNumberComponent,
+        TranslateModule,
+        MatTooltip,
+        MatButton,
+        MatCardContent,
+    ]
 })
 export class RepsExerciseComponent implements OnInit {
 
