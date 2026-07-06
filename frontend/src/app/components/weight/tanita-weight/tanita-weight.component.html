@@ -17,6 +17,7 @@
       <div class="flex flex-col items-center">
         @if (tanitaWeightData(); as tanitaWeightData) {
           <ngx-charts-line-chart
+            [@.disabled]="true"
             [view]="[900, 500]"
             [title]="'Weight'"
             [trimXAxisTicks]="true"

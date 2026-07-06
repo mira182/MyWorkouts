@@ -52,7 +52,7 @@
 
     @if (workout(); as currentWorkout) {
       <div>
-        @for (workoutExercise of currentWorkout.workoutExercises; track workoutExercise) {
+        @for (workoutExercise of currentWorkout.workoutExercises; track workoutExercise.id) {
           <workout-exercise
             [workoutDate]="currentWorkout.date"
             [workoutExercise]="workoutExercise"
