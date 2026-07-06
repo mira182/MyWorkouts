@@ -3,7 +3,7 @@ import {DateTimeService} from "../../../services/date-time/date-time.service";
 import {MatChipOption, MatChipsModule} from "@angular/material/chips";
 import {Interval} from "../../../model/time/interval";
 import moment, {Moment} from "moment";
-import {CommonModule} from "@angular/common";
+
 
 export class MonthChip {
   id: number;
@@ -12,14 +12,12 @@ export class MonthChip {
 }
 
 @Component({
-  selector: 'app-chips-time-select',
-  templateUrl: './chips-time-select.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-chips-time-select',
+    templateUrl: './chips-time-select.component.html',
+    imports: [
     MatChipsModule,
-    MatChipOption,
-  ]
+    MatChipOption
+]
 })
 export class ChipsTimeSelectComponent implements OnInit {
 
@@ -89,7 +87,6 @@ export class ChipsTimeSelectComponent implements OnInit {
     this.chips.forEach(chip => chip.selected = false);
     chip.selected = true;
     let selectedInterval;
-    const firstAndLastDayOfMonth = DateTimeService.getFirstAndLastDayOfMonth(new Date());
     const firstDayOfMonth: Moment = moment().startOf('month');
     const lastDayOfMonth: Moment = moment().endOf('month');
     switch (chip.id) {

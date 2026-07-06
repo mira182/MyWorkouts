@@ -11,21 +11,31 @@
   <div [formGroup]="form" class="flex flex-col">
     <mat-form-field>
       <input matInput placeholder="{{'EXERCISE.name' | translate}}" formControlName="name" required>
-      <mat-error *ngIf="form.get('name').invalid">{{'ERROR.required.exerciseName' | translate}}</mat-error>
+      @if (form.get('name').invalid) {
+        <mat-error>{{'ERROR.required.exerciseName' | translate}}</mat-error>
+      }
     </mat-form-field>
     <mat-form-field>
       <mat-label>{{'EXERCISE.type' | translate}}</mat-label>
       <mat-select formControlName="type">
-        <mat-option *ngFor="let exerciseType of exerciseTypes" [value]="exerciseType">{{ exerciseType }}</mat-option>
+        @for (exerciseType of exerciseTypes(); track exerciseType) {
+          <mat-option [value]="exerciseType">{{ exerciseType }}</mat-option>
+        }
       </mat-select>
-      <mat-error *ngIf="form.get('type').invalid">{{'ERROR.required.exerciseType' | translate}}</mat-error>
+      @if (form.get('type').invalid) {
+        <mat-error>{{'ERROR.required.exerciseType' | translate}}</mat-error>
+      }
     </mat-form-field>
     <mat-form-field>
       <mat-label>{{'EXERCISE.category' | translate}}</mat-label>
       <mat-select formControlName="category">
-        <mat-option *ngFor="let exerciseCategory of exerciseCategories" [value]="exerciseCategory">{{ exerciseCategory }}</mat-option>
+        @for (exerciseCategory of exerciseCategories(); track exerciseCategory) {
+          <mat-option [value]="exerciseCategory">{{ exerciseCategory }}</mat-option>
+        }
       </mat-select>
-      <mat-error *ngIf="form.get('category').invalid">{{'ERROR.required.exerciseCategory' | translate}}</mat-error>
+      @if (form.get('category').invalid) {
+        <mat-error>{{'ERROR.required.exerciseCategory' | translate}}</mat-error>
+      }
     </mat-form-field>
     <app-image-preview (selectedImage)="selectedImage = $event"></app-image-preview>
   </div>

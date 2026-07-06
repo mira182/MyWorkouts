@@ -5,7 +5,7 @@ import moment, {Moment} from "moment";
 import {ScaleType} from "../base-weight/base-weight.class";
 import {TanitaService} from "../../../services/weight/tanita/tanita.service";
 import {WithingsService} from "../../../services/weight/withings/withings.service";
-import {CommonModule} from "@angular/common";
+
 import {MatCardModule} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
@@ -23,21 +23,19 @@ export interface MeasurementDetails {
 }
 
 @Component({
-  selector: ' app-measurement-details',
-  templateUrl: './measurement-details.component.html',
-  styleUrls: ['./measurement-details.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: ' app-measurement-details',
+    templateUrl: './measurement-details.component.html',
+    styleUrls: ['./measurement-details.component.scss'],
+    imports: [
     MatCardModule,
     MatDivider,
     MatListModule,
-    DaySelectComponent,
-  ],
-  providers: [
-    TanitaService,
-    WithingsService,
-  ]
+    DaySelectComponent
+],
+    providers: [
+        TanitaService,
+        WithingsService,
+    ]
 })
 export class MeasurementDetailsComponent implements OnInit, OnChanges {
 

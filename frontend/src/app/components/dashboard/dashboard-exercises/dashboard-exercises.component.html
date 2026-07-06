@@ -1,14 +1,20 @@
 <div class="flex flex-col">
   <button mat-stroked-button (click)="openSelectExerciseDialog()">
-    <span *ngIf="!selectedExercise">Select exercise...</span><span *ngIf="selectedExercise">{{selectedExercise.name}}</span>
+    @if (!selectedExercise()) {
+      <span>Select exercise...</span>
+      }@if (selectedExercise(); as selectedExercise) {
+      <span>{{selectedExercise.name}}</span>
+    }
   </button>
 
   <mat-form-field>
     <mat-label>Chart type</mat-label>
     <mat-select [formControl]="selectedChartTypeControl" (selectionChange)="chartTypeSelected()">
-      <mat-option *ngFor="let chartType of exerciseChartType" [value]="chartType.value">
-        {{chartType.text}}
-      </mat-option>
+      @for (chartType of exerciseChartType; track chartType) {
+        <mat-option [value]="chartType.value">
+          {{chartType.text}}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 

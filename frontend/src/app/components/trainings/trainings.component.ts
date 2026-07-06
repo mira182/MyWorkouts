@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, signal} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {TrainingService} from "../../services/rest/training/training.service";
 import {AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
@@ -27,32 +27,31 @@ import {DateTimeService} from "../../services/date-time/date-time.service";
 import moment from "moment";
 
 @Component({
-  selector: 'app-trainings',
-  templateUrl: './trainings.component.html',
-  styleUrls: ['./trainings.component.scss'],
-  standalone: true,
-  imports: [
-    MatExpansionModule,
-    TranslateModule,
-    CommonModule,
-    MatFormFieldModule,
-    MatIcon,
-    MatSelectModule,
-    MatIconButton,
-    MatInput,
-    MatDatepickerToggle,
-    MatDatepicker,
-    MatCheckbox,
-    MatProgressBar,
-    MatButton,
-    MatMiniFabButton,
-    MatTooltipModule,
-    MatProgressSpinner,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    PageHeaderLayoutComponent,
-    WorkoutSetsComponent,
-  ]
+    selector: 'app-trainings',
+    templateUrl: './trainings.component.html',
+    styleUrls: ['./trainings.component.scss'],
+    imports: [
+        MatExpansionModule,
+        TranslateModule,
+        CommonModule,
+        MatFormFieldModule,
+        MatIcon,
+        MatSelectModule,
+        MatIconButton,
+        MatInput,
+        MatDatepickerToggle,
+        MatDatepicker,
+        MatCheckbox,
+        MatProgressBar,
+        MatButton,
+        MatMiniFabButton,
+        MatTooltipModule,
+        MatProgressSpinner,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        PageHeaderLayoutComponent,
+        WorkoutSetsComponent,
+    ]
 })
 export class TrainingsComponent implements OnInit {
 
@@ -60,9 +59,9 @@ export class TrainingsComponent implements OnInit {
 
   trainingTime;
 
-  loading: boolean = false;
+  loading = signal(false);
 
-  workoutsLoading: boolean = false;
+  workoutsLoading = signal(false);
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder,
@@ -70,6 +69,7 @@ export class TrainingsComponent implements OnInit {
               private snackBar: SnackBarService,
               private translate: TranslateService,
               private dialogsHandler: DialogsHandlerService,
+              private cdr: ChangeDetectorRef,
               private spinner: NgxSpinnerService) {
   }
 
@@ -91,11 +91,11 @@ export class TrainingsComponent implements OnInit {
   protected readonly formatDate = DateTimeService.formatDate;
 
   initForm() {
-    this.loading = true;
+    this.loading.set(true);
 
     this.trainingService.getAllTrainingsWithoutWorkouts()
       .pipe(
-        finalize(() => this.loading = false),
+        finalize(() => this.loading.set(false)),
         take(1),
       )
       .subscribe(trainingPlans => {
@@ -209,13 +209,13 @@ export class TrainingsComponent implements OnInit {
     this.dialogsHandler.openDateDialog().afterClosed().subscribe(selectedDate => {
       if (selectedDate) {
         this.spinner.show();
-        this.trainingService.applyTraining(trainingFromGroup.value.id, selectedDate).subscribe(ok => {
+        this.trainingService.applyTraining(trainingFromGroup.value.id, selectedDate)
+          .pipe(finalize(() => this.spinner.hide()))
+          .subscribe(ok => {
           if (ok) {
-            this.spinner.hide();
             this.snackBar.showSuccessSnackBar(this.translate.instant("ALERT.successfully-saved"));
           }
         }, error => {
-          this.spinner.hide();
           this.snackBar.showErrorSnackBar(error);
         });
       }
@@ -229,10 +229,10 @@ export class TrainingsComponent implements OnInit {
       return;
     }
 
-    this.workoutsLoading = true;
+    this.workoutsLoading.set(true);
     this.trainingService.getTrainingWithWorkouts(trainingId)
       .pipe(
-        finalize(() => this.workoutsLoading = false),
+        finalize(() => this.workoutsLoading.set(false)),
         take(1),
       )
       .subscribe({
@@ -251,8 +251,8 @@ export class TrainingsComponent implements OnInit {
       exercise: [trainingExercise.exercise],
       trainingSets: [trainingExercise.trainingSets || []],
     })));
-    // Mark loaded so updateTraining knows it's safe to sync exercises.
     trainingControl.get('exercisesLoaded').setValue(true);
+    this.cdr.markForCheck();
   }
 
   protected removeTrainingExercise(trainingControl: AbstractControl, exerciseIndex: number): void {

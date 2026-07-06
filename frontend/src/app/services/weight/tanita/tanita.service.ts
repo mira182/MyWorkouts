@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Urls} from "../../../model/urls";
-import {Observable} from "rxjs/index";
-import {tap} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {TanitaMeasurementModel} from "../../../model/weight/tanita-measurement.model";
 import Response from "../../../model/response";
 import {MeasurementType} from "../../../model/weight/measurement-type.enum";

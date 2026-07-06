@@ -4,14 +4,13 @@ import {TranslateModule} from "@ngx-translate/core";
 import {MeasurementRow} from "../measurements-table/measurements-table.component";
 
 @Component({
-  selector: 'app-day-details',
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-  ],
-  templateUrl: './day-details.component.html',
-  styleUrl: './day-details.component.scss'
+    selector: 'app-day-details',
+    imports: [
+        CommonModule,
+        TranslateModule,
+    ],
+    templateUrl: './day-details.component.html',
+    styleUrl: './day-details.component.scss'
 })
 export class DayDetailsComponent {
 

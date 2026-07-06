@@ -6,14 +6,12 @@ import {ThemeService} from "../../../services/theme/theme.service";
 import {Unsubscribe} from "../../unsubscribe/unsubscribe";
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {
-  MatDrawer,
-  MatDrawerContainer,
   MatSidenav,
   MatSidenavContainer,
   MatSidenavModule
 } from "@angular/material/sidenav";
 import {MatIcon} from "@angular/material/icon";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatIconButton} from "@angular/material/button";
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
@@ -22,41 +20,35 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ImportService} from "../../../services/rest/export-import/import.service";
 import {LoginService} from "../../../services/rest/auth/login.service";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
-import {MatCheckbox} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-home-layout',
-  templateUrl: './home-page-layout.component.html',
-  styles: [],
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    ToolbarComponent,
-    MatDrawer,
-    MatDrawerContainer,
-    MatIcon,
-    MatIconButton,
-    MatListItem,
-    MatMenu,
-    MatMenuItem,
-    MatNavList,
-    MatSlideToggle,
-    MatTooltip,
-    RouterLink,
-    RouterLinkActive,
-    TranslateModule,
-    MatMenuModule,
-    MatSidenavContainer,
-    MatSidenav,
-    MatCheckbox,
-    MatButton,
-    FormsModule,
-    MatSidenavModule
-  ],
-  providers: [
-    ThemeService,
-  ]
+    selector: 'app-home-layout',
+    templateUrl: './home-page-layout.component.html',
+    styles: [],
+    imports: [
+        RouterOutlet,
+        ToolbarComponent,
+        MatIcon,
+        MatIconButton,
+        MatListItem,
+        MatMenu,
+        MatMenuItem,
+        MatNavList,
+        MatSlideToggle,
+        MatTooltip,
+        RouterLink,
+        RouterLinkActive,
+        TranslateModule,
+        MatMenuModule,
+        MatSidenavContainer,
+        MatSidenav,
+        FormsModule,
+        MatSidenavModule
+    ],
+    providers: [
+        ThemeService,
+    ]
 })
 export class HomeLayoutComponent extends Unsubscribe implements OnInit {
 

@@ -7,22 +7,30 @@
       <mat-select (selectionChange)="breakdownTypeSelected()" [formControl]="selectedBreakdownValue">
         <mat-select-trigger>
           {{ 'DASHBOARD.BREAKDOWN.' + selectedBreakdownValue.value.option | translate }}
-          <span *ngIf="selectedBreakdownValue.value.group === 'EXERCISE_CATEGORY'" class="additional-selection">
+          @if (selectedBreakdownValue.value.group === 'EXERCISE_CATEGORY') {
+            <span class="additional-selection">
               (by Category)
-          </span>
-          <span *ngIf="selectedBreakdownValue.value.group === 'EXERCISE_NAME'" class="additional-selection">
+            </span>
+          }
+          @if (selectedBreakdownValue.value.group === 'EXERCISE_NAME') {
+            <span class="additional-selection">
               (by Exercise)
-          </span>
+            </span>
+          }
         </mat-select-trigger>
         <mat-optgroup [label]="'DASHBOARD.BREAKDOWN.EXERCISE_CATEGORY' | translate">
-          <mat-option *ngFor="let option of breakdownOptions" [value]="{ option: option, group: 'EXERCISE_CATEGORY' }">
-            {{ 'DASHBOARD.BREAKDOWN.' + option | translate }}
-          </mat-option>
+          @for (option of breakdownOptions(); track option) {
+            <mat-option [value]="{ option: option, group: 'EXERCISE_CATEGORY' }">
+              {{ 'DASHBOARD.BREAKDOWN.' + option | translate }}
+            </mat-option>
+          }
         </mat-optgroup>
         <mat-optgroup [label]="'DASHBOARD.BREAKDOWN.EXERCISE_NAME' | translate">
-          <mat-option *ngFor="let option of breakdownOptions" [value]="{ option: option, group: 'EXERCISE_NAME' }">
-            {{ 'DASHBOARD.BREAKDOWN.' + option | translate }}
-          </mat-option>
+          @for (option of breakdownOptions(); track option) {
+            <mat-option [value]="{ option: option, group: 'EXERCISE_NAME' }">
+              {{ 'DASHBOARD.BREAKDOWN.' + option | translate }}
+            </mat-option>
+          }
         </mat-optgroup>
       </mat-select>
     </mat-form-field>

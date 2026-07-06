@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {WithingsMeasurementModel} from "../../../model/weight/withings-measurement.model";
 import {MeasurementsTableComponent} from "../measurements-table/measurements-table.component";
@@ -8,9 +8,9 @@ import {TranslateModule} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatIcon} from "@angular/material/icon";
-import {MatFabButton, MatIconButton} from "@angular/material/button";
+import {MatFabButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
-import {CommonModule} from "@angular/common";
+
 import {WithingsService} from "../../../services/weight/withings/withings.service";
 import {BaseWeightClass} from "../base-weight/base-weight.class";
 import {forkJoin, take} from "rxjs";
@@ -32,27 +32,24 @@ interface RangeOption {
 }
 
 @Component({
-  selector: 'app-withings-weight',
-  templateUrl: './withings-weight.component.html',
-  styleUrls: ['./withings-weight.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-withings-weight',
+    templateUrl: './withings-weight.component.html',
+    styleUrls: ['./withings-weight.component.scss'],
+    imports: [
     MatTooltip,
     MatTabsModule,
     MatIcon,
-    MatIconButton,
     MatFabButton,
     TranslateModule,
     NgxLineChartComponent,
     MatButtonToggleModule,
     NgxSpinnerModule,
     MeasurementsTableComponent,
-    DayDetailsComponent,
-  ],
-  providers: [
-    WithingsService,
-  ]
+    DayDetailsComponent
+],
+    providers: [
+        WithingsService,
+    ]
 })
 export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 
@@ -72,7 +69,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
     muscleMassRatio: '%',
     boneMass: 'kg',
   };
-  protected tableData: WithingsMeasurementModel[] = [];
+  protected tableData = signal<WithingsMeasurementModel[]>([]);
 
   protected readonly charts: ChartDefinition[] = [
     {key: 'weight', title: 'Weight', types: ['WEIGHT']},
@@ -93,7 +90,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
   ];
   protected selectedRangeDays = 7;
 
-  protected viewData: { [key: string]: NgxWeightChartData[] } = {};
+  protected viewData = signal<{ [key: string]: NgxWeightChartData[] }>({});
   private readonly allData: { [key: string]: NgxWeightChartData[] } = {};
 
   protected tooltip: { visible: boolean; date: Date | null; x: number; y: number } =
@@ -146,14 +143,16 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
     this.withingsService.getMeasurements()
       .pipe(take(1))
       .subscribe({
-        next: measurements => this.tableData = measurements,
+        next: measurements => this.tableData.set(measurements),
         error: (err) => this.snackBar.showErrorSnackBar(err?.error),
       });
   }
 
   protected onRangeChange(days: number): void {
     this.selectedRangeDays = days;
-    this.charts.forEach(chart => this.viewData[chart.key] = this.filterByRange(this.allData[chart.key]));
+    const next: { [key: string]: NgxWeightChartData[] } = {};
+    this.charts.forEach(chart => next[chart.key] = this.filterByRange(this.allData[chart.key]));
+    this.viewData.set(next);
   }
 
   private loadChart(chart: ChartDefinition): void {
@@ -164,7 +163,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
       .subscribe({
         next: data => {
           this.allData[chart.key] = data;
-          this.viewData[chart.key] = this.filterByRange(data);
+          this.viewData.update(v => ({...v, [chart.key]: this.filterByRange(data)}));
         },
         error: (err) => this.snackBar.showErrorSnackBar(err),
       });
@@ -183,7 +182,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
   }
 
   selectedTab(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
+    this.selectedTabIndex.set(tabIndex);
   }
 
   protected onPointHovered(event: { date: Date; x: number; y: number }): void {

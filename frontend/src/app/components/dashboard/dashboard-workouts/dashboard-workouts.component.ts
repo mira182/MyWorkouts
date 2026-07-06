@@ -3,9 +3,8 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 import {Interval} from "../../../model/time/interval";
 import moment from 'moment';
-import {CommonModule} from "@angular/common";
+
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {ChipsTimeSelectComponent} from "../chips-time-select/chips-time-select.component";
 import {MatSelectModule} from "@angular/material/select";
 import {CookieModule, CookieService} from "ngx-cookie";
@@ -36,20 +35,17 @@ export interface WorkoutChartSettings {
 }
 
 @Component({
-  selector: 'app-dashboard-workouts',
-  templateUrl: './dashboard-workouts.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-dashboard-workouts',
+    templateUrl: './dashboard-workouts.component.html',
+    imports: [
     TranslateModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatProgressSpinner,
     ChipsTimeSelectComponent,
     MatSelectModule,
     CookieModule,
     NgxSpinnerModule
-  ],
+]
 })
 export class DashboardWorkoutsComponent implements OnInit {
 

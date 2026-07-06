@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, signal, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 import {Interval} from "../../../model/time/interval";
-import {CommonModule} from "@angular/common";
+
 import {MatSelectModule} from "@angular/material/select";
 import {combineLatest, finalize, take} from "rxjs";
 import {LineChartModule, NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
@@ -18,29 +18,27 @@ import {Chart} from 'chart.js';
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Component({
-  selector: 'app-dashboard-breakdown',
-  templateUrl: './dashboard-breakdown.component.html',
-  standalone: true,
-  encapsulation: ViewEncapsulation.None,
-  imports: [
+    selector: 'app-dashboard-breakdown',
+    templateUrl: './dashboard-breakdown.component.html',
+    encapsulation: ViewEncapsulation.None,
+    imports: [
     TranslateModule,
-    CommonModule,
     MatSelectModule,
     ReactiveFormsModule,
     PieChartModule,
     LineChartModule,
     WeekDatePickerComponent,
     NgxChartsModule,
-    NgxSpinnerModule,
-  ]
+    NgxSpinnerModule
+]
 })
 export class DashboardBreakdownComponent implements OnInit {
 
   protected selectedBreakdownValue: FormControl;
 
-  protected breakdownOptions: string[] = [];
+  protected breakdownOptions = signal<string[]>([]);
 
-  protected breakdownGroups: string[] = [];
+  protected breakdownGroups = signal<string[]>([]);
 
   protected chart: Chart<"pie", number[], string>;
 
@@ -63,8 +61,8 @@ export class DashboardBreakdownComponent implements OnInit {
         take(1),
       )
       .subscribe(([breakdownChartTypes, breakdownChartGroups]) => {
-        this.breakdownOptions = breakdownChartTypes;
-        this.breakdownGroups = breakdownChartGroups;
+        this.breakdownOptions.set(breakdownChartTypes);
+        this.breakdownGroups.set(breakdownChartGroups);
       });
 
     this.selectedBreakdownValue = new FormControl({ group: 'EXERCISE_CATEGORY', option: "SETS_NUMBER"});

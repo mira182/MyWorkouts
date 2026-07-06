@@ -6,24 +6,30 @@
       <mat-form-field>
         <mat-label>{{ 'EXERCISE.name' | translate }}</mat-label>
         <input matInput type="text" placeholder="{{ exercise.name }}" formControlName="name">
-        <mat-error *ngIf="editExerciseForm.controls['name'].invalid">{{ 'ERROR.required.name' | translate }}</mat-error>
+        @if (editExerciseForm.controls['name'].invalid) {
+          <mat-error>{{ 'ERROR.required.name' | translate }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>{{ 'EXERCISE.category' | translate }}</mat-label>
         <mat-select formControlName="category">
-          <mat-option *ngFor="let category of exerciseCategories" [value]="category">
-            {{ category }}
-          </mat-option>
+          @for (category of exerciseCategories(); track category) {
+            <mat-option [value]="category">
+              {{ category }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>{{ 'EXERCISE.type' | translate }}</mat-label>
         <mat-select formControlName="type">
-          <mat-option *ngFor="let type of exerciseTypes" [value]="type">
-            {{ type }}
-          </mat-option>
+          @for (type of exerciseTypes(); track type) {
+            <mat-option [value]="type">
+              {{ type }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
 

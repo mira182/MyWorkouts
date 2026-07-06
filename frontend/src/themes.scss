@@ -1,13 +1,14 @@
 @use "@angular/material" as mat;
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // LIGHT THEME
-$angular-primary: mat.define-palette(mat.$indigo-palette, 500, 100, 900);
-$angular-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$angular-warn: mat.define-palette(mat.$red-palette, A200, A100, A400);
-$angular-success: mat.define-palette(mat.$green-palette, 500, 100, 900);
+$angular-primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500, 100, 900);
+$angular-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$angular-warn: mat.m2-define-palette(mat.$m2-red-palette, A200, A100, A400);
+$angular-success: mat.m2-define-palette(mat.$m2-green-palette, 500, 100, 900);
 
-$angular-default-theme: mat.define-light-theme(
+$angular-default-theme: mat.m2-define-light-theme(
     (
       color: (
         primary: $angular-primary,
@@ -19,9 +20,9 @@ $angular-default-theme: mat.define-light-theme(
 );
 
 // DARK THEME
-$angular-dark-primary: mat.define-palette(mat.$orange-palette, 800, 500, 900);
+$angular-dark-primary: mat.m2-define-palette(mat.$m2-orange-palette, 800, 500, 900);
 
-$angular-dark-theme: mat.define-dark-theme(
+$angular-dark-theme: mat.m2-define-dark-theme(
     (
       color: (
         primary: $angular-dark-primary,

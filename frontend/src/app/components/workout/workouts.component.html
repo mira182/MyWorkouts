@@ -24,12 +24,16 @@
         <mat-icon>fitness_center</mat-icon>
       </button>
       <mat-menu #templateMenu="matMenu">
-        <button mat-menu-item *ngFor="let training of trainings" (click)="applyTemplate(training)">
-          {{ training.name }}
-        </button>
-        <button mat-menu-item disabled *ngIf="!trainings.length">
-          {{ 'WORKOUTS.no-templates' | translate }}
-        </button>
+        @for (training of trainings(); track training) {
+          <button mat-menu-item (click)="applyTemplate(training)">
+            {{ training.name }}
+          </button>
+        }
+        @if (!trainings().length) {
+          <button mat-menu-item disabled>
+            {{ 'WORKOUTS.no-templates' | translate }}
+          </button>
+        }
       </mat-menu>
 
       <button mat-mini-fab matTooltip="{{'BUTTON.delete-workouts' | translate}}" (click)="deleteWorkout()">
@@ -46,18 +50,19 @@
 
     <app-day-select [inputDate]="selectedDate()" (dateChanged)="getWorkoutsForDay($event)"></app-day-select>
 
-    <div *ngIf="workout; else noWorkouts">
-      <workout-exercise
-        *ngFor="let workoutExercise of workout.workoutExercises"
-        [workoutDate]="workout.date"
-        [workoutExercise]="workoutExercise"
-        (workoutExerciseUpdated)="onWorkoutExerciseUpdated()">
-      </workout-exercise>
-    </div>
-
-    <ng-template #noWorkouts>
+    @if (workout(); as currentWorkout) {
+      <div>
+        @for (workoutExercise of currentWorkout.workoutExercises; track workoutExercise) {
+          <workout-exercise
+            [workoutDate]="currentWorkout.date"
+            [workoutExercise]="workoutExercise"
+            (workoutExerciseUpdated)="onWorkoutExerciseUpdated()">
+          </workout-exercise>
+        }
+      </div>
+    } @else {
       <div class="text-center">{{ 'TEXTS.no-workouts' | translate }}</div>
-    </ng-template>
+    }
 
   </div>
 </div>

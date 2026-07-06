@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
+import {MatMiniFabButton} from "@angular/material/button";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
-import {CommonModule} from "@angular/common";
+
 import {MatInput} from "@angular/material/input";
 import {MatIcon} from "@angular/material/icon";
 import {isNil} from "lodash";
@@ -10,20 +10,17 @@ import {takeUntil} from "rxjs";
 import {Unsubscribe} from "../../unsubscribe/unsubscribe";
 
 @Component({
-  selector: 'input-number',
-  templateUrl: './input-number.component.html',
-  imports: [
-    MatIconButton,
+    selector: 'input-number',
+    templateUrl: './input-number.component.html',
+    imports: [
     MatFormField,
-    CommonModule,
     ReactiveFormsModule,
     MatInput,
     MatIcon,
     MatError,
     MatLabel,
-    MatMiniFabButton,
-  ],
-  standalone: true
+    MatMiniFabButton
+]
 })
 export class InputNumberComponent extends Unsubscribe implements OnInit {
 

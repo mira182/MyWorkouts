@@ -1,31 +1,26 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WorkoutSet} from "../../model/exercise/workoutSet";
-import {DatePickerComponent} from "../date-picker/date-picker.component";
 import {MatFormField, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {MatTooltip} from "@angular/material/tooltip";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {WorkoutSetComponentConfigurationModel} from "../workout-exercise/model/workout-set-configuratio.model";
 import {ExerciseType} from "../../model/exercise/exerciseType";
 
 @Component({
-  selector: 'workout-sets',
-  standalone: true,
-  imports: [
+    selector: 'workout-sets',
+    imports: [
     MatFormField,
     MatIcon,
     MatIconButton,
     MatInput,
     MatSuffix,
     MatTooltip,
-    NgForOf,
-    NgIf,
     ReactiveFormsModule
-  ],
-  templateUrl: './workout-sets.component.html',
+],
+    templateUrl: './workout-sets.component.html'
 })
 export class WorkoutSetsComponent implements OnInit {
 

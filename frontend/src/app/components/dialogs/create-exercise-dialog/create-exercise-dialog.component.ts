@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {TranslateModule} from "@ngx-translate/core";
-import {CommonModule} from "@angular/common";
+
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {ImagePreviewComponent} from "../../image-preview/image-preview.component";
@@ -15,12 +15,10 @@ import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 
 @Component({
-  selector: 'app-create-exercise-dialog',
-  templateUrl: './create-exercise-dialog.component.html',
-  standalone: true,
-  imports: [
+    selector: 'app-create-exercise-dialog',
+    templateUrl: './create-exercise-dialog.component.html',
+    imports: [
     TranslateModule,
-    CommonModule,
     MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -31,15 +29,15 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
     MatInput,
     MatIcon,
     PageHeaderLayoutComponent
-  ]
+]
 })
 export class CreateExerciseDialogComponent implements OnInit {
 
   protected form: FormGroup;
 
-  protected exerciseTypes: string[];
+  protected exerciseTypes = signal<string[]>([]);
 
-  protected exerciseCategories: string[] = [];
+  protected exerciseCategories = signal<string[]>([]);
 
   protected selectedImage: File;
 
@@ -56,8 +54,8 @@ export class CreateExerciseDialogComponent implements OnInit {
       )
       .subscribe({
         next: ([categories, types]) => {
-          this.exerciseCategories = categories;
-          this.exerciseTypes = types;
+          this.exerciseCategories.set(categories);
+          this.exerciseTypes.set(types);
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
       });

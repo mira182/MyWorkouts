@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
@@ -7,7 +7,7 @@ import {CookieService} from "ngx-cookie";
 import {ChipsTimeSelectComponent} from "../chips-time-select/chips-time-select.component";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {CommonModule} from "@angular/common";
+
 import {MatButton} from "@angular/material/button";
 import moment from "moment";
 import {WorkoutChartSettings} from "../dashboard-workouts/dashboard-workouts.component";
@@ -22,27 +22,25 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {DialogsHandlerService} from "../../../services/dialogs-handler/dialogs-handler.service";
 
 @Component({
-  selector: 'app-dashboard-exercises',
-  templateUrl: './dashboard-exercises.component.html',
-  imports: [
+    selector: 'app-dashboard-exercises',
+    templateUrl: './dashboard-exercises.component.html',
+    imports: [
     MatFormField,
     MatSelect,
     MatOption,
-    CommonModule,
     TranslateModule,
     ReactiveFormsModule,
     ChipsTimeSelectComponent,
     MatButton,
     MatLabel,
     NgxSpinnerModule
-  ],
-  standalone: true
+]
 })
 export class DashboardExercisesComponent implements OnInit {
 
   readonly COOKIE_NAME = 'exercise-chart-filter';
 
-  protected selectedExercise: Exercise;
+  protected selectedExercise = signal<Exercise | undefined>(undefined);
 
   exerciseChartType = [
     {value: "MAX_WEIGHT", text: "Max Weight"},
@@ -75,7 +73,7 @@ export class DashboardExercisesComponent implements OnInit {
         startDate: moment(exerciseChartFilterCookie.interval.startDate),
         endDate: moment(exerciseChartFilterCookie.interval.endDate),
       };
-      this.selectedExercise = exerciseChartFilterCookie.selectedExercise
+      this.selectedExercise.set(exerciseChartFilterCookie.selectedExercise)
       this.selectedChartTypeControl.setValue(exerciseChartFilterCookie.chartType)
     }
 
@@ -89,7 +87,7 @@ export class DashboardExercisesComponent implements OnInit {
         take(1)
       )
       .subscribe(exercise => {
-        this.selectedExercise = exercise;
+        this.selectedExercise.set(exercise);
         this.updateChart(this.currentInterval);
       });
   }
@@ -106,12 +104,13 @@ export class DashboardExercisesComponent implements OnInit {
   protected updateChart(interval: Interval) {
     this.cookieService.putObject(this.COOKIE_NAME, {
       interval: interval,
-      selectedExercise: this.selectedExercise,
+      selectedExercise: this.selectedExercise(),
       chartType: this.selectedChartTypeControl.value
     });
 
-    if (this.selectedExercise) {
-      this.chartJsDashboardService.getWorkoutExerciseChartData(this.selectedChartTypeControl.value, this.selectedExercise.name, this.currentInterval.startDate, this.currentInterval.endDate)
+    const exercise = this.selectedExercise();
+    if (exercise) {
+      this.chartJsDashboardService.getWorkoutExerciseChartData(this.selectedChartTypeControl.value, exercise.name, this.currentInterval.startDate, this.currentInterval.endDate)
         .pipe(
           take(1)
         )

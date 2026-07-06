@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
@@ -9,7 +9,7 @@ import {Urls} from "../../../model/urls";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatActionList, MatListItem} from "@angular/material/list";
-import {CommonModule, NgOptimizedImage} from "@angular/common";
+import { NgOptimizedImage } from "@angular/common";
 import {ImageUtilsService} from "../../../services/image/image.utils.service";
 import {WeightRepsExerciseComponent} from "../../exercise-types/weight-reps-exercise/weight-reps-exercise.component";
 import {RepsExerciseComponent} from "../../exercise-types/reps-exercise/reps-exercise.component";
@@ -21,11 +21,10 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
 import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
-  selector: 'app-add-workout-dialog',
-  templateUrl: './add-workout-exercise-dialog.component.html',
-  styleUrl: './add-workout-exercise-dialog.component.scss',
-  imports: [
-    CommonModule,
+    selector: 'app-add-workout-dialog',
+    templateUrl: './add-workout-exercise-dialog.component.html',
+    styleUrl: './add-workout-exercise-dialog.component.scss',
+    imports: [
     MatIcon,
     MatDialogModule,
     MatStepperModule,
@@ -39,15 +38,14 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
     TimeExerciseComponent,
     MatTooltip,
     PageHeaderLayoutComponent,
-    NgOptimizedImage,
-  ],
-  standalone: true,
+    NgOptimizedImage
+]
 })
 export class AddWorkoutExerciseDialogComponent implements OnInit {
 
-  protected exerciseCategories: string[] = [];
+  protected exerciseCategories = signal<string[]>([]);
 
-  protected exercisesByCategory: Exercise[] = [];
+  protected exercisesByCategory = signal<Exercise[]>([]);
 
   protected readonly IMAGE_BASE_URL = Urls.IMAGE_BASE_URL;
 
@@ -66,7 +64,7 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
       .pipe(
         take(1),
       )
-      .subscribe(categories => this.exerciseCategories = categories);
+      .subscribe(categories => this.exerciseCategories.set(categories));
   }
 
   protected selectExercise(exercise: Exercise) {
@@ -81,7 +79,7 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
     this.exerciseService.getAllExercisesByCategory(exerciseCategory)
       .pipe(take(1))
       .subscribe({
-        next: exercises => this.exercisesByCategory = exercises,
+        next: exercises => this.exercisesByCategory.set(exercises),
         error: err => this.snackBarService.showErrorSnackBar(err),
       });
   }

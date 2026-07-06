@@ -28,9 +28,11 @@
       <mat-form-field>
         <mat-label>Schedule day</mat-label>
         <mat-select formControlName="trainingDay">
-          <mat-option *ngFor="let day of weekDays" [value]="day">
-            {{ day }}
-          </mat-option>
+          @for (day of weekDays; track day) {
+            <mat-option [value]="day">
+              {{ day }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
 
@@ -42,29 +44,29 @@
       <mat-checkbox formControlName="scheduled">Scheduled</mat-checkbox>
 
       <mat-accordion multi class="mt-2">
-        <mat-expansion-panel *ngFor="let trainingExercise of trainingExercises.controls; let i = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{ trainingExercise.get('exercise').value?.name }}</mat-panel-title>
-            <mat-panel-description>
-              {{ (trainingExercise.get('workoutSets')?.value || trainingExercise.get('trainingSets').value)?.length || 0 }}
-              {{ 'HOME.sets' | translate }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <div class="flex flex-row justify-end">
-            <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.edit' | translate }}"
-                    (click)="trainingExercise.enabled ? trainingExercise.disable() : trainingExercise.enable()">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.delete' | translate }}"
-                    (click)="trainingExercises.removeAt(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-
-          <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value">
-          </workout-sets>
-        </mat-expansion-panel>
+        @for (trainingExercise of trainingExercises.controls; track trainingExercise; let i = $index) {
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ trainingExercise.get('exercise').value?.name }}</mat-panel-title>
+              <mat-panel-description>
+                {{ (trainingExercise.get('workoutSets')?.value || trainingExercise.get('trainingSets').value)?.length || 0 }}
+                {{ 'HOME.sets' | translate }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="flex flex-row justify-end">
+              <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.edit' | translate }}"
+                (click)="trainingExercise.enabled ? trainingExercise.disable() : trainingExercise.enable()">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.delete' | translate }}"
+                (click)="trainingExercises.removeAt(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value">
+            </workout-sets>
+          </mat-expansion-panel>
+        }
       </mat-accordion>
     </div>
   </form>

@@ -17,33 +17,39 @@
     <div class="flex flex-row justify-center">
       <mat-form-field>
         <input matInput
-               placeholder="Exercise name"
-               aria-label="Exercise"
-               [matAutocomplete]="auto"
-               [formControl]="searchExerciseFormControl">
-        <span matSuffix>
-          <mat-icon>search</mat-icon>
-        </span>
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let exercise of filteredExercises | async" [value]="exercise.name">
-            <div class="flex flex-row justify-start items-start">
-              <div>
-                <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)" height="50">
-              </div>
-              <div>
-                <span>{{ exercise.name }}</span><br/>
-                <small>{{ exercise.category }}</small>
-              </div>
-            </div>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
+          placeholder="Exercise name"
+          aria-label="Exercise"
+          [matAutocomplete]="auto"
+          [formControl]="searchExerciseFormControl">
+          <span matSuffix>
+            <mat-icon>search</mat-icon>
+          </span>
+          <mat-autocomplete #auto="matAutocomplete">
+            @for (exercise of filteredExercises | async; track exercise) {
+              <mat-option [value]="exercise.name">
+                <div class="flex flex-row justify-start items-start">
+                  <div>
+                    <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)" height="50">
+                  </div>
+                  <div>
+                    <span>{{ exercise.name }}</span><br/>
+                    <small>{{ exercise.category }}</small>
+                  </div>
+                </div>
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
 
-    <mat-tab-group #exerciseTabs (selectedTabChange)="tabChange($event)">
-      <mat-tab *ngFor="let category of exerciseCategories" label="{{ category }}">
-        <app-exercise-item *ngFor="let exercise of exercisesByCategory" [exercise]="exercise" (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
-      </mat-tab>
-    </mat-tab-group>
+      <mat-tab-group #exerciseTabs (selectedTabChange)="tabChange($event)">
+        @for (category of exerciseCategories(); track category) {
+          <mat-tab label="{{ category }}">
+            @for (exercise of exercisesByCategory(); track exercise) {
+              <app-exercise-item [exercise]="exercise" (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
+            }
+          </mat-tab>
+        }
+      </mat-tab-group>
+    </div>
   </div>
-</div>

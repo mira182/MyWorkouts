@@ -1,4 +1,4 @@
-<ng-container *ngIf="workoutExercise">
+@if (workoutExercise) {
   <form [formGroup]="form" class="flex flex-col justify-center items-center gap-8">
     <mat-card class="w-80 sm:w-96 mb-6">
       <mat-card-subtitle>
@@ -6,32 +6,31 @@
           <div class="text-lg text-wrap hyphens-auto">
             {{ form.get('exercise').value.name }}
           </div>
-
           <!--     ACTION BUTTONS     -->
           <div class="flex flex-row">
-            <button *ngIf="form.enabled" mat-icon-button matTooltip="{{'BUTTON.save' | translate}}"
-                    (click)="updateWorkoutExercise()" color="primary">
-              <mat-icon>check</mat-icon>
-            </button>
+            @if (form.enabled) {
+              <button mat-icon-button matTooltip="{{'BUTTON.save' | translate}}"
+                (click)="updateWorkoutExercise()" color="primary">
+                <mat-icon>check</mat-icon>
+              </button>
+            }
             <button mat-icon-button matTooltip="{{'BUTTON.edit' | translate}}"
-                    (click)="form.disabled ? form.enable() : form.disable()">
+              (click)="form.disabled ? form.enable() : form.disable()">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button matTooltip="{{'BUTTON.delete' | translate}}"
-                    (click)="deleteWorkoutExercise()">
+              (click)="deleteWorkoutExercise()">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-
         </div>
       </mat-card-subtitle>
-
       <mat-divider></mat-divider>
-
       <mat-card-content>
-        <app-date-picker class="flex flex-row justify-center mt-4" *ngIf="form.enabled" [date]="date"
-                         (datePicked)="workoutExerciseDateUpdated($event)"></app-date-picker>
-
+        @if (form.enabled) {
+          <app-date-picker class="flex flex-row justify-center mt-4" [date]="date"
+          (datePicked)="workoutExerciseDateUpdated($event)"></app-date-picker>
+        }
         <workout-sets
           [form]="form"
           [workoutSets]="workoutExercise.workoutSets">
@@ -39,4 +38,4 @@
       </mat-card-content>
     </mat-card>
   </form>
-</ng-container>
+}

@@ -1,19 +1,17 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
-import {CommonModule} from "@angular/common";
+
 import {MatIconButton} from "@angular/material/button";
 import {isNil} from "lodash";
 
 @Component({
-  selector: 'app-image-preview',
-  templateUrl: './image-preview.component.html',
-  styleUrls: ['./image-preview.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-image-preview',
+    templateUrl: './image-preview.component.html',
+    styleUrls: ['./image-preview.component.scss'],
+    imports: [
     MatIcon,
     MatIconButton
-  ]
+]
 })
 export class ImagePreviewComponent {
 

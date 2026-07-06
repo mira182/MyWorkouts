@@ -38,27 +38,32 @@
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
-        <ng-container *ngIf="latestWeight; else noWeight">
+        @if (latestWeight(); as latestWeight) {
           <div class="current-weight">{{ latestWeight | number: '1.1-1' }} <span class="unit">kg</span></div>
           <div class="deltas">
-            <span class="delta" [ngClass]="deltaClass(deltaWeek)" *ngIf="deltaWeek !== undefined"
-                  [matTooltip]="'HOME.delta-7-tooltip' | translate">
-              {{ deltaArrow(deltaWeek) }} {{ deltaAbs(deltaWeek) | number: '1.1-1' }} kg / 7d
-            </span>
-            <span class="delta" [ngClass]="deltaClass(deltaMonth)" *ngIf="deltaMonth !== undefined"
-                  [matTooltip]="'HOME.delta-30-tooltip' | translate">
-              {{ deltaArrow(deltaMonth) }} {{ deltaAbs(deltaMonth) | number: '1.1-1' }} kg / 30d
-            </span>
-            <span class="delta" [ngClass]="deltaClass(deltaAvgWeek)" *ngIf="deltaAvgWeek !== undefined"
-                  [matTooltip]="'HOME.delta-average-7-tooltip' | translate">
-              {{ deltaArrow(deltaAvgWeek) }} {{ deltaAbs(deltaAvgWeek) | number: '1.1-1' }} kg / WAVG
-            </span>
+            @if (deltaWeek() !== undefined) {
+              <span class="delta" [ngClass]="deltaClass(deltaWeek())"
+                [matTooltip]="'HOME.delta-7-tooltip' | translate">
+                {{ deltaArrow(deltaWeek()) }} {{ deltaAbs(deltaWeek()) | number: '1.1-1' }} kg / 7d
+              </span>
+            }
+            @if (deltaMonth() !== undefined) {
+              <span class="delta" [ngClass]="deltaClass(deltaMonth())"
+                [matTooltip]="'HOME.delta-30-tooltip' | translate">
+                {{ deltaArrow(deltaMonth()) }} {{ deltaAbs(deltaMonth()) | number: '1.1-1' }} kg / 30d
+              </span>
+            }
+            @if (deltaAvgWeek() !== undefined) {
+              <span class="delta" [ngClass]="deltaClass(deltaAvgWeek())"
+                [matTooltip]="'HOME.delta-average-7-tooltip' | translate">
+                {{ deltaArrow(deltaAvgWeek()) }} {{ deltaAbs(deltaAvgWeek()) | number: '1.1-1' }} kg / WAVG
+              </span>
+            }
           </div>
-          <app-ngx-line-chart [compact]="true" [showDots]="false" [chartData]="sparkData"></app-ngx-line-chart>
-        </ng-container>
-        <ng-template #noWeight>
+          <app-ngx-line-chart [compact]="true" [showDots]="false" [chartData]="sparkData()"></app-ngx-line-chart>
+        } @else {
           <p class="hint">{{ 'HOME.no-weight-week' | translate }}</p>
-        </ng-template>
+        }
       </mat-card-content>
     </mat-card>
 
@@ -68,19 +73,20 @@
         <mat-card-title>{{ 'HOME.today-workout' | translate }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ng-container *ngIf="todayWorkout?.workoutExercises?.length; else noWorkout">
+        @if (todayWorkout()?.workoutExercises?.length) {
           <ul class="exercise-list">
-            <li *ngFor="let we of todayWorkout!.workoutExercises">
-              {{ we.exercise.name }}
-              <span class="sets">({{ we.workoutSets?.length || 0 }} {{ 'HOME.sets' | translate }})</span>
-            </li>
+            @for (we of todayWorkout()!.workoutExercises; track we) {
+              <li>
+                {{ we.exercise.name }}
+                <span class="sets">({{ we.workoutSets?.length || 0 }} {{ 'HOME.sets' | translate }})</span>
+              </li>
+            }
           </ul>
           <button mat-button color="primary" routerLink="/workouts">{{ 'HOME.open-workout' | translate }}</button>
-        </ng-container>
-        <ng-template #noWorkout>
+        } @else {
           <p class="hint">{{ 'HOME.no-workout-today' | translate }}</p>
           <button mat-flat-button color="primary" routerLink="/workouts">{{ 'BUTTON.add-workout' | translate }}</button>
-        </ng-template>
+        }
       </mat-card-content>
     </mat-card>
 

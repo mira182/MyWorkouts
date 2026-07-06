@@ -4,13 +4,12 @@ import {Color, LineChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {curveMonotoneX} from "d3-shape";
 
 @Component({
-  selector: 'app-ngx-line-chart',
-  standalone: true,
-  imports: [
-    LineChartModule
-  ],
-  templateUrl: './ngx-line-chart.component.html',
-  styleUrl: './ngx-line-chart.component.scss'
+    selector: 'app-ngx-line-chart',
+    imports: [
+        LineChartModule
+    ],
+    templateUrl: './ngx-line-chart.component.html',
+    styleUrl: './ngx-line-chart.component.scss'
 })
 export class NgxLineChartComponent {
 
@@ -37,7 +36,7 @@ export class NgxLineChartComponent {
 
   legend: boolean = true;
   showLabels: boolean = true;
-  animations: boolean = true;
+  animations: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
@@ -47,8 +46,6 @@ export class NgxLineChartComponent {
   timeline: boolean = true;
   autoScale: boolean = true;
   curve = curveMonotoneX;
-  // Bright, well-separated line colors that stay readable on the dark theme
-  // (ngx-charts' default scheme is muted blues that vanish on dark surfaces).
   scheme: Color = {
     name: 'weightCharts',
     selectable: true,
@@ -65,8 +62,6 @@ export class NgxLineChartComponent {
     ],
   };
 
-  // Render a dot at each data point. The parent turns this off for the "All" range,
-  // where the points are too dense to stay legible.
   @Input()
   @HostBinding('class.show-dots')
   showDots = true;

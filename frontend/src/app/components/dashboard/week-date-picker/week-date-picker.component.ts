@@ -36,18 +36,17 @@ export class WeekRangeSelectionStrategy<D> implements MatDateRangeSelectionStrat
 }
 
 @Component({
-  selector: 'app-week-date-picker',
-  templateUrl: './week-date-picker.component.html',
-  standalone: true,
-  providers: [{
-    provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
-    useClass: WeekRangeSelectionStrategy
-  }],
-  imports: [
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDatepickerModule
-  ]
+    selector: 'app-week-date-picker',
+    templateUrl: './week-date-picker.component.html',
+    providers: [{
+            provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+            useClass: WeekRangeSelectionStrategy
+        }],
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDatepickerModule
+    ]
 })
 export class WeekDatePickerComponent implements OnInit {
 

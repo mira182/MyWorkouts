@@ -2,11 +2,15 @@
   <mat-form-field>
     <mat-label>{{'TITLES.workouts' | translate}}</mat-label>
     <mat-select [formControl]="selectWorkoutControl" [compareWith]="compareChartTypes" (selectionChange)="updateChart(currentInterval)">
-      <mat-optgroup *ngFor="let group of workoutGroups" [label]="group.groupName">
-        <mat-option *ngFor="let chart of group.charts" [value]="chart">
-          {{chart.viewValue}}
-        </mat-option>
-      </mat-optgroup>
+      @for (group of workoutGroups; track group) {
+        <mat-optgroup [label]="group.groupName">
+          @for (chart of group.charts; track chart) {
+            <mat-option [value]="chart">
+              {{chart.viewValue}}
+            </mat-option>
+          }
+        </mat-optgroup>
+      }
     </mat-select>
   </mat-form-field>
 

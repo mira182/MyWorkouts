@@ -1,22 +1,15 @@
 import {Component} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {MatIcon, MatIconRegistry} from "@angular/material/icon";
+import {RouterOutlet} from '@angular/router';
+import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ThemeService} from "./services/theme/theme.service";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {LoginService} from "./services/rest/auth/login.service";
 import {TranslateModule} from "@ngx-translate/core";
 import {OverlayContainer} from "@angular/cdk/overlay";
-import {MatToolbar} from "@angular/material/toolbar";
-import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {MatMenu, MatMenuModule} from "@angular/material/menu";
-import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatListItem, MatNavList} from "@angular/material/list";
-import {MatDrawer, MatDrawerContainer, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
+import {MatMenuModule} from "@angular/material/menu";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {CommonModule} from "@angular/common";
-import {MatTooltip} from "@angular/material/tooltip";
 import {takeUntil} from "rxjs";
 import {Unsubscribe} from "./components/unsubscribe/unsubscribe";
 import {TokenService} from "./services/rest/auth/token.service";
@@ -26,32 +19,15 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @Component({
-  selector: 'app-root',
-  imports: [
-    CommonModule,
+    selector: 'app-root',
+    imports: [
     RouterOutlet,
-    MatIcon,
-    MatToolbar,
     TranslateModule,
-    MatSlideToggle,
-    MatMenu,
-    MatIconButton,
-    MatButton,
-    RouterLinkActive,
-    RouterLink,
-    MatListItem,
-    MatSidenavContainer,
-    MatNavList,
     NgxSpinnerModule,
-    MatDrawerContainer,
-    MatDrawer,
-    MatMenuModule,
-    MatTooltip,
-    MatSidenavContent,
-  ],
-  providers: [LoginService, ThemeService, TokenService],
-  templateUrl: './app.component.html',
-  standalone: true,
+    MatMenuModule
+],
+    providers: [LoginService, ThemeService, TokenService],
+    templateUrl: './app.component.html'
 })
 export class AppComponent extends Unsubscribe {
   static weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];

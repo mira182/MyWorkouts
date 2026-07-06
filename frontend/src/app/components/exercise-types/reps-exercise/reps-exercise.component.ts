@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatCard, MatCardContent} from "@angular/material/card";
-import {CommonModule} from "@angular/common";
+
 import {MatIcon} from "@angular/material/icon";
 import {InputNumberComponent} from "../input-number/input-number.component";
 import {TranslateModule} from "@ngx-translate/core";
@@ -10,20 +10,18 @@ import {MatButton} from "@angular/material/button";
 import {WorkoutSet} from "../../../model/exercise/workoutSet";
 
 @Component({
-  selector: 'app-reps-exercise',
-  templateUrl: './reps-exercise.component.html',
-  standalone: true,
-  imports: [
+    selector: 'app-reps-exercise',
+    templateUrl: './reps-exercise.component.html',
+    imports: [
     MatCard,
-    CommonModule,
     ReactiveFormsModule,
     MatIcon,
     InputNumberComponent,
     TranslateModule,
     MatTooltip,
     MatButton,
-    MatCardContent,
-  ]
+    MatCardContent
+]
 })
 export class RepsExerciseComponent implements OnInit {
 

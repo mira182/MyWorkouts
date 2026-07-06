@@ -11,20 +11,19 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {API_DATE_FORMAT} from "../../app.config";
 
 @Component({
-  selector: 'app-day-select',
-  templateUrl: './day-select.component.html',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatIcon,
-    MatInput,
-    MatIconButton,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    DateTimeService,
-  ]
+    selector: 'app-day-select',
+    templateUrl: './day-select.component.html',
+    imports: [
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatIcon,
+        MatInput,
+        MatIconButton,
+        ReactiveFormsModule,
+    ],
+    providers: [
+        DateTimeService,
+    ]
 })
 export class DaySelectComponent implements OnInit, OnChanges {
 
@@ -42,7 +41,6 @@ export class DaySelectComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (!changes['inputDate'].firstChange && changes['inputDate'].previousValue != changes['inputDate'].currentValue) {
-      this.dateChanged.emit(changes['inputDate'].currentValue);
       this.dateFormControl = new FormControl(changes['inputDate'].currentValue);
       this.myMethodChangingQueryParams(changes['inputDate'].currentValue);
     }

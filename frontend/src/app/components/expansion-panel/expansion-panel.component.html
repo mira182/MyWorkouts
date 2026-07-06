@@ -15,9 +15,9 @@
     </div>
   </div>
 
-  <ng-container *ngIf="toggleContent">
+  @if (toggleContent) {
     <div [@animationShowHide]="sStatus">
       <ng-content select="[panelContent]"></ng-content>
     </div>
-  </ng-container>
+  }
 </div>

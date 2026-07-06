@@ -9,14 +9,18 @@
 </div>
 
 <div class="cal-grid">
-  <span class="weekday" *ngFor="let d of weekdayLabels">{{ d }}</span>
-  <ng-container *ngFor="let week of weeks">
-    <button type="button" class="day" *ngFor="let day of week"
-            [class.out]="!day.inMonth"
-            [class.today]="day.isToday"
-            [class.has-workout]="day.hasWorkout"
-            (click)="openDay(day)">
-      {{ day.date.date() }}
-    </button>
-  </ng-container>
+  @for (d of weekdayLabels; track d) {
+    <span class="weekday">{{ d }}</span>
+  }
+  @for (week of weeks(); track week) {
+    @for (day of week; track day) {
+      <button type="button" class="day"
+        [class.out]="!day.inMonth"
+        [class.today]="day.isToday"
+        [class.has-workout]="day.hasWorkout"
+        (click)="openDay(day)">
+        {{ day.date.date() }}
+      </button>
+    }
+  }
 </div>

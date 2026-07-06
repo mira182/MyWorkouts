@@ -6,9 +6,11 @@
         <mat-form-field class="full-width-input">
           <mat-label>{{'USER.username' | translate}}</mat-label>
           <input matInput [placeholder]="'USER.username' | translate" formControlName="username" required>
-          <mat-error *ngIf="isFieldInvalid('username')">
-            {{'ERROR.required.username' | translate}}
-          </mat-error>
+          @if (isFieldInvalid('username')) {
+            <mat-error>
+              {{'ERROR.required.username' | translate}}
+            </mat-error>
+          }
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <mat-label>{{'USER.password' | translate}}</mat-label>
@@ -16,9 +18,11 @@
           <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
-          <mat-error *ngIf="isFieldInvalid('password')">
-            {{'ERROR.required.password' | translate}}
-          </mat-error>
+          @if (isFieldInvalid('password')) {
+            <mat-error>
+              {{'ERROR.required.password' | translate}}
+            </mat-error>
+          }
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">
           <ngx-spinner

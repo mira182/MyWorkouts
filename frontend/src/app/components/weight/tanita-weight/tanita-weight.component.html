@@ -1,49 +1,54 @@
 <div class="h-full">
-  <mat-tab-group (selectedIndexChange)="selectedTab($event)" [selectedIndex]="selectedTabIndex">
+  <mat-tab-group (selectedIndexChange)="selectedTab($event)" [selectedIndex]="selectedTabIndex()">
     <mat-tab label="Charts">
       <div class="flex flex-col justify-between gap-2">
         <form [formGroup]="showChartsFormGroup">
           <div class="flex flex-row" formArrayName="showChartsCheckboxes">
-            <div class="mr-4" *ngFor="let checkBoxControl of checkboxControls; let i = index">
-              <input class="mr-1" type="checkbox" [formControl]="checkBoxControl"/>
-              <label>{{ "LABELS." + checkboxLabelKeys[i] | translate }}</label>
-            </div>
+            @for (checkBoxControl of checkboxControls; track checkBoxControl; let i = $index) {
+              <div class="mr-4">
+                <input class="mr-1" type="checkbox" [formControl]="checkBoxControl"/>
+                <label>{{ "LABELS." + checkboxLabelKeys[i] | translate }}</label>
+              </div>
+            }
           </div>
         </form>
       </div>
 
       <div class="flex flex-col items-center">
-        <ngx-charts-line-chart
-          *ngIf="tanitaWeightData"
-          [view]="[900, 500]"
-          [title]="'Weight'"
-          [trimXAxisTicks]="true"
-          [results]="tanitaWeightData"
-          [legend]="false"
-          [showXAxisLabel]="true"
-          [showYAxisLabel]="true"
-          [xAxis]="true"
-          [yAxis]="true"
-          [xAxisLabel]="'Date'"
-          [yAxisLabel]="'Weight'"
-          [autoScale]="true"
-          [timeline]="true"
-          [xAxisTickFormatting]="xAxisFormat"
-          (select)="onSelect($event)"
-        >
-        </ngx-charts-line-chart>
+        @if (tanitaWeightData(); as tanitaWeightData) {
+          <ngx-charts-line-chart
+            [view]="[900, 500]"
+            [title]="'Weight'"
+            [trimXAxisTicks]="true"
+            [animations]="false"
+            [results]="tanitaWeightData"
+            [legend]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [xAxisLabel]="'Date'"
+            [yAxisLabel]="'Weight'"
+            [autoScale]="true"
+            [timeline]="true"
+            [xAxisTickFormatting]="xAxisFormat"
+            (select)="onSelect($event)"
+            >
+          </ngx-charts-line-chart>
+        }
       </div>
     </mat-tab>
 
     <mat-tab label="Tables">
-      <app-measurements-table [data]="tableData" [numericColumns]="numericColumns" [units]="units"></app-measurements-table>
+      <app-measurements-table [data]="tableData()" [numericColumns]="numericColumns" [units]="units"></app-measurements-table>
     </mat-tab>
 
     <mat-tab label="Details">
-      <app-measurement-details
-        *ngIf="selectedTabIndex === 2"
-        [scaleType]="selectedScaleType">
-      </app-measurement-details>
+      @if (selectedTabIndex() === 2) {
+        <app-measurement-details
+          [scaleType]="selectedScaleType">
+        </app-measurement-details>
+      }
     </mat-tab>
 
     <mat-tab>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import moment, {Moment} from "moment";
@@ -26,25 +26,24 @@ interface WeightPoint {
 }
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    RouterLink,
-    MatCardModule,
-    MatButtonModule,
-    MatIcon,
-    MatTooltip,
-    NgxSpinnerModule,
-    NgxLineChartComponent,
-    WorkoutCalendarComponent,
-  ],
-  providers: [
-    WithingsService,
-  ]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        RouterLink,
+        MatCardModule,
+        MatButtonModule,
+        MatIcon,
+        MatTooltip,
+        NgxSpinnerModule,
+        NgxLineChartComponent,
+        WorkoutCalendarComponent,
+    ],
+    providers: [
+        WithingsService,
+    ]
 })
 export class HomeComponent implements OnInit {
 
@@ -52,17 +51,17 @@ export class HomeComponent implements OnInit {
   protected greetingKey: string;
 
   // Weight card — all values are scoped to the selected ISO week (Monday–Sunday).
-  protected latestWeight?: number;
-  protected deltaWeek?: number;
-  protected deltaMonth?: number;
-  protected deltaAvgWeek?: number;
-  protected sparkData: NgxWeightChartData[] = [];
+  protected latestWeight = signal<number | undefined>(undefined);
+  protected deltaWeek = signal<number | undefined>(undefined);
+  protected deltaMonth = signal<number | undefined>(undefined);
+  protected deltaAvgWeek = signal<number | undefined>(undefined);
+  protected sparkData = signal<NgxWeightChartData[]>([]);
   protected selectedWeekStart: Moment = moment().startOf('isoWeek');
 
   private weightData?: NgxWeightChartData;
   private allPoints: WeightPoint[] = [];
 
-  protected todayWorkout: Workout | null = null;
+  protected todayWorkout = signal<Workout | null>(null);
 
   constructor(private readonly chartService: NgxWeightChartService,
               private readonly workoutService: WorkoutService,
@@ -132,26 +131,26 @@ export class HomeComponent implements OnInit {
     const latest = weekPoints[weekPoints.length - 1];
 
     if (!latest) {
-      this.latestWeight = undefined;
-      this.deltaWeek = undefined;
-      this.deltaMonth = undefined;
-      this.deltaAvgWeek = undefined;
-      this.sparkData = [];
+      this.latestWeight.set(undefined);
+      this.deltaWeek.set(undefined);
+      this.deltaMonth.set(undefined);
+      this.deltaAvgWeek.set(undefined);
+      this.sparkData.set([]);
       return;
     }
 
-    this.latestWeight = latest.value;
-    this.deltaWeek = HomeComponent.deltaSince(this.allPoints, latest, 7);
-    this.deltaMonth = HomeComponent.deltaSince(this.allPoints, latest, 30);
-    this.deltaAvgWeek = HomeComponent.weeklyAvgDelta(this.allPoints, startMs);
+    this.latestWeight.set(latest.value);
+    this.deltaWeek.set(HomeComponent.deltaSince(this.allPoints, latest, 7));
+    this.deltaMonth.set(HomeComponent.deltaSince(this.allPoints, latest, 30));
+    this.deltaAvgWeek.set(HomeComponent.weeklyAvgDelta(this.allPoints, startMs));
 
-    this.sparkData = [{
+    this.sparkData.set([{
       ...this.weightData!,
       series: (this.weightData?.series ?? []).filter(point => {
         const time = new Date(point.name as unknown as string).getTime();
         return point.value > 0 && time >= startMs && time < endMs;
       }),
-    }];
+    }]);
   }
 
   private static deltaSince(points: WeightPoint[], latest: WeightPoint, days: number): number | undefined {
@@ -181,7 +180,7 @@ export class HomeComponent implements OnInit {
     this.workoutService.getWorkoutForDay(moment())
       .pipe(take(1))
       .subscribe({
-        next: workout => this.todayWorkout = workout,
+        next: workout => this.todayWorkout.set(workout),
         error: (err) => this.snackBar.showErrorSnackBar(err?.error),
       });
   }
