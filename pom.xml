@@ -21,7 +21,12 @@
         <apache-csv.version>2.15.0</apache-csv.version>
         <google-gson.version>2.14.0</google-gson.version>
         <testcontainers.version>1.12.2</testcontainers.version>
-        <querydsl.version>5.1.0</querydsl.version>
+        <!-- OpenFeign fork: the original com.querydsl is abandoned and its last release (5.1.0)
+             is still vulnerable to CVE-2024-49203 (HQL injection via orderBy). The fork keeps the
+             com.querydsl.* Java packages, so only groupId + version change. Kept as a separate
+             property so Spring Boot's own managed `querydsl.version` (its com.querydsl:querydsl-bom
+             import) is left intact. -->
+        <openfeign-querydsl.version>5.6.1</openfeign-querydsl.version>
         <xml-bind.version>2.3.1</xml-bind.version>
         <glassfish-jaxb.version>2.3.1</glassfish-jaxb.version>
         <flyway.version>10.6.0</flyway.version>
@@ -134,16 +139,16 @@
             <version>${glassfish-jaxb.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.querydsl</groupId>
+            <groupId>io.github.openfeign.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>${querydsl.version}</version>
+            <version>${openfeign-querydsl.version}</version>
             <classifier>jakarta</classifier>
         </dependency>
         <dependency>
-            <groupId>com.querydsl</groupId>
+            <groupId>io.github.openfeign.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
             <scope>provided</scope>
-            <version>${querydsl.version}</version>
+            <version>${openfeign-querydsl.version}</version>
             <classifier>jakarta</classifier>
         </dependency>
         <dependency>
@@ -241,9 +246,9 @@
                                     <version>${mapstruct.version}</version>
                                 </path>
                                 <path>
-                                    <groupId>com.querydsl</groupId>
+                                    <groupId>io.github.openfeign.querydsl</groupId>
                                     <artifactId>querydsl-apt</artifactId>
-                                    <version>${querydsl.version}</version>
+                                    <version>${openfeign-querydsl.version}</version>
                                     <classifier>jakarta</classifier>
                                 </path>
                                 <path>
