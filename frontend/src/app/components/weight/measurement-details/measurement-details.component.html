@@ -12,29 +12,35 @@
     <mat-divider></mat-divider>
     <mat-card-content>
       <mat-list role="list">
-        <mat-list-item *ngFor="let measurementTransformingInput of measurementDetails; index as i">
-          <div class="flex flex-row flex-nowrap gap-8 justify-start w-96">
-            <div>
-              <strong>{{ measurementTransformingInput.name }}</strong>
+        @for (measurementTransformingInput of measurementDetails; track measurementTransformingInput; let i = $index) {
+          <mat-list-item>
+            <div class="flex flex-row flex-nowrap gap-8 justify-start w-96">
+              <div>
+                <strong>{{ measurementTransformingInput.name }}</strong>
+              </div>
+              <div>
+                <div class="measurementTransformingInput-value">
+                  {{ measurementTransformingInput.value }}
+                </div>&nbsp;
+                <span class="measurementTransformingInput-unit">{{ measurementTransformingInput.unit }}</span>
+              </div>
+              <div>
+                <div class="measurementTransformingInput-value">
+                  {{ measurementTransformingInput.secondValue }}
+                </div>&nbsp;
+                <span class="measurementTransformingInput-unit">{{ measurementTransformingInput.secondUnit }}</span>
+              </div>
             </div>
-            <div>
-              <div class="measurementTransformingInput-value">
-                {{ measurementTransformingInput.value }}
-              </div>&nbsp;
-              <span class="measurementTransformingInput-unit">{{ measurementTransformingInput.unit }}</span>
-            </div>
-            <div>
-              <div class="measurementTransformingInput-value">
-                {{ measurementTransformingInput.secondValue }}
-              </div>&nbsp;
-              <span class="measurementTransformingInput-unit">{{ measurementTransformingInput.secondUnit }}</span>
-            </div>
+            @if (i < measurementDetails.length - 1) {
+              <mat-divider></mat-divider>
+            }
+          </mat-list-item>
+        }
+        @if (measurementDetails.length === 0) {
+          <div>
+            No data for this day.
           </div>
-          <mat-divider *ngIf="i < measurementDetails.length - 1"></mat-divider>
-        </mat-list-item>
-        <div *ngIf="measurementDetails.length === 0">
-          No data for this day.
-        </div>
+        }
         <mat-divider></mat-divider>
       </mat-list>
     </mat-card-content>

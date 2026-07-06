@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
@@ -6,10 +6,10 @@ import {MatTableModule} from "@angular/material/table";
 import {TanitaService} from "../../../services/weight/tanita/tanita.service";
 import {WithingsService} from "../../../services/weight/withings/withings.service";
 import {MatTabsModule} from "@angular/material/tabs";
-import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MeasurementDetailsComponent} from "../measurement-details/measurement-details.component";
-import {CommonModule} from "@angular/common";
+
 import {MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatTooltip} from "@angular/material/tooltip";
@@ -29,21 +29,19 @@ import {TanitaMeasurementModel} from "../../../model/weight/tanita-measurement.m
     templateUrl: './tanita-weight.component.html',
     styleUrls: ['./tanita-weight.component.scss'],
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatTabsModule,
-        MatCheckbox,
-        FormsModule,
-        MeasurementDetailsComponent,
-        MatTableModule,
-        MatIconButton,
-        MatIcon,
-        MatTooltip,
-        TranslateModule,
-        NgxChartsModule,
-        NgxSpinnerModule,
-        MeasurementsTableComponent,
-    ],
+    ReactiveFormsModule,
+    MatTabsModule,
+    FormsModule,
+    MeasurementDetailsComponent,
+    MatTableModule,
+    MatIconButton,
+    MatIcon,
+    MatTooltip,
+    TranslateModule,
+    NgxChartsModule,
+    NgxSpinnerModule,
+    MeasurementsTableComponent
+],
     providers: [
         TanitaService,
         WithingsService,
@@ -76,13 +74,13 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
     metabolicAge: '',
     physiqueRating: '',
   };
-  protected tableData: TanitaMeasurementModel[] = [];
+  protected tableData = signal<TanitaMeasurementModel[]>([]);
 
   public showChartsFormGroup: FormGroup;
 
   protected checkboxLabelKeys: string[] = ['WEIGHT', 'BMI', 'BODY_FAT'];
 
-  public tanitaWeightData: NgxWeightChartData[];
+  public tanitaWeightData = signal<NgxWeightChartData[] | undefined>(undefined);
 
   constructor(private readonly tanitaService: TanitaService,
               private readonly translateService: TranslateService,
@@ -104,7 +102,7 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
       )
       .subscribe({
         next: data => {
-          this.tanitaWeightData = [data];
+          this.tanitaWeightData.set([data]);
         },
         error: (err) => this.snackBar.showErrorSnackBar(err),
       });
@@ -116,7 +114,7 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
     this.tanitaService.getMeasurements()
       .pipe(take(1))
       .subscribe({
-        next: measurements => this.tableData = measurements,
+        next: measurements => this.tableData.set(measurements),
         error: (err) => this.snackBar.showErrorSnackBar(err?.error),
       });
   }
@@ -130,7 +128,7 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
   }
 
   public selectedTab(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
+    this.selectedTabIndex.set(tabIndex);
   }
 
   public updateTanitaData() {

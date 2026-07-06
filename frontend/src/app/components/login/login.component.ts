@@ -7,7 +7,7 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatError, MatFormFieldModule} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
-import {CommonModule} from "@angular/common";
+
 import {finalize, take} from "rxjs";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
@@ -18,20 +18,19 @@ import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     imports: [
-        MatCard,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatIcon,
-        MatError,
-        TranslateModule,
-        FormsModule,
-        MatInput,
-        CommonModule,
-        MatCardContent,
-        MatButton,
-        NgxSpinnerModule,
-        MatIconButton,
-    ],
+    MatCard,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatIcon,
+    MatError,
+    TranslateModule,
+    FormsModule,
+    MatInput,
+    MatCardContent,
+    MatButton,
+    NgxSpinnerModule,
+    MatIconButton
+],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginComponent implements OnInit {

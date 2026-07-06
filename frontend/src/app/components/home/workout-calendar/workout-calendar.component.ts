@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonModule} from "@angular/common";
+import {Component, OnInit, signal} from '@angular/core';
+
 import {Router} from "@angular/router";
 import moment, {Moment} from "moment";
 import {MatIcon} from "@angular/material/icon";
@@ -19,17 +19,16 @@ interface CalendarDay {
 @Component({
     selector: 'app-workout-calendar',
     imports: [
-        CommonModule,
-        MatIcon,
-        MatIconButton,
-    ],
+    MatIcon,
+    MatIconButton
+],
     templateUrl: './workout-calendar.component.html',
     styleUrl: './workout-calendar.component.scss'
 })
 export class WorkoutCalendarComponent implements OnInit {
 
   protected month: Moment = moment().startOf('month');
-  protected weeks: CalendarDay[][] = [];
+  protected weeks = signal<CalendarDay[][]>([]);
   protected readonly weekdayLabels = Array.from({length: 7}, (_, i) => moment().isoWeekday(i + 1).format('dd'));
 
   constructor(private readonly workoutService: WorkoutService,
@@ -91,6 +90,6 @@ export class WorkoutCalendarComponent implements OnInit {
       }
       weeks.push(week);
     }
-    this.weeks = weeks;
+    this.weeks.set(weeks);
   }
 }

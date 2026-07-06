@@ -1,25 +1,27 @@
 <div class="flex flex-col">
   <form [formGroup]="repsForm">
     <div class="flex flex-row sm:flex-col flex-wrap justify-start gap-y-2" formArrayName="sets">
-      <div *ngFor="let set of sets.controls; let i = index" class="flex-grow">
-        <mat-card class="mat-elevation-z4">
-          <mat-card-content>
-            <div class="flex flex-row justify-start items-center">
-              <div class="flex-1 font-bold text-lg">{{ i + 1 }}</div>
-              <button class="flex-grow-0" mat-button matTooltip="{{'BUTTON.delete' | translate}}"
-                      (click)="removeSet(i)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-            <div [formGroupName]="i">
-              <input-number [step]="1" [label]="'WORKOUTS.reps' | translate"
-                            [errorMessage]="'ERROR.required.reps' | translate"
-                            [initialValue]="currentReps"
-                            (numberChanged)="repsUpdated($event, i)"></input-number>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
+      @for (set of sets.controls; track set; let i = $index) {
+        <div class="flex-grow">
+          <mat-card class="mat-elevation-z4">
+            <mat-card-content>
+              <div class="flex flex-row justify-start items-center">
+                <div class="flex-1 font-bold text-lg">{{ i + 1 }}</div>
+                <button class="flex-grow-0" mat-button matTooltip="{{'BUTTON.delete' | translate}}"
+                  (click)="removeSet(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <div [formGroupName]="i">
+                <input-number [step]="1" [label]="'WORKOUTS.reps' | translate"
+                  [errorMessage]="'ERROR.required.reps' | translate"
+                  [initialValue]="currentReps"
+                (numberChanged)="repsUpdated($event, i)"></input-number>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      }
     </div>
   </form>
 

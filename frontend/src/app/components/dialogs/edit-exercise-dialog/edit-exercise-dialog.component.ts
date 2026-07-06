@@ -1,10 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, signal} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {Exercise} from "../../../model/exercise/exercise";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {CommonModule} from "@angular/common";
+
 import {TranslateModule} from "@ngx-translate/core";
 import {MatInput} from "@angular/material/input";
 import {ImagePreviewComponent} from "../../image-preview/image-preview.component";
@@ -19,25 +19,24 @@ import {ExerciseService} from "../../../services/rest/exercise/exercise.service"
     templateUrl: './edit-exercise-dialog.component.html',
     styleUrls: ['./edit-exercise-dialog.component.scss'],
     imports: [
-        CommonModule,
-        TranslateModule,
-        MatDialogModule,
-        MatFormField,
-        MatSelect,
-        MatOption,
-        ReactiveFormsModule,
-        MatInput,
-        ImagePreviewComponent,
-        MatButton,
-        MatLabel,
-        MatError,
-    ]
+    TranslateModule,
+    MatDialogModule,
+    MatFormField,
+    MatSelect,
+    MatOption,
+    ReactiveFormsModule,
+    MatInput,
+    ImagePreviewComponent,
+    MatButton,
+    MatLabel,
+    MatError
+]
 })
 export class EditExerciseDialogComponent implements OnInit {
 
-  protected exerciseCategories: string[] = [];
+  protected exerciseCategories = signal<string[]>([]);
 
-  protected exerciseTypes: string[] = [];
+  protected exerciseTypes = signal<string[]>([]);
 
   protected exercise: Exercise;
 
@@ -65,8 +64,8 @@ export class EditExerciseDialogComponent implements OnInit {
       )
       .subscribe({
         next: ([categories, types]) => {
-          this.exerciseCategories = categories;
-          this.exerciseTypes = types;
+          this.exerciseCategories.set(categories);
+          this.exerciseTypes.set(types);
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
       });

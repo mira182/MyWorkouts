@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatCard, MatCardContent} from "@angular/material/card";
-import {CommonModule} from "@angular/common";
+
 import {TranslateModule} from "@ngx-translate/core";
 import {MatIcon} from "@angular/material/icon";
 import {InputNumberComponent} from "../input-number/input-number.component";
@@ -18,16 +18,15 @@ export class WeightReps {
     selector: 'app-weight-reps-exercise',
     templateUrl: './weight-reps-exercise.component.html',
     imports: [
-        CommonModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        MatCard,
-        MatCardContent,
-        MatIcon,
-        InputNumberComponent,
-        MatTooltip,
-        MatButton,
-    ]
+    TranslateModule,
+    ReactiveFormsModule,
+    MatCard,
+    MatCardContent,
+    MatIcon,
+    InputNumberComponent,
+    MatTooltip,
+    MatButton
+]
 })
 export class WeightRepsExerciseComponent implements OnInit {
 

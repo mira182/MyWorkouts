@@ -1,15 +1,9 @@
 import {Component} from '@angular/core';
-import {MatIcon} from "@angular/material/icon";
-import {MatMiniFabButton} from "@angular/material/button";
-import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-page-header-layout',
     imports: [
-        MatIcon,
-        MatMiniFabButton,
-        MatTooltip,
         TranslateModule
     ],
     templateUrl: './page-header-layout.component.html',

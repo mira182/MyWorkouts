@@ -1,8 +1,14 @@
-<div *ngIf="messageTranslationKey">{{ messageTranslationKey | translate }}</div>
+@if (messageTranslationKey) {
+  <div>{{ messageTranslationKey | translate }}</div>
+}
 
-<div *ngIf="errorMessageTranslationKey">{{ errorMessageTranslationKey | translate }}</div>
+@if (errorMessageTranslationKey) {
+  <div>{{ errorMessageTranslationKey | translate }}</div>
+}
 
-<div *ngIf="error">
-  <div>{{ 'ALERT.statusCode' | translate }} : {{ error.statusCode }}</div>
-  <div>{{ error.message | translate }}</div>
-</div>
+@if (error) {
+  <div>
+    <div>{{ 'ALERT.statusCode' | translate }} : {{ error.statusCode }}</div>
+    <div>{{ error.message | translate }}</div>
+  </div>
+}

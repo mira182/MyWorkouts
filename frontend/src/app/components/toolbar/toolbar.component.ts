@@ -5,11 +5,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatTooltip} from "@angular/material/tooltip";
-import {NgIf} from "@angular/common";
-import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+
+import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {MatDrawer, MatDrawerContainer} from "@angular/material/sidenav";
-import {MatListItem, MatNavList} from "@angular/material/list";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {take} from "rxjs";
 import {LoginService} from "../../services/rest/auth/login.service";
@@ -21,24 +19,18 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
 @Component({
     selector: 'app-toolbar',
     imports: [
-        MatButton,
-        MatIcon,
-        MatIconButton,
-        MatMenuModule,
-        MatSlideToggle,
-        MatToolbar,
-        MatTooltip,
-        NgIf,
-        RouterLink,
-        RouterLinkActive,
-        TranslateModule,
-        MatDrawer,
-        MatDrawerContainer,
-        MatListItem,
-        MatNavList,
-        NgxSpinnerModule,
-        RouterOutlet,
-    ],
+    MatButton,
+    MatIcon,
+    MatIconButton,
+    MatMenuModule,
+    MatSlideToggle,
+    MatToolbar,
+    MatTooltip,
+    RouterLink,
+    RouterLinkActive,
+    TranslateModule,
+    NgxSpinnerModule
+],
     templateUrl: './toolbar.component.html'
 })
 export class ToolbarComponent extends Unsubscribe implements OnInit {

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCard, MatCardContent} from "@angular/material/card";
-import {CommonModule} from "@angular/common";
+
 import {TranslateModule} from "@ngx-translate/core";
 import {InputNumberComponent} from "../input-number/input-number.component";
 import {MatIcon} from "@angular/material/icon";
@@ -13,16 +13,15 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
     selector: 'app-time-exercise',
     templateUrl: './time-exercise.component.html',
     imports: [
-        CommonModule,
-        MatCard,
-        TranslateModule,
-        ReactiveFormsModule,
-        InputNumberComponent,
-        MatIcon,
-        MatTooltip,
-        MatButton,
-        MatCardContent,
-    ]
+    MatCard,
+    TranslateModule,
+    ReactiveFormsModule,
+    InputNumberComponent,
+    MatIcon,
+    MatTooltip,
+    MatButton,
+    MatCardContent
+]
 })
 export class TimeExerciseComponent implements OnInit {
 

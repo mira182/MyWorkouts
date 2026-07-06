@@ -41,7 +41,6 @@ export class DaySelectComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (!changes['inputDate'].firstChange && changes['inputDate'].previousValue != changes['inputDate'].currentValue) {
-      this.dateChanged.emit(changes['inputDate'].currentValue);
       this.dateFormControl = new FormControl(changes['inputDate'].currentValue);
       this.myMethodChangingQueryParams(changes['inputDate'].currentValue);
     }

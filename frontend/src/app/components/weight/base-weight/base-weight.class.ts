@@ -1,4 +1,4 @@
-import {Router} from "@angular/router";
+import {signal} from "@angular/core";
 import {Moment} from "moment";
 
 export enum ScaleType {
@@ -20,6 +20,6 @@ export class BaseWeightClass {
   measurementDate: Moment;
 
   selectedScaleType: ScaleType = ScaleType.TANITA;
-  selectedTabIndex = 0;
+  selectedTabIndex = signal(0);
 
 }

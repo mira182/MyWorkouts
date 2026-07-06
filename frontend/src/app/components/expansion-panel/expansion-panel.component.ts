@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NgIf} from "@angular/common";
+
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
@@ -7,10 +7,9 @@ import {MatIconButton} from "@angular/material/button";
 @Component({
     selector: 'app-expansion-panel',
     imports: [
-        NgIf,
-        MatIcon,
-        MatIconButton
-    ],
+    MatIcon,
+    MatIconButton
+],
     templateUrl: './expansion-panel.component.html',
     animations: [
         trigger('animationShowHide', [

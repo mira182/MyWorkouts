@@ -1,15 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {Interval} from "../../../model/time/interval";
-import {CommonModule} from "@angular/common";
+
 import {TranslateModule} from "@ngx-translate/core";
 import {MatCardModule} from "@angular/material/card";
-import {MatDivider} from "@angular/material/divider";
 import {WeekDatePickerComponent} from "../week-date-picker/week-date-picker.component";
 import {NumberCardModule} from "@swimlane/ngx-charts";
 import {NgxDashboardService} from "../../../services/rest/chart/dashborad/charts/ngx/ngx-dashboard.service";
 import moment from "moment";
-import {MatFormField} from "@angular/material/form-field";
-import {MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker} from "@angular/material/datepicker";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgxDataPoint} from "../../weight/model/ngx-chart-data-model";
 
@@ -17,22 +14,16 @@ import {NgxDataPoint} from "../../weight/model/ngx-chart-data-model";
     selector: 'app-dashboard-totals',
     templateUrl: './dashboard-totals.component.html',
     imports: [
-        CommonModule,
-        TranslateModule,
-        MatCardModule,
-        MatDivider,
-        WeekDatePickerComponent,
-        NumberCardModule,
-        MatFormField,
-        MatDateRangeInput,
-        MatDatepickerToggle,
-        MatDateRangePicker,
-        ReactiveFormsModule
-    ]
+    TranslateModule,
+    MatCardModule,
+    WeekDatePickerComponent,
+    NumberCardModule,
+    ReactiveFormsModule
+]
 })
 export class DashboardTotalsComponent implements OnInit {
 
-  protected data: NgxDataPoint[];
+  protected data = signal<NgxDataPoint[]>([]);
 
   protected selectedWeekRange: Interval = {
     startDate: moment().startOf('isoWeek'),
@@ -53,7 +44,7 @@ export class DashboardTotalsComponent implements OnInit {
   private loadChartData(): void {
     this.ngxDashboardService.getTotalsChartData(this.selectedWeekRange.startDate, this.selectedWeekRange.endDate)
       .subscribe((data) => {
-        this.data = [...data.data];
+        this.data.set([...data.data]);
       });
   }
 

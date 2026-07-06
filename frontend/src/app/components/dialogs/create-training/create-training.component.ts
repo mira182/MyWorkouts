@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {WorkoutExerciseService} from "../../../services/rest/workout-exercise/workout-exercise.service";
@@ -8,7 +8,7 @@ import {TrainingService} from "../../../services/rest/training/training.service"
 import {DialogsHandlerService} from "../../../services/dialogs-handler/dialogs-handler.service";
 import {AppComponent} from "../../../app.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {CommonModule} from "@angular/common";
+
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
@@ -29,23 +29,22 @@ import moment from "moment";
     selector: 'app-create-training',
     templateUrl: './create-training.component.html',
     imports: [
-        MatFormFieldModule,
-        TranslateModule,
-        CommonModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatExpansionModule,
-        ReactiveFormsModule,
-        MatTooltipModule,
-        MatIcon,
-        MatIconButton,
-        MatButton,
-        MatDialogModule,
-        MatInput,
-        PageHeaderLayoutComponent,
-        WorkoutSetsComponent,
-    ]
+    MatFormFieldModule,
+    TranslateModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatIcon,
+    MatIconButton,
+    MatButton,
+    MatDialogModule,
+    MatInput,
+    PageHeaderLayoutComponent,
+    WorkoutSetsComponent
+]
 })
 export class CreateTrainingComponent implements OnInit {
 
@@ -59,6 +58,7 @@ export class CreateTrainingComponent implements OnInit {
               private trainingService: TrainingService,
               private translate: TranslateService,
               private snackBar: SnackBarService,
+              private cdr: ChangeDetectorRef,
               public dialogsHandler: DialogsHandlerService) { }
 
   ngOnInit(): void {
@@ -127,7 +127,7 @@ export class CreateTrainingComponent implements OnInit {
         }),
         take(1),
       )
-      .subscribe();
+      .subscribe(() => this.cdr.markForCheck());
   }
 
 }

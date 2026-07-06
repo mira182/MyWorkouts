@@ -12,109 +12,115 @@
 <div class="flex flex-col justify-center items-center">
   <form [formGroup]="form">
     <div formArrayName="trainingPlans">
-      <div *ngIf="loading">
-        <mat-spinner [diameter]="40"></mat-spinner>
-      </div>
-      <div *ngIf="trainingPlans.controls.length === 0 && !loading">
-        <div>{{ 'TEXTS.no-training-plans' | translate }}</div>
-      </div>
+      @if (loading()) {
+        <div>
+          <mat-spinner [diameter]="40"></mat-spinner>
+        </div>
+      }
+      @if (trainingPlans.controls.length === 0 && !loading()) {
+        <div>
+          <div>{{ 'TEXTS.no-training-plans' | translate }}</div>
+        </div>
+      }
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let trainingPlan of trainingPlans.controls; let trainingIndex = index" [formGroup]="trainingPlan"
-                             (afterExpand)="getWorkoutsForTraining(trainingIndex)">
-          <mat-expansion-panel-header [ngClass]="{'active-training': trainingPlan.value.scheduled}" >
-            <mat-panel-title>
-              {{trainingPlan.value.name}}
-            </mat-panel-title>
-            <mat-panel-description>
-              {{ formatDate(trainingPlan.value.startDate) }} {{ trainingPlan.value.trainingDay }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <ng-template matExpansionPanelContent>
-          <div class="flex flex-row justify-center sm:hidden">
-            <button *ngIf="form.dirty" mat-icon-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">
-              <mat-icon>check</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="trainingPlan.enabled ? trainingPlan.disable() : trainingPlan.enable()">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="deleteTraining(trainingPlan)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="addExerciseToTraining(trainingIndex)">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="logTraining(trainingPlan)">
-              <mat-icon>check_box</mat-icon>
-            </button>
-          </div>
-
-          <div class="flex flex-col">
-            <mat-form-field>
-              <input matInput placeholder="Training name" formControlName="name">
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>Schedule day</mat-label>
-              <mat-select formControlName="trainingDay">
-                <mat-option *ngFor="let day of weekDays" [value]="day">
-                  {{day}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>Start day</mat-label>
-              <input matInput [matDatepicker]="datePicker" formControlName="startDate">
-              <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-              <mat-datepicker #datePicker></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>Training time</mat-label>
-              <input matInput type="time" formControlName="trainingTime">
-            </mat-form-field>
-
-            <mat-checkbox [formControl]="trainingPlan.get('scheduled')">Scheduled</mat-checkbox>
-          </div>
-
-            <mat-progress-bar *ngIf="workoutsLoading" mode="indeterminate"></mat-progress-bar>
-            <mat-accordion multi>
-              <mat-expansion-panel *ngFor="let trainingExercise of trainingPlan.get('trainingExercises').controls; let i = index">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>{{ trainingExercise.get('exercise').value?.name }}</mat-panel-title>
-                  <mat-panel-description>
-                    {{ (trainingExercise.get('workoutSets')?.value || trainingExercise.get('trainingSets').value)?.length || 0 }}
-                    {{ 'HOME.sets' | translate }}
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-
-                <div class="flex flex-row justify-end">
-                  <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.edit' | translate }}"
-                          (click)="trainingExercise.enabled ? trainingExercise.disable() : trainingExercise.enable()">
-                    <mat-icon>edit</mat-icon>
+        @for (trainingPlan of trainingPlans.controls; track trainingPlan; let trainingIndex = $index) {
+          <mat-expansion-panel [formGroup]="trainingPlan"
+            (afterExpand)="getWorkoutsForTraining(trainingIndex)">
+            <mat-expansion-panel-header [ngClass]="{'active-training': trainingPlan.value.scheduled}" >
+              <mat-panel-title>
+                {{trainingPlan.value.name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ formatDate(trainingPlan.value.startDate) }} {{ trainingPlan.value.trainingDay }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <div class="flex flex-row justify-center sm:hidden">
+                @if (form.dirty) {
+                  <button mat-icon-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">
+                    <mat-icon>check</mat-icon>
                   </button>
-                  <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.delete' | translate }}"
-                          (click)="removeTrainingExercise(trainingPlan, i)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
-
-                <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value"></workout-sets>
-              </mat-expansion-panel>
-            </mat-accordion>
-
-          <mat-action-row class="" fxHide.lt-md fxShow.gt-sm>
-            <button *ngIf="form.dirty" mat-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">Save training</button>
-            <button mat-button color="primary" (click)="trainingPlan.enabled ? trainingPlan.disable() : trainingPlan.enable()">
-              Edit training
-            </button>
-            <button mat-button color="primary" (click)="deleteTraining(trainingPlan)">Delete training</button>
-            <button mat-button color="primary" (click)="addExerciseToTraining(trainingIndex)">Add workout</button>
-            <button mat-button color="primary" (click)="logTraining(trainingPlan)">Log training</button>
-          </mat-action-row>
-          </ng-template>
-        </mat-expansion-panel>
+                }
+                <button mat-icon-button color="primary" (click)="trainingPlan.enabled ? trainingPlan.disable() : trainingPlan.enable()">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="deleteTraining(trainingPlan)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="addExerciseToTraining(trainingIndex)">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="logTraining(trainingPlan)">
+                  <mat-icon>check_box</mat-icon>
+                </button>
+              </div>
+              <div class="flex flex-col">
+                <mat-form-field>
+                  <input matInput placeholder="Training name" formControlName="name">
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Schedule day</mat-label>
+                  <mat-select formControlName="trainingDay">
+                    @for (day of weekDays; track day) {
+                      <mat-option [value]="day">
+                        {{day}}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Start day</mat-label>
+                  <input matInput [matDatepicker]="datePicker" formControlName="startDate">
+                  <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datePicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Training time</mat-label>
+                  <input matInput type="time" formControlName="trainingTime">
+                </mat-form-field>
+                <mat-checkbox [formControl]="trainingPlan.get('scheduled')">Scheduled</mat-checkbox>
+              </div>
+              @if (workoutsLoading()) {
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+              }
+              <mat-accordion multi>
+                @for (trainingExercise of trainingPlan.get('trainingExercises').controls; track trainingExercise; let i = $index) {
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>{{ trainingExercise.get('exercise').value?.name }}</mat-panel-title>
+                      <mat-panel-description>
+                        {{ (trainingExercise.get('workoutSets')?.value || trainingExercise.get('trainingSets').value)?.length || 0 }}
+                        {{ 'HOME.sets' | translate }}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="flex flex-row justify-end">
+                      <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.edit' | translate }}"
+                        (click)="trainingExercise.enabled ? trainingExercise.disable() : trainingExercise.enable()">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button type="button" mat-icon-button matTooltip="{{ 'BUTTON.delete' | translate }}"
+                        (click)="removeTrainingExercise(trainingPlan, i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                    <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value"></workout-sets>
+                  </mat-expansion-panel>
+                }
+              </mat-accordion>
+              <mat-action-row class="" fxHide.lt-md fxShow.gt-sm>
+                @if (form.dirty) {
+                  <button mat-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">Save training</button>
+                }
+                <button mat-button color="primary" (click)="trainingPlan.enabled ? trainingPlan.disable() : trainingPlan.enable()">
+                  Edit training
+                </button>
+                <button mat-button color="primary" (click)="deleteTraining(trainingPlan)">Delete training</button>
+                <button mat-button color="primary" (click)="addExerciseToTraining(trainingIndex)">Add workout</button>
+                <button mat-button color="primary" (click)="logTraining(trainingPlan)">Log training</button>
+              </mat-action-row>
+            </ng-template>
+          </mat-expansion-panel>
+        }
       </mat-accordion>
     </div>
   </form>

@@ -1,6 +1,6 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import moment, {Moment} from "moment";
-import {CommonModule} from "@angular/common";
+
 import {MatIcon} from "@angular/material/icon";
 import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
@@ -25,26 +25,25 @@ import {WorkoutDayService} from "../../services/rest/workout/workout-day.service
 @Component({
     selector: 'app-workouts',
     imports: [
-        CommonModule,
-        MatIcon,
-        MatTooltip,
-        TranslateModule,
-        MatMiniFabButton,
-        MatMenuModule,
-        DaySelectComponent,
-        NgxSpinnerModule,
-        WorkoutExerciseComponent,
-        PageHeaderLayoutComponent
-    ],
+    MatIcon,
+    MatTooltip,
+    TranslateModule,
+    MatMiniFabButton,
+    MatMenuModule,
+    DaySelectComponent,
+    NgxSpinnerModule,
+    WorkoutExerciseComponent,
+    PageHeaderLayoutComponent
+],
     templateUrl: './workouts.component.html'
 })
 export class WorkoutsComponent extends Unsubscribe implements OnInit {
 
-  public workout: Workout;
+  public workout = signal<Workout | undefined>(undefined);
 
   protected selectedDate: WritableSignal<Moment> = signal(moment());
 
-  protected trainings: TrainingPlan[] = [];
+  protected trainings = signal<TrainingPlan[]>([]);
 
   constructor(private readonly snackBarService: SnackBarService,
               private readonly workoutService: WorkoutService,
@@ -60,17 +59,18 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
       .pipe(
         debounceTime(200),
         tap(() => this.spinner.show()),
-        switchMap(date => this.workoutService.getWorkoutForDay(date)),
+        switchMap(date => this.workoutService.getWorkoutForDay(date).pipe(
+          finalize(() => this.spinner.hide()),
+        )),
         takeUntil(this.unSubscribe),
       )
       .subscribe({
         next: workout => {
-          this.workout = workout;
-          this.spinner.hide();
+          this.workout.set(workout ?? undefined);
         },
         error: err => {
+          this.workout.set(undefined);
           this.snackBarService.showErrorSnackBar(err);
-          this.spinner.hide();
         },
       });
 
@@ -81,7 +81,7 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
     this.trainingService.getAllTrainingsWithoutWorkouts()
       .pipe(take(1))
       .subscribe({
-        next: trainings => this.trainings = trainings,
+        next: trainings => this.trainings.set(trainings),
         error: err => this.snackBarService.showErrorSnackBar(err),
       });
   }
@@ -118,7 +118,7 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
       )
       .subscribe({
         next: (workout) => {
-          this.workout = workout;
+          this.workout.set(workout);
           this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
         },
         error: err => {
@@ -133,14 +133,16 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   }
 
   protected deleteWorkout() {
-    if (!this.workout?.id) {
+    const workoutId = this.workout()?.id;
+    if (!workoutId) {
       this.snackBarService.showErrorMessageSnackBar('ALERT.workout-id-missing');
+      return;
     }
 
     this.dialogsHandler.openDeleteConfirmationDialog("Do you really want to delete workout?").afterClosed()
       .pipe(
         filter(confirm => confirm),
-        switchMap(() => this.workoutService.deleteWorkout(this.workout.id!)),
+        switchMap(() => this.workoutService.deleteWorkout(workoutId)),
         take(1),
       )
       .subscribe({
@@ -150,7 +152,7 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   }
 
   public today() {
-    this.selectedDate.set(moment());
+    this.getWorkoutsForDay(moment());
   }
 
   protected onWorkoutExerciseUpdated(): void {

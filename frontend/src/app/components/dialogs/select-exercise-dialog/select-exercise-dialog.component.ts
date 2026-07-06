@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ExerciseHelperService} from "../../../services/exercise-helper/exercise-helper.service";
 import {Exercise} from "../../../model/exercise/exercise";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {Urls} from "../../../model/urls";
 import {MatStepperModule} from "@angular/material/stepper";
-import {CommonModule} from "@angular/common";
+
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatActionList, MatListItem} from "@angular/material/list";
@@ -16,22 +16,21 @@ import {MatButton} from "@angular/material/button";
     selector: 'app-select-exercise-dialog',
     templateUrl: './select-exercise-dialog.component.html',
     imports: [
-        MatStepperModule,
-        CommonModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        MatActionList,
-        MatListItem,
-        MatButton
-    ]
+    MatStepperModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    MatActionList,
+    MatListItem,
+    MatButton
+]
 })
 export class SelectExerciseDialogComponent implements OnInit {
 
   exercises: Exercise[] = [];
 
-  protected exerciseCategories: string[] = [];
+  protected exerciseCategories = signal<string[]>([]);
 
-  exercisesBySelectedCategory: Exercise[] = [];
+  exercisesBySelectedCategory = signal<Exercise[]>([]);
 
   readonly IMAGE_BASE_URL = Urls.IMAGE_BASE_URL;
 
@@ -43,7 +42,7 @@ export class SelectExerciseDialogComponent implements OnInit {
   public ngOnInit(): void {
     this.exerciseService.getAllCategories()
       .subscribe(categories => {
-        this.exerciseCategories = categories;
+        this.exerciseCategories.set(categories);
       })
   }
 
@@ -57,7 +56,7 @@ export class SelectExerciseDialogComponent implements OnInit {
         take(1)
       )
       .subscribe(exercises => {
-        this.exercisesBySelectedCategory = exercises;
+        this.exercisesBySelectedCategory.set(exercises);
       });
   }
 }

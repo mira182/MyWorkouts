@@ -1,3 +1,5 @@
 <mat-chip-listbox class="flex justify-center items-center" [selectable]="true">
-  <mat-chip-option *ngFor="let chip of chips" [selected]="chip.selected" (click)="selectChip(chip)">{{chip.name}}</mat-chip-option>
+  @for (chip of chips; track chip) {
+    <mat-chip-option [selected]="chip.selected" (click)="selectChip(chip)">{{chip.name}}</mat-chip-option>
+  }
 </mat-chip-listbox>

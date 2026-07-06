@@ -1,10 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
-import {NgIf} from "@angular/common";
-import {MatIcon} from "@angular/material/icon";
 import {Exercise} from "../../model/exercise/exercise";
-import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatExpansionPanelActionRow} from "@angular/material/expansion";
+import {MatButton} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
 import {Urls} from "../../model/urls";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
@@ -12,7 +8,6 @@ import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {ExerciseHelperService} from "../../services/exercise-helper/exercise-helper.service";
 import {filter, mergeMap, switchMap, take} from "rxjs";
 import {isNil} from "lodash";
-import {MatTooltip} from "@angular/material/tooltip";
 import {MatDivider} from "@angular/material/divider";
 import {ExpansionPanelComponent} from "../expansion-panel/expansion-panel.component";
 import {ExerciseService} from "../../services/rest/exercise/exercise.service";
@@ -20,17 +15,11 @@ import {ExerciseService} from "../../services/rest/exercise/exercise.service";
 @Component({
     selector: 'app-exercise-item',
     imports: [
-        PageHeaderLayoutComponent,
-        NgIf,
-        MatIcon,
-        MatButton,
-        MatExpansionPanelActionRow,
-        TranslateModule,
-        MatIconButton,
-        MatTooltip,
-        MatDivider,
-        ExpansionPanelComponent
-    ],
+    MatButton,
+    TranslateModule,
+    MatDivider,
+    ExpansionPanelComponent
+],
     templateUrl: './exercise-item.component.html'
 })
 export class ExerciseItemComponent {

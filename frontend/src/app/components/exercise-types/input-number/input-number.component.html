@@ -6,7 +6,9 @@
     <mat-label>{{ label }}</mat-label>
     <input matInput [formControl]="formControl" type="number" step="{{ step }}" min="0">
     <span matSuffix>{{ suffix }}</span>
-    <mat-error *ngIf="formControl.invalid">{{ errorMessage }}</mat-error>
+    @if (formControl.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+    }
   </mat-form-field>
   <div>
     <button mat-mini-fab color="warn" (click)="increment()"><mat-icon>add</mat-icon></button>

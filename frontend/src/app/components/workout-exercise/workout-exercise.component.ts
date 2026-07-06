@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WorkoutExercise} from "../../model/workout-exercise/workoutExercise";
-import {CommonModule} from "@angular/common";
+
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCard, MatCardContent, MatCardSubtitle} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
@@ -22,21 +22,20 @@ import {API_DATE_FORMAT} from "../../app.config";
 @Component({
     selector: 'workout-exercise',
     imports: [
-        CommonModule,
-        FormsModule,
-        MatCardContent,
-        MatCardSubtitle,
-        MatDivider,
-        MatIcon,
-        MatIconButton,
-        MatTooltip,
-        ReactiveFormsModule,
-        TranslateModule,
-        MatCard,
-        DatePickerComponent,
-        MatFormFieldModule,
-        WorkoutSetsComponent
-    ],
+    FormsModule,
+    MatCardContent,
+    MatCardSubtitle,
+    MatDivider,
+    MatIcon,
+    MatIconButton,
+    MatTooltip,
+    ReactiveFormsModule,
+    TranslateModule,
+    MatCard,
+    DatePickerComponent,
+    MatFormFieldModule,
+    WorkoutSetsComponent
+],
     templateUrl: './workout-exercise.component.html'
 })
 export class WorkoutExerciseComponent implements OnInit {

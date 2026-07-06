@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, signal, ViewChild} from '@angular/core';
 import {Exercise} from "../../model/exercise/exercise";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
@@ -13,7 +13,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatTabChangeEvent, MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {MatButton, MatMiniFabButton} from "@angular/material/button";
+import {MatMiniFabButton} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
@@ -35,7 +35,6 @@ import {ExerciseService} from "../../services/rest/exercise/exercise.service";
         MatAutocompleteModule,
         MatTabsModule,
         MatExpansionModule,
-        MatButton,
         MatMiniFabButton,
         MatTooltipModule,
         MatIcon,
@@ -48,7 +47,7 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
 
   protected exercises: Exercise[] = [];
 
-  protected exerciseCategories = [];
+  protected exerciseCategories = signal<string[]>([]);
 
   protected exerciseTypes = [];
 
@@ -58,7 +57,7 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
 
   protected searchExerciseFormControl = new FormControl();
 
-  protected exercisesByCategory: Exercise[] = [];
+  protected exercisesByCategory = signal<Exercise[]>([]);
 
   @ViewChild("exerciseTabs", { static: false }) exerciseTabs: MatTabGroup;
 
@@ -80,7 +79,7 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
       )
       .subscribe({
         next: ([categories, types]) => {
-          this.exerciseCategories = categories;
+          this.exerciseCategories.set(categories);
           this.exerciseTypes = types;
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
@@ -130,7 +129,7 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
       )
       .subscribe({
         next: exercises => {
-          this.exercisesByCategory = exercises
+          this.exercisesByCategory.set(exercises)
           this.goToTab(category)
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
