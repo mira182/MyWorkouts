@@ -9,8 +9,8 @@
   </div>
 </app-page-header-layout>
 
-<div class="flex flex-col justify-center items-center">
-  <form [formGroup]="form">
+<div class="flex flex-col items-center px-3 py-4">
+  <form [formGroup]="form" class="w-full max-w-2xl">
     <div formArrayName="trainingPlans">
       @if (loading()) {
         <div>
@@ -18,11 +18,11 @@
         </div>
       }
       @if (trainingPlans.controls.length === 0 && !loading()) {
-        <div>
-          <div>{{ 'TEXTS.no-training-plans' | translate }}</div>
+        <div class="text-center opacity-70 py-8">
+          {{ 'TEXTS.no-training-plans' | translate }}
         </div>
       }
-      <mat-accordion>
+      <mat-accordion class="trainings-accordion">
         @for (trainingPlan of trainingPlans.controls; track trainingPlan; let trainingIndex = $index) {
           <mat-expansion-panel [formGroup]="trainingPlan"
             (afterExpand)="getWorkoutsForTraining(trainingIndex)">
@@ -107,7 +107,7 @@
                   </mat-expansion-panel>
                 }
               </mat-accordion>
-              <mat-action-row class="" fxHide.lt-md fxShow.gt-sm>
+              <mat-action-row class="hidden sm:flex">
                 @if (form.dirty) {
                   <button mat-button color="primary" (click)="updateTraining(trainingPlan.value.id, trainingPlan)">Save training</button>
                 }

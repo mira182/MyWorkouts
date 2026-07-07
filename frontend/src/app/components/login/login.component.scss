@@ -1,10 +1,108 @@
-.login-box {
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+:host {
+  display: block;
+  height: 100%;
 }
-.full-width-input {
+
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 16% 16%, rgba(255, 152, 0, 0.30), transparent 46%),
+    radial-gradient(circle at 84% 82%, rgba(255, 87, 34, 0.24), transparent 46%),
+    linear-gradient(135deg, #131318 0%, #1e1e26 48%, #2c1d10 100%);
+}
+
+.login-content {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: login-fade-in 0.5s ease both;
+}
+
+.brand {
+  text-align: center;
+  color: #fff;
+}
+
+.brand-badge {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 14px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255, 167, 38, 0.28), rgba(255, 87, 34, 0.22));
+  border: 1px solid rgba(255, 167, 38, 0.40);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 34px rgba(255, 111, 0, 0.28);
+
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: #ffb74d;
+  }
+}
+
+.brand-name {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.brand-tagline {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* --- Card --- */
+.login-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55) !important;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 8px 6px;
+}
+
+.login-field {
   width: 100%;
 }
+
+.login-btn {
+  height: 48px;
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  border-radius: 12px;
+
+  mat-icon {
+    margin-right: 6px;
+  }
+}
+
+@keyframes login-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweaks (padding, heading size) live on the template via Tailwind
+   `max-[420px]:` variants — no media query needed here. */

@@ -1,40 +1,50 @@
-<div class="login-box">
-  <mat-card class="max-w-96 px-8">
-    <mat-card-content>
-      <form class="flex flex-col items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <h2 class="mb-3">{{'TITLES.login-title' | translate}}</h2>
-        <mat-form-field class="full-width-input">
-          <mat-label>{{'USER.username' | translate}}</mat-label>
-          <input matInput [placeholder]="'USER.username' | translate" formControlName="username" required>
-          @if (isFieldInvalid('username')) {
-            <mat-error>
-              {{'ERROR.required.username' | translate}}
-            </mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field class="full-width-input">
-          <mat-label>{{'USER.password' | translate}}</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" [placeholder]="'USER.password' | translate" formControlName="password" required>
-          <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
-            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+<div class="login-page dark-theme p-6 max-[420px]:p-4">
+  <div class="login-content">
+    <div class="brand">
+      <div class="brand-badge">
+        <mat-icon>fitness_center</mat-icon>
+      </div>
+      <h1 class="brand-name text-[28px] max-[420px]:text-2xl">MyWorkouts</h1>
+      <p class="brand-tagline">{{ 'TITLES.login-title' | translate }}</p>
+    </div>
+
+    <mat-card class="login-card">
+      <mat-card-content>
+        <form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="login-field">
+            <mat-label>{{ 'USER.username' | translate }}</mat-label>
+            <mat-icon matIconPrefix>person</mat-icon>
+            <input matInput [placeholder]="'USER.username' | translate" formControlName="username"
+                   autocomplete="username" required>
+            @if (isFieldInvalid('username')) {
+              <mat-error>{{ 'ERROR.required.username' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="login-field">
+            <mat-label>{{ 'USER.password' | translate }}</mat-label>
+            <mat-icon matIconPrefix>lock</mat-icon>
+            <input matInput [type]="hidePassword ? 'password' : 'text'"
+                   [placeholder]="'USER.password' | translate" formControlName="password"
+                   autocomplete="current-password" required>
+            <button type="button" mat-icon-button matIconSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="(hidePassword ? 'BUTTON.show' : 'BUTTON.hide') | translate">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            @if (isFieldInvalid('password')) {
+              <mat-error>{{ 'ERROR.required.password' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <button mat-flat-button color="primary" type="submit" class="login-btn">
+            <mat-icon>login</mat-icon>
+            {{ 'BUTTON.login' | translate }}
           </button>
-          @if (isFieldInvalid('password')) {
-            <mat-error>
-              {{'ERROR.required.password' | translate}}
-            </mat-error>
-          }
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">
-          <ngx-spinner
-            bdColor="rgba(51,51,51,0.8)"
-            size="medium"
-            color="#fff"
-            type="ball-spin"
-            [fullScreen]="true"
-          ></ngx-spinner>
-          {{'BUTTON.login' | translate}}
-        </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ngx-spinner bdColor="rgba(18,18,32,0.75)" size="medium" color="#fff" type="ball-spin"
+               [fullScreen]="true"></ngx-spinner>
 </div>

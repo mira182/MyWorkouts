@@ -85,6 +85,8 @@
   "BUTTON": {
     "logout": "Odhlásit",
     "login": "Přihlásit",
+    "show": "Zobrazit heslo",
+    "hide": "Skrýt heslo",
     "cancel": "Zruš",
     "close": "Zavřít",
     "edit": "Uprav",

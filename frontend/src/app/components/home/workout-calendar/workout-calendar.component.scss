@@ -37,7 +37,7 @@
     transition: background-color 0.15s ease;
 
     &:hover {
-      background: rgba(63, 81, 181, 0.15);
+      background: var(--brand-primary-soft);
     }
 
     &.out {
@@ -45,27 +45,13 @@
     }
 
     &.today {
-      box-shadow: inset 0 0 0 2px #3f51b5;
+      box-shadow: inset 0 0 0 2px var(--brand-primary);
     }
 
     &.has-workout {
-      background: #3f51b5;
-      color: #fff;
+      background: var(--brand-primary);
+      color: var(--brand-on-primary);
       font-weight: 600;
     }
-  }
-}
-
-:host-context(.dark-theme) .cal-grid .day {
-  &:hover {
-    background: rgba(239, 108, 0, 0.2);
-  }
-
-  &.today {
-    box-shadow: inset 0 0 0 2px #ef6c00;
-  }
-
-  &.has-workout {
-    background: #ef6c00;
   }
 }

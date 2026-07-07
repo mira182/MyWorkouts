@@ -1,10 +1,18 @@
-<div class="flex flex-row justify-center">
-  <button mat-icon-button (click)="decrementDay()" color="primary"><mat-icon>chevron_left</mat-icon></button>
-  <mat-form-field>
-    <mat-label>Select day</mat-label>
-    <input matInput [matDatepicker]="picker" [formControl]="dateFormControl" (dateChange)="dateSelected($event)">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <button mat-icon-button (click)="incrementDay()" color="primary"><mat-icon>chevron_right</mat-icon></button>
+<div class="flex justify-center py-3">
+  <div class="flex flex-row items-center gap-2">
+    <button mat-icon-button color="primary" aria-label="Previous day" (click)="decrementDay()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-48">
+      <mat-label>Select day</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="dateFormControl" (dateChange)="dateSelected($event)">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-icon-button color="primary" aria-label="Next day" (click)="incrementDay()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
 </div>

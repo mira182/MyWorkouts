@@ -63,10 +63,9 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  public isFieldInvalid(field: string) {
-    return (
-      (!this.form.get(field)?.valid && this.form.get(field)?.touched) || this.form.get(field)?.untouched
-    );
+  public isFieldInvalid(field: string): boolean {
+    const control = this.form.get(field);
+    return !!control && control.invalid && (control.touched || this.submitted);
   }
 
   public onSubmit() {

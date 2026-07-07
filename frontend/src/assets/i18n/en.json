@@ -85,6 +85,8 @@
   "BUTTON": {
     "logout": "Logout",
     "login": "Login",
+    "show": "Show password",
+    "hide": "Hide password",
     "cancel": "Cancel",
     "close": "Close",
     "edit": "Edit",

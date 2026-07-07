@@ -31,7 +31,8 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
     TranslateModule,
     NgxSpinnerModule
 ],
-    templateUrl: './toolbar.component.html'
+    templateUrl: './toolbar.component.html',
+    styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent extends Unsubscribe implements OnInit {
 

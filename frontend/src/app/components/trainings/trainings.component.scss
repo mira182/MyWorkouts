@@ -1,7 +1,10 @@
-.trainings-container {
-  padding: 10px;
+.active-training {
+  background-color: var(--brand-primary-soft) !important;
 }
 
-.active-training {
-  background-color: #80bdff !important;
+.trainings-accordion > .mat-expansion-panel {
+  margin-bottom: 12px;
+  border-radius: 14px !important;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }

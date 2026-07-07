@@ -4,4 +4,65 @@
 @tailwind utilities;
 
 html, body { height: 100% }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
+}
+
+/* Rounded corners across Material components (MDC shape tokens) */
+:root {
+  --mdc-filled-button-container-shape: 10px;
+  --mdc-outlined-button-container-shape: 10px;
+  --mdc-text-button-container-shape: 10px;
+  --mdc-protected-button-container-shape: 10px;
+  --mdc-outlined-text-field-container-shape: 10px;
+  --mdc-filled-text-field-container-shape: 8px;
+  --mdc-dialog-container-shape: 18px;
+  --mdc-plain-tooltip-container-shape: 8px;
+
+  --brand-primary: #f4511e;
+  --brand-primary-strong: #e64a19;
+  --brand-on-primary: #fff;
+  --brand-primary-soft: rgba(244, 81, 30, 0.14);
+  --brand-primary-softer: rgba(244, 81, 30, 0.08);
+}
+
+.dark-theme {
+  --brand-primary: #fb8c00;
+  --brand-primary-strong: #ef6c00;
+  --brand-primary-soft: rgba(251, 140, 0, 0.20);
+  --brand-primary-softer: rgba(251, 140, 0, 0.12);
+}
+
+/* Cards: softer, more modern rounding + gentler elevation */
+.mat-mdc-card {
+  border-radius: 16px;
+}
+
+/* Menus / autocomplete / select panels */
+.mat-mdc-menu-panel,
+.mat-mdc-autocomplete-panel,
+.mat-mdc-select-panel {
+  border-radius: 12px !important;
+}
+
+/* Refined type scale: tighter, slightly heavier headings */
+h1, h2, h3,
+.mat-mdc-card-title,
+.mat-mdc-dialog-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* Buttons: a touch more presence, less shouty casing */
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-outlined-button {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
