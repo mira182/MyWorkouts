@@ -155,7 +155,8 @@
   "EXERCISE": {
     "name": "Name",
     "type": "Type",
-    "category": "Category"
+    "category": "Category",
+    "search": "Search exercise"
   },
   "LABELS": {
     "date-picker": "Choose a date",

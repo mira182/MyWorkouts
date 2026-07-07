@@ -24,6 +24,10 @@ export class ExerciseService {
     return this.http.post<Exercise>(Urls.API_URL + Urls.EXERCISE_URL, formData);
   }
 
+  public getAllExercises(): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(Urls.API_URL + Urls.EXERCISE_URL);
+  }
+
   public getAllExercisesByCategory(category: string): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(Urls.API_URL + Urls.EXERCISE_URL + '/getByCategory', { params: { category }});
   }

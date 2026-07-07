@@ -14,39 +14,39 @@
 
   <div>
 
-    <div class="flex flex-row justify-center">
-      <mat-form-field>
+    <div class="flex justify-center px-3 pt-2">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full max-w-md">
+        <mat-label>{{ 'EXERCISE.search' | translate }}</mat-label>
+        <mat-icon matIconPrefix>search</mat-icon>
         <input matInput
-          placeholder="Exercise name"
           aria-label="Exercise"
           [matAutocomplete]="auto"
           [formControl]="searchExerciseFormControl">
-          <span matSuffix>
-            <mat-icon>search</mat-icon>
-          </span>
-          <mat-autocomplete #auto="matAutocomplete">
-            @for (exercise of filteredExercises | async; track exercise) {
-              <mat-option [value]="exercise.name">
-                <div class="flex flex-row justify-start items-start">
-                  <div>
-                    <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)" height="50">
-                  </div>
-                  <div>
-                    <span>{{ exercise.name }}</span><br/>
-                    <small>{{ exercise.category }}</small>
-                  </div>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onExerciseSelected($event)">
+          @for (exercise of filteredExercises | async; track exercise) {
+            <mat-option [value]="exercise.name">
+              <div class="flex flex-row items-center gap-3">
+                <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)"
+                     width="40" height="40" class="rounded">
+                <div class="flex flex-col leading-tight">
+                  <span>{{ exercise.name }}</span>
+                  <small class="opacity-60">{{ exercise.category }}</small>
                 </div>
-              </mat-option>
-            }
-          </mat-autocomplete>
-        </mat-form-field>
-      </div>
+              </div>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
 
-      <mat-tab-group #exerciseTabs (selectedTabChange)="tabChange($event)">
+      <mat-tab-group #exerciseTabs class="w-4/5 mx-auto" mat-align-tabs="center" (selectedTabChange)="tabChange($event)">
         @for (category of exerciseCategories(); track category) {
           <mat-tab label="{{ category }}">
             @for (exercise of exercisesByCategory(); track exercise) {
-              <app-exercise-item [exercise]="exercise" (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
+              <app-exercise-item [exercise]="exercise"
+                               [attr.data-exercise-id]="exercise.id"
+                               [class.exercise-highlight]="exercise.id === highlightedExerciseId()"
+                               (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
             }
           </mat-tab>
         }

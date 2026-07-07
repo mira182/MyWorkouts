@@ -10,7 +10,7 @@ import {Urls} from "../../model/urls";
 import {ExerciseHelperService} from "../../services/exercise-helper/exercise-helper.service";
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {MatTabChangeEvent, MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatMiniFabButton} from "@angular/material/button";
@@ -59,6 +59,9 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
 
   protected exercisesByCategory = signal<Exercise[]>([]);
 
+  // Set when an exercise is picked from search, so its panel flashes + scrolls into view.
+  protected highlightedExerciseId = signal<number | null>(null);
+
   @ViewChild("exerciseTabs", { static: false }) exerciseTabs: MatTabGroup;
 
   constructor(private readonly exerciseService: ExerciseService,
@@ -81,7 +84,20 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
         next: ([categories, types]) => {
           this.exerciseCategories.set(categories);
           this.exerciseTypes = types;
+          // MatTabGroup's (selectedTabChange) doesn't fire for the initially-selected
+          // tab, so load the first category's exercises up front.
+          if (categories.length > 0) {
+            this.loadExercisesByCategory(categories[0]);
+          }
         },
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+
+    // load ALL exercises to back the search autocomplete
+    this.exerciseService.getAllExercises()
+      .pipe(take(1))
+      .subscribe({
+        next: exercises => this.exercises = exercises,
         error: err => this.snackBarService.showErrorSnackBar(err),
       });
 
@@ -92,6 +108,34 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
         map(state => state ? this.searchExercises(state) : this.exercises.slice()),
         takeUntil(this.unSubscribe),
       );
+  }
+
+  // When a search result is picked, jump to that exercise's category tab.
+  protected onExerciseSelected(event: MatAutocompleteSelectedEvent): void {
+    const exercise = this.exercises.find(e => e.name === event.option.value);
+    if (exercise) {
+      this.highlightedExerciseId.set(exercise.id);
+      this.loadExercisesByCategory(exercise.category);
+    }
+  }
+
+  // Scroll to the highlighted exercise within the active tab (the same list is
+  // rendered in every tab, so scope the lookup to the active tab body) and clear
+  // the highlight afterwards so re-selecting the same item re-triggers the flash.
+  private scrollToHighlighted(): void {
+    const id = this.highlightedExerciseId();
+    if (id == null) {
+      return;
+    }
+    setTimeout(() => {
+      const selector = `[data-exercise-id="${id}"]`;
+      const active = document.querySelector('.mat-mdc-tab-body-active');
+      const el = (active?.querySelector(selector)
+        ?? Array.from(document.querySelectorAll(selector))
+          .find(n => (n as HTMLElement).offsetParent !== null)) as HTMLElement | undefined;
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 400);
+    setTimeout(() => this.highlightedExerciseId.set(null), 2400);
   }
 
   private searchExercises(value: string): Exercise[] {
@@ -131,6 +175,7 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
         next: exercises => {
           this.exercisesByCategory.set(exercises)
           this.goToTab(category)
+          this.scrollToHighlighted()
         },
         error: err => this.snackBarService.showErrorSnackBar(err),
       })

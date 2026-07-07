@@ -1,1 +1,17 @@
+/* Flash a searched-and-selected exercise so it's easy to spot after jumping tabs. */
+.exercise-highlight {
+  display: block;
+  border-radius: 14px;
+  animation: exercise-flash 1.8s ease-out;
+}
 
+@keyframes exercise-flash {
+  0%, 25% {
+    background: var(--brand-primary-soft);
+    box-shadow: 0 0 0 3px var(--brand-primary);
+  }
+  100% {
+    background: transparent;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}

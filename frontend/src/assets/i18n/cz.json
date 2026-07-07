@@ -155,7 +155,8 @@
   "EXERCISE": {
     "name": "Název",
     "type": "Typ",
-    "category": "Kategorie"
+    "category": "Kategorie",
+    "search": "Hledat cvik"
   },
   "LABELS": {
     "date-picker": "Vyberte datum",
