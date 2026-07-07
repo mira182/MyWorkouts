@@ -1,0 +1,6 @@
+/* Active nav item: a subtle translucent pill so the current page is clear
+   against the orange toolbar. */
+.nav-active {
+  background: rgba(255, 255, 255, 0.18);
+  font-weight: 600;
+}
