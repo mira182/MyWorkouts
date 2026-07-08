@@ -8,7 +8,8 @@
       <mat-label>Select day</mat-label>
       <input matInput [matDatepicker]="picker" [formControl]="dateFormControl" (dateChange)="dateSelected($event)">
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker [dateClass]="workoutDateClass"
+                      [calendarHeaderComponent]="workoutCalendarHeader"></mat-datepicker>
     </mat-form-field>
 
     <button mat-icon-button color="primary" aria-label="Next day" (click)="incrementDay()">

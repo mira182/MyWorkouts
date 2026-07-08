@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatCalendarCellClassFunction, MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/datepicker";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {DateTimeService} from "../../services/date-time/date-time.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -9,6 +9,8 @@ import {MatIconButton} from "@angular/material/button";
 import moment, {Moment} from "moment";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {API_DATE_FORMAT} from "../../app.config";
+import {WorkoutDaysService} from "../../services/workout-days/workout-days.service";
+import {WorkoutCalendarHeaderComponent} from "./workout-calendar-header.component";
 
 @Component({
     selector: 'app-day-select',
@@ -35,8 +37,14 @@ export class DaySelectComponent implements OnInit, OnChanges {
 
   public dateFormControl = new FormControl();
 
+  protected readonly workoutCalendarHeader = WorkoutCalendarHeaderComponent;
+
+  protected readonly workoutDateClass: MatCalendarCellClassFunction<Moment> = (date, view) =>
+    view === 'month' && this.workoutDaysService.has(date.format(API_DATE_FORMAT)) ? 'has-workout-day' : '';
+
   constructor(private readonly router: Router,
-              private readonly activatedRoute: ActivatedRoute) {
+              private readonly activatedRoute: ActivatedRoute,
+              private readonly workoutDaysService: WorkoutDaysService) {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
