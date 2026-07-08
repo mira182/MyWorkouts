@@ -2,12 +2,18 @@ package com.workouts.myworkouts.service.exercise;
 
 import com.workouts.myworkouts.exceptions.ExerciseNotFoundException;
 import com.workouts.myworkouts.model.dto.exercise.ExerciseDto;
+import com.workouts.myworkouts.model.dto.exercise.ExerciseStatsDto;
+import com.workouts.myworkouts.model.dto.exercise.PersonalRecordsDto;
+import com.workouts.myworkouts.model.dto.workout.projections.WorkoutExerciseDateDto;
 import com.workouts.myworkouts.model.entity.exercise.Exercise;
 import com.workouts.myworkouts.model.entity.picture.ExercisePicture;
+import com.workouts.myworkouts.model.entity.workout.WorkoutSet;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.PictureType;
 import com.workouts.myworkouts.model.mapper.ExerciseMapper;
+import com.workouts.myworkouts.model.mapper.WorkoutSetMapper;
 import com.workouts.myworkouts.repository.exercise.ExerciseRepository;
+import com.workouts.myworkouts.repository.workout.WorkoutExerciseRepository;
 import com.workouts.myworkouts.service.image.ImageService;
 import com.workouts.myworkouts.service.picture.PictureService;
 import lombok.NonNull;
@@ -17,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +40,10 @@ public class ExerciseServiceImpl implements ExerciseService {
     private final ImageService imageService;
 
     private final PictureService pictureService;
+
+    private final WorkoutExerciseRepository workoutExerciseRepository;
+
+    private final WorkoutSetMapper workoutSetMapper;
 
     @Override
     @Transactional
@@ -97,6 +108,38 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Transactional
     public void deleteExercise(long id) {
         exerciseRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ExerciseStatsDto getExerciseStats(long exerciseId, LocalDate before) {
+        final List<WorkoutExerciseDateDto> history = workoutExerciseRepository.findByExerciseIdOrderByWorkoutDateDesc(exerciseId);
+
+        // History is ordered by workout date descending, so the first entry before the
+        // reference date is the most recent previous session.
+        final WorkoutExerciseDateDto lastSession = history.stream()
+                .filter(entry -> before == null || entry.getDate().isBefore(before))
+                .findFirst()
+                .orElse(null);
+
+        final List<WorkoutSet> allSets = history.stream()
+                .flatMap(entry -> entry.getWorkoutExercise().getWorkoutSets().stream())
+                .toList();
+
+        final PersonalRecordsDto personalRecords = PersonalRecordsDto.builder()
+                .maxWeight(allSets.stream().mapToDouble(WorkoutSet::getWeight).max().orElse(0))
+                .maxReps(allSets.stream().mapToInt(WorkoutSet::getReps).max().orElse(0))
+                .bestSetVolume(allSets.stream().mapToDouble(set -> set.getWeight() * set.getReps()).max().orElse(0))
+                .estimatedOneRepMax(allSets.stream().mapToDouble(set -> set.getWeight() * (1 + set.getReps() / 30.0)).max().orElse(0))
+                .build();
+
+        return ExerciseStatsDto.builder()
+                .lastSessionDate(lastSession != null ? lastSession.getDate() : null)
+                .lastSessionSets(lastSession != null
+                        ? lastSession.getWorkoutExercise().getWorkoutSets().stream().map(workoutSetMapper::entityToDto).toList()
+                        : List.of())
+                .personalRecords(personalRecords)
+                .build();
     }
 
     private void addImagesToExercise(String exerciseName, Exercise foundOrCreatedExercise, MultipartFile file) {

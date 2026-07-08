@@ -1,5 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
+import {DatePipe, DecimalPipe} from "@angular/common";
 import {WorkoutExercise} from "../../model/workout-exercise/workoutExercise";
+import {ExerciseStats} from "../../model/exercise/exercise-stats";
+import {WorkoutSet} from "../../model/exercise/workoutSet";
+import {ExerciseService} from "../../services/rest/exercise/exercise.service";
 
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCard, MatCardContent, MatCardSubtitle} from "@angular/material/card";
@@ -34,7 +38,9 @@ import {API_DATE_FORMAT} from "../../app.config";
     MatCard,
     DatePickerComponent,
     MatFormFieldModule,
-    WorkoutSetsComponent
+    WorkoutSetsComponent,
+    DatePipe,
+    DecimalPipe
 ],
     templateUrl: './workout-exercise.component.html'
 })
@@ -51,15 +57,46 @@ export class WorkoutExerciseComponent implements OnInit {
 
   protected form: FormGroup;
 
+  protected stats = signal<ExerciseStats | undefined>(undefined);
+
   constructor(private readonly formBuilder: FormBuilder,
               private readonly dialogsHandler: DialogsHandlerService,
               private readonly spinner: NgxSpinnerService,
               private readonly snackBarService: SnackBarService,
-              private readonly workoutExerciseService: WorkoutExerciseService) {
+              private readonly workoutExerciseService: WorkoutExerciseService,
+              private readonly exerciseService: ExerciseService) {
   }
 
   public ngOnInit(): void {
     this.initForm();
+    this.loadStats();
+  }
+
+  // "Last time" + personal records for this exercise (previous sessions before this workout).
+  private loadStats(): void {
+    const exerciseId = this.workoutExercise?.exercise?.id;
+    if (exerciseId == null) {
+      return;
+    }
+    this.exerciseService.getExerciseStats(exerciseId, this.workoutDate)
+      .pipe(take(1))
+      .subscribe({
+        next: stats => this.stats.set(stats),
+        error: () => {}, // stats are non-critical decoration; ignore failures silently
+      });
+  }
+
+  protected formatSet(set: WorkoutSet): string {
+    if (set.weight > 0) {
+      return `${set.weight}×${set.reps}`;
+    }
+    if (set.reps > 0) {
+      return `${set.reps} reps`;
+    }
+    if (set.duration > 0) {
+      return `${set.duration}s`;
+    }
+    return '–';
   }
   protected get date(): FormControl {
     return this.form.get('date') as FormControl;

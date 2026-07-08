@@ -17,4 +17,12 @@ public interface WorkoutExerciseRepository extends JpaRepository<WorkoutExercise
             AND we.exercise.name = :exerciseName
             """)
     List<WorkoutExerciseDateDto> findByExerciseBetweenWorkoutDate(String exerciseName, LocalDate startDate, LocalDate endDate);
+
+    @Query("""
+            SELECT new com.workouts.myworkouts.model.dto.workout.projections.WorkoutExerciseDateDto(w.date, we) FROM WorkoutExercise we
+            JOIN Workout w ON we.workout = w
+            WHERE we.exercise.id = :exerciseId
+            ORDER BY w.date DESC
+            """)
+    List<WorkoutExerciseDateDto> findByExerciseIdOrderByWorkoutDateDesc(Long exerciseId);
 }

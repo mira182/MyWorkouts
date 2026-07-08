@@ -1,15 +1,18 @@
 package com.workouts.myworkouts.controller.workout;
 
 import com.workouts.myworkouts.model.dto.exercise.ExerciseDto;
+import com.workouts.myworkouts.model.dto.exercise.ExerciseStatsDto;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.ExerciseType;
 import com.workouts.myworkouts.service.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.workouts.myworkouts.config.Constants.API_BASE_URL;
@@ -48,6 +51,13 @@ public class ExerciseController {
     @GetMapping
     public List<ExerciseDto> getAllExercises() {
         return exerciseService.getAllExercises();
+    }
+
+    @GetMapping("/{id}/stats")
+    public ExerciseStatsDto getExerciseStats(
+            @PathVariable long id,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate before) {
+        return exerciseService.getExerciseStats(id, before);
     }
 
     @PatchMapping(path = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE })

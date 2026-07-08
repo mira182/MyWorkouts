@@ -156,7 +156,11 @@
     "name": "Název",
     "type": "Typ",
     "category": "Kategorie",
-    "search": "Hledat cvik"
+    "search": "Hledat cvik",
+    "last-time": "Naposledy",
+    "pr-weight-tooltip": "Nejtěžší série",
+    "pr-1rm-tooltip": "Odhadované 1RM (Epley)",
+    "pr-reps-tooltip": "Nejvíce opakování v sérii"
   },
   "LABELS": {
     "date-picker": "Vyberte datum",

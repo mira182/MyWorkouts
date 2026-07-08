@@ -156,7 +156,11 @@
     "name": "Name",
     "type": "Type",
     "category": "Category",
-    "search": "Search exercise"
+    "search": "Search exercise",
+    "last-time": "Last time",
+    "pr-weight-tooltip": "Heaviest set",
+    "pr-1rm-tooltip": "Estimated one-rep max (Epley)",
+    "pr-reps-tooltip": "Most reps in a set"
   },
   "LABELS": {
     "date-picker": "Choose a date",

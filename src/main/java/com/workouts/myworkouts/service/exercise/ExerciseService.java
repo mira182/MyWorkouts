@@ -1,15 +1,19 @@
 package com.workouts.myworkouts.service.exercise;
 
 import com.workouts.myworkouts.model.dto.exercise.ExerciseDto;
+import com.workouts.myworkouts.model.dto.exercise.ExerciseStatsDto;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import lombok.NonNull;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ExerciseService {
 
     List<ExerciseDto> getAllExercises();
+
+    ExerciseStatsDto getExerciseStats(long exerciseId, LocalDate before);
 
     ExerciseDto createExercise(@NonNull ExerciseDto exerciseDto);
 

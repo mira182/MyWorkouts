@@ -31,6 +31,37 @@
           <app-date-picker class="flex flex-row justify-center mt-4" [date]="date"
           (datePicked)="workoutExerciseDateUpdated($event)"></app-date-picker>
         }
+
+        @if (stats(); as stats) {
+          <div class="flex flex-col items-center gap-2 px-1 pt-4 pb-2">
+            @if (stats.personalRecords.maxWeight > 0) {
+              <div class="flex flex-wrap justify-center gap-2">
+                <span matTooltip="{{ 'EXERCISE.pr-weight-tooltip' | translate }}"
+                      class="rounded-full bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] px-3 py-1.5 text-sm font-semibold">
+                  PR {{ stats.personalRecords.maxWeight | number: '1.0-1' }} kg
+                </span>
+                <span matTooltip="{{ 'EXERCISE.pr-1rm-tooltip' | translate }}"
+                      class="rounded-full bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] px-3 py-1.5 text-sm font-semibold">
+                  1RM ~{{ stats.personalRecords.estimatedOneRepMax | number: '1.0-0' }} kg
+                </span>
+                <span matTooltip="{{ 'EXERCISE.pr-reps-tooltip' | translate }}"
+                      class="rounded-full bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] px-3 py-1.5 text-sm font-semibold">
+                  {{ stats.personalRecords.maxReps }} reps
+                </span>
+              </div>
+            }
+            @if (stats.lastSessionDate) {
+              <div class="text-center text-sm opacity-75">
+                <span class="font-medium">{{ 'EXERCISE.last-time' | translate }} ({{ stats.lastSessionDate | date: 'd.M.' }}):</span>
+                @for (set of stats.lastSessionSets; track $index) {
+                  {{ formatSet(set) }}@if (!$last) {&nbsp;·&nbsp;}
+                }
+              </div>
+            }
+            <mat-divider class="mt-1 w-full"></mat-divider>
+          </div>
+        }
+
         <workout-sets
           [form]="form"
           [workoutSets]="workoutExercise.workoutSets">
