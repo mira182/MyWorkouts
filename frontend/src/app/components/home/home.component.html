@@ -22,6 +22,47 @@
     </button>
   </div>
 
+  @if (weekSummary(); as summary) {
+    <mat-card class="w-full max-w-2xl">
+      <mat-card-content>
+        <div class="text-center text-sm opacity-60 pt-1">{{ 'HOME.this-week' | translate }}</div>
+        <div class="grid grid-cols-3 gap-2 py-3 text-center divide-x divide-[rgba(127,127,127,0.25)]">
+
+          <div class="flex flex-col items-center gap-0.5">
+            <span class="text-sm opacity-60">{{ 'HOME.summary-workouts' | translate }}</span>
+            <span class="text-xl sm:text-2xl font-semibold">{{ summary.workouts }}</span>
+            <span class="text-xs font-medium" [ngClass]="deltaToneClass(summary.workoutsDelta, true)">
+              {{ signedDelta(summary.workoutsDelta) }} {{ 'HOME.vs-last-week' | translate }}
+            </span>
+          </div>
+
+          <div class="flex flex-col items-center gap-0.5">
+            <span class="text-sm opacity-60">{{ 'HOME.summary-volume' | translate }}</span>
+            <span class="text-xl sm:text-2xl font-semibold">{{ compact(summary.volume) }} kg</span>
+            <span class="text-xs font-medium" [ngClass]="deltaToneClass(summary.volumeDelta, true)">
+              {{ signedDelta(summary.volumeDelta) }} {{ 'HOME.vs-last-week' | translate }}
+            </span>
+          </div>
+
+          <div class="flex flex-col items-center gap-0.5">
+            <span class="text-sm opacity-60">{{ 'HOME.summary-weight' | translate }}</span>
+            @if (summaryWeightDelta() !== undefined) {
+              <span class="text-xl sm:text-2xl font-semibold"
+                    [ngClass]="deltaToneClass(summaryWeightDelta(), false)"
+                    [matTooltip]="'HOME.delta-average-7-tooltip' | translate">
+                {{ signedDelta(summaryWeightDelta(), 1) }} kg
+              </span>
+            } @else {
+              <span class="text-xl sm:text-2xl font-semibold opacity-40">–</span>
+            }
+            <span class="text-xs font-medium opacity-60">{{ 'HOME.vs-last-week' | translate }}</span>
+          </div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
   <div class="cards flex flex-wrap justify-center items-start gap-5 w-full">
     <!-- WEIGHT AT A GLANCE -->
     <mat-card class="home-card">

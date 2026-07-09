@@ -2,7 +2,7 @@ import {Component, OnInit, signal} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import moment, {Moment} from "moment";
-import {take} from "rxjs";
+import {forkJoin, take} from "rxjs";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
@@ -19,10 +19,21 @@ import {Workout} from "../../model/workout/workout";
 import {WithingsService} from "../../services/weight/withings/withings.service";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutCalendarComponent} from "./workout-calendar/workout-calendar.component";
+import {
+  NgxDashboardChartData,
+  NgxDashboardService
+} from "../../services/rest/chart/dashborad/charts/ngx/ngx-dashboard.service";
 
 interface WeightPoint {
   time: number;
   value: number;
+}
+
+interface WeekSummary {
+  workouts: number;
+  volume: number;
+  workoutsDelta: number;
+  volumeDelta: number;
 }
 
 @Component({
@@ -63,9 +74,13 @@ export class HomeComponent implements OnInit {
 
   protected todayWorkout = signal<Workout | null>(null);
 
+  protected weekSummary = signal<WeekSummary | undefined>(undefined);
+  protected summaryWeightDelta = signal<number | undefined>(undefined);
+
   constructor(private readonly chartService: NgxWeightChartService,
               private readonly workoutService: WorkoutService,
               private readonly withingsService: WithingsService,
+              private readonly ngxDashboardService: NgxDashboardService,
               private readonly snackBar: SnackBarService,
               private readonly spinner: NgxSpinnerService) {
   }
@@ -75,6 +90,33 @@ export class HomeComponent implements OnInit {
     this.greetingKey = HomeComponent.greetingKeyForHour(new Date().getHours());
     this.loadWeight();
     this.loadTodayWorkout();
+    this.loadWeekSummary();
+  }
+
+  private loadWeekSummary(): void {
+    const thisWeekStart = moment().startOf('isoWeek');
+    const thisWeekEnd = thisWeekStart.clone().add(6, 'days');
+    const lastWeekStart = thisWeekStart.clone().subtract(1, 'week');
+    const lastWeekEnd = thisWeekStart.clone().subtract(1, 'day');
+
+    forkJoin([
+      this.ngxDashboardService.getTotalsChartData(thisWeekStart, thisWeekEnd),
+      this.ngxDashboardService.getTotalsChartData(lastWeekStart, lastWeekEnd),
+    ])
+      .pipe(take(1))
+      .subscribe({
+        next: ([current, previous]) => {
+          const read = (data: NgxDashboardChartData, key: string) =>
+            data.data.find(point => String(point.name) === key)?.value ?? 0;
+          this.weekSummary.set({
+            workouts: read(current, 'WORKOUTS_COUNT'),
+            volume: read(current, 'WORKOUTS_VOLUME'),
+            workoutsDelta: read(current, 'WORKOUTS_COUNT') - read(previous, 'WORKOUTS_COUNT'),
+            volumeDelta: read(current, 'WORKOUTS_VOLUME') - read(previous, 'WORKOUTS_VOLUME'),
+          });
+        },
+        error: () => {}, // summary is decoration; skip silently on failure
+      });
   }
 
   private static greetingKeyForHour(hour: number): string {
@@ -99,6 +141,9 @@ export class HomeComponent implements OnInit {
       .filter(point => point.value > 0)
       .map(point => ({time: new Date(point.name as unknown as string).getTime(), value: point.value}))
       .sort((a, b) => a.time - b.time);
+    // Summary tile: current week's average vs last week's, regardless of week navigation.
+    this.summaryWeightDelta.set(
+      HomeComponent.weeklyAvgDelta(this.allPoints, moment().startOf('isoWeek').valueOf()));
     this.recomputeWeek();
   }
 
@@ -220,5 +265,30 @@ export class HomeComponent implements OnInit {
 
   protected deltaAbs(delta?: number): number {
     return Math.abs(delta ?? 0);
+  }
+
+  /** Compact stat-tile value: 1284 → "1,284", 12400 → "12.4K". */
+  protected compact(value: number): string {
+    return value >= 10_000
+      ? `${(value / 1000).toFixed(1)}K`
+      : Math.round(value).toLocaleString();
+  }
+
+  /** Signed compact delta for the "vs last week" line: +2, −1.2K, ±0. */
+  protected signedDelta(delta: number | undefined, decimals = 0): string {
+    if (delta === undefined || delta === 0) {
+      return '±0';
+    }
+    const abs = Math.abs(delta);
+    const text = abs >= 10_000 ? `${(abs / 1000).toFixed(1)}K` : abs.toFixed(decimals);
+    return (delta > 0 ? '+' : '−') + text;
+  }
+
+  /** Green when the change is in the desired direction, red otherwise, muted when flat. */
+  protected deltaToneClass(delta: number | undefined, upIsGood: boolean): string {
+    if (delta === undefined || delta === 0) {
+      return 'opacity-60';
+    }
+    return (delta > 0) === upIsGood ? 'text-[#66bb6a]' : 'text-[#ef5350]';
   }
 }

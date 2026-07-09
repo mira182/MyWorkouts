@@ -1,5 +1,4 @@
 import {Component, OnInit, signal} from '@angular/core';
-import {ExerciseHelperService} from "../../../services/exercise-helper/exercise-helper.service";
 import {Exercise} from "../../../model/exercise/exercise";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -35,8 +34,7 @@ export class SelectExerciseDialogComponent implements OnInit {
   readonly IMAGE_BASE_URL = Urls.IMAGE_BASE_URL;
 
   constructor(private readonly exerciseService: ExerciseService,
-              private readonly dialogRef: MatDialogRef<SelectExerciseDialogComponent>,
-              protected readonly exerciseHelper: ExerciseHelperService) {
+              private readonly dialogRef: MatDialogRef<SelectExerciseDialogComponent>) {
   }
 
   public ngOnInit(): void {
