@@ -17,7 +17,12 @@
     "open-workout": "Open workout",
     "sets": "sets",
     "calendar-title": "Workout calendar",
-    "sync-withings": "Sync Withings"
+    "sync-withings": "Sync Withings",
+    "this-week": "This week",
+    "summary-workouts": "Workouts",
+    "summary-volume": "Volume",
+    "summary-weight": "Weight change",
+    "vs-last-week": "vs last week"
   },
   "USER": {
     "user-details": "User details",

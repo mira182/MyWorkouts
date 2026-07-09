@@ -11,15 +11,17 @@ import {isNil} from "lodash";
 import {MatDivider} from "@angular/material/divider";
 import {ExpansionPanelComponent} from "../expansion-panel/expansion-panel.component";
 import {ExerciseService} from "../../services/rest/exercise/exercise.service";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
     selector: 'app-exercise-item',
-    imports: [
+  imports: [
     MatButton,
     TranslateModule,
     MatDivider,
-    ExpansionPanelComponent
-],
+    ExpansionPanelComponent,
+    NgOptimizedImage
+  ],
     templateUrl: './exercise-item.component.html'
 })
 export class ExerciseItemComponent {

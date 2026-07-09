@@ -8,8 +8,12 @@
   </div>
 
   <div panelContent>
-    <img [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseImagePath(exercise)" width="300px" height="200px"
-         loading="lazy" class="rounded-lg">
+    @if (exerciseHelper.getExerciseImagePath(exercise); as imagePath) {
+      <img [ngSrc]="IMAGE_BASE_URL + imagePath"
+           width="300" height="200"
+           [alt]="exercise.name"
+           class="rounded-lg max-w-full object-contain">
+    }
 
     <mat-divider></mat-divider>
 

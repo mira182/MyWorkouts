@@ -7,7 +7,6 @@ import {combineLatest, filter, mergeMap, Observable, take, takeUntil} from "rxjs
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {Urls} from "../../model/urls";
-import {ExerciseHelperService} from "../../services/exercise-helper/exercise-helper.service";
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
@@ -66,7 +65,6 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
 
   constructor(private readonly exerciseService: ExerciseService,
               private readonly snackBarService: SnackBarService,
-              protected readonly exerciseHelper: ExerciseHelperService,
               private readonly dialogsHandler: DialogsHandlerService) {
     super();
   }

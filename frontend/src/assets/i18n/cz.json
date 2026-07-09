@@ -17,7 +17,12 @@
     "open-workout": "Otevřít trénink",
     "sets": "sérií",
     "calendar-title": "Kalendář tréninků",
-    "sync-withings": "Synchronizovat Withings"
+    "sync-withings": "Synchronizovat Withings",
+    "this-week": "Tento týden",
+    "summary-workouts": "Tréninky",
+    "summary-volume": "Objem",
+    "summary-weight": "Změna váhy",
+    "vs-last-week": "vs. minulý týden"
   },
   "USER": {
     "user-details": "Detaily o uživateli",
