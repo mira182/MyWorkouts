@@ -1,4 +1,4 @@
-import {Component, OnInit, signal, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, signal, ViewChild} from '@angular/core';
 import {Exercise} from "../../model/exercise/exercise";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
@@ -7,12 +7,13 @@ import {combineLatest, filter, mergeMap, Observable, take, takeUntil} from "rxjs
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {Urls} from "../../model/urls";
+import {ExerciseHelperService} from "../../services/exercise-helper/exercise-helper.service";
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {MatTabChangeEvent, MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {MatMiniFabButton} from "@angular/material/button";
+import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
@@ -35,6 +36,7 @@ import {ExerciseService} from "../../services/rest/exercise/exercise.service";
         MatTabsModule,
         MatExpansionModule,
         MatMiniFabButton,
+        MatIconButton,
         MatTooltipModule,
         MatIcon,
         MatInput,
@@ -61,10 +63,16 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
   // Set when an exercise is picked from search, so its panel flashes + scrolls into view.
   protected highlightedExerciseId = signal<number | null>(null);
 
+  // Header search collapses to an icon; this drives the inline expand/collapse.
+  protected searchOpen = signal(false);
+
   @ViewChild("exerciseTabs", { static: false }) exerciseTabs: MatTabGroup;
+
+  @ViewChild("searchInput") searchInput: ElementRef<HTMLInputElement>;
 
   constructor(private readonly exerciseService: ExerciseService,
               private readonly snackBarService: SnackBarService,
+              protected readonly exerciseHelper: ExerciseHelperService,
               private readonly dialogsHandler: DialogsHandlerService) {
     super();
   }
@@ -108,6 +116,17 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
       );
   }
 
+  protected openSearch(): void {
+    this.searchOpen.set(true);
+    // Focus once the inline field has been revealed.
+    setTimeout(() => this.searchInput?.nativeElement.focus());
+  }
+
+  protected closeSearch(): void {
+    this.searchExerciseFormControl.setValue('');
+    this.searchOpen.set(false);
+  }
+
   // When a search result is picked, jump to that exercise's category tab.
   protected onExerciseSelected(event: MatAutocompleteSelectedEvent): void {
     const exercise = this.exercises.find(e => e.name === event.option.value);
@@ -115,6 +134,7 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
       this.highlightedExerciseId.set(exercise.id);
       this.loadExercisesByCategory(exercise.category);
     }
+    this.closeSearch();
   }
 
   // Scroll to the highlighted exercise within the active tab (the same list is

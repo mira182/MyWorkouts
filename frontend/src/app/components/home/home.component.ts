@@ -232,7 +232,7 @@ export class HomeComponent implements OnInit {
 
   protected syncWithings(): void {
     this.spinner.show();
-    this.withingsService.getWithingsAuthUrl()
+    this.withingsService.getWithingsAuthUrl('/home')
       .pipe(take(1))
       .subscribe({
         next: response => {

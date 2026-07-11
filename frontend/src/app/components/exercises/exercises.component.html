@@ -1,55 +1,67 @@
 <div class="flex flex-col gap-2">
   <app-page-header-layout>
-    <div headerTitle>
+    <!-- Hide the title on phones while the search is expanded so the field has room. -->
+    <div headerTitle [class.hidden]="searchOpen()" class="sm:block">
       <div>{{ 'TITLES.exercises' | translate }}</div>
     </div>
 
     <div headerActions>
+      <!-- Inline-expanding search: grows out of the header when the icon is clicked. -->
+      <div class="overflow-hidden transition-all duration-300"
+           [ngClass]="searchOpen() ? 'w-56 sm:w-72' : 'w-0 opacity-0'">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-56 sm:w-72">
+          <mat-icon matIconPrefix>search</mat-icon>
+          <input matInput #searchInput
+            [placeholder]="'EXERCISE.search' | translate"
+            aria-label="Exercise"
+            [matAutocomplete]="auto"
+            [formControl]="searchExerciseFormControl"
+            (keydown.escape)="closeSearch()">
+          <button mat-icon-button matIconSuffix matTooltip="{{'BUTTON.close' | translate}}" (click)="closeSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onExerciseSelected($event)">
+            @for (exercise of filteredExercises | async; track exercise) {
+              <mat-option [value]="exercise.name">
+                <div class="flex flex-row items-center gap-3">
+                  <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)"
+                       width="40" height="40" class="rounded">
+                  <div class="flex flex-col leading-tight">
+                    <span>{{ exercise.name }}</span>
+                    <small class="opacity-60">{{ exercise.category }}</small>
+                  </div>
+                </div>
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      @if (!searchOpen()) {
+        <button mat-mini-fab matTooltip="{{'EXERCISE.search' | translate}}" (click)="openSearch()">
+          <mat-icon>search</mat-icon>
+        </button>
+      }
+
       <button mat-mini-fab matTooltip="{{'BUTTON.create-exercise' | translate}}" (click)="createExercise()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </app-page-header-layout>
 
-
-  <div>
-
-    <div class="flex justify-center px-3 pt-2">
-      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full max-w-md">
-        <mat-label>{{ 'EXERCISE.search' | translate }}</mat-label>
-        <mat-icon matIconPrefix>search</mat-icon>
-        <input matInput
-          aria-label="Exercise"
-          [matAutocomplete]="auto"
-          [formControl]="searchExerciseFormControl">
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onExerciseSelected($event)">
-          @for (exercise of filteredExercises | async; track exercise) {
-            <mat-option [value]="exercise.name">
-              <div class="flex flex-row items-center gap-3">
-                <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)"
-                     width="40" height="40" class="rounded">
-                <div class="flex flex-col leading-tight">
-                  <span>{{ exercise.name }}</span>
-                  <small class="opacity-60">{{ exercise.category }}</small>
-                </div>
-              </div>
-            </mat-option>
+  <mat-tab-group #exerciseTabs class="w-4/5 mx-auto" mat-align-tabs="center" (selectedTabChange)="tabChange($event)">
+    @for (category of exerciseCategories(); track category) {
+      <mat-tab label="{{ category }}">
+        <div class="flex flex-col items-center py-3">
+          @for (exercise of exercisesByCategory(); track exercise) {
+            <app-exercise-item class="block w-[340px] max-w-full"
+                             [exercise]="exercise"
+                             [attr.data-exercise-id]="exercise.id"
+                             [class.exercise-highlight]="exercise.id === highlightedExerciseId()"
+                             (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
           }
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-
-      <mat-tab-group #exerciseTabs class="w-4/5 mx-auto" mat-align-tabs="center" (selectedTabChange)="tabChange($event)">
-        @for (category of exerciseCategories(); track category) {
-          <mat-tab label="{{ category }}">
-            @for (exercise of exercisesByCategory(); track exercise) {
-              <app-exercise-item [exercise]="exercise"
-                               [attr.data-exercise-id]="exercise.id"
-                               [class.exercise-highlight]="exercise.id === highlightedExerciseId()"
-                               (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
-            }
-          </mat-tab>
-        }
-      </mat-tab-group>
-    </div>
-  </div>
+        </div>
+      </mat-tab>
+    }
+  </mat-tab-group>
+</div>

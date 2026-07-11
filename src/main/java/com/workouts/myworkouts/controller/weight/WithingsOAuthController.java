@@ -23,8 +23,8 @@ public class WithingsOAuthController {
     }
 
     @GetMapping("/auth-redirect")
-    public WithingsAuthUrlResponseDto getWithingsAuthUrl() {
-        String authUrl = withingsOAuthService.getWithingsAuthUrl();
+    public WithingsAuthUrlResponseDto getWithingsAuthUrl(@RequestParam(required = false) String state) {
+        String authUrl = withingsOAuthService.getWithingsAuthUrl(state);
         return new WithingsAuthUrlResponseDto(authUrl);
     }
 }

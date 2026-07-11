@@ -4,7 +4,7 @@ import com.workouts.myworkouts.model.dto.weight.withings.WithingsTokenResponseDt
 
 public interface WithingsOAuthService {
 
-    String getWithingsAuthUrl();
+    String getWithingsAuthUrl(String state);
 
     WithingsTokenResponseDto exchangeAuthorizationCode(String authorizationCode);
 }

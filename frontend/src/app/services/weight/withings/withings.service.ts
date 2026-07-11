@@ -13,8 +13,9 @@ export class WithingsService {
               private readonly chartService: NgxWeightChartService) {
   }
 
-  public getWithingsAuthUrl(): Observable<{ authUrl: string }> {
-    return this.http.get<{ authUrl: string }>(Urls.API_URL + '/weight/withings/oauth/auth-redirect');
+  public getWithingsAuthUrl(returnPath?: string): Observable<{ authUrl: string }> {
+    const params = returnPath ? new HttpParams().set('state', returnPath) : undefined;
+    return this.http.get<{ authUrl: string }>(Urls.API_URL + '/weight/withings/oauth/auth-redirect', {params});
   }
 
   public updateMeasurements(authorizationCode: string): Observable<any> {

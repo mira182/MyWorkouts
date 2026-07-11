@@ -1,5 +1,5 @@
 import {Component, OnInit, signal} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {WithingsMeasurementModel} from "../../../model/weight/withings-measurement.model";
 import {MeasurementsTableComponent} from "../measurements-table/measurements-table.component";
 import {DayDetailsComponent} from "../day-details/day-details.component";
@@ -98,6 +98,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
   private tooltipHideTimer: ReturnType<typeof setTimeout> | undefined;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private snackBar: SnackBarService,
               private withingsService: WithingsService,
               private spinner: NgxSpinnerService,
@@ -109,7 +110,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
     this.route.queryParams.pipe(take(1)).subscribe(params => {
       const withingsCode = params['code'];
       if (withingsCode) {
-        this.importMeasurements(withingsCode);
+        this.importMeasurements(withingsCode, params['state']);
       } else {
         this.loadAllCharts();
         this.loadTable();
@@ -117,16 +118,20 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
     });
   }
 
-  private importMeasurements(code: string): void {
+  private importMeasurements(code: string, returnPath?: string): void {
     this.spinner.show();
     this.withingsService.updateMeasurements(code)
       .pipe(take(1))
       .subscribe({
         next: () => {
           this.snackBar.showSuccessSnackBar('ALERT.successfully-saved');
+          this.spinner.hide();
+          if (returnPath === '/home') {
+            this.router.navigateByUrl('/home');
+            return;
+          }
           this.loadAllCharts();
           this.loadTable();
-          this.spinner.hide();
         },
         error: (err) => {
           this.spinner.hide();
@@ -202,7 +207,7 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
 
   redirectToWithingsAuthUrl(): void {
     this.spinner.show();
-    this.withingsService.getWithingsAuthUrl()
+    this.withingsService.getWithingsAuthUrl('/weight')
       .pipe(take(1))
       .subscribe({
         next: response => {

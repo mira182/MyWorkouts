@@ -19,7 +19,9 @@ public class WithingsOAuthServiceImpl implements WithingsOAuthService {
 
     private static final String OAUTH_TOKEN_URL = "https://wbsapi.withings.net/v2/oauth2";
 
-    private static final String OUATH_URL= "https://account.withings.com/oauth2_user/authorize2?response_type=code&state=test&scope=user.metrics";
+    private static final String OUATH_URL= "https://account.withings.com/oauth2_user/authorize2?response_type=code&scope=user.metrics";
+
+    private static final String DEFAULT_STATE = "/weight";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -33,10 +35,11 @@ public class WithingsOAuthServiceImpl implements WithingsOAuthService {
     private String redirectUri;
 
     @Override
-    public String getWithingsAuthUrl() {
+    public String getWithingsAuthUrl(String state) {
         return UriComponentsBuilder.fromUriString(OUATH_URL)
                 .queryParam("client_id", clientId)
                 .queryParam("redirect_uri", redirectUri)
+                .queryParam("state", state != null && !state.isBlank() ? state : DEFAULT_STATE)
                 .encode()
                 .toUriString();
     }
