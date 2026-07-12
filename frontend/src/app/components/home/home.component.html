@@ -22,7 +22,17 @@
     </button>
   </div>
 
-  @if (weekSummary(); as summary) {
+  @if (weekSummary() === undefined) {
+    <mat-card class="w-full max-w-2xl">
+      <mat-card-content>
+        <div class="grid grid-cols-3 gap-4 py-4">
+          <app-skeleton class="h-16"></app-skeleton>
+          <app-skeleton class="h-16"></app-skeleton>
+          <app-skeleton class="h-16"></app-skeleton>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else if (weekSummary(); as summary) {
     <mat-card class="w-full max-w-2xl">
       <mat-card-content>
         <div class="text-center text-sm opacity-60 pt-1">{{ 'HOME.this-week' | translate }}</div>
@@ -79,7 +89,13 @@
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
-        @if (latestWeight(); as latestWeight) {
+        @if (!weightLoaded()) {
+          <div class="flex flex-col gap-3 py-2">
+            <app-skeleton class="h-10 w-32"></app-skeleton>
+            <app-skeleton class="h-4 w-full"></app-skeleton>
+            <app-skeleton class="h-24 w-full"></app-skeleton>
+          </div>
+        } @else if (latestWeight(); as latestWeight) {
           <div class="current-weight">{{ latestWeight | number: '1.1-1' }} <span class="unit">kg</span></div>
           <div class="deltas">
             @if (deltaWeek() !== undefined) {

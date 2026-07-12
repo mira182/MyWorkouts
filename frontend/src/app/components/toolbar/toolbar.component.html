@@ -1,41 +1,27 @@
 <mat-toolbar color="primary">
 
   <!--  MOBILE LAYOUT  -->
-  <div class="flex flex-row justify-center items-center basis-full lg:hidden">
-    <button mat-icon-button (click)="sidenavToggle.emit()">
-      <mat-icon>menu</mat-icon>
-    </button>
+  <div class="flex flex-row items-center basis-full md:hidden">
+    <span class="text-lg font-semibold">MyWorkouts</span>
     <span class="flex-1"></span>
 
-    <div>
-      <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-        <mat-icon>import_export</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="import()">{{ 'BUTTON.import' | translate }}</button>
-      </mat-menu>
-    </div>
-    <div>
-      <mat-slide-toggle [checked]="themeService.isDarkThemeValue" (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
-    </div>
-    <div class="btn-group flex justify-center items-center" role="group">
-      <button mat-icon-button type="button">
-        <mat-icon svgIcon="cz" (click)="selectionChanged('cz')"></mat-icon>
-      </button>
-      <button mat-icon-button type="button">
-        <mat-icon svgIcon="en" (click)="selectionChanged('en')"></mat-icon>
-      </button>
-    </div>
+    <button mat-icon-button type="button" (click)="toggleTheme()"
+            matTooltip="{{ 'BUTTON.toggle-theme' | translate }}">
+      <mat-icon>{{ themeService.isDarkThemeValue ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
 
-    <button mat-button routerLink="/login" routerLinkActive="active" (click)="logOut()">
+    <button mat-icon-button type="button" [matMenuTriggerFor]="overflowMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <button mat-icon-button routerLink="/login" (click)="logOut()"
+            matTooltip="{{ 'BUTTON.logout' | translate }}">
       <mat-icon>exit_to_app</mat-icon>
-      <span>{{ 'BUTTON.logout' | translate }}</span>
     </button>
   </div>
 
   <!--  DESKTOP LAYOUT  -->
-  <div class="hidden md:flex md:flex-row md:items-center md:justify-center md:basis-full">
-    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+  <div class="hidden md:flex md:flex-row md:items-center md:basis-full">
     <button mat-button routerLinkActive="nav-active" routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
@@ -57,29 +43,33 @@
 
     <span class="flex-1"></span>
 
-    <div>
-      <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-        <mat-icon>import_export</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="import()">{{ 'BUTTON.import' | translate }}</button>
-      </mat-menu>
-    </div>
-    <div>
-      <mat-slide-toggle [checked]="themeService.isDarkThemeValue" (change)="themeService.setDarkTheme($event.checked)" matTooltip="Dark theme"></mat-slide-toggle>
-    </div>
-    <div class="btn-group items-center justify-center" role="group">
-      <button mat-icon-button type="button" (click)="selectionChanged('cz')">
-        <mat-icon svgIcon="cz"></mat-icon>
-      </button>
-      <button mat-icon-button type="button" (click)="selectionChanged('en')">
-        <mat-icon svgIcon="en"></mat-icon>
-      </button>
-    </div>
+    <button mat-icon-button type="button" (click)="toggleTheme()"
+            matTooltip="{{ 'BUTTON.toggle-theme' | translate }}">
+      <mat-icon>{{ themeService.isDarkThemeValue ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
 
-    <button mat-button routerLink="/login" routerLinkActive="active" (click)="logOut()">
+    <button mat-icon-button type="button" [matMenuTriggerFor]="overflowMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <button mat-button routerLink="/login" (click)="logOut()">
       <mat-icon>exit_to_app</mat-icon>
       <span>{{ 'BUTTON.logout' | translate }}</span>
     </button>
   </div>
+
+  <mat-menu #overflowMenu="matMenu">
+    <button mat-menu-item (click)="import()">
+      <mat-icon>import_export</mat-icon>
+      <span>{{ 'BUTTON.import' | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="selectionChanged('en')">
+      <mat-icon svgIcon="en"></mat-icon>
+      <span>English</span>
+    </button>
+    <button mat-menu-item (click)="selectionChanged('cz')">
+      <mat-icon svgIcon="cz"></mat-icon>
+      <span>Čeština</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>

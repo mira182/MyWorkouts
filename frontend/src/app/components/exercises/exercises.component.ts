@@ -3,7 +3,7 @@ import {Exercise} from "../../model/exercise/exercise";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
-import {combineLatest, filter, mergeMap, Observable, take, takeUntil} from "rxjs";
+import {combineLatest, filter, finalize, mergeMap, Observable, take, takeUntil} from "rxjs";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {Urls} from "../../model/urls";
@@ -22,6 +22,8 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
 import {ExerciseItemComponent} from "../exercise-item/exercise-item.component";
 import {isNil} from "lodash";
 import {ExerciseService} from "../../services/rest/exercise/exercise.service";
+import {SkeletonComponent} from "../skeleton/skeleton.component";
+import {EmptyStateComponent} from "../empty-state/empty-state.component";
 
 @Component({
     selector: 'app-exercises',
@@ -42,6 +44,8 @@ import {ExerciseService} from "../../services/rest/exercise/exercise.service";
         MatInput,
         PageHeaderLayoutComponent,
         ExerciseItemComponent,
+        SkeletonComponent,
+        EmptyStateComponent,
     ]
 })
 export class ExercisesComponent extends Unsubscribe implements OnInit {
@@ -65,6 +69,8 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
 
   // Header search collapses to an icon; this drives the inline expand/collapse.
   protected searchOpen = signal(false);
+
+  protected categoryLoading = signal(false);
 
   @ViewChild("exerciseTabs", { static: false }) exerciseTabs: MatTabGroup;
 
@@ -185,8 +191,10 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
   }
 
   private loadExercisesByCategory(category: string): void {
+    this.categoryLoading.set(true);
     this.exerciseService.getAllExercisesByCategory(category)
       .pipe(
+        finalize(() => this.categoryLoading.set(false)),
         take(1),
       )
       .subscribe({

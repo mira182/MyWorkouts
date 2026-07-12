@@ -92,6 +92,7 @@
     "login": "Login",
     "show": "Show password",
     "hide": "Hide password",
+    "toggle-theme": "Toggle dark mode",
     "cancel": "Cancel",
     "close": "Close",
     "edit": "Edit",
@@ -135,7 +136,8 @@
   },
   "TEXTS": {
     "no-workouts": "No workouts today.",
-    "no-training-plans": "No training plans"
+    "no-training-plans": "No training plans",
+    "no-exercises-category": "No exercises in this category yet."
   },
   "MESSAGES": {
     "delete-exercise-question": "Do you really want to delete exercise?",

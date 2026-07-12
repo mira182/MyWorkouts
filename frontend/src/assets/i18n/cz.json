@@ -92,6 +92,7 @@
     "login": "Přihlásit",
     "show": "Zobrazit heslo",
     "hide": "Skrýt heslo",
+    "toggle-theme": "Přepnout tmavý režim",
     "cancel": "Zruš",
     "close": "Zavřít",
     "edit": "Uprav",
@@ -135,7 +136,8 @@
   },
   "TEXTS": {
     "no-workouts": "Žádný trénink",
-    "no-training-plans": "Žádné tréninkové plány"
+    "no-training-plans": "Žádné tréninkové plány",
+    "no-exercises-category": "V této kategorii zatím nejsou žádné cviky."
   },
   "MESSAGES": {
     "delete-exercise-question": "Opravdu chcete smazat cvik?",

@@ -13,14 +13,19 @@
   <form [formGroup]="form" class="w-full max-w-2xl">
     <div formArrayName="trainingPlans">
       @if (loading()) {
-        <div>
-          <mat-spinner [diameter]="40"></mat-spinner>
+        <div class="flex flex-col gap-3">
+          <app-skeleton class="h-14 w-full"></app-skeleton>
+          <app-skeleton class="h-14 w-full"></app-skeleton>
+          <app-skeleton class="h-14 w-full"></app-skeleton>
         </div>
       }
       @if (trainingPlans.controls.length === 0 && !loading()) {
-        <div class="text-center opacity-70 py-8">
-          {{ 'TEXTS.no-training-plans' | translate }}
-        </div>
+        <app-empty-state icon="event_note" [message]="'TEXTS.no-training-plans' | translate">
+          <button mat-flat-button color="primary" (click)="addTraining()">
+            <mat-icon>add</mat-icon>
+            {{ 'BUTTON.add-training' | translate }}
+          </button>
+        </app-empty-state>
       }
       <mat-accordion class="trainings-accordion">
         @for (trainingPlan of trainingPlans.controls; track trainingPlan; let trainingIndex = $index) {

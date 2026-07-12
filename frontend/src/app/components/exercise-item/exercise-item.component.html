@@ -13,6 +13,10 @@
            width="300" height="200"
            [alt]="exercise.name"
            class="block mx-auto rounded-lg max-w-full object-contain">
+    } @else {
+      <div class="w-[300px] h-[200px] max-w-full mx-auto rounded-lg grid place-items-center bg-[var(--brand-primary-softer)]">
+        <mat-icon class="!w-14 !h-14 !text-[56px] text-[var(--brand-primary)] opacity-40">fitness_center</mat-icon>
+      </div>
     }
 
     <mat-divider></mat-divider>

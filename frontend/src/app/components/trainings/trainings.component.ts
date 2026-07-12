@@ -19,9 +19,10 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {filter, finalize, switchMap, take} from "rxjs";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
 import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
+import {EmptyStateComponent} from "../empty-state/empty-state.component";
+import {SkeletonComponent} from "../skeleton/skeleton.component";
 import {TrainingExercise} from "../../model/training/trainingExercise";
 import {DateTimeService} from "../../services/date-time/date-time.service";
 import moment from "moment";
@@ -46,11 +47,12 @@ import moment from "moment";
         MatButton,
         MatMiniFabButton,
         MatTooltipModule,
-        MatProgressSpinner,
         MatDatepickerModule,
         ReactiveFormsModule,
         PageHeaderLayoutComponent,
         WorkoutSetsComponent,
+        EmptyStateComponent,
+        SkeletonComponent,
     ]
 })
 export class TrainingsComponent implements OnInit {

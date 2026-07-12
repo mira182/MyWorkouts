@@ -50,7 +50,12 @@
 
     <app-day-select [inputDate]="selectedDate()" (dateChanged)="getWorkoutsForDay($event)"></app-day-select>
 
-    @if (workout(); as currentWorkout) {
+    @if (dayLoading()) {
+      <div class="flex flex-col items-center gap-4 py-4">
+        <app-skeleton class="h-48 w-80 sm:w-96"></app-skeleton>
+        <app-skeleton class="h-48 w-80 sm:w-96"></app-skeleton>
+      </div>
+    } @else if (workout(); as currentWorkout) {
       <div>
         @for (workoutExercise of currentWorkout.workoutExercises; track workoutExercise.id) {
           <workout-exercise
@@ -61,7 +66,12 @@
         }
       </div>
     } @else {
-      <div class="text-center">{{ 'TEXTS.no-workouts' | translate }}</div>
+      <app-empty-state icon="fitness_center" [message]="'TEXTS.no-workouts' | translate">
+        <button mat-flat-button color="primary" (click)="openAddWorkoutExerciseDialog()">
+          <mat-icon>add</mat-icon>
+          {{ 'BUTTON.add-workout' | translate }}
+        </button>
+      </app-empty-state>
     }
 
   </div>

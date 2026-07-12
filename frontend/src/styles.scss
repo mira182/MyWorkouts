@@ -28,6 +28,9 @@ body {
   --brand-on-primary: #fff;
   --brand-primary-soft: rgba(244, 81, 30, 0.14);
   --brand-primary-softer: rgba(244, 81, 30, 0.08);
+
+  --app-background: #fafafa;
+  --app-on-background: rgba(0, 0, 0, 0.87);
 }
 
 .dark-theme {
@@ -35,6 +38,9 @@ body {
   --brand-primary-strong: #ef6c00;
   --brand-primary-soft: rgba(251, 140, 0, 0.20);
   --brand-primary-softer: rgba(251, 140, 0, 0.12);
+
+  --app-background: #303030;
+  --app-on-background: #fff;
 }
 
 /* Cards: softer, more modern rounding + gentler elevation */

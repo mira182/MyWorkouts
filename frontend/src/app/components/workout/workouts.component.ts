@@ -4,7 +4,7 @@ import moment, {Moment} from "moment";
 import {MatIcon} from "@angular/material/icon";
 import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
-import {MatMiniFabButton} from "@angular/material/button";
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {DaySelectComponent} from "../day-select/day-select.component";
 import {TrainingService} from "../../services/rest/training/training.service";
@@ -21,6 +21,8 @@ import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.com
 import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
 import {Unsubscribe} from "../unsubscribe/unsubscribe";
 import {WorkoutDayService} from "../../services/rest/workout/workout-day.service";
+import {EmptyStateComponent} from "../empty-state/empty-state.component";
+import {SkeletonComponent} from "../skeleton/skeleton.component";
 
 @Component({
     selector: 'app-workouts',
@@ -28,12 +30,15 @@ import {WorkoutDayService} from "../../services/rest/workout/workout-day.service
     MatIcon,
     MatTooltip,
     TranslateModule,
+    MatButton,
     MatMiniFabButton,
     MatMenuModule,
     DaySelectComponent,
     NgxSpinnerModule,
     WorkoutExerciseComponent,
-    PageHeaderLayoutComponent
+    PageHeaderLayoutComponent,
+    EmptyStateComponent,
+    SkeletonComponent
 ],
     templateUrl: './workouts.component.html'
 })
@@ -44,6 +49,8 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   protected selectedDate: WritableSignal<Moment> = signal(moment());
 
   protected trainings = signal<TrainingPlan[]>([]);
+
+  protected dayLoading = signal(false);
 
   constructor(private readonly snackBarService: SnackBarService,
               private readonly workoutService: WorkoutService,
@@ -58,9 +65,9 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
     this.workoutDayService.getWorkoutDay
       .pipe(
         debounceTime(200),
-        tap(() => this.spinner.show()),
+        tap(() => this.dayLoading.set(true)),
         switchMap(date => this.workoutService.getWorkoutForDay(date).pipe(
-          finalize(() => this.spinner.hide()),
+          finalize(() => this.dayLoading.set(false)),
         )),
         takeUntil(this.unSubscribe),
       )

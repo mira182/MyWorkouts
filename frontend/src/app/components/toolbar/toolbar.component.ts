@@ -1,8 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
-import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatTooltip} from "@angular/material/tooltip";
 
@@ -23,7 +22,6 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
     MatIcon,
     MatIconButton,
     MatMenuModule,
-    MatSlideToggle,
     MatToolbar,
     MatTooltip,
     RouterLink,
@@ -36,9 +34,6 @@ import {Unsubscribe} from "../unsubscribe/unsubscribe";
 })
 export class ToolbarComponent extends Unsubscribe implements OnInit {
 
-  @Output()
-  public sidenavToggle : EventEmitter<void> = new EventEmitter<void>();
-
   constructor(private readonly translateService: TranslateService,
               private readonly loginService : LoginService,
               protected readonly themeService: ThemeService,
@@ -48,13 +43,16 @@ export class ToolbarComponent extends Unsubscribe implements OnInit {
   }
 
   ngOnInit(): void {
-
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     this.translateService.use('en');
   }
 
   protected selectionChanged(selectedLanguage: string): void {
     this.translateService.use(selectedLanguage);
+  }
+
+  protected toggleTheme(): void {
+    this.themeService.setDarkTheme(!this.themeService.isDarkThemeValue);
   }
 
   protected logOut() {

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {WorkoutSet} from "../../model/exercise/workoutSet";
 import {MatFormField, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
@@ -12,6 +13,7 @@ import {ExerciseType} from "../../model/exercise/exerciseType";
 @Component({
     selector: 'workout-sets',
     imports: [
+    NgClass,
     MatFormField,
     MatIcon,
     MatIconButton,
@@ -20,7 +22,8 @@ import {ExerciseType} from "../../model/exercise/exerciseType";
     MatTooltip,
     ReactiveFormsModule
 ],
-    templateUrl: './workout-sets.component.html'
+    templateUrl: './workout-sets.component.html',
+    styleUrl: './workout-sets.component.scss'
 })
 export class WorkoutSetsComponent implements OnInit {
 
@@ -71,6 +74,30 @@ export class WorkoutSetsComponent implements OnInit {
       reps: new FormControl(0, Validators.required),
       distance: new FormControl(0, Validators.required),
       duration: new FormControl(0, Validators.required),
+    }));
+  }
+
+  protected step(controlName: string, index: number, direction: number, stepSize: number): void {
+    const control = this.getWorkoutSetFormControl(controlName, index);
+    if (!control) {
+      return;
+    }
+    const next = (Number(control.value) || 0) + direction * stepSize;
+    control.setValue(Math.max(0, Math.round(next * 100) / 100));
+  }
+
+  protected duplicateLastSet(): void {
+    const last = this.workoutSetsFormArray.at(this.workoutSetsFormArray.length - 1);
+    if (!last) {
+      this.addNewWorkoutSet();
+      return;
+    }
+    const values = last.getRawValue();
+    this.workoutSetsFormArray.push(this.formBuilder.group({
+      weight: new FormControl(values.weight, Validators.required),
+      reps: new FormControl(values.reps, Validators.required),
+      distance: new FormControl(values.distance, Validators.required),
+      duration: new FormControl(values.duration, Validators.required),
     }));
   }
 

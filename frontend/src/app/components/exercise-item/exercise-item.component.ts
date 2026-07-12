@@ -9,6 +9,7 @@ import {ExerciseHelperService} from "../../services/exercise-helper/exercise-hel
 import {filter, mergeMap, switchMap, take} from "rxjs";
 import {isNil} from "lodash";
 import {MatDivider} from "@angular/material/divider";
+import {MatIcon} from "@angular/material/icon";
 import {ExpansionPanelComponent} from "../expansion-panel/expansion-panel.component";
 import {ExerciseService} from "../../services/rest/exercise/exercise.service";
 import {NgOptimizedImage} from "@angular/common";
@@ -19,6 +20,7 @@ import {NgOptimizedImage} from "@angular/common";
     MatButton,
     TranslateModule,
     MatDivider,
+    MatIcon,
     ExpansionPanelComponent,
     NgOptimizedImage
   ],

@@ -52,15 +52,25 @@
   <mat-tab-group #exerciseTabs class="w-4/5 mx-auto" mat-align-tabs="center" (selectedTabChange)="tabChange($event)">
     @for (category of exerciseCategories(); track category) {
       <mat-tab label="{{ category }}">
-        <div class="flex flex-col items-center py-3">
-          @for (exercise of exercisesByCategory(); track exercise) {
-            <app-exercise-item class="block w-[340px] max-w-full"
-                             [exercise]="exercise"
-                             [attr.data-exercise-id]="exercise.id"
-                             [class.exercise-highlight]="exercise.id === highlightedExerciseId()"
-                             (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
-          }
-        </div>
+        @if (categoryLoading()) {
+          <div class="flex flex-col items-center gap-3 py-4">
+            <app-skeleton class="h-16 w-[340px] max-w-full"></app-skeleton>
+            <app-skeleton class="h-16 w-[340px] max-w-full"></app-skeleton>
+            <app-skeleton class="h-16 w-[340px] max-w-full"></app-skeleton>
+          </div>
+        } @else if (exercisesByCategory().length === 0) {
+          <app-empty-state icon="fitness_center" [message]="'TEXTS.no-exercises-category' | translate"></app-empty-state>
+        } @else {
+          <div class="flex flex-col items-center py-3">
+            @for (exercise of exercisesByCategory(); track exercise) {
+              <app-exercise-item class="block w-[340px] max-w-full"
+                               [exercise]="exercise"
+                               [attr.data-exercise-id]="exercise.id"
+                               [class.exercise-highlight]="exercise.id === highlightedExerciseId()"
+                               (exerciseEdited)="exerciseEdited(category)"></app-exercise-item>
+            }
+          </div>
+        }
       </mat-tab>
     }
   </mat-tab-group>

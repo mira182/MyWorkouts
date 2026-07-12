@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.nav-item {
+  @apply flex flex-col flex-1 items-center justify-center gap-1 no-underline;
+  color: inherit;
+  opacity: 0.65;
+}
+
+.nav-item.nav-active {
+  opacity: 1;
+  color: var(--brand-primary);
+}
+
+:host-context(.dark-theme) {
+  background: #212121;
+  border-top-color: rgba(255, 255, 255, 0.12);
+}

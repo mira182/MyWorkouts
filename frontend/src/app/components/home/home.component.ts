@@ -19,6 +19,7 @@ import {Workout} from "../../model/workout/workout";
 import {WithingsService} from "../../services/weight/withings/withings.service";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutCalendarComponent} from "./workout-calendar/workout-calendar.component";
+import {SkeletonComponent} from "../skeleton/skeleton.component";
 import {
   NgxDashboardChartData,
   NgxDashboardService
@@ -51,6 +52,7 @@ interface WeekSummary {
         NgxSpinnerModule,
         NgxLineChartComponent,
         WorkoutCalendarComponent,
+        SkeletonComponent,
     ],
     providers: [
         WithingsService,
@@ -74,8 +76,10 @@ export class HomeComponent implements OnInit {
 
   protected todayWorkout = signal<Workout | null>(null);
 
-  protected weekSummary = signal<WeekSummary | undefined>(undefined);
+  protected weekSummary = signal<WeekSummary | null | undefined>(undefined);
   protected summaryWeightDelta = signal<number | undefined>(undefined);
+
+  protected weightLoaded = signal(false);
 
   constructor(private readonly chartService: NgxWeightChartService,
               private readonly workoutService: WorkoutService,
@@ -115,7 +119,7 @@ export class HomeComponent implements OnInit {
             volumeDelta: read(current, 'WORKOUTS_VOLUME') - read(previous, 'WORKOUTS_VOLUME'),
           });
         },
-        error: () => {}, // summary is decoration; skip silently on failure
+        error: () => this.weekSummary.set(null), // summary is decoration; hide silently on failure
       });
   }
 
@@ -131,7 +135,10 @@ export class HomeComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: data => this.computeWeightSummary(data),
-        error: (err) => this.snackBar.showErrorSnackBar(err?.error),
+        error: (err) => {
+          this.weightLoaded.set(true);
+          this.snackBar.showErrorSnackBar(err?.error);
+        },
       });
   }
 
@@ -145,6 +152,7 @@ export class HomeComponent implements OnInit {
     this.summaryWeightDelta.set(
       HomeComponent.weeklyAvgDelta(this.allPoints, moment().startOf('isoWeek').valueOf()));
     this.recomputeWeek();
+    this.weightLoaded.set(true);
   }
 
   protected previousWeek(): void {
