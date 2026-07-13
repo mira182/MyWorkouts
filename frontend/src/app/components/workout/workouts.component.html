@@ -55,7 +55,7 @@
         <app-skeleton class="h-48 w-80 sm:w-96"></app-skeleton>
         <app-skeleton class="h-48 w-80 sm:w-96"></app-skeleton>
       </div>
-    } @else if (workout(); as currentWorkout) {
+    } @else if (currentWorkout(); as currentWorkout) {
       <div>
         @for (workoutExercise of currentWorkout.workoutExercises; track workoutExercise.id) {
           <workout-exercise

@@ -4,6 +4,7 @@ import com.workouts.myworkouts.exceptions.WorkoutNotFoundException;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
 import com.workouts.myworkouts.model.dto.workout.projections.WorkoutExerciseDateDto;
+import com.workouts.myworkouts.model.entity.workout.Workout;
 import com.workouts.myworkouts.model.entity.workout.WorkoutExercise;
 import com.workouts.myworkouts.model.mapper.WorkoutExerciseMapper;
 import com.workouts.myworkouts.model.mapper.WorkoutSetMapper;
@@ -81,6 +82,16 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
     @Override
     @Transactional
     public void deleteWorkoutExercise(long id) {
-        workoutExerciseRepository.deleteById(id);
+        final WorkoutExercise workoutExercise = workoutExerciseRepository.findById(id)
+                .orElseThrow(() -> new WorkoutNotFoundException(id));
+
+        final Workout workout = workoutExercise.getWorkout();
+        workout.getWorkoutExercises().remove(workoutExercise);
+
+        if (workout.getWorkoutExercises().isEmpty()) {
+            workoutRepository.delete(workout);
+        } else {
+            workoutRepository.save(workout);
+        }
     }
 }

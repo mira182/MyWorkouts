@@ -1,4 +1,4 @@
-import {Component, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, computed, OnInit, signal, WritableSignal} from '@angular/core';
 import moment, {Moment} from "moment";
 
 import {MatIcon} from "@angular/material/icon";
@@ -47,6 +47,11 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   protected readonly DATE_FORMATS = DATE_FORMATS;
 
   public workout = signal<Workout | undefined>(undefined);
+
+  protected readonly currentWorkout = computed(() => {
+    const w = this.workout();
+    return w?.workoutExercises?.length ? w : undefined;
+  });
 
   protected selectedDate: WritableSignal<Moment> = signal(moment());
 
