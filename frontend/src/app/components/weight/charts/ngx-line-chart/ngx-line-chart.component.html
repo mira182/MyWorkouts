@@ -6,40 +6,56 @@
   </defs>
 </svg>
 
-<ngx-charts-line-chart
-  [@.disabled]="true"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [animations]="animations"
-  [timeline]="timeline"
-  [autoScale]="autoScale"
-  [xAxisTicks]="xAxisTicks"
-  [xScaleMin]="xScaleMin"
-  [xAxisTickFormatting]="xAxisFormat"
-  [curve]="curve"
-  [scheme]="scheme"
-  [results]="chartData"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate()"
->
-  <ng-template #tooltipTemplate let-model="model">
-    <div class="p-1 text-xs">
-      <div>{{ tooltipDate(model?.name) }}</div>
-      <div class="font-semibold">{{ model?.series }}: {{ model?.value }}</div>
-    </div>
-  </ng-template>
-  <ng-template #seriesTooltipTemplate let-model="model">
-    <div class="p-1 text-xs text-left">
-      <div>{{ tooltipDate(model?.[0]?.name) }}</div>
-      @for (item of model; track item.series) {
-        <div><span [style.color]="item.color">●</span> {{ item.series }}: <span class="font-semibold">{{ item.value }}</span></div>
+<div class="flex flex-col h-full">
+  <div class="flex-1 min-h-0">
+    <ngx-charts-line-chart
+      [@.disabled]="true"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [animations]="animations"
+      [timeline]="timeline"
+      [autoScale]="autoScale"
+      [xAxisTicks]="xAxisTicks"
+      [xScaleMin]="xScaleMin"
+      [xAxisTickFormatting]="xAxisFormat"
+      [curve]="curve"
+      [scheme]="scheme"
+      [results]="chartData"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate()"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="p-1 text-xs">
+          <div>{{ tooltipDate(model?.name) }}</div>
+          <div class="font-semibold">{{ model?.series }}: {{ model?.value }}</div>
+        </div>
+      </ng-template>
+      <ng-template #seriesTooltipTemplate let-model="model">
+        <div class="p-1 text-xs text-left">
+          <div>{{ tooltipDate(model?.[0]?.name) }}</div>
+          @for (item of model; track item.series) {
+            <div><span [style.color]="item.color">●</span> {{ item.series }}: <span
+              class="font-semibold">{{ item.value }}</span></div>
+          }
+        </div>
+      </ng-template>
+    </ngx-charts-line-chart>
+  </div>
+
+  @if (showCustomLegend) {
+    <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 pt-1 pb-1 text-xs">
+      @for (item of legendItems; track item.name) {
+        <span class="inline-flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full" [style.background]="item.color"></span>
+          {{ item.name }}
+        </span>
       }
     </div>
-  </ng-template>
-</ngx-charts-line-chart>
+  }
+</div>

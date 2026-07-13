@@ -57,9 +57,10 @@
           <div class="flex flex-col items-center gap-0.5">
             <span class="text-sm opacity-60">{{ 'HOME.summary-weight' | translate }}</span>
             @if (summaryWeightDelta() !== undefined) {
-              <span class="text-xl sm:text-2xl font-semibold"
+              <span class="text-xl sm:text-2xl font-semibold cursor-help"
                     [ngClass]="deltaToneClass(summaryWeightDelta(), false)"
-                    [matTooltip]="'HOME.delta-average-7-tooltip' | translate">
+                    [matTooltip]="'HOME.delta-average-7-tooltip' | translate"
+                    #summaryTip="matTooltip" (click)="summaryTip.toggle()">
                 {{ signedDelta(summaryWeightDelta(), 1) }} kg
               </span>
             } @else {
@@ -99,20 +100,23 @@
           <div class="current-weight">{{ latestWeight | number: '1.1-1' }} <span class="unit">kg</span></div>
           <div class="deltas">
             @if (deltaWeek() !== undefined) {
-              <span class="delta" [ngClass]="deltaClass(deltaWeek())"
-                [matTooltip]="'HOME.delta-7-tooltip' | translate">
+              <span class="delta cursor-help" [ngClass]="deltaClass(deltaWeek())"
+                [matTooltip]="'HOME.delta-7-tooltip' | translate"
+                #weekTip="matTooltip" (click)="weekTip.toggle()">
                 {{ deltaArrow(deltaWeek()) }} {{ deltaAbs(deltaWeek()) | number: '1.1-1' }} kg / 7d
               </span>
             }
             @if (deltaMonth() !== undefined) {
-              <span class="delta" [ngClass]="deltaClass(deltaMonth())"
-                [matTooltip]="'HOME.delta-30-tooltip' | translate">
+              <span class="delta cursor-help" [ngClass]="deltaClass(deltaMonth())"
+                [matTooltip]="'HOME.delta-30-tooltip' | translate"
+                #monthTip="matTooltip" (click)="monthTip.toggle()">
                 {{ deltaArrow(deltaMonth()) }} {{ deltaAbs(deltaMonth()) | number: '1.1-1' }} kg / 30d
               </span>
             }
             @if (deltaAvgWeek() !== undefined) {
-              <span class="delta" [ngClass]="deltaClass(deltaAvgWeek())"
-                [matTooltip]="'HOME.delta-average-7-tooltip' | translate">
+              <span class="delta cursor-help" [ngClass]="deltaClass(deltaAvgWeek())"
+                [matTooltip]="'HOME.delta-average-7-tooltip' | translate"
+                #avgTip="matTooltip" (click)="avgTip.toggle()">
                 {{ deltaArrow(deltaAvgWeek()) }} {{ deltaAbs(deltaAvgWeek()) | number: '1.1-1' }} kg / WAVG
               </span>
             }

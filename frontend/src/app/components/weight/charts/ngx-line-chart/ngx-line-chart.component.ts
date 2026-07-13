@@ -36,12 +36,15 @@ export class NgxLineChartComponent {
     return this._chartData;
   }
 
-  legend: boolean = true;
+  // ngx-charts' own legend either steals width (right) or overflows the fixed-height
+  // host (below — it reserves no space). We render a compact legend ourselves instead.
+  legend: boolean = false;
   showLabels: boolean = true;
   animations: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
+  // The y values are self-explanatory here; the "Value" axis name only ate plot width.
+  showYAxisLabel: boolean = false;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Date';
   yAxisLabel: string = 'Value';
@@ -75,7 +78,6 @@ export class NgxLineChartComponent {
   set compact(value: boolean) {
     this._compact = value;
     if (value) {
-      this.legend = false;
       this.showXAxisLabel = false;
       this.showYAxisLabel = false;
     }
@@ -116,6 +118,8 @@ export class NgxLineChartComponent {
   }
 
   private static readonly DAILY_TICKS_MAX_DAYS = 31;
+  // Cap visible x-axis labels so dates don't overlap on dense ranges (e.g. a full month).
+  private static readonly MAX_X_TICKS = 7;
 
   xAxisTicks?: Date[];
   xScaleMin?: Date;
@@ -124,6 +128,19 @@ export class NgxLineChartComponent {
 
   protected tooltipDate(value: any): string {
     return value ? moment(value).format(DATE_FORMATS.display) : '';
+  }
+
+  // Only worth a legend when there's more than one line to tell apart (and not the sparkline).
+  protected get showCustomLegend(): boolean {
+    return !this._compact && this._chartData.length > 1;
+  }
+
+  // Series are colored by their order in the scheme domain (ScaleType.Ordinal).
+  protected get legendItems(): { name: string; color: string }[] {
+    return this._chartData.map((series, i) => ({
+      name: (series as { name?: string }).name ?? '',
+      color: this.scheme.domain[i % this.scheme.domain.length],
+    }));
   }
 
   private computeXAxisTicks(): void {
@@ -153,9 +170,15 @@ export class NgxLineChartComponent {
       return;
     }
 
+    // Step so we show at most MAX_X_TICKS evenly-spaced days across the range.
+    const step = Math.max(1, Math.ceil(days / NgxLineChartComponent.MAX_X_TICKS));
     const ticks: Date[] = [];
-    for (let i = 0; i < days; i++) {
+    for (let i = 0; i < days; i += step) {
       ticks.push(new Date(first.getTime() + i * 86_400_000));
+    }
+    // Always anchor the final day so the axis ends on the latest measurement.
+    if (ticks[ticks.length - 1]?.getTime() !== last.getTime()) {
+      ticks.push(last);
     }
     this.xAxisTicks = ticks;
     this.xScaleMin = first;
