@@ -98,16 +98,16 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   protected applyTemplate(training: TrainingPlan): void {
     this.spinner.show();
     this.trainingService.applyTraining(training.id, this.selectedDate().toDate())
-      .pipe(take(1))
+      .pipe(
+        finalize(() => this.spinner.hide()),
+        take(1),
+      )
       .subscribe({
         next: () => {
           this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
           this.getWorkoutsForDay(this.selectedDate()); // reloads the day's workout
         },
-        error: err => {
-          this.spinner.hide();
-          this.snackBarService.showErrorSnackBar(err);
-        },
+        error: err => this.snackBarService.showErrorSnackBar(err),
       });
   }
 
