@@ -13,18 +13,18 @@ import {errorInterceptor} from "./services/interceptors/error-interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {restCacheInterceptor} from "./services/interceptors/rest-cache-interceptor";
 import {MyDateAdapter} from "./config/date-picker-adapter";
+import {DATE_FORMATS} from "./config/date-formats";
 import {CookieModule} from "ngx-cookie";
 
-export const API_DATE_FORMAT = 'yyyy-MM-DD';
 export const MY_DATE_FORMATS = {
   parse: {
-    dateInput: 'LL',
+    dateInput: DATE_FORMATS.display,
   },
   display: {
-    dateInput: 'DD/MM/yyyy',
-    monthYearLabel: 'MMM YYYY',
+    dateInput: DATE_FORMATS.display,
+    monthYearLabel: DATE_FORMATS.monthYearShort,
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
+    monthYearA11yLabel: DATE_FORMATS.monthYear,
   },
 };
 

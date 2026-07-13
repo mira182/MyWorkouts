@@ -35,6 +35,20 @@
             [xAxisTickFormatting]="xAxisFormat"
             (select)="onSelect($event)"
             >
+            <ng-template #tooltipTemplate let-model="model">
+              <div class="p-1 text-xs">
+                <div>{{ xAxisFormat(model?.name) }}</div>
+                <div class="font-semibold">{{ model?.value }} kg</div>
+              </div>
+            </ng-template>
+            <ng-template #seriesTooltipTemplate let-model="model">
+              <div class="p-1 text-xs text-left">
+                <div>{{ xAxisFormat(model?.[0]?.name) }}</div>
+                @for (item of model; track item.series) {
+                  <div><span [style.color]="item.color">●</span> <span class="font-semibold">{{ item.value }} kg</span></div>
+                }
+              </div>
+            </ng-template>
           </ngx-charts-line-chart>
         }
       </div>

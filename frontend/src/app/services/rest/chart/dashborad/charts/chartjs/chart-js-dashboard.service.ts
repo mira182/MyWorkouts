@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Moment} from "moment/moment";
 import {Observable} from "rxjs";
 import {Urls} from "../../../../../../model/urls";
-import {API_DATE_FORMAT} from "../../../../../../app.config";
 import {HttpClient} from "@angular/common/http";
+import {DATE_FORMATS} from "../../../../../../config/date-formats";
 
 export interface ChartJsData {
   data: ChartJsDataPoint[];
@@ -26,8 +26,8 @@ export class ChartJsDashboardService {
       params: {
         breakdownChartGroup: breakdownChartGroup,
         breakdownChartType: breakdownChartType,
-        startDate: startDate.format(API_DATE_FORMAT),
-        endDate:endDate.format(API_DATE_FORMAT),
+        startDate: startDate.format(DATE_FORMATS.apiDate),
+        endDate:endDate.format(DATE_FORMATS.apiDate),
       }
     });
   }
@@ -36,8 +36,8 @@ export class ChartJsDashboardService {
     return this.http.get<ChartJsData>(Urls.API_URL + Urls.DASHBOARD_URL + Urls.CHART_JS_URL + '/workoutChartData', {
       params: {
         workoutChartType: workoutChartType,
-        startDate: startDate.format(API_DATE_FORMAT),
-        endDate:endDate.format(API_DATE_FORMAT),
+        startDate: startDate.format(DATE_FORMATS.apiDate),
+        endDate:endDate.format(DATE_FORMATS.apiDate),
       }
     });
   }
@@ -47,8 +47,8 @@ export class ChartJsDashboardService {
       params: {
         exerciseName: exerciseName,
         workoutExerciseChartType: workoutExerciseChartType,
-        startDate: startDate.format(API_DATE_FORMAT),
-        endDate:endDate.format(API_DATE_FORMAT),
+        startDate: startDate.format(DATE_FORMATS.apiDate),
+        endDate:endDate.format(DATE_FORMATS.apiDate),
       }
     });
   }

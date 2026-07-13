@@ -20,6 +20,7 @@ import {WithingsService} from "../../services/weight/withings/withings.service";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutCalendarComponent} from "./workout-calendar/workout-calendar.component";
 import {SkeletonComponent} from "../skeleton/skeleton.component";
+import {DATE_FORMATS} from "../../config/date-formats";
 import {
   NgxDashboardChartData,
   NgxDashboardService
@@ -148,7 +149,6 @@ export class HomeComponent implements OnInit {
       .filter(point => point.value > 0)
       .map(point => ({time: new Date(point.name as unknown as string).getTime(), value: point.value}))
       .sort((a, b) => a.time - b.time);
-    // Summary tile: current week's average vs last week's, regardless of week navigation.
     this.summaryWeightDelta.set(
       HomeComponent.weeklyAvgDelta(this.allPoints, moment().startOf('isoWeek').valueOf()));
     this.recomputeWeek();
@@ -173,7 +173,7 @@ export class HomeComponent implements OnInit {
 
   protected get weekLabel(): string {
     const weekEnd = this.selectedWeekStart.clone().add(6, 'days');
-    return `${this.selectedWeekStart.format('D.M.')} – ${weekEnd.format('D.M.YYYY')}`;
+    return `${this.selectedWeekStart.format(DATE_FORMATS.shortDayMonth)} – ${weekEnd.format(DATE_FORMATS.shortDate)}`;
   }
 
   private recomputeWeek(): void {
@@ -275,14 +275,12 @@ export class HomeComponent implements OnInit {
     return Math.abs(delta ?? 0);
   }
 
-  /** Compact stat-tile value: 1284 → "1,284", 12400 → "12.4K". */
   protected compact(value: number): string {
     return value >= 10_000
       ? `${(value / 1000).toFixed(1)}K`
       : Math.round(value).toLocaleString();
   }
 
-  /** Signed compact delta for the "vs last week" line: +2, −1.2K, ±0. */
   protected signedDelta(delta: number | undefined, decimals = 0): string {
     if (delta === undefined || delta === 0) {
       return '±0';
@@ -292,7 +290,6 @@ export class HomeComponent implements OnInit {
     return (delta > 0 ? '+' : '−') + text;
   }
 
-  /** Green when the change is in the desired direction, red otherwise, muted when flat. */
   protected deltaToneClass(delta: number | undefined, upIsGood: boolean): string {
     if (delta === undefined || delta === 0) {
       return 'opacity-60';

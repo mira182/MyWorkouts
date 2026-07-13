@@ -3,8 +3,8 @@ import {Urls} from '../../../../../../model/urls';
 import {HttpClient} from '@angular/common/http';
 import {Observable, take} from 'rxjs';
 import {Moment} from "moment";
-import {API_DATE_FORMAT} from "../../../../../../app.config";
 import {NgxDataPoint} from "../../../../../../components/weight/model/ngx-chart-data-model";
+import {DATE_FORMATS} from "../../../../../../config/date-formats";
 
 export interface NgxDashboardChartData {
   data: NgxDataPoint[];
@@ -22,8 +22,8 @@ export class NgxDashboardService {
       params: {
         breakdownChartGroup: breakdownChartGroup,
         breakdownChartType: breakdownChartType,
-        startDate: startDate.format(API_DATE_FORMAT),
-        endDate:endDate.format(API_DATE_FORMAT),
+        startDate: startDate.format(DATE_FORMATS.apiDate),
+        endDate:endDate.format(DATE_FORMATS.apiDate),
       }
     })
       .pipe(
@@ -34,8 +34,8 @@ export class NgxDashboardService {
   public getTotalsChartData(startDate: Moment, endDate: Moment): Observable<NgxDashboardChartData> {
     return this.http.get<NgxDashboardChartData>(Urls.API_URL + Urls.DASHBOARD_URL + Urls.NGX_URL + '/totalsChartData', {
       params: {
-        startDate: startDate.format(API_DATE_FORMAT),
-        endDate:endDate.format(API_DATE_FORMAT),
+        startDate: startDate.format(DATE_FORMATS.apiDate),
+        endDate:endDate.format(DATE_FORMATS.apiDate),
       }
     })
       .pipe(

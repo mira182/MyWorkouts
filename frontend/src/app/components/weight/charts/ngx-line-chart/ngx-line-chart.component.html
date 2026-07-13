@@ -1,5 +1,3 @@
-<!-- Marker used to render a dot at every vertex of the line path (attached via SCSS).
-     context-stroke makes each dot match its series line colour. -->
 <svg class="chart-defs" aria-hidden="true">
   <defs>
     <marker id="ngx-line-dot" markerWidth="8" markerHeight="8" refX="4" refY="4" markerUnits="userSpaceOnUse">
@@ -30,4 +28,18 @@
   (activate)="onActivate($event)"
   (deactivate)="onDeactivate()"
 >
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="p-1 text-xs">
+      <div>{{ tooltipDate(model?.name) }}</div>
+      <div class="font-semibold">{{ model?.series }}: {{ model?.value }}</div>
+    </div>
+  </ng-template>
+  <ng-template #seriesTooltipTemplate let-model="model">
+    <div class="p-1 text-xs text-left">
+      <div>{{ tooltipDate(model?.[0]?.name) }}</div>
+      @for (item of model; track item.series) {
+        <div><span [style.color]="item.color">●</span> {{ item.series }}: <span class="font-semibold">{{ item.value }}</span></div>
+      }
+    </div>
+  </ng-template>
 </ngx-charts-line-chart>

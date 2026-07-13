@@ -16,6 +16,7 @@ import {finalize, take} from "rxjs";
 import {isNil} from "lodash";
 import {createWorkoutChartConfig} from "../../../model/charts/configuration/create-chart.config";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
+import {DATE_FORMATS} from "../../../config/date-formats";
 
 export class WorkoutChartType {
   value: string;
@@ -140,7 +141,7 @@ export class DashboardWorkoutsComponent implements OnInit {
         }
 
         this.chart = createWorkoutChartConfig(
-          data.data.map(point => moment(point.key).format('DD-MM-YYYY')),
+          data.data.map(point => moment(point.key).format(DATE_FORMATS.display)),
           data.data.map(point => point.value),
           this.getSettingsOfChart()
         );

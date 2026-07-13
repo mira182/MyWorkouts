@@ -2,6 +2,8 @@ import {Component, EventEmitter, HostBinding, HostListener, Input, Output} from 
 import {NgxWeightChartData} from "../../model/ngx-chart-data-model";
 import {Color, LineChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {curveMonotoneX} from "d3-shape";
+import moment from "moment";
+import {DATE_FORMATS} from "../../../../config/date-formats";
 
 @Component({
     selector: 'app-ngx-line-chart',
@@ -118,10 +120,11 @@ export class NgxLineChartComponent {
   xAxisTicks?: Date[];
   xScaleMin?: Date;
 
-  xAxisFormat = (value: any): string => {
-    const d = new Date(value);
-    return `${d.getDate()}.${d.getMonth() + 1}.`;
-  };
+  xAxisFormat = (value: any): string => moment(value).format(DATE_FORMATS.shortDayMonth);
+
+  protected tooltipDate(value: any): string {
+    return value ? moment(value).format(DATE_FORMATS.display) : '';
+  }
 
   private computeXAxisTicks(): void {
     const times = this._chartData

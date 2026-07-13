@@ -4,6 +4,7 @@ import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatSort, MatSortModule} from "@angular/material/sort";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {TranslateModule} from "@ngx-translate/core";
+import {AppDatePipe} from "../../../pipes/app-date.pipe";
 
 export interface MeasurementRow {
   date: string | Date;
@@ -15,6 +16,7 @@ export interface MeasurementRow {
     selector: 'app-measurements-table',
     imports: [
         CommonModule,
+        AppDatePipe,
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,

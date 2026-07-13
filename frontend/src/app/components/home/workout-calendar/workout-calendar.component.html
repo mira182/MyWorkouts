@@ -2,7 +2,7 @@
   <button mat-icon-button type="button" (click)="previousMonth()">
     <mat-icon>chevron_left</mat-icon>
   </button>
-  <span class="month-label">{{ month.format('MMMM YYYY') }}</span>
+  <span class="month-label">{{ month.format(DATE_FORMATS.monthYear) }}</span>
   <button mat-icon-button type="button" (click)="nextMonth()">
     <mat-icon>chevron_right</mat-icon>
   </button>

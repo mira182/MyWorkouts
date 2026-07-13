@@ -23,6 +23,7 @@ import moment from "moment";
 import {NgxWeightChartData} from "../model/ngx-chart-data-model";
 import {MeasurementsTableComponent} from "../measurements-table/measurements-table.component";
 import {TanitaMeasurementModel} from "../../../model/weight/tanita-measurement.model";
+import {DATE_FORMATS} from "../../../config/date-formats";
 
 @Component({
     selector: 'app-tanita-weight',
@@ -57,7 +58,7 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
     'muscleMass', 'muscleMassRatio', 'muscleQuality', 'boneMass', 'visceralFat', 'bmr',
     'metabolicAge', 'physiqueRating'
   ];
- 
+
   protected readonly units: Record<string, string> = {
     weight: 'kg',
     bmi: '',
@@ -119,8 +120,8 @@ export class TanitaWeightComponent extends BaseWeightClass implements OnInit {
       });
   }
 
-  public xAxisFormat(val: string, index: any) {
-    return moment(val).format('ll');
+  public xAxisFormat(val: string) {
+    return moment(val).format(DATE_FORMATS.display);
   }
 
   get checkboxControls(): FormControl[] {

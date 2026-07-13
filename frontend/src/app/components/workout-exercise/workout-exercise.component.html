@@ -52,7 +52,7 @@
             }
             @if (stats.lastSessionDate) {
               <div class="text-center text-sm opacity-75">
-                <span class="font-medium">{{ 'EXERCISE.last-time' | translate }} ({{ stats.lastSessionDate | date: 'd.M.' }}):</span>
+                <span class="font-medium">{{ 'EXERCISE.last-time' | translate }} ({{ stats.lastSessionDate | appDate }}):</span>
                 @for (set of stats.lastSessionSets; track $index) {
                   {{ formatSet(set) }}@if (!$last) {&nbsp;·&nbsp;}
                 }

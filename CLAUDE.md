@@ -20,6 +20,11 @@ The frontend uses **Tailwind CSS** (`frontend/tailwind.config.js`, `@tailwind` d
   `var(--brand-primary)`, `--brand-primary-strong`, `--brand-on-primary`, `--brand-primary-soft`, `--brand-primary-softer`.
 - Global rounding/type polish (MDC shape tokens, card radius, headings) also lives in `src/styles.scss`. Don't re-hardcode radii per component.
 
+## Date formats
+
+- All **display** date/time formats live in `frontend/src/app/config/date-formats.ts` (`DATE_FORMATS`, moment tokens) — change them there, nowhere else. Templates render dates via the `appDate` pipe (`value | appDate`, `value | appDate:'time'`); code uses `moment(...).format(DATE_FORMATS.…)`. Never hardcode a date format string.
+- `API_DATE_FORMAT` (`yyyy-MM-DD`, in `app.config.ts`) is the backend wire contract — not a display setting.
+
 ## Build / verify
 
 - Frontend build: `cd frontend && npm run build`. Dev server: `npm start` (`ng serve`).

@@ -20,6 +20,7 @@ import {createWorkoutExerciseChartConfig} from "../../../model/charts/configurat
 import {isNil} from "lodash";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {DialogsHandlerService} from "../../../services/dialogs-handler/dialogs-handler.service";
+import {DATE_FORMATS} from "../../../config/date-formats";
 
 @Component({
     selector: 'app-dashboard-exercises',
@@ -120,7 +121,7 @@ export class DashboardExercisesComponent implements OnInit {
           }
 
           this.chart = createWorkoutExerciseChartConfig(
-            data.data.map(point => moment(point.key).format('DD-MM-YYYY')),
+            data.data.map(point => moment(point.key).format(DATE_FORMATS.display)),
             data.data.map(point => point.value),
             this.getSettings()
           );

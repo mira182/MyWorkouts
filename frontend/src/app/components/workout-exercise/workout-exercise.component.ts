@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
-import {DatePipe, DecimalPipe} from "@angular/common";
+import {DecimalPipe} from "@angular/common";
+import {AppDatePipe} from "../../pipes/app-date.pipe";
 import {WorkoutExercise} from "../../model/workout-exercise/workoutExercise";
 import {ExerciseStats} from "../../model/exercise/exercise-stats";
 import {WorkoutSet} from "../../model/exercise/workoutSet";
@@ -21,7 +22,7 @@ import {WorkoutExerciseService} from "../../services/rest/workout-exercise/worko
 import {filter, finalize, switchMap, take, tap} from "rxjs";
 import {DatePickerComponent} from "../date-picker/date-picker.component";
 import {WorkoutSetsComponent} from "../workout-sets/workout-sets.component";
-import {API_DATE_FORMAT} from "../../app.config";
+import {DATE_FORMATS} from "../../config/date-formats";
 
 @Component({
     selector: 'workout-exercise',
@@ -39,7 +40,7 @@ import {API_DATE_FORMAT} from "../../app.config";
     DatePickerComponent,
     MatFormFieldModule,
     WorkoutSetsComponent,
-    DatePipe,
+    AppDatePipe,
     DecimalPipe
 ],
     templateUrl: './workout-exercise.component.html'
@@ -105,7 +106,7 @@ export class WorkoutExerciseComponent implements OnInit {
   private initForm(): void {
     this.form = this.formBuilder.group({
       id: [this.workoutExercise.id],
-      date: [ moment(this.workoutDate).format(API_DATE_FORMAT) ],
+      date: [ moment(this.workoutDate).format(DATE_FORMATS.apiDate) ],
       exercise: [ this.workoutExercise?.exercise, Validators.required ],
     });
 
@@ -113,7 +114,7 @@ export class WorkoutExerciseComponent implements OnInit {
   }
 
   protected workoutExerciseDateUpdated(date: Moment): void {
-    this.date.setValue(date.format(API_DATE_FORMAT));
+    this.date.setValue(date.format(DATE_FORMATS.apiDate));
   }
 
   protected updateWorkoutExercise() {

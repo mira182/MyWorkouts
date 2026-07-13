@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {RangeType} from "../../model/utils/rangeType";
 import moment, {Moment} from "moment";
 import "moment/locale/cs";
+import {DATE_FORMATS} from "../../config/date-formats";
 
 @Injectable()
 export class DateTimeService {
 
   constructor() { }
 
-  // Localised long date (Czech by default); returns '' for an invalid/empty date.
-  public static formatDate(date, format: string = 'LL', locale: string = 'cs'): string {
+  public static formatDate(date, format: string = DATE_FORMATS.display, locale: string = 'cs'): string {
     const parsed = moment(date);
     return parsed.isValid() ? parsed.locale(locale).format(format) : '';
   }

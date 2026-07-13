@@ -16,13 +16,13 @@ import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-hand
 import {debounceTime, filter, finalize, mergeMap, switchMap, take, takeUntil, tap} from "rxjs";
 import {Workout} from "../../model/workout/workout";
 import {isNil} from "lodash";
-import {API_DATE_FORMAT} from "../../app.config";
 import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.component";
 import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
 import {Unsubscribe} from "../unsubscribe/unsubscribe";
 import {WorkoutDayService} from "../../services/rest/workout/workout-day.service";
 import {EmptyStateComponent} from "../empty-state/empty-state.component";
 import {SkeletonComponent} from "../skeleton/skeleton.component";
+import {DATE_FORMATS} from "../../config/date-formats";
 
 @Component({
     selector: 'app-workouts',
@@ -43,6 +43,8 @@ import {SkeletonComponent} from "../skeleton/skeleton.component";
     templateUrl: './workouts.component.html'
 })
 export class WorkoutsComponent extends Unsubscribe implements OnInit {
+
+  protected readonly DATE_FORMATS = DATE_FORMATS;
 
   public workout = signal<Workout | undefined>(undefined);
 
@@ -115,7 +117,7 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
         filter((workoutExercise) => !isNil(workoutExercise)),
         // TODO change create to add workoutExercise to workout with some ID
         mergeMap(workoutExercise => this.workoutService.createWorkout({
-          date: this.selectedDate().format(API_DATE_FORMAT),
+          date: this.selectedDate().format(DATE_FORMATS.apiDate),
           note: 'test note',
           workoutExercises: [ workoutExercise ],
         })),

@@ -8,9 +8,9 @@ import {MatInput} from "@angular/material/input";
 import {MatIconButton} from "@angular/material/button";
 import moment, {Moment} from "moment";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {API_DATE_FORMAT} from "../../app.config";
 import {WorkoutDaysService} from "../../services/workout-days/workout-days.service";
 import {WorkoutCalendarHeaderComponent} from "./workout-calendar-header.component";
+import {DATE_FORMATS} from "../../config/date-formats";
 
 @Component({
     selector: 'app-day-select',
@@ -40,7 +40,7 @@ export class DaySelectComponent implements OnInit, OnChanges {
   protected readonly workoutCalendarHeader = WorkoutCalendarHeaderComponent;
 
   protected readonly workoutDateClass: MatCalendarCellClassFunction<Moment> = (date, view) =>
-    view === 'month' && this.workoutDaysService.has(date.format(API_DATE_FORMAT)) ? 'has-workout-day' : '';
+    view === 'month' && this.workoutDaysService.has(date.format(DATE_FORMATS.apiDate)) ? 'has-workout-day' : '';
 
   constructor(private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,
@@ -77,7 +77,7 @@ export class DaySelectComponent implements OnInit, OnChanges {
   }
 
   public myMethodChangingQueryParams(date: Moment) {
-    const queryParams: Params = { date: date.format(API_DATE_FORMAT) };
+    const queryParams: Params = { date: date.format(DATE_FORMATS.apiDate) };
 
     this.router.navigate(
       [],

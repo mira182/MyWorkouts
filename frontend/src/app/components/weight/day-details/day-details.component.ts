@@ -2,11 +2,13 @@ import {Component, Input} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {MeasurementRow} from "../measurements-table/measurements-table.component";
+import {AppDatePipe} from "../../../pipes/app-date.pipe";
 
 @Component({
     selector: 'app-day-details',
     imports: [
         CommonModule,
+        AppDatePipe,
         TranslateModule,
     ],
     templateUrl: './day-details.component.html',

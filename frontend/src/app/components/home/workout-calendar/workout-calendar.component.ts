@@ -8,6 +8,7 @@ import {take} from "rxjs";
 import {WorkoutService} from "../../../services/rest/workout/workout.service";
 import {WorkoutDayService} from "../../../services/rest/workout/workout-day.service";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
+import {DATE_FORMATS} from "../../../config/date-formats";
 
 interface CalendarDay {
   date: Moment;
@@ -27,9 +28,11 @@ interface CalendarDay {
 })
 export class WorkoutCalendarComponent implements OnInit {
 
+  protected readonly DATE_FORMATS = DATE_FORMATS;
+
   protected month: Moment = moment().startOf('month');
   protected weeks = signal<CalendarDay[][]>([]);
-  protected readonly weekdayLabels = Array.from({length: 7}, (_, i) => moment().isoWeekday(i + 1).format('dd'));
+  protected readonly weekdayLabels = Array.from({length: 7}, (_, i) => moment().isoWeekday(i + 1).format(DATE_FORMATS.weekdayMin));
 
   constructor(private readonly workoutService: WorkoutService,
               private readonly workoutDayService: WorkoutDayService,
