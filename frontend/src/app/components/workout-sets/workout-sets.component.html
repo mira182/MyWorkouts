@@ -6,7 +6,7 @@
       @for (formControl of config?.formControls; track formControl) {
         <div class="flex flex-row items-center gap-0.5" [ngClass]="form.enabled ? '' : 'flex-1 min-w-0'">
           @if (form.enabled) {
-            <button mat-icon-button class="stepper-btn shrink-0" tabindex="-1"
+            <button mat-mini-fab color="success" class="stepper-btn shrink-0" tabindex="-1"
               (click)="step(formControl.name, setIndex, -1, formControl.step)">
               <mat-icon>remove</mat-icon>
             </button>
@@ -20,7 +20,7 @@
             <span class="text-xs" matTextSuffix>{{ formControl.unit }}</span>
           </mat-form-field>
           @if (form.enabled) {
-            <button mat-icon-button class="stepper-btn shrink-0" tabindex="-1"
+            <button mat-mini-fab color="warn" class="stepper-btn shrink-0" tabindex="-1"
               (click)="step(formControl.name, setIndex, 1, formControl.step)">
               <mat-icon>add</mat-icon>
             </button>

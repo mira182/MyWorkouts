@@ -49,7 +49,8 @@
     </div>
   </app-page-header-layout>
 
-  <mat-tab-group #exerciseTabs class="w-4/5 mx-auto" mat-align-tabs="center" (selectedTabChange)="tabChange($event)">
+  <mat-tab-group #exerciseTabs class="w-4/5 mx-auto" mat-align-tabs="center" [disablePagination]="true"
+                 (selectedTabChange)="tabChange($event)">
     @for (category of exerciseCategories(); track category) {
       <mat-tab label="{{ category }}">
         @if (categoryLoading()) {

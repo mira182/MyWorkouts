@@ -1,7 +1,14 @@
 :host ::ng-deep .mat-mdc-tab-header {
-  width: fit-content;
   max-width: 100%;
-  margin: 0 auto;
+}
+
+:host ::ng-deep .mat-mdc-tab-label-container {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+:host ::ng-deep .mat-mdc-tab-label-container::-webkit-scrollbar {
+  display: none;
 }
 
 :host ::ng-deep .mat-mdc-tab {

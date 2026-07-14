@@ -1,14 +1,14 @@
 <div class="rounded shadow-lg m-2 border-2 border-gray-100">
-  <div class="flex items-center cursor-pointer m-2 gap-4" (click)="onSwitch()">
-    <div class="grow ml-4 text-lg">
+  <div class="flex items-center cursor-pointer p-2 gap-2" (click)="onSwitch()">
+    <div class="grow min-w-0 ml-2 text-lg break-words">
       <ng-content select="[panelTitle]"></ng-content>
     </div>
 
-    <div class="text-gray-500">
+    <div class="shrink-0 text-gray-500 text-sm">
       <ng-content select="[panelDescription]"></ng-content>
     </div>
 
-    <div class="ml-auto" [@animationRotate]="sStatus">
+    <div class="shrink-0" [@animationRotate]="sStatus">
       <button mat-icon-button>
         <mat-icon>expand_more</mat-icon>
       </button>

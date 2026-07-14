@@ -43,9 +43,9 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
     @Override
     @Transactional(readOnly = true)
     public Map<LocalDate, BigDecimal> findByExerciseBetweenDates(@NonNull String exerciseName,
-                                                                         @NonNull LocalDate startDate,
-                                                                         @NonNull LocalDate endDate,
-                                                                         @NonNull Function<WorkoutExerciseDto, BigDecimal> mappingFunction) {
+                                                                 @NonNull LocalDate startDate,
+                                                                 @NonNull LocalDate endDate,
+                                                                 @NonNull Function<WorkoutExerciseDto, BigDecimal> mappingFunction) {
         return workoutExerciseRepository.findByExerciseBetweenWorkoutDate(exerciseName, startDate, endDate).stream()
                 .collect(toMap(WorkoutExerciseDateDto::getDate, workoutExercise -> mappingFunction.apply(workoutExerciseMapper.entityToDto(workoutExercise.getWorkoutExercise())), (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }

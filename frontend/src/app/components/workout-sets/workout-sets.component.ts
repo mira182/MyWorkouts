@@ -3,7 +3,7 @@ import {NgClass} from '@angular/common';
 import {WorkoutSet} from "../../model/exercise/workoutSet";
 import {MatFormField, MatSuffix} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {MatTooltip} from "@angular/material/tooltip";
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -17,6 +17,7 @@ import {ExerciseType} from "../../model/exercise/exerciseType";
     MatFormField,
     MatIcon,
     MatIconButton,
+    MatMiniFabButton,
     MatInput,
     MatSuffix,
     MatTooltip,
