@@ -23,6 +23,7 @@ import {WorkoutDayService} from "../../services/rest/workout/workout-day.service
 import {EmptyStateComponent} from "../empty-state/empty-state.component";
 import {SkeletonComponent} from "../skeleton/skeleton.component";
 import {DATE_FORMATS} from "../../config/date-formats";
+import {SwipeDirective} from "../../directives/swipe.directive";
 
 @Component({
     selector: 'app-workouts',
@@ -38,7 +39,8 @@ import {DATE_FORMATS} from "../../config/date-formats";
     WorkoutExerciseComponent,
     PageHeaderLayoutComponent,
     EmptyStateComponent,
-    SkeletonComponent
+    SkeletonComponent,
+    SwipeDirective
 ],
     templateUrl: './workouts.component.html'
 })
@@ -169,22 +171,12 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
     this.getWorkoutsForDay(moment());
   }
 
-  private touchStartX = 0;
-  private touchStartY = 0;
-
-  protected onTouchStart(event: TouchEvent): void {
-    this.touchStartX = event.changedTouches[0].clientX;
-    this.touchStartY = event.changedTouches[0].clientY;
+  protected nextDay(): void {
+    this.getWorkoutsForDay(this.selectedDate().clone().add(1, 'day'));
   }
 
-  protected onTouchEnd(event: TouchEvent): void {
-    const deltaX = event.changedTouches[0].clientX - this.touchStartX;
-    const deltaY = event.changedTouches[0].clientY - this.touchStartY;
-    // Clearly horizontal and long enough — otherwise it's a scroll or a tap.
-    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > 1.5 * Math.abs(deltaY)) {
-      // Swipe left → next day, swipe right → previous day.
-      this.getWorkoutsForDay(this.selectedDate().clone().add(deltaX < 0 ? 1 : -1, 'day'));
-    }
+  protected previousDay(): void {
+    this.getWorkoutsForDay(this.selectedDate().clone().subtract(1, 'day'));
   }
 
   protected onWorkoutExerciseUpdated(): void {
