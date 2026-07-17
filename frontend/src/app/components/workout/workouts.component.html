@@ -46,7 +46,7 @@
     </div>
   </app-page-header-layout>
 
-  <div>
+  <div (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
 
     <app-day-select [inputDate]="selectedDate()" (dateChanged)="getWorkoutsForDay($event)"></app-day-select>
 

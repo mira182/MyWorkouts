@@ -1,4 +1,5 @@
-import {ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, isDevMode, provideZonelessChangeDetection} from '@angular/core';
+import {provideServiceWorker} from '@angular/service-worker';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -48,6 +49,10 @@ export const appConfig: ApplicationConfig = {
     // provideNoopAnimations(),
     importProvidersFrom(NgxSpinnerModule.forRoot()),
     provideAnimations(),
-    importProvidersFrom(CookieModule.withOptions())
+    importProvidersFrom(CookieModule.withOptions()),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ]
 };

@@ -87,6 +87,10 @@ export class WorkoutExerciseComponent implements OnInit {
       });
   }
 
+  protected openHistory(): void {
+    this.dialogsHandler.openExerciseHistoryDialog(this.workoutExercise.exercise);
+  }
+
   protected formatSet(set: WorkoutSet): string {
     if (set.weight > 0) {
       return `${set.weight}×${set.reps}`;
@@ -136,7 +140,7 @@ export class WorkoutExerciseComponent implements OnInit {
   }
 
   protected deleteWorkoutExercise() {
-    this.dialogsHandler.openDeleteConfirmationDialog("Do you really want to delete workout?").afterClosed()
+    this.dialogsHandler.openDeleteConfirmationDialog('MESSAGES.delete-workout-exercise-question').afterClosed()
       .pipe(
         filter(confirm => confirm),
         switchMap(() => this.workoutExerciseService.deleteWorkoutExercise(this.workoutExercise.id)),

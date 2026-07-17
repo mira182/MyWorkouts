@@ -7,6 +7,7 @@ import {MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {MatTooltip} from "@angular/material/tooltip";
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {TranslateModule} from "@ngx-translate/core";
 import {WorkoutSetComponentConfigurationModel} from "../workout-exercise/model/workout-set-configuratio.model";
 import {ExerciseType} from "../../model/exercise/exerciseType";
 
@@ -21,7 +22,8 @@ import {ExerciseType} from "../../model/exercise/exerciseType";
     MatInput,
     MatSuffix,
     MatTooltip,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
 ],
     templateUrl: './workout-sets.component.html',
     styleUrl: './workout-sets.component.scss'

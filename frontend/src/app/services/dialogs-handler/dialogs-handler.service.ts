@@ -16,6 +16,9 @@ import {Exercise} from "../../model/exercise/exercise";
 import {
   SelectExerciseDialogComponent
 } from "../../components/dialogs/select-exercise-dialog/select-exercise-dialog.component";
+import {
+  ExerciseHistoryDialogComponent
+} from "../../components/dialogs/exercise-history-dialog/exercise-history-dialog.component";
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +79,15 @@ export class DialogsHandlerService {
       height: 'auto',
       width: '300px',
       hasBackdrop: true
+    });
+  }
+
+  public openExerciseHistoryDialog(exercise: Exercise): MatDialogRef<ExerciseHistoryDialogComponent> {
+    return this.dialog.open(ExerciseHistoryDialogComponent, {
+      width: '520px',
+      maxWidth: '95vw',
+      hasBackdrop: true,
+      data: {exercise},
     });
   }
 

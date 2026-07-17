@@ -93,6 +93,9 @@
     "show": "Zobrazit heslo",
     "hide": "Skrýt heslo",
     "toggle-theme": "Přepnout tmavý režim",
+    "remove-set": "Odebrat sérii",
+    "add-set": "Přidat sérii",
+    "duplicate-last-set": "Duplikovat poslední sérii",
     "cancel": "Zruš",
     "close": "Zavřít",
     "edit": "Uprav",
@@ -134,6 +137,11 @@
     "new-exercise": "Nový cvik",
     "edit-exercise": "Upravit cvik"
   },
+  "HISTORY": {
+    "title": "Vývoj",
+    "chart-type": "Metrika",
+    "no-data": "Pro tento cvik zatím není žádná historie."
+  },
   "TEXTS": {
     "no-workouts": "Žádný trénink",
     "no-training-plans": "Žádné tréninkové plány",
@@ -142,13 +150,20 @@
   "MESSAGES": {
     "delete-exercise-question": "Opravdu chcete smazat cvik?",
     "delete-workout-question": "Opravdu chcete smazat workout?",
+    "delete-workout-exercise-question": "Opravdu chcete odstranit tento cvik z tréninku?",
     "delete-training-question": "Opravdu chcete smazat trénink?"
   },
   "WEIGHT": {
     "weight": "Moje váha",
     "update": "Aktualizuj",
     "loading": "Načítá se...",
-    "report": "Ukaž report"
+    "report": "Ukaž report",
+    "chart-weight": "Váha",
+    "chart-mass": "Tuk a svalová hmota",
+    "chart-ratio": "Podíl tuku a svalů",
+    "chart-bmi": "BMI",
+    "chart-water": "Voda",
+    "chart-bone": "Kostní hmota"
   },
   "WORKOUTS": {
     "workouts": "Workouts",

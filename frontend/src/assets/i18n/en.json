@@ -93,6 +93,9 @@
     "show": "Show password",
     "hide": "Hide password",
     "toggle-theme": "Toggle dark mode",
+    "remove-set": "Remove set",
+    "add-set": "Add set",
+    "duplicate-last-set": "Duplicate last set",
     "cancel": "Cancel",
     "close": "Close",
     "edit": "Edit",
@@ -134,6 +137,11 @@
     "new-exercise": "New exercise",
     "edit-exercise": "Edit exercise"
   },
+  "HISTORY": {
+    "title": "Progress",
+    "chart-type": "Metric",
+    "no-data": "No history for this exercise yet."
+  },
   "TEXTS": {
     "no-workouts": "No workouts today.",
     "no-training-plans": "No training plans",
@@ -142,13 +150,20 @@
   "MESSAGES": {
     "delete-exercise-question": "Do you really want to delete exercise?",
     "delete-workout-question": "Do you really want to delete workout?",
+    "delete-workout-exercise-question": "Do you really want to remove this exercise from the workout?",
     "delete-training-question": "Do you really want to delete training?"
   },
   "WEIGHT": {
     "weight" : "Weight",
     "update" : "Update",
     "loading" : "Loading...",
-    "report": "Show report"
+    "report": "Show report",
+    "chart-weight": "Weight",
+    "chart-mass": "Fat & muscle mass",
+    "chart-ratio": "Fat & muscle ratio",
+    "chart-bmi": "BMI",
+    "chart-water": "Water",
+    "chart-bone": "Bone mass"
   },
   "WORKOUTS": {
     "workouts": "Workouts",

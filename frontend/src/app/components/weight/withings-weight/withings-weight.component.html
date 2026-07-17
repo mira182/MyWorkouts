@@ -10,7 +10,7 @@
         </mat-button-toggle-group>
 
         @for (chart of charts; track chart) {
-          <h3 class="chart-title w-full px-3 sm:w-4/5 sm:px-0">{{ chart.title }}</h3>
+          <h3 class="chart-title w-full px-3 sm:w-4/5 sm:px-0">{{ chart.title | translate }}</h3>
           <app-ngx-line-chart class="w-full sm:w-4/5" [chartData]="viewData()[chart.key]" [showDots]="selectedRangeDays !== 0"
             (pointHovered)="onPointHovered($event)"
           (pointLeft)="onPointLeft()"></app-ngx-line-chart>

@@ -72,12 +72,12 @@ export class WithingsWeightComponent extends BaseWeightClass implements OnInit {
   protected tableData = signal<WithingsMeasurementModel[]>([]);
 
   protected readonly charts: ChartDefinition[] = [
-    {key: 'weight', title: 'Weight', types: ['WEIGHT']},
-    {key: 'mass', title: 'Fat & muscle mass', types: ['FAT_MASS', 'MUSCLE_MASS']},
-    {key: 'ratio', title: 'Fat & muscle ratio', types: ['FAT_RATIO', 'MUSCLE_MASS_RATIO']},
-    {key: 'bmi', title: 'BMI', types: ['BMI']},
-    {key: 'water', title: 'Water', types: ['WATER_MASS', 'WATER_RATIO']},
-    {key: 'bone', title: 'Bone mass', types: ['BONE_MASS']},
+    {key: 'weight', title: 'WEIGHT.chart-weight', types: ['WEIGHT']},
+    {key: 'mass', title: 'WEIGHT.chart-mass', types: ['FAT_MASS', 'MUSCLE_MASS']},
+    {key: 'ratio', title: 'WEIGHT.chart-ratio', types: ['FAT_RATIO', 'MUSCLE_MASS_RATIO']},
+    {key: 'bmi', title: 'WEIGHT.chart-bmi', types: ['BMI']},
+    {key: 'water', title: 'WEIGHT.chart-water', types: ['WATER_MASS', 'WATER_RATIO']},
+    {key: 'bone', title: 'WEIGHT.chart-bone', types: ['BONE_MASS']},
   ];
 
   protected readonly ranges: RangeOption[] = [

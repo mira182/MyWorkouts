@@ -153,7 +153,7 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
       return;
     }
 
-    this.dialogsHandler.openDeleteConfirmationDialog("Do you really want to delete workout?").afterClosed()
+    this.dialogsHandler.openDeleteConfirmationDialog('MESSAGES.delete-workout-question').afterClosed()
       .pipe(
         filter(confirm => confirm),
         switchMap(() => this.workoutService.deleteWorkout(workoutId)),
@@ -167,6 +167,24 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
 
   public today() {
     this.getWorkoutsForDay(moment());
+  }
+
+  private touchStartX = 0;
+  private touchStartY = 0;
+
+  protected onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.changedTouches[0].clientX;
+    this.touchStartY = event.changedTouches[0].clientY;
+  }
+
+  protected onTouchEnd(event: TouchEvent): void {
+    const deltaX = event.changedTouches[0].clientX - this.touchStartX;
+    const deltaY = event.changedTouches[0].clientY - this.touchStartY;
+    // Clearly horizontal and long enough — otherwise it's a scroll or a tap.
+    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > 1.5 * Math.abs(deltaY)) {
+      // Swipe left → next day, swipe right → previous day.
+      this.getWorkoutsForDay(this.selectedDate().clone().add(deltaX < 0 ? 1 : -1, 'day'));
+    }
   }
 
   protected onWorkoutExerciseUpdated(): void {

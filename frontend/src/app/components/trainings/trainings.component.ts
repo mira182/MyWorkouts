@@ -153,7 +153,7 @@ export class TrainingsComponent implements OnInit {
   }
 
   deleteTraining(training) {
-    this.dialogsHandler.openDeleteConfirmationDialog("Do you really want to delete training?")
+    this.dialogsHandler.openDeleteConfirmationDialog('MESSAGES.delete-training-question')
       .afterClosed().subscribe(yes => {
       if (yes) {
         this.spinner.show();

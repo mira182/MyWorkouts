@@ -1,0 +1,24 @@
+<div mat-dialog-title class="!flex flex-row items-center justify-between gap-2">
+  <span class="min-w-0 break-words">{{ data.exercise.name }}</span>
+  <button mat-icon-button mat-dialog-close class="shrink-0">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full">
+    <mat-label>{{ 'HISTORY.chart-type' | translate }}</mat-label>
+    <mat-select [formControl]="typeControl" (selectionChange)="load()">
+      @for (type of chartTypes; track type.value) {
+        <mat-option [value]="type.value">{{ type.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="mt-4">
+    <canvas id="workoutExerciseChart" [class.hidden]="noData()"></canvas>
+    @if (noData()) {
+      <div class="text-center opacity-70 py-8">{{ 'HISTORY.no-data' | translate }}</div>
+    }
+  </div>
+</mat-dialog-content>

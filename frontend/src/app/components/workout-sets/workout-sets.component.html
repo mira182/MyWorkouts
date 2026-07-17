@@ -29,7 +29,7 @@
       }
 
       @if (form.enabled) {
-        <button mat-icon-button class="stepper-btn shrink-0" matTooltip="Remove Set"
+        <button mat-icon-button class="stepper-btn shrink-0" matTooltip="{{ 'BUTTON.remove-set' | translate }}"
           (click)="workoutSetsFormArray.removeAt(setIndex)">
           <mat-icon>delete_forever</mat-icon>
         </button>
@@ -40,11 +40,11 @@
   @if (form.enabled) {
     <div class="flex flex-row justify-end mt-2">
       @if (workoutSetsFormArray.length > 0) {
-        <button mat-icon-button matTooltip="Duplicate last set" (click)="duplicateLastSet()">
+        <button mat-icon-button matTooltip="{{ 'BUTTON.duplicate-last-set' | translate }}" (click)="duplicateLastSet()">
           <mat-icon>content_copy</mat-icon>
         </button>
       }
-      <button mat-icon-button matTooltip="Add Set" (click)="addNewWorkoutSet()">
+      <button mat-icon-button matTooltip="{{ 'BUTTON.add-set' | translate }}" (click)="addNewWorkoutSet()">
         <mat-icon>add_circle_outline</mat-icon>
       </button>
     </div>
