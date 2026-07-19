@@ -12,6 +12,7 @@ import {FitExercise, FitSet, FitWorkout} from '../../../model/workout/fit-workou
 import {Exercise} from '../../../model/exercise/exercise';
 import {WorkoutExercise} from '../../../model/workout-exercise/workoutExercise';
 import {ExerciseService} from '../../../services/rest/exercise/exercise.service';
+import {WorkoutService} from '../../../services/rest/workout/workout.service';
 import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 import {AppDatePipe} from '../../../pipes/app-date.pipe';
 
@@ -47,6 +48,7 @@ export class FitImportReviewDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) protected readonly data: FitWorkout,
               private readonly dialogRef: MatDialogRef<FitImportReviewDialogComponent>,
               private readonly exerciseService: ExerciseService,
+              private readonly workoutService: WorkoutService,
               private readonly snackBarService: SnackBarService) {
     this.blocks = (data.exercises ?? []).map((block: FitExercise) => ({
       garminName: block.garminName,
@@ -81,6 +83,8 @@ export class FitImportReviewDialogComponent implements OnInit {
   }
 
   protected save(): void {
+    this.persistMappings();
+
     const workoutExercises: WorkoutExercise[] = this.blocks
       .filter(block => block.include.value)
       .map(block => ({
@@ -94,5 +98,15 @@ export class FitImportReviewDialogComponent implements OnInit {
       }));
 
     this.dialogRef.close({date: this.data.date, workoutExercises});
+  }
+
+  private persistMappings(): void {
+    const mappings = this.blocks
+      .filter(block => block.include.value && block.exerciseId.value != null && !block.garminName.startsWith('UNKNOWN'))
+      .map(block => ({garminName: block.garminName, exerciseId: block.exerciseId.value!}));
+
+    if (mappings.length) {
+      this.workoutService.saveFitMappings(mappings).pipe(take(1)).subscribe({error: () => {}});
+    }
   }
 }

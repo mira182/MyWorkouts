@@ -12,8 +12,11 @@ import com.garmin.fit.SetType;
 import com.workouts.myworkouts.model.dto.fit.FitExerciseDto;
 import com.workouts.myworkouts.model.dto.fit.FitSetDto;
 import com.workouts.myworkouts.model.dto.fit.FitWorkoutDto;
+import com.workouts.myworkouts.model.dto.fit.GarminMappingDto;
 import com.workouts.myworkouts.model.entity.exercise.Exercise;
+import com.workouts.myworkouts.model.entity.fit.GarminExerciseMapping;
 import com.workouts.myworkouts.repository.exercise.ExerciseRepository;
+import com.workouts.myworkouts.repository.fit.GarminExerciseMappingRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +31,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -40,6 +45,8 @@ public class FitImportServiceImpl implements FitImportService {
     private static final String UNKNOWN = "UNKNOWN";
 
     private final ExerciseRepository exerciseRepository;
+
+    private final GarminExerciseMappingRepository mappingRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -72,12 +79,38 @@ public class FitImportServiceImpl implements FitImportService {
         log.info("Parsed FIT file '{}': {} set messages, {} exercise blocks",
                 file.getOriginalFilename(), setMessages.size(), blocks.size());
 
+        final Map<String, Long> savedMappings = mappingRepository.findAll().stream()
+                .collect(Collectors.toMap(GarminExerciseMapping::getGarminName, mapping -> mapping.getExercise().getId()));
+
         final List<Exercise> knownExercises = exerciseRepository.findAll();
         final List<FitExerciseDto> exercises = blocks.stream()
-                .map(block -> new FitExerciseDto(block.name, suggestExercise(block.name, knownExercises), block.sets))
+                .map(block -> new FitExerciseDto(
+                        block.name,
+                        savedMappings.containsKey(block.name)
+                                ? savedMappings.get(block.name)
+                                : suggestExercise(block.name, knownExercises),
+                        block.sets))
                 .toList();
 
         return new FitWorkoutDto(toLocalDate(activityDate[0]), exercises);
+    }
+
+    @Override
+    @Transactional
+    public void saveMappings(@NonNull List<GarminMappingDto> mappings) {
+        mappings.stream()
+                .filter(dto -> dto.garminName() != null && dto.exerciseId() != null
+                        && !dto.garminName().startsWith(UNKNOWN))
+                .forEach(dto -> exerciseRepository.findById(dto.exerciseId()).ifPresent(exercise -> {
+                    final GarminExerciseMapping mapping = mappingRepository.findByGarminName(dto.garminName())
+                            .orElseGet(() -> {
+                                final GarminExerciseMapping created = new GarminExerciseMapping();
+                                created.setGarminName(dto.garminName());
+                                return created;
+                            });
+                    mapping.setExercise(exercise);
+                    mappingRepository.save(mapping);
+                }));
     }
 
     private static final class Block {

@@ -42,6 +42,10 @@ export class WorkoutService {
     return this.http.post<FitWorkout>(Urls.API_URL + Urls.WORKOUT_URL + '/importFit', formData);
   }
 
+  public saveFitMappings(mappings: { garminName: string; exerciseId: number }[]): Observable<void> {
+    return this.http.post<void>(Urls.API_URL + Urls.WORKOUT_URL + '/fitMappings', mappings);
+  }
+
   public updateNote(workoutId: number, note: string): Observable<void> {
     return this.http.patch<void>(Urls.API_URL + Urls.WORKOUT_URL + '/note', note,
       { params: { workoutId } });

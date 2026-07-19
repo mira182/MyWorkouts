@@ -1,6 +1,7 @@
 package com.workouts.myworkouts.controller.workout;
 
 import com.workouts.myworkouts.model.dto.fit.FitWorkoutDto;
+import com.workouts.myworkouts.model.dto.fit.GarminMappingDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
 import com.workouts.myworkouts.service.fit.FitImportService;
@@ -42,6 +43,11 @@ public class WorkoutController {
     @PostMapping(value = "/importFit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public FitWorkoutDto importFit(@RequestPart("file") MultipartFile file) {
         return fitImportService.parseFitFile(file);
+    }
+
+    @PostMapping("/fitMappings")
+    public void saveFitMappings(@RequestBody List<GarminMappingDto> mappings) {
+        fitImportService.saveMappings(mappings);
     }
 
     @PostMapping("/copyLast")
