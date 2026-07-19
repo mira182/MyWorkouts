@@ -27,9 +27,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -38,6 +36,8 @@ public class FitImportServiceImpl implements FitImportService {
 
     // FIT encodes "no subtype" as an invalid uint16.
     private static final int INVALID_SUBTYPE = 0xFFFE;
+
+    private static final String UNKNOWN = "UNKNOWN";
 
     private final ExerciseRepository exerciseRepository;
 
@@ -68,37 +68,80 @@ public class FitImportServiceImpl implements FitImportService {
             throw new IllegalArgumentException("Not a readable FIT file: " + e.getMessage(), e);
         }
 
-        final Map<String, List<FitSetDto>> setsByGarminExercise = groupActiveSets(setMessages);
+        final List<Block> blocks = groupActiveSets(setMessages);
         log.info("Parsed FIT file '{}': {} set messages, {} exercise blocks",
-                file.getOriginalFilename(), setMessages.size(), setsByGarminExercise.size());
+                file.getOriginalFilename(), setMessages.size(), blocks.size());
 
         final List<Exercise> knownExercises = exerciseRepository.findAll();
-        final List<FitExerciseDto> exercises = setsByGarminExercise.entrySet().stream()
-                .map(entry -> new FitExerciseDto(entry.getKey(), suggestExercise(entry.getKey(), knownExercises), entry.getValue()))
+        final List<FitExerciseDto> exercises = blocks.stream()
+                .map(block -> new FitExerciseDto(block.name, suggestExercise(block.name, knownExercises), block.sets))
                 .toList();
 
         return new FitWorkoutDto(toLocalDate(activityDate[0]), exercises);
     }
 
-    /** Active sets only, grouped by Garmin classification in order of first appearance. */
-    private static Map<String, List<FitSetDto>> groupActiveSets(List<SetMesg> setMessages) {
-        final Map<String, List<FitSetDto>> grouped = new LinkedHashMap<>();
-        setMessages.stream()
-                .filter(set -> set.getSetType() != null && set.getSetType() == SetType.ACTIVE)
-                .forEach(set -> grouped
-                        .computeIfAbsent(garminExerciseName(set), key -> new ArrayList<>())
-                        .add(new FitSetDto(
-                                set.getRepetitions() != null ? set.getRepetitions() : 0,
-                                set.getWeight() != null ? Math.round(set.getWeight() * 10) / 10.0 : 0,
-                                set.getDuration() != null ? Math.round(set.getDuration()) : 0)));
-        return grouped;
+    private static final class Block {
+        private final String key;
+        private String name;
+        private final List<FitSetDto> sets = new ArrayList<>();
+
+        private Block(String key, String name) {
+            this.key = key;
+            this.name = name;
+        }
+    }
+
+    /**
+     * Active sets grouped into exercise blocks. Classified sets merge across the whole
+     * session by category. UNCLASSIFIED sets are grouped by their weight — same weight
+     * almost always means the same exercise, even when its sets are interleaved with
+     * recognized ones (a heuristic, but it matches how strength sessions actually look).
+     */
+    private static List<Block> groupActiveSets(List<SetMesg> setMessages) {
+        final List<Block> blocks = new ArrayList<>();
+
+        for (SetMesg set : setMessages) {
+            if (set.getSetType() == null || set.getSetType() != SetType.ACTIVE) {
+                continue;
+            }
+            final String name = garminExerciseName(set);
+            final double weight = set.getWeight() != null ? Math.round(set.getWeight() * 10) / 10.0 : 0;
+            final String key = UNKNOWN.equals(name) ? UNKNOWN + "@" + weight : name;
+
+            final Block target = blocks.stream()
+                    .filter(block -> block.key.equals(key))
+                    .findFirst()
+                    .orElseGet(() -> {
+                        final Block created = new Block(key, name);
+                        blocks.add(created);
+                        return created;
+                    });
+
+            target.sets.add(new FitSetDto(
+                    set.getRepetitions() != null ? set.getRepetitions() : 0,
+                    weight,
+                    set.getDuration() != null ? Math.round(set.getDuration()) : 0));
+        }
+
+        numberUnknownBlocks(blocks);
+        return blocks;
+    }
+
+    /** With several unclassified groups, label them "UNKNOWN 1..N" so they stay tellable apart. */
+    private static void numberUnknownBlocks(List<Block> blocks) {
+        final List<Block> unknowns = blocks.stream().filter(block -> UNKNOWN.equals(block.name)).toList();
+        if (unknowns.size() > 1) {
+            for (int i = 0; i < unknowns.size(); i++) {
+                unknowns.get(i).name = UNKNOWN + " " + (i + 1);
+            }
+        }
     }
 
     private static String garminExerciseName(SetMesg set) {
         final Integer category = set.getNumCategory() > 0 ? set.getCategory(0) : null;
         final String categoryName = category != null ? ExerciseCategory.getStringFromValue(category) : null;
         if (categoryName == null || categoryName.isBlank()) {
-            return "UNKNOWN";
+            return UNKNOWN;
         }
         // Keep distinct variants apart (e.g. flat vs incline bench) via the subtype code.
         final Integer subtype = set.getNumCategorySubtype() > 0 ? set.getCategorySubtype(0) : null;
