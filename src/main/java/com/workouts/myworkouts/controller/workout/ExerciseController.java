@@ -1,6 +1,7 @@
 package com.workouts.myworkouts.controller.workout;
 
 import com.workouts.myworkouts.model.dto.exercise.ExerciseDto;
+import com.workouts.myworkouts.model.dto.exercise.ExerciseRecordDto;
 import com.workouts.myworkouts.model.dto.exercise.ExerciseStatsDto;
 import com.workouts.myworkouts.model.enums.ExerciseCategory;
 import com.workouts.myworkouts.model.enums.ExerciseType;
@@ -51,6 +52,11 @@ public class ExerciseController {
     @GetMapping
     public List<ExerciseDto> getAllExercises() {
         return exerciseService.getAllExercises();
+    }
+
+    @GetMapping("/records")
+    public List<ExerciseRecordDto> getExerciseRecords() {
+        return exerciseService.getExerciseRecords();
     }
 
     @GetMapping("/{id}/stats")

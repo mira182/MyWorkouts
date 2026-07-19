@@ -33,6 +33,12 @@
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
     </properties>
     <dependencies>
+        <!-- Garmin FIT SDK — parsing .fit strength activities for workout import -->
+        <dependency>
+            <groupId>com.garmin</groupId>
+            <artifactId>fit</artifactId>
+            <version>21.176.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>

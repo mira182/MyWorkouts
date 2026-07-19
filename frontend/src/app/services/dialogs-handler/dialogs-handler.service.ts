@@ -19,6 +19,10 @@ import {
 import {
   ExerciseHistoryDialogComponent
 } from "../../components/dialogs/exercise-history-dialog/exercise-history-dialog.component";
+import {
+  FitImportReviewDialogComponent
+} from "../../components/dialogs/fit-import-review/fit-import-review-dialog.component";
+import {FitWorkout} from "../../model/workout/fit-workout";
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +92,16 @@ export class DialogsHandlerService {
       maxWidth: '95vw',
       hasBackdrop: true,
       data: {exercise},
+    });
+  }
+
+  public openFitImportReviewDialog(draft: FitWorkout): MatDialogRef<FitImportReviewDialogComponent> {
+    return this.dialog.open(FitImportReviewDialogComponent, {
+      width: '520px',
+      maxWidth: '95vw',
+      hasBackdrop: true,
+      disableClose: true,
+      data: draft,
     });
   }
 

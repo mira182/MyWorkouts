@@ -109,6 +109,9 @@
     "next": "Další",
     "back": "Zpátky",
     "add-workout": "Přidej workout",
+    "copy-last-workout": "Zkopírovat poslední trénink",
+    "save-add-another": "Uložit a přidat další",
+    "import-fit": "Import z Garminu (.fit)",
     "add-exercise": "Přidej cvik",
     "edit-exercise": "Uprav cvik",
     "delete-exercise": "Smaž cvik",
@@ -129,6 +132,7 @@
     "registration-title": "Registrace",
     "breakdown": "Rozbor",
     "totals": "Součty",
+    "records": "Rekordy",
     "workouts": "Workouts",
     "trainings": "Tréninky",
     "exercises": "Cviky",
@@ -141,6 +145,19 @@
     "title": "Vývoj",
     "chart-type": "Metrika",
     "no-data": "Pro tento cvik zatím není žádná historie."
+  },
+  "FIT": {
+    "title": "Zkontrolovat import z Garminu",
+    "select-exercise": "Vyber cvik",
+    "no-exercises": "V souboru nebyly nalezeny žádné silové série."
+  },
+  "RECORDS": {
+    "exercise": "Cvik",
+    "pr": "PR",
+    "one-rm": "~1RM",
+    "reps": "Opakování",
+    "date": "Dosaženo",
+    "empty": "Zatím žádné rekordy — nejdřív zaznamenej nějaké tréninky."
   },
   "TEXTS": {
     "no-workouts": "Žádný trénink",
@@ -172,7 +189,9 @@
     "weight": "Váha",
     "reps": "Opakování",
     "apply-training": "Použít tréninkovou šablonu",
-    "no-templates": "Zatím žádné tréninkové plány"
+    "no-templates": "Zatím žádné tréninkové plány",
+    "note": "Poznámka",
+    "added": "Přidáno"
   },
   "EXERCISE": {
     "name": "Název",

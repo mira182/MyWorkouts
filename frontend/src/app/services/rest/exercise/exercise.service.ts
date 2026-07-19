@@ -3,6 +3,7 @@ import {Urls} from '../../../model/urls';
 import {HttpClient} from '@angular/common/http';
 import {Exercise} from '../../../model/exercise/exercise';
 import {ExerciseStats} from '../../../model/exercise/exercise-stats';
+import {ExerciseRecord} from '../../../model/exercise/exercise-record';
 import {Observable, take} from 'rxjs';
 
 @Injectable({
@@ -27,6 +28,10 @@ export class ExerciseService {
 
   public getAllExercises(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(Urls.API_URL + Urls.EXERCISE_URL);
+  }
+
+  public getExerciseRecords(): Observable<ExerciseRecord[]> {
+    return this.http.get<ExerciseRecord[]>(Urls.API_URL + Urls.EXERCISE_URL + '/records');
   }
 
   public getExerciseStats(id: number, before?: string): Observable<ExerciseStats> {

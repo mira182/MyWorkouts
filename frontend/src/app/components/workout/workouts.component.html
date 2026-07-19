@@ -36,6 +36,11 @@
         }
       </mat-menu>
 
+      <button mat-mini-fab matTooltip="{{'BUTTON.import-fit' | translate}}" (click)="fitFileInput.click()">
+        <mat-icon>upload_file</mat-icon>
+      </button>
+      <input #fitFileInput type="file" accept=".fit" class="hidden" (change)="onFitFileSelected($event)">
+
       <button mat-mini-fab matTooltip="{{'BUTTON.delete-workouts' | translate}}" (click)="deleteWorkout()">
         <mat-icon>delete</mat-icon>
       </button>
@@ -56,6 +61,12 @@
         <app-skeleton class="h-48 w-80 sm:w-96"></app-skeleton>
       </div>
     } @else if (currentWorkout(); as currentWorkout) {
+      <div class="flex justify-center px-3 pb-2">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-[352px] max-w-full sm:w-96">
+          <mat-label>{{ 'WORKOUTS.note' | translate }}</mat-label>
+          <input matInput [formControl]="noteControl" (blur)="saveNote()" (keydown.enter)="saveNote()">
+        </mat-form-field>
+      </div>
       <div>
         @for (workoutExercise of currentWorkout.workoutExercises; track workoutExercise.id) {
           <workout-exercise
@@ -67,10 +78,16 @@
       </div>
     } @else {
       <app-empty-state icon="fitness_center" [message]="'TEXTS.no-workouts' | translate">
-        <button mat-flat-button color="primary" (click)="openAddWorkoutExerciseDialog()">
-          <mat-icon>add</mat-icon>
-          {{ 'BUTTON.add-workout' | translate }}
-        </button>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button mat-flat-button color="primary" (click)="openAddWorkoutExerciseDialog()">
+            <mat-icon>add</mat-icon>
+            {{ 'BUTTON.add-workout' | translate }}
+          </button>
+          <button mat-stroked-button (click)="copyLastWorkout()">
+            <mat-icon>content_copy</mat-icon>
+            {{ 'BUTTON.copy-last-workout' | translate }}
+          </button>
+        </div>
       </app-empty-state>
     }
 

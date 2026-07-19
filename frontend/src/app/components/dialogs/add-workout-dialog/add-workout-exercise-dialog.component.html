@@ -74,8 +74,12 @@
           }
         }
       </div>
-      <div class="flex flex-row justify-end items-center">
+      <div class="flex flex-row flex-wrap justify-end items-center gap-2 mt-2">
+        @if (collected().length > 0) {
+          <span class="mr-auto text-sm opacity-70">{{ 'WORKOUTS.added' | translate }}: {{ collected().length }}</span>
+        }
         <button mat-button matStepperPrevious>{{ 'BUTTON.back' | translate }}</button>
+        <button mat-stroked-button (click)="saveAndAddAnother()">{{ 'BUTTON.save-add-another' | translate }}</button>
         <button mat-raised-button (click)="saveWorkoutExercise()" color="primary">{{ 'BUTTON.save' | translate }}</button>
       </div>
     </mat-step>

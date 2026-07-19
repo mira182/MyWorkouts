@@ -19,6 +19,10 @@ public interface WorkoutService {
 
     WorkoutDto addWorkoutExerciseToWorkout(@NonNull WorkoutDto workoutDto);
 
+    WorkoutDto copyLastWorkout(@NonNull LocalDate date);
+
+    void updateNote(long workoutId, String note);
+
     void deleteWorkout(long id);
 
     void addWorkoutExerciseToWorkout(long workoutId, @NonNull WorkoutExerciseDto workoutExerciseDto);

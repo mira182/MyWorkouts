@@ -20,6 +20,8 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
     Optional<Workout> findByDate(LocalDate date);
 
+    Optional<Workout> findFirstByDateLessThanOrderByDateDesc(LocalDate date);
+
     long countAllByDateBetween(LocalDate startDate, LocalDate endDate);
 
     @Query("""

@@ -1,4 +1,7 @@
-import {Component, computed, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, computed, effect, OnInit, signal, WritableSignal} from '@angular/core';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
 import moment, {Moment} from "moment";
 
 import {MatIcon} from "@angular/material/icon";
@@ -13,8 +16,10 @@ import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {WorkoutService} from "../../services/rest/workout/workout.service";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
-import {debounceTime, filter, finalize, mergeMap, switchMap, take, takeUntil, tap} from "rxjs";
+import {debounceTime, filter, finalize, map, mergeMap, switchMap, take, takeUntil, tap} from "rxjs";
 import {Workout} from "../../model/workout/workout";
+import {WorkoutExercise} from "../../model/workout-exercise/workoutExercise";
+import {FitWorkout} from "../../model/workout/fit-workout";
 import {isNil} from "lodash";
 import {WorkoutExerciseComponent} from "../workout-exercise/workout-exercise.component";
 import {PageHeaderLayoutComponent} from "../layouts/page-header-layout/page-header-layout.component";
@@ -40,7 +45,10 @@ import {SwipeDirective} from "../../directives/swipe.directive";
     PageHeaderLayoutComponent,
     EmptyStateComponent,
     SkeletonComponent,
-    SwipeDirective
+    SwipeDirective,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInput
 ],
     templateUrl: './workouts.component.html'
 })
@@ -60,6 +68,12 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   protected trainings = signal<TrainingPlan[]>([]);
 
   protected dayLoading = signal(false);
+
+  protected readonly noteControl = new FormControl('');
+
+  private readonly syncNote = effect(() => {
+    this.noteControl.setValue(this.workout()?.note ?? '', {emitEvent: false});
+  });
 
   constructor(private readonly snackBarService: SnackBarService,
               private readonly workoutService: WorkoutService,
@@ -102,6 +116,65 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
       });
   }
 
+  protected onFitFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) {
+      return;
+    }
+
+    this.spinner.show();
+    this.workoutService.importFitFile(file)
+      .pipe(
+        finalize(() => this.spinner.hide()),
+        take(1),
+      )
+      .subscribe({
+        next: draft => this.reviewFitDraft(draft),
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+  }
+
+  private reviewFitDraft(draft: FitWorkout): void {
+    this.dialogsHandler.openFitImportReviewDialog(draft).afterClosed()
+      .pipe(
+        filter((result): result is { date: string; workoutExercises: WorkoutExercise[] } =>
+          !isNil(result) && result.workoutExercises.length > 0),
+        mergeMap(result => this.workoutService.createWorkout({
+          date: result.date,
+          note: '',
+          workoutExercises: result.workoutExercises,
+        }).pipe(map(() => result.date))),
+        tap(() => this.spinner.show()),
+        finalize(() => this.spinner.hide()),
+        take(1),
+      )
+      .subscribe({
+        next: date => {
+          this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
+          this.getWorkoutsForDay(moment(date));
+        },
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+  }
+
+  protected copyLastWorkout(): void {
+    this.spinner.show();
+    this.workoutService.copyLastWorkout(this.selectedDate())
+      .pipe(
+        finalize(() => this.spinner.hide()),
+        take(1),
+      )
+      .subscribe({
+        next: workout => {
+          this.workout.set(workout);
+          this.snackBarService.showSuccessSnackBar('ALERT.successfully-saved');
+        },
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
+  }
+
   protected applyTemplate(training: TrainingPlan): void {
     this.spinner.show();
     this.trainingService.applyTraining(training.id, this.selectedDate().toDate())
@@ -121,12 +194,11 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
   protected openAddWorkoutExerciseDialog() {
     this.dialogsHandler.openAddWorkoutExerciseDialog().afterClosed()
       .pipe(
-        filter((workoutExercise) => !isNil(workoutExercise)),
-        // TODO change create to add workoutExercise to workout with some ID
-        mergeMap(workoutExercise => this.workoutService.createWorkout({
+        filter((workoutExercises: WorkoutExercise[]) => !isNil(workoutExercises) && workoutExercises.length > 0),
+        mergeMap((workoutExercises: WorkoutExercise[]) => this.workoutService.createWorkout({
           date: this.selectedDate().format(DATE_FORMATS.apiDate),
-          note: 'test note',
-          workoutExercises: [ workoutExercise ],
+          note: '',
+          workoutExercises: workoutExercises,
         })),
         tap(() => this.spinner.show()),
         finalize(() => this.spinner.hide()),
@@ -177,6 +249,20 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
 
   protected previousDay(): void {
     this.getWorkoutsForDay(this.selectedDate().clone().subtract(1, 'day'));
+  }
+
+  protected saveNote(): void {
+    const workout = this.workout();
+    const note = this.noteControl.value ?? '';
+    if (!workout?.id || note === (workout.note ?? '')) {
+      return;
+    }
+    this.workoutService.updateNote(workout.id, note)
+      .pipe(take(1))
+      .subscribe({
+        next: () => workout.note = note,
+        error: err => this.snackBarService.showErrorSnackBar(err),
+      });
   }
 
   protected onWorkoutExerciseUpdated(): void {

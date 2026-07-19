@@ -5,6 +5,8 @@ import com.workouts.myworkouts.model.dto.export.WorkoutExerciseExportDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutDto;
 import com.workouts.myworkouts.model.dto.workout.WorkoutExerciseDto;
 import com.workouts.myworkouts.model.entity.workout.Workout;
+import com.workouts.myworkouts.model.entity.workout.WorkoutExercise;
+import com.workouts.myworkouts.model.entity.workout.WorkoutSet;
 import com.workouts.myworkouts.model.mapper.WorkoutExerciseMapper;
 import com.workouts.myworkouts.model.mapper.WorkoutMapper;
 import com.workouts.myworkouts.model.mapper.export.WorkoutExerciseExportMapper;
@@ -99,6 +101,46 @@ public class WorkoutServiceImpl implements WorkoutService {
                 .orElseThrow(() -> new WorkoutNotFoundException(workoutId))
                 .getWorkoutExercises()
                 .add(workoutExerciseRepository.save(workoutExerciseMapper.dtoToEntity(workoutExerciseDto)));
+    }
+
+    @Override
+    @Transactional
+    public WorkoutDto copyLastWorkout(@NonNull LocalDate date) {
+        if (workoutRepository.findByDate(date).isPresent()) {
+            throw new IllegalStateException("Workout already exists on " + date);
+        }
+
+        final Workout source = workoutRepository.findFirstByDateLessThanOrderByDateDesc(date)
+                .orElseThrow(() -> new WorkoutNotFoundException(date));
+
+        final Workout copy = new Workout();
+        copy.setDate(date);
+
+        source.getWorkoutExercises().forEach(sourceExercise -> {
+            final WorkoutExercise exerciseCopy = new WorkoutExercise();
+            exerciseCopy.setExercise(sourceExercise.getExercise());
+
+            sourceExercise.getWorkoutSets().forEach(sourceSet -> {
+                final WorkoutSet setCopy = new WorkoutSet();
+                setCopy.setReps(sourceSet.getReps());
+                setCopy.setWeight(sourceSet.getWeight());
+                setCopy.setDuration(sourceSet.getDuration());
+                setCopy.setDistance(sourceSet.getDistance());
+                exerciseCopy.addWorkoutSet(setCopy);
+            });
+
+            copy.addWorkoutExercise(exerciseCopy);
+        });
+
+        return workoutMapper.entityToDto(workoutRepository.save(copy));
+    }
+
+    @Override
+    @Transactional
+    public void updateNote(long workoutId, String note) {
+        workoutRepository.findById(workoutId)
+                .orElseThrow(() -> new WorkoutNotFoundException(workoutId))
+                .setNote(note);
     }
 
     @Override

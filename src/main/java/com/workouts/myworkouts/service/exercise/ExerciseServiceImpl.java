@@ -2,8 +2,10 @@ package com.workouts.myworkouts.service.exercise;
 
 import com.workouts.myworkouts.exceptions.ExerciseNotFoundException;
 import com.workouts.myworkouts.model.dto.exercise.ExerciseDto;
+import com.workouts.myworkouts.model.dto.exercise.ExerciseRecordDto;
 import com.workouts.myworkouts.model.dto.exercise.ExerciseStatsDto;
 import com.workouts.myworkouts.model.dto.exercise.PersonalRecordsDto;
+import com.workouts.myworkouts.model.dto.workout.projections.ExerciseRecordRowDto;
 import com.workouts.myworkouts.model.dto.workout.projections.WorkoutExerciseDateDto;
 import com.workouts.myworkouts.model.entity.exercise.Exercise;
 import com.workouts.myworkouts.model.entity.picture.ExercisePicture;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,6 +143,38 @@ public class ExerciseServiceImpl implements ExerciseService {
                         : List.of())
                 .personalRecords(personalRecords)
                 .build();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ExerciseRecordDto> getExerciseRecords() {
+        return workoutExerciseRepository.findAllRecordRows().stream()
+                .collect(Collectors.groupingBy(ExerciseRecordRowDto::exerciseId, LinkedHashMap::new, Collectors.toList()))
+                .values().stream()
+                .map(ExerciseServiceImpl::aggregateRecords)
+                .sorted(Comparator.comparing(ExerciseRecordDto::exerciseName, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+    }
+
+    private static ExerciseRecordDto aggregateRecords(List<ExerciseRecordRowDto> rows) {
+        final ExerciseRecordRowDto first = rows.get(0);
+        final double maxWeight = rows.stream().mapToDouble(ExerciseRecordRowDto::weight).max().orElse(0);
+        final LocalDate maxWeightDate = rows.stream()
+                .filter(row -> row.weight() == maxWeight)
+                .map(ExerciseRecordRowDto::date)
+                .min(LocalDate::compareTo)
+                .orElse(null);
+
+        return new ExerciseRecordDto(
+                first.exerciseId(),
+                first.exerciseName(),
+                first.category().name(),
+                maxWeight,
+                maxWeightDate,
+                rows.stream().mapToInt(ExerciseRecordRowDto::reps).max().orElse(0),
+                // Epley estimate over every set — the best set may not be the heaviest one.
+                rows.stream().mapToDouble(row -> row.weight() * (1 + row.reps() / 30.0)).max().orElse(0),
+                rows.stream().map(ExerciseRecordRowDto::date).max(LocalDate::compareTo).orElse(null));
     }
 
     private void addImagesToExercise(String exerciseName, Exercise foundOrCreatedExercise, MultipartFile file) {

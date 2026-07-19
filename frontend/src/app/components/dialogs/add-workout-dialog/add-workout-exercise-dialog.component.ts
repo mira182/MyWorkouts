@@ -1,6 +1,6 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal, ViewChild} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
-import {MatStepperModule} from "@angular/material/stepper";
+import {MatStepper, MatStepperModule} from "@angular/material/stepper";
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {WorkoutExercise} from "../../../model/workout-exercise/workoutExercise";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
@@ -53,6 +53,10 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
 
   protected workoutSets: WorkoutSet[];
 
+  protected collected = signal<WorkoutExercise[]>([]);
+
+  @ViewChild(MatStepper) private stepper: MatStepper;
+
   constructor(protected readonly dialogRef: MatDialogRef<AddWorkoutExerciseDialogComponent>,
               protected readonly exerciseService: ExerciseService,
               protected readonly imageUtilsService: ImageUtilsService,
@@ -85,11 +89,22 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
   }
 
   protected saveWorkoutExercise() {
-    let workoutExercise: WorkoutExercise = {
+    this.collectCurrent();
+    this.dialogRef.close(this.collected());
+  }
+
+  protected saveAndAddAnother(): void {
+    this.collectCurrent();
+    this.selectedExercise = undefined;
+    this.workoutSets = undefined;
+    this.exercisesByCategory.set([]);
+    this.stepper.reset();
+  }
+
+  private collectCurrent(): void {
+    this.collected.update(list => [...list, {
       exercise: this.selectedExercise,
       workoutSets: this.workoutSets,
-    };
-
-    this.dialogRef.close(workoutExercise);
+    }]);
   }
 }
