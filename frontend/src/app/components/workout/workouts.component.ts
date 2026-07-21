@@ -124,6 +124,11 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
       return;
     }
 
+    if (!file.name.toLowerCase().endsWith('.fit')) {
+      this.snackBarService.showErrorMessageSnackBar('ALERT.invalid-fit-file');
+      return;
+    }
+
     this.spinner.show();
     this.workoutService.importFitFile(file)
       .pipe(

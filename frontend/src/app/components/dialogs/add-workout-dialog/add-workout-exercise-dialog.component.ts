@@ -15,7 +15,8 @@ import {WeightRepsExerciseComponent} from "../../exercise-types/weight-reps-exer
 import {RepsExerciseComponent} from "../../exercise-types/reps-exercise/reps-exercise.component";
 import {TimeExerciseComponent} from "../../exercise-types/time-exercise/time-exercise.component";
 import {MatTooltip} from "@angular/material/tooltip";
-import {take} from "rxjs";
+import {finalize, take} from "rxjs";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {PageHeaderLayoutComponent} from "../../layouts/page-header-layout/page-header-layout.component";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
 import {WorkoutSet} from "../../../model/exercise/workoutSet";
@@ -38,7 +39,8 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
     TimeExerciseComponent,
     MatTooltip,
     PageHeaderLayoutComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatProgressSpinner
 ]
 })
 export class AddWorkoutExerciseDialogComponent implements OnInit {
@@ -46,6 +48,8 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
   protected exerciseCategories = signal<string[]>([]);
 
   protected exercisesByCategory = signal<Exercise[]>([]);
+
+  protected loadingExercises = signal(false);
 
   protected readonly IMAGE_BASE_URL = Urls.IMAGE_BASE_URL;
 
@@ -80,8 +84,13 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
   }
 
   protected selectCategory(exerciseCategory: string): void {
+    this.exercisesByCategory.set([]);
+    this.loadingExercises.set(true);
     this.exerciseService.getAllExercisesByCategory(exerciseCategory)
-      .pipe(take(1))
+      .pipe(
+        finalize(() => this.loadingExercises.set(false)),
+        take(1),
+      )
       .subscribe({
         next: exercises => this.exercisesByCategory.set(exercises),
         error: err => this.snackBarService.showErrorSnackBar(err),

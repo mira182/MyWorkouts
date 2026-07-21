@@ -39,7 +39,7 @@
       <button mat-mini-fab matTooltip="{{'BUTTON.import-fit' | translate}}" (click)="fitFileInput.click()">
         <mat-icon>upload_file</mat-icon>
       </button>
-      <input #fitFileInput type="file" accept=".fit" class="hidden" (change)="onFitFileSelected($event)">
+      <input #fitFileInput type="file" accept="*/*" class="hidden" (change)="onFitFileSelected($event)">
 
       <button mat-mini-fab matTooltip="{{'BUTTON.delete-workouts' | translate}}" (click)="deleteWorkout()">
         <mat-icon>delete</mat-icon>

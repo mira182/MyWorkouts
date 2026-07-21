@@ -85,6 +85,7 @@
     "statusCode": "Status code: ",
     "workout-id-missing": "Workout ID is missing",
     "import-success": "Import was successful",
+    "invalid-fit-file": "Please select a .fit file exported from Garmin.",
     "login-failed": "Username or password is incorrect"
   },
   "BUTTON": {

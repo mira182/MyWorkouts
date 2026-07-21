@@ -85,6 +85,7 @@
     "statusCode": "Stavový kód: ",
     "workout-id-missing": "Workout ID chybí",
     "import-success": "Import proběhl úspěšně",
+    "invalid-fit-file": "Vyber prosím soubor .fit exportovaný z Garminu.",
     "login-failed": "Nesprávné uživatelské jméno nebo heslo"
   },
   "BUTTON": {

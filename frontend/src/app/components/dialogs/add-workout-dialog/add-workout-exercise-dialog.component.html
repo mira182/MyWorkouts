@@ -29,7 +29,11 @@
     <mat-step>
       <ng-template matStepLabel>{{ 'WORKOUTS.select-exercise' | translate }}</ng-template>
       <mat-action-list>
-        @if (exercisesByCategory().length > 0) {
+        @if (loadingExercises()) {
+          <div class="flex justify-center py-8">
+            <mat-spinner [diameter]="40"></mat-spinner>
+          </div>
+        } @else if (exercisesByCategory().length > 0) {
           <div>
             @for (exercise of exercisesByCategory(); track exercise) {
               <button mat-list-item matStepperNext (click)="selectExercise(exercise)"

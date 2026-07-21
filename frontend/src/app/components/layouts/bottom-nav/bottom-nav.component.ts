@@ -13,13 +13,13 @@ import {TranslateModule} from '@ngx-translate/core';
         <mat-icon>home</mat-icon>
         <span class="text-[11px] leading-none">{{ 'HOME.home' | translate }}</span>
       </a>
-      <a routerLink="/workouts" routerLinkActive="nav-active" class="nav-item">
-        <mat-icon>fitness_center</mat-icon>
-        <span class="text-[11px] leading-none">{{ 'WORKOUTS.workouts' | translate }}</span>
-      </a>
       <a routerLink="/weight" routerLinkActive="nav-active" class="nav-item">
         <mat-icon>monitor_weight</mat-icon>
         <span class="text-[11px] leading-none">{{ 'WEIGHT.weight' | translate }}</span>
+      </a>
+      <a routerLink="/workouts" routerLinkActive="nav-active" class="nav-item">
+        <mat-icon>fitness_center</mat-icon>
+        <span class="text-[11px] leading-none">{{ 'WORKOUTS.workouts' | translate }}</span>
       </a>
       <a routerLink="/exercises" routerLinkActive="nav-active" class="nav-item">
         <mat-icon>menu_book</mat-icon>
