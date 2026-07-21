@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 
 import {MatIconButton} from "@angular/material/button";
+import {TranslateModule} from "@ngx-translate/core";
 import {isNil} from "lodash";
 
 @Component({
@@ -10,7 +11,8 @@ import {isNil} from "lodash";
     styleUrls: ['./image-preview.component.scss'],
     imports: [
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    TranslateModule
 ]
 })
 export class ImagePreviewComponent {

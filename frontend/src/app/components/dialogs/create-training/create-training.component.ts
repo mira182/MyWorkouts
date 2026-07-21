@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {WorkoutExerciseService} from "../../../services/rest/workout-exercise/workout-exercise.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
@@ -78,6 +78,10 @@ export class CreateTrainingComponent implements OnInit {
 
   get trainingExercises() {
     return this.form.get('trainingExercises') as FormArray;
+  }
+
+  protected asFormGroup(control: AbstractControl): FormGroup {
+    return control as FormGroup;
   }
 
   saveTraining() {

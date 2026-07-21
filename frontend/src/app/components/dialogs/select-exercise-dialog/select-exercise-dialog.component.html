@@ -14,10 +14,11 @@
     <ng-template matStepLabel>{{"WORKOUTS.select-exercise" | translate}}</ng-template>
     <mat-action-list>
       @for (exercise of exercisesBySelectedCategory(); track exercise) {
-        <button mat-list-item matStepperNext (click)="setSelectedExercise(exercise)">
+        <button mat-list-item (click)="setSelectedExercise(exercise)"
+                appLongPress (longPress)="showExerciseImage(exercise)">
           <div class="flex flex-row items-center gap-2">
             <img [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)"
-                 width="32" height="32" class="rounded">
+                 width="32" height="32" class="rounded" alt="">
             <span class="text-wrap">{{ exercise.name }}</span>
           </div>
         </button>

@@ -1,0 +1,23 @@
+<div mat-dialog-title class="!flex flex-row items-start justify-between gap-2">
+  <span class="min-w-0 break-words">{{ exercise.name }}</span>
+  <button mat-icon-button mat-dialog-close class="shrink-0">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  @if (exerciseHelper.getExerciseImagePath(exercise); as imagePath) {
+    <img [src]="IMAGE_BASE_URL + imagePath" [alt]="exercise.name"
+         class="block mx-auto rounded-lg max-w-full object-contain">
+  } @else {
+    <div class="w-full h-52 rounded-lg grid place-items-center bg-[var(--brand-primary-softer)]">
+      <mat-icon class="!w-14 !h-14 !text-[56px] text-[var(--brand-primary)] opacity-40">fitness_center</mat-icon>
+    </div>
+  }
+
+  <div class="flex flex-wrap justify-center gap-2 pt-3 text-sm opacity-70">
+    <span>{{ exercise.category }}</span>
+    <span>·</span>
+    <span>{{ exercise.type }}</span>
+  </div>
+</mat-dialog-content>

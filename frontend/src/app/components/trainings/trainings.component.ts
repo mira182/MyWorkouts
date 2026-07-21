@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, signal} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {TrainingService} from "../../services/rest/training/training.service";
-import {AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
@@ -84,6 +84,18 @@ export class TrainingsComponent implements OnInit {
 
   protected get trainingPlans(): FormArray {
     return this.form.get('trainingPlans') as FormArray;
+  }
+
+  protected asFormGroup(control: AbstractControl): FormGroup {
+    return control as FormGroup;
+  }
+
+  protected scheduledControl(trainingPlan: AbstractControl): FormControl {
+    return trainingPlan.get('scheduled') as FormControl;
+  }
+
+  protected trainingExercisesOf(trainingPlan: AbstractControl): FormArray {
+    return trainingPlan.get('trainingExercises') as FormArray;
   }
 
   protected get weekDays() {

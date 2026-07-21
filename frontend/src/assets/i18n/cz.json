@@ -206,6 +206,7 @@
   },
   "LABELS": {
     "date-picker": "Vyberte datum",
+    "image-preview": "Náhled vybraného obrázku",
     "WEIGHT": "Váha",
     "BMI": "BMI",
     "BODY_FAT": "Tuk"

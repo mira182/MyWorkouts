@@ -1,7 +1,11 @@
 import {Component, OnInit, signal, ViewChild} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
 import {MatStepper, MatStepperModule} from "@angular/material/stepper";
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {
+  ExerciseImageDialogComponent
+} from "../exercise-image-dialog/exercise-image-dialog.component";
+import {LongPressDirective} from "../../../directives/long-press.directive";
 import {WorkoutExercise} from "../../../model/workout-exercise/workoutExercise";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
@@ -40,7 +44,8 @@ import {WorkoutSet} from "../../../model/exercise/workoutSet";
     MatTooltip,
     PageHeaderLayoutComponent,
     NgOptimizedImage,
-    MatProgressSpinner
+    MatProgressSpinner,
+    LongPressDirective
 ]
 })
 export class AddWorkoutExerciseDialogComponent implements OnInit {
@@ -61,9 +66,12 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
 
   @ViewChild(MatStepper) private stepper: MatStepper;
 
+  private suppressNextClick = false;
+
   constructor(protected readonly dialogRef: MatDialogRef<AddWorkoutExerciseDialogComponent>,
               protected readonly exerciseService: ExerciseService,
               protected readonly imageUtilsService: ImageUtilsService,
+              private readonly dialog: MatDialog,
               private readonly snackBarService: SnackBarService) {
   }
 
@@ -76,7 +84,24 @@ export class AddWorkoutExerciseDialogComponent implements OnInit {
   }
 
   protected selectExercise(exercise: Exercise) {
+    if (this.suppressNextClick) {
+      this.suppressNextClick = false;
+      return;
+    }
     this.selectedExercise = exercise;
+    this.stepper.next();
+  }
+
+  protected showExerciseImage(exercise: Exercise): void {
+    this.suppressNextClick = true;
+    setTimeout(() => this.suppressNextClick = false, 400);
+
+    this.dialog.open(ExerciseImageDialogComponent, {
+      width: '420px',
+      maxWidth: '92vw',
+      hasBackdrop: true,
+      data: exercise,
+    });
   }
 
   protected setsUpdated(workoutSets: WorkoutSet[]) {

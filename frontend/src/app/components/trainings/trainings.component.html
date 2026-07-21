@@ -29,7 +29,7 @@
       }
       <mat-accordion class="trainings-accordion">
         @for (trainingPlan of trainingPlans.controls; track trainingPlan; let trainingIndex = $index) {
-          <mat-expansion-panel [formGroup]="trainingPlan"
+          <mat-expansion-panel [formGroup]="asFormGroup(trainingPlan)"
             (afterExpand)="getWorkoutsForTraining(trainingIndex)">
             <mat-expansion-panel-header [ngClass]="{'active-training': trainingPlan.value.scheduled}" >
               <mat-panel-title>
@@ -83,13 +83,13 @@
                   <mat-label>Training time</mat-label>
                   <input matInput type="time" formControlName="trainingTime">
                 </mat-form-field>
-                <mat-checkbox [formControl]="trainingPlan.get('scheduled')">Scheduled</mat-checkbox>
+                <mat-checkbox [formControl]="scheduledControl(trainingPlan)">Scheduled</mat-checkbox>
               </div>
               @if (workoutsLoading()) {
                 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
               }
               <mat-accordion multi>
-                @for (trainingExercise of trainingPlan.get('trainingExercises').controls; track trainingExercise; let i = $index) {
+                @for (trainingExercise of trainingExercisesOf(trainingPlan).controls; track trainingExercise; let i = $index) {
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title>{{ trainingExercise.get('exercise').value?.name }}</mat-panel-title>
@@ -108,7 +108,7 @@
                         <mat-icon>delete</mat-icon>
                       </button>
                     </div>
-                    <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value"></workout-sets>
+                    <workout-sets [form]="asFormGroup(trainingExercise)" [workoutSets]="trainingExercise.get('trainingSets').value"></workout-sets>
                   </mat-expansion-panel>
                 }
               </mat-accordion>

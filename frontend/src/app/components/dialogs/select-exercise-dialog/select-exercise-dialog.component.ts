@@ -1,7 +1,10 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ExerciseHelperService} from "../../../services/exercise-helper/exercise-helper.service";
+import {ExerciseImageDialogComponent} from "../exercise-image-dialog/exercise-image-dialog.component";
+import {LongPressDirective} from "../../../directives/long-press.directive";
 import {Urls} from "../../../model/urls";
 import {MatStepperModule} from "@angular/material/stepper";
 
@@ -20,7 +23,8 @@ import {MatButton} from "@angular/material/button";
     ReactiveFormsModule,
     MatActionList,
     MatListItem,
-    MatButton
+    MatButton,
+    LongPressDirective
 ]
 })
 export class SelectExerciseDialogComponent implements OnInit {
@@ -33,7 +37,11 @@ export class SelectExerciseDialogComponent implements OnInit {
 
   readonly IMAGE_BASE_URL = Urls.IMAGE_BASE_URL;
 
+  private suppressNextClick = false;
+
   constructor(private readonly exerciseService: ExerciseService,
+              protected readonly exerciseHelper: ExerciseHelperService,
+              private readonly dialog: MatDialog,
               private readonly dialogRef: MatDialogRef<SelectExerciseDialogComponent>) {
   }
 
@@ -45,7 +53,23 @@ export class SelectExerciseDialogComponent implements OnInit {
   }
 
   protected setSelectedExercise(exercise: Exercise) {
+    if (this.suppressNextClick) {
+      this.suppressNextClick = false;
+      return;
+    }
     this.dialogRef.close(exercise);
+  }
+
+  protected showExerciseImage(exercise: Exercise): void {
+    this.suppressNextClick = true;
+    setTimeout(() => this.suppressNextClick = false, 400);
+
+    this.dialog.open(ExerciseImageDialogComponent, {
+      width: '420px',
+      maxWidth: '92vw',
+      hasBackdrop: true,
+      data: exercise,
+    });
   }
 
   protected selectCategory(category: string): void {

@@ -122,7 +122,7 @@ export class NgxLineChartComponent {
   private static readonly MAX_X_TICKS = 7;
 
   xAxisTicks?: Date[];
-  xScaleMin?: Date;
+  xScaleMin?: any;
 
   xAxisFormat = (value: any): string => moment(value).format(DATE_FORMATS.shortDayMonth);
 

@@ -63,7 +63,7 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-            <workout-sets [form]="trainingExercise" [workoutSets]="trainingExercise.get('trainingSets').value">
+            <workout-sets [form]="asFormGroup(trainingExercise)" [workoutSets]="trainingExercise.get('trainingSets').value">
             </workout-sets>
           </mat-expansion-panel>
         }

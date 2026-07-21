@@ -36,11 +36,12 @@
         } @else if (exercisesByCategory().length > 0) {
           <div>
             @for (exercise of exercisesByCategory(); track exercise) {
-              <button mat-list-item matStepperNext (click)="selectExercise(exercise)"
+              <button mat-list-item (click)="selectExercise(exercise)"
+                appLongPress (longPress)="showExerciseImage(exercise)"
                 >
                 <div class="flex flex-row items-center gap-x-2">
                   <img ngSrc="{{ IMAGE_BASE_URL + imageUtilsService.getExerciseIconPath(exercise) }}"
-                       width="32" height="32" class="rounded">
+                       width="32" height="32" class="rounded" alt="">
                   <span class="text-wrap">{{ exercise.name }}</span>
                 </div>
               </button>

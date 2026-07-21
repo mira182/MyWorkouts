@@ -206,6 +206,7 @@
   },
   "LABELS": {
     "date-picker": "Choose a date",
+    "image-preview": "Selected image preview",
     "WEIGHT": "Weight",
     "BMI": "BMI",
     "BODY_FAT": "Body fat"
