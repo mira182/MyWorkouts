@@ -4,16 +4,18 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {TranslateModule} from '@ngx-translate/core';
 import {take} from 'rxjs';
-import {ExerciseService} from '../../../services/rest/exercise/exercise.service';
-import {ExerciseRecord} from '../../../model/exercise/exercise-record';
-import {Exercise} from '../../../model/exercise/exercise';
-import {DialogsHandlerService} from '../../../services/dialogs-handler/dialogs-handler.service';
-import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
-import {AppDatePipe} from '../../../pipes/app-date.pipe';
-import {SkeletonComponent} from '../../skeleton/skeleton.component';
+import {ExerciseService} from '../../services/rest/exercise/exercise.service';
+import {ExerciseRecord} from '../../model/exercise/exercise-record';
+import {Exercise} from '../../model/exercise/exercise';
+import {DialogsHandlerService} from '../../services/dialogs-handler/dialogs-handler.service';
+import {SnackBarService} from '../../services/snack-bar/snack-bar.service';
+import {AppDatePipe} from '../../pipes/app-date.pipe';
+import {SkeletonComponent} from '../skeleton/skeleton.component';
+import {EmptyStateComponent} from '../empty-state/empty-state.component';
+import {PageHeaderLayoutComponent} from '../layouts/page-header-layout/page-header-layout.component';
 
 @Component({
-  selector: 'app-dashboard-records',
+  selector: 'app-records-page',
   imports: [
     DecimalPipe,
     MatTableModule,
@@ -21,10 +23,12 @@ import {SkeletonComponent} from '../../skeleton/skeleton.component';
     TranslateModule,
     AppDatePipe,
     SkeletonComponent,
+    EmptyStateComponent,
+    PageHeaderLayoutComponent,
   ],
-  templateUrl: './dashboard-records.component.html',
+  templateUrl: './records-page.component.html',
 })
-export class DashboardRecordsComponent implements OnInit {
+export class RecordsPageComponent implements OnInit {
 
   protected readonly displayedColumns = ['exerciseName', 'maxWeight', 'estimatedOneRepMax', 'maxReps', 'maxWeightDate'];
 

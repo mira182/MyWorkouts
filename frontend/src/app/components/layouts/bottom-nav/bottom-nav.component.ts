@@ -29,6 +29,10 @@ import {TranslateModule} from '@ngx-translate/core';
         <mat-icon>event_note</mat-icon>
         <span class="text-[11px] leading-none">{{ 'BUTTON.trainings' | translate }}</span>
       </a>
+      <a routerLink="/records" routerLinkActive="nav-active" class="nav-item">
+        <mat-icon>emoji_events</mat-icon>
+        <span class="text-[11px] leading-none">{{ 'TITLES.records' | translate }}</span>
+      </a>
       <a routerLink="/dashboard" routerLinkActive="nav-active" class="nav-item">
         <mat-icon>insights</mat-icon>
         <span class="text-[11px] leading-none">{{ 'BUTTON.dashboard' | translate }}</span>

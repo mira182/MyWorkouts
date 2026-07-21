@@ -9,6 +9,7 @@ import {WorkoutsComponent} from "./components/workout/workouts.component";
 import {TrainingsComponent} from "./components/trainings/trainings.component";
 import {ExercisesComponent} from "./components/exercises/exercises.component";
 import {DashboardPageComponent} from "./components/dashboard/dashboard-page/dashboard-page.component";
+import {RecordsPageComponent} from "./components/records/records-page.component";
 
 export const routes: Routes = [
   {
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: 'trainings', component: TrainingsComponent, canActivate: [canActivatePageFunction]  },
       { path: 'exercises', component: ExercisesComponent, canActivate: [canActivatePageFunction]  },
       { path: 'dashboard', component: DashboardPageComponent, canActivate: [canActivatePageFunction]  },
+      { path: 'records', component: RecordsPageComponent, canActivate: [canActivatePageFunction]  },
     ]
   },
   {

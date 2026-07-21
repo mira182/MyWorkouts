@@ -8,7 +8,6 @@ import {TranslateModule} from "@ngx-translate/core";
 import {DashboardTotalsComponent} from "../dashboard-totals/dashboard-totals.component";
 import {DashboardWorkoutsComponent} from "../dashboard-workouts/dashboard-workouts.component";
 import {DashboardExercisesComponent} from "../dashboard-exercises/dashboard-exercises.component";
-import {DashboardRecordsComponent} from "../dashboard-records/dashboard-records.component";
 
 @Component({
     selector: 'app-workout-dashboard',
@@ -21,8 +20,7 @@ import {DashboardRecordsComponent} from "../dashboard-records/dashboard-records.
     DashboardBreakdownComponent,
     DashboardTotalsComponent,
     DashboardWorkoutsComponent,
-    DashboardExercisesComponent,
-    DashboardRecordsComponent
+    DashboardExercisesComponent
 ]
 })
 export class DashboardPageComponent {
