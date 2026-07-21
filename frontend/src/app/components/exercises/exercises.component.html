@@ -21,7 +21,7 @@
             <mat-icon>close</mat-icon>
           </button>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onExerciseSelected($event)">
-            @for (exercise of filteredExercises | async; track exercise) {
+            @for (exercise of filteredExercises(); track exercise) {
               <mat-option [value]="exercise.name">
                 <div class="flex flex-row items-center gap-3">
                   <img loading="lazy" [src]="IMAGE_BASE_URL + exerciseHelper.getExerciseIconPath(exercise)"

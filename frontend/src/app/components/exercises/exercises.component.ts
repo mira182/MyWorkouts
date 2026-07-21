@@ -3,7 +3,7 @@ import {Exercise} from "../../model/exercise/exercise";
 import {SnackBarService} from "../../services/snack-bar/snack-bar.service";
 import {TranslateModule} from "@ngx-translate/core";
 import {DialogsHandlerService} from "../../services/dialogs-handler/dialogs-handler.service";
-import {combineLatest, filter, finalize, mergeMap, Observable, take, takeUntil} from "rxjs";
+import {combineLatest, filter, finalize, mergeMap, take, takeUntil} from "rxjs";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {Urls} from "../../model/urls";
@@ -58,7 +58,9 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
 
   readonly IMAGE_BASE_URL = Urls.IMAGE_BASE_URL;
 
-  protected filteredExercises: Observable<Exercise[]>;
+  // Signal rather than an Observable + async pipe: signal reads drive change detection
+  // directly in this zoneless app, and the template stays free of the async pipe.
+  protected filteredExercises = signal<Exercise[]>([]);
 
   protected searchExerciseFormControl = new FormControl();
 
@@ -113,13 +115,14 @@ export class ExercisesComponent extends Unsubscribe implements OnInit {
         error: err => this.snackBarService.showErrorSnackBar(err),
       });
 
-    // observable of searching
-    this.filteredExercises = this.searchExerciseFormControl.valueChanges
+    // keep the search suggestions in sync with what's typed
+    this.searchExerciseFormControl.valueChanges
       .pipe(
         startWith(''),
         map(state => state ? this.searchExercises(state) : this.exercises.slice()),
         takeUntil(this.unSubscribe),
-      );
+      )
+      .subscribe(exercises => this.filteredExercises.set(exercises));
   }
 
   protected openSearch(): void {
