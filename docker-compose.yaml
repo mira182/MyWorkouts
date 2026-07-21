@@ -30,8 +30,6 @@ services:
     ports:
       - "8082:80"
     volumes:
-      # Same image volume the backend writes to, mounted read-only so nginx can
-      # serve /img/** directly as static files (uploads appear here immediately).
       - "/volume2/Apps/MyWorkouts/img:/usr/share/nginx/html/img:ro"
     networks:
       - myworkouts-frontend
@@ -59,8 +57,6 @@ services:
       - "/volume2/Apps/MyWorkouts/logs:/usr/app/logs"
       - "/volume2/Apps/MyWorkouts/img:/usr/app/img"
       - "/volume2/Apps/MyWorkouts/export:/usr/app/export"
-      # Persisted Google/Gmail OAuth token (seed once; see deployment notes).
-      # Without this the Tanita import tries an interactive browser flow and hangs.
       - "/volume2/Apps/MyWorkouts/tokens:/usr/app/tokens"
     restart: unless-stopped
 
