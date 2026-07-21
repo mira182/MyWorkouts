@@ -9,6 +9,7 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
+import {ActivatedRoute} from "@angular/router";
 import {DaySelectComponent} from "../day-select/day-select.component";
 import {TrainingService} from "../../services/rest/training/training.service";
 import {TrainingPlan} from "../../model/training/trainingPlan";
@@ -80,7 +81,8 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
               private readonly trainingService: TrainingService,
               private readonly dialogsHandler: DialogsHandlerService,
               private readonly spinner: NgxSpinnerService,
-              private readonly workoutDayService: WorkoutDayService) {
+              private readonly workoutDayService: WorkoutDayService,
+              private readonly activatedRoute: ActivatedRoute) {
     super();
   }
 
@@ -105,6 +107,10 @@ export class WorkoutsComponent extends Unsubscribe implements OnInit {
       });
 
     this.loadTrainingTemplates();
+
+    if (this.activatedRoute.snapshot.queryParamMap.get('add') === 'true') {
+      this.openAddWorkoutExerciseDialog();
+    }
   }
 
   private loadTrainingTemplates(): void {

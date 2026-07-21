@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {ToolbarComponent} from "../../toolbar/toolbar.component";
 import {BottomNavComponent} from "../bottom-nav/bottom-nav.component";
@@ -16,14 +16,11 @@ import {TranslateService} from "@ngx-translate/core";
         RouterOutlet,
         ToolbarComponent,
         BottomNavComponent,
-    ],
-    providers: [
-        ThemeService,
     ]
 })
 export class HomeLayoutComponent extends Unsubscribe implements OnInit {
 
-  public isDarkTheme: boolean = false;
+  public isDarkTheme = signal(false);
 
   constructor(protected readonly themeService: ThemeService,
               private readonly translateService: TranslateService,
@@ -38,13 +35,10 @@ export class HomeLayoutComponent extends Unsubscribe implements OnInit {
         takeUntil(this.unSubscribe),
       )
       .subscribe(isDarkTheme => {
-        this.isDarkTheme = isDarkTheme;
-        if (this.isDarkTheme) {
-          this.overlayContainer.getContainerElement().classList.add('dark-theme');
-        }
+        this.isDarkTheme.set(isDarkTheme);
+        this.overlayContainer.getContainerElement().classList.toggle('dark-theme', isDarkTheme);
       });
 
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
     this.translateService.use('en');
   }
 }

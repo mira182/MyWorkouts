@@ -4,7 +4,7 @@
   <h2 class="greeting">{{ greetingKey | translate }}, {{ user?.firstName }}!</h2>
 
   <div class="quick-actions flex flex-wrap justify-center gap-3">
-    <button mat-flat-button color="primary" routerLink="/workouts">
+    <button mat-flat-button color="primary" routerLink="/workouts" [queryParams]="{add: true}">
       <mat-icon>add</mat-icon>
       {{ 'BUTTON.add-workout' | translate }}
     </button>
@@ -146,7 +146,7 @@
           <button mat-button color="primary" routerLink="/workouts">{{ 'HOME.open-workout' | translate }}</button>
         } @else {
           <p class="hint">{{ 'HOME.no-workout-today' | translate }}</p>
-          <button mat-flat-button color="primary" routerLink="/workouts">{{ 'BUTTON.add-workout' | translate }}</button>
+          <button mat-flat-button color="primary" routerLink="/workouts" [queryParams]="{add: true}">{{ 'BUTTON.add-workout' | translate }}</button>
         }
       </mat-card-content>
     </mat-card>
