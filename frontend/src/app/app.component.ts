@@ -13,6 +13,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {takeUntil} from "rxjs";
 import {Unsubscribe} from "./components/unsubscribe/unsubscribe";
 import {TokenService} from "./services/rest/auth/token.service";
+import {AppUpdateService} from "./services/app-update/app-update.service";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,8 +38,11 @@ export class AppComponent extends Unsubscribe {
   constructor(private readonly sanitizer: DomSanitizer,
               private readonly iconRegistry: MatIconRegistry,
               private readonly themeService: ThemeService,
+              private readonly appUpdateService: AppUpdateService,
               private readonly overlayContainer: OverlayContainer) {
     super();
+
+    this.appUpdateService.init();
 
     iconRegistry.addSvgIcon('bathroom-scale',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/bathroom-scale.svg'));

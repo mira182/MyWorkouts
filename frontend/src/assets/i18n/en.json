@@ -85,6 +85,7 @@
     "statusCode": "Status code: ",
     "workout-id-missing": "Workout ID is missing",
     "import-success": "Import was successful",
+    "update-available": "A new version is available.",
     "invalid-fit-file": "Please select a .fit file exported from Garmin.",
     "login-failed": "Username or password is incorrect"
   },
@@ -113,6 +114,7 @@
     "copy-last-workout": "Copy last workout",
     "save-add-another": "Save & add another",
     "import-fit": "Import from Garmin (.fit)",
+    "reload": "Reload",
     "add-exercise": "Add exercise",
     "edit-exercise": "Edit exercise",
     "delete-exercise": "Delete exercise",

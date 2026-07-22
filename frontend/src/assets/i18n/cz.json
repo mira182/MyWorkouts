@@ -85,6 +85,7 @@
     "statusCode": "Stavový kód: ",
     "workout-id-missing": "Workout ID chybí",
     "import-success": "Import proběhl úspěšně",
+    "update-available": "Je dostupná nová verze.",
     "invalid-fit-file": "Vyber prosím soubor .fit exportovaný z Garminu.",
     "login-failed": "Nesprávné uživatelské jméno nebo heslo"
   },
@@ -113,6 +114,7 @@
     "copy-last-workout": "Zkopírovat poslední trénink",
     "save-add-another": "Uložit a přidat další",
     "import-fit": "Import z Garminu (.fit)",
+    "reload": "Načíst znovu",
     "add-exercise": "Přidej cvik",
     "edit-exercise": "Uprav cvik",
     "delete-exercise": "Smaž cvik",
