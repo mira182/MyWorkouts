@@ -43,6 +43,19 @@ body {
   --app-on-background: #fff;
 }
 
+/* Long-pressable rows: stop the browser's own press-and-hold behaviour (iOS callout,
+   text selection) and keep Android from treating the press as a press on the image,
+   which pops up "save image / download" instead of our preview. */
+[appLongPress] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+
+  img {
+    pointer-events: none;
+  }
+}
+
 /* Cards: softer, more modern rounding + gentler elevation */
 .mat-mdc-card {
   border-radius: 16px;

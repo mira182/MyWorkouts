@@ -86,6 +86,8 @@
     "workout-id-missing": "Workout ID chybí",
     "import-success": "Import proběhl úspěšně",
     "update-available": "Je dostupná nová verze.",
+    "only-images-supported": "Podporovány jsou pouze obrázky.",
+    "image-read-failed": "Vybraný obrázek se nepodařilo načíst.",
     "invalid-fit-file": "Vyber prosím soubor .fit exportovaný z Garminu.",
     "login-failed": "Nesprávné uživatelské jméno nebo heslo"
   },
