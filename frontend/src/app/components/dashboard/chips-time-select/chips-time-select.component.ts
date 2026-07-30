@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DateTimeService} from "../../../services/date-time/date-time.service";
 import {MatChipOption, MatChipsModule} from "@angular/material/chips";
 import {Interval} from "../../../model/time/interval";
 import moment, {Moment} from "moment";
@@ -46,8 +45,17 @@ export class ChipsTimeSelectComponent implements OnInit {
       id: 5,
       name: "2 years",
       selected: false
+    },
+    {
+      id: 6,
+      name: "All",
+      selected: false
     }
   ];
+
+  private static allTimeStart(): Moment {
+    return moment('1970-01-01');
+  }
 
   @Input()
   public interval: Interval;
@@ -65,22 +73,13 @@ export class ChipsTimeSelectComponent implements OnInit {
   }
 
   private intervalToChip(interval: Interval): MonthChip {
-    const numberOfMonths = moment(interval.endDate).diff(interval.startDate, 'months', true);
-    switch (numberOfMonths) {
-      case 0:
-      case 1:
-        return this.chips[0]
-      case 3:
-        return this.chips[1]
-      case 6:
-        return this.chips[2]
-      case 12:
-        return this.chips[3]
-      case 24:
-        return this.chips[4]
-      default:
-        return this.chips[0];
-    }
+    const numberOfMonths = Math.round(moment(interval.endDate).diff(interval.startDate, 'months', true));
+    if (numberOfMonths <= 1) return this.chips[0];   // 1 month
+    if (numberOfMonths <= 4) return this.chips[1];   // 3 months
+    if (numberOfMonths <= 7) return this.chips[2];   // 6 months
+    if (numberOfMonths <= 13) return this.chips[3];  // 1 year
+    if (numberOfMonths <= 25) return this.chips[4];  // 2 years
+    return this.chips[5];                            // All
   }
 
   protected selectChip(chip: MonthChip) {
@@ -104,6 +103,9 @@ export class ChipsTimeSelectComponent implements OnInit {
         break;
       case 5: // 2 years
         selectedInterval = { startDate: firstDayOfMonth.subtract(24, 'months'), endDate: lastDayOfMonth };
+        break;
+      case 6: // all
+        selectedInterval = { startDate: ChipsTimeSelectComponent.allTimeStart(), endDate: lastDayOfMonth };
         break;
     }
     this.chipSelected.emit(selectedInterval);
