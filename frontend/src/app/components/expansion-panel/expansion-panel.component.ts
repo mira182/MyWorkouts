@@ -11,6 +11,7 @@ import {MatIconButton} from "@angular/material/button";
     MatIconButton
 ],
     templateUrl: './expansion-panel.component.html',
+    styleUrl: './expansion-panel.component.scss',
     animations: [
         trigger('animationShowHide', [
             state('close', style({ height: '0px', overflow: 'hidden' })),
