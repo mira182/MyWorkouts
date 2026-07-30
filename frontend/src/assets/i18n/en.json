@@ -238,6 +238,8 @@
     "no-data": "No measurements for this day."
   },
   "DASHBOARD": {
+    "no-data-period": "No data for the selected period.",
+    "select-exercise-hint": "Select an exercise to see its progress.",
     "BREAKDOWN": {
       "SETS_NUMBER": "Number of Sets",
       "REPS_NUMBER": "Number of Reps",

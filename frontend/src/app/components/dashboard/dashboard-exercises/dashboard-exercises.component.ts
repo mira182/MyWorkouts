@@ -20,6 +20,7 @@ import {createWorkoutExerciseChartConfig} from "../../../model/charts/configurat
 import {isNil} from "lodash";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {DialogsHandlerService} from "../../../services/dialogs-handler/dialogs-handler.service";
+import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {DATE_FORMATS} from "../../../config/date-formats";
 
 @Component({
@@ -57,8 +58,11 @@ export class DashboardExercisesComponent implements OnInit {
 
   protected chart: Chart;
 
+  protected noData = signal(false);
+
   constructor(private readonly dialogsHandlerService: DialogsHandlerService,
               private readonly cookieService: CookieService,
+              private readonly snackBarService: SnackBarService,
               private readonly chartJsDashboardService: ChartJsDashboardService) { }
 
   public ngOnInit(): void {
@@ -115,17 +119,30 @@ export class DashboardExercisesComponent implements OnInit {
         .pipe(
           take(1)
         )
-        .subscribe(data => {
-          if (!isNil(this.chart)) {
-            this.chart.destroy();
-          }
+        .subscribe({
+          next: data => {
+            if (!isNil(this.chart)) {
+              this.chart.destroy();
+              this.chart = undefined;
+            }
 
-          this.chart = createWorkoutExerciseChartConfig(
-            data.data.map(point => moment(point.key).format(DATE_FORMATS.display)),
-            data.data.map(point => point.value),
-            this.getSettings()
-          );
-      });
+            const points = data?.data ?? [];
+            this.noData.set(points.length === 0);
+            if (points.length === 0) {
+              return;
+            }
+
+            this.chart = createWorkoutExerciseChartConfig(
+              points.map(point => moment(point.key).format(DATE_FORMATS.display)),
+              points.map(point => point.value),
+              this.getSettings()
+            );
+          },
+          error: err => {
+            this.noData.set(true);
+            this.snackBarService.showErrorSnackBar(err);
+          },
+        });
     }
   }
 

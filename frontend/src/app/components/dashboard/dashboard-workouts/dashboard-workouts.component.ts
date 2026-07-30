@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 import {Interval} from "../../../model/time/interval";
@@ -17,6 +17,7 @@ import {isNil} from "lodash";
 import {createWorkoutChartConfig} from "../../../model/charts/configuration/create-chart.config";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {DATE_FORMATS} from "../../../config/date-formats";
+import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 
 export class WorkoutChartType {
   value: string;
@@ -87,8 +88,11 @@ export class DashboardWorkoutsComponent implements OnInit {
 
   protected chart;
 
+  protected noData = signal(false);
+
   constructor(private readonly chartJsDashboardService: ChartJsDashboardService,
               private readonly cookieService: CookieService,
+              private readonly snackBarService: SnackBarService,
               private readonly spinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -135,16 +139,29 @@ export class DashboardWorkoutsComponent implements OnInit {
         finalize(() => this.spinnerService.hide()),
         take(1)
       )
-      .subscribe(data => {
-        if (!isNil(this.chart)) {
-          this.chart.destroy();
-        }
+      .subscribe({
+        next: data => {
+          if (!isNil(this.chart)) {
+            this.chart.destroy();
+            this.chart = undefined;
+          }
 
-        this.chart = createWorkoutChartConfig(
-          data.data.map(point => moment(point.key).format(DATE_FORMATS.display)),
-          data.data.map(point => point.value),
-          this.getSettingsOfChart()
-        );
+          const points = data?.data ?? [];
+          this.noData.set(points.length === 0);
+          if (points.length === 0) {
+            return;
+          }
+
+          this.chart = createWorkoutChartConfig(
+            points.map(point => moment(point.key).format(DATE_FORMATS.display)),
+            points.map(point => point.value),
+            this.getSettingsOfChart()
+          );
+        },
+        error: err => {
+          this.noData.set(true);
+          this.snackBarService.showErrorSnackBar(err);
+        },
       });
   }
 

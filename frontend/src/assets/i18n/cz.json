@@ -238,6 +238,8 @@
     "no-data": "Žádná měření pro tento den."
   },
   "DASHBOARD": {
+    "no-data-period": "Pro vybrané období nejsou žádná data.",
+    "select-exercise-hint": "Vyber cvik pro zobrazení jeho vývoje.",
     "BREAKDOWN": {
       "SETS_NUMBER": "Počet setů",
       "REPS_NUMBER": "Počet opakování",
