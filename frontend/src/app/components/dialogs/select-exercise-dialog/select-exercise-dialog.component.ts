@@ -1,7 +1,7 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {Exercise} from "../../../model/exercise/exercise";
 import {ExerciseService} from "../../../services/rest/exercise/exercise.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {ExerciseHelperService} from "../../../services/exercise-helper/exercise-helper.service";
 import {ExerciseImageDialogComponent} from "../exercise-image-dialog/exercise-image-dialog.component";
 import {LongPressDirective} from "../../../directives/long-press.directive";
@@ -17,7 +17,9 @@ import {MatButton} from "@angular/material/button";
 @Component({
     selector: 'app-select-exercise-dialog',
     templateUrl: './select-exercise-dialog.component.html',
+    styleUrl: './select-exercise-dialog.component.scss',
     imports: [
+    MatDialogModule,
     MatStepperModule,
     TranslateModule,
     ReactiveFormsModule,

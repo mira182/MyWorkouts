@@ -1,0 +1,8 @@
+// Material's stepper hides overflow on its content container (for the slide
+// animation), so a long exercise list gets clipped instead of scrolling.
+// Same treatment as the add-workout dialog. Material-internal DOM → ::ng-deep.
+:host ::ng-deep .mat-horizontal-content-container {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 0 24px;
+}

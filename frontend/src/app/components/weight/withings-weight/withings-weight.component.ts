@@ -8,7 +8,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {SnackBarService} from "../../../services/snack-bar/snack-bar.service";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatIcon} from "@angular/material/icon";
-import {MatFabButton} from "@angular/material/button";
+import {MatMiniFabButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
 
 import {WithingsService} from "../../../services/weight/withings/withings.service";
@@ -36,10 +36,10 @@ interface RangeOption {
     templateUrl: './withings-weight.component.html',
     styleUrls: ['./withings-weight.component.scss'],
     imports: [
-    MatTooltip,
     MatTabsModule,
     MatIcon,
-    MatFabButton,
+    MatMiniFabButton,
+    MatTooltip,
     TranslateModule,
     NgxLineChartComponent,
     MatButtonToggleModule,
